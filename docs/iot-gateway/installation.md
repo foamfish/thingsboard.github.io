@@ -1,6 +1,6 @@
 ---
 layout: docwithnav
-title: IoT Gateway Installation options
+title: 网关安装选项
 notitle: "true"
 
 ---
@@ -10,10 +10,10 @@ notitle: "true"
        <div class="install-options-hero">
           <div class="container">
             <div class="install-options-hero-content">
-                <h1>ThingsBoard IoT Gateway installation options</h1>
+                <h1>ThingsBoard网关安装选项</h1>
                 <div class="install-options-description">
                     <p>
-                        ThingsBoard IoT Gateway is designed to run and utilize on majority of hardware, from single-board computers like Raspberry Pi to powerful Edge Gateways for IoT
+ThingsBoard网关旨在在大多数硬件上运行和使用，从树莓派等单片计算机到强大的IoT Edge网关。
                     </p>
                 </div>
             </div>            
