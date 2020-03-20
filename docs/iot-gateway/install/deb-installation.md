@@ -1,45 +1,47 @@
 ---
 layout: docwithnav
-title: Install ThingsBoard IoT Gateway as package.
+title: Ubuntu服务系统下安装ThingsBoard网关
 
 ---
 
-### Prerequisites
+### 先决条件
 
-This guide describes how to install ThingsBoard IoT Gateway on Ubuntu Server 18.04 LTS. 
-The minimum system requirements match official [minimum requirements](https://help.ubuntu.com/lts/serverguide/preparing-to-install.html#system-requirements) for the OS.
+本指南描述了如何在Ubuntu Server 18.04上安装ThingsBoard网关。
 
-### Step 1. Download the deb file
+操作系统配置为官方[最低配置](https://help.ubuntu.com/lts/serverguide/preparing-to-install.html#system-requirements)。
 
-Download installation package.
+### 步骤1.下载deb文件
+
+下载安装包。
 
 ```bash
 wget https://github.com/thingsboard/thingsboard-gateway/releases/latest/download/python3-thingsboard-gateway.deb
 ```
 {: .copy-code}
 
-### Step 2. Install the gateway using apt
+### 步骤2.使用apt安装网关
 
-Install ThingsBoard IoT Gateway as package and run it as daemon use the following command:<br><br>
+以软件包形式安装ThingsBoard网关并以守护程序身份运行，请使用以下命令：<br> <br>
 
 ```bash
 sudo apt install ./python3-thingsboard-gateway.deb -y
 ```
 {: .copy-code}
 
-The deb package will automatically install the necessary libraries for the IOT Gateway to work:  
+deb软件包将自动安装必要的库，以使IOT网关正常工作：
 
-1. System libraries: *libffi-dev, libglib2.0-dev, libxml2-dev, libxslt-dev, libssl-dev, zlib1g-dev, python3-dev, python3-pip*.  
-2. Python modules: *importlib, importlib-metadata, jsonschema, pymodbus, lxml, jsonpath-rw, paho-mqtt, pyserial, PyYAML, simplejson, pyrsistent*.  
+1. 系统库：*libffi-dev，libglib2.0-dev，libxml2-dev，libxslt-dev，libssl-dev，zlib1g-dev，python3-dev，python3-pip*。
 
-### Step 3. Check gateway status 
+2. Python模块：*importlib，importlib-metadata，jsonschema，pymodbus，lxml，jsonpath-rw，paho-mqtt，pyserial，PyYAML，simplejson，pysistent*。
+
+### 步骤3.检查网关状态
 
 ```bash
 systemctl status thingsboard-gateway
 ```
 {: .copy-code}
 
-You may notice some errors in the output. However, it is expected, since gateway is not configured to connect to ThingsBoard yet:
+出现如下信息则表示没有配置网关和ThingsBoard连接：
 
 ```text
 ... python3[7563]: ''2019-12-26 09:31:15' - ERROR - mqtt_connector - 181 - Default Broker connection FAIL with error 5 not authorised!'
@@ -48,8 +50,8 @@ You may notice some errors in the output. However, it is expected, since gateway
 ... python3[7563]: ''2019-12-26 09:31:17' - DEBUG - tb_client - 78 - connecting to ThingsBoard'
 ```
 
-### Step 4. Configure the gateway 
+### 步骤4.配置网关
 
-Now you can go to [**configuration guide**](/docs/iot-gateway/configuration/) to configure the gateway.
+现在您可以转到[**配置指南**](/docs/iot-gateway/configuration/)来配置网关。
 
 
