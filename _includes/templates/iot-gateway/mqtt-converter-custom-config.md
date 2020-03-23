@@ -1,8 +1,8 @@
-A custom converter is converter written for some device:
+自定义转换器是为某些设备编写的转换器：
 
 
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**描述**|
 |:-|:-|-
 | type                        | **custom**                      | Provides information to connector that custom converter will be uses for converting data from topic.                                                                      |
 | extension                   | **CustomMqttUplinkConverter**   | Name of custom converter class.                                                                                                                                           |
@@ -19,7 +19,7 @@ A custom converter is converter written for some device:
 {% include templates/info-banner.md content=difference %}
 
 
-Converter subsection in the configuration will look like:
+Converter示例如下：
 ```json
       "converter": {
         "type": "custom",

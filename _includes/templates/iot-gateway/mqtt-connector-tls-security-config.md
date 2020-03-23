@@ -1,13 +1,13 @@
-In table below described parameters to configure authorization on mqtt broker .  
+mqtt broker上的授权配置参数详见下表。
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**描述**|
 |:-|:-|-
 | caCert                   | **/etc/thingsboard-gateway/ca.pem**          | Path to CA file.                                               |
 | privateKey               | **/etc/thingsboard-gateway/privateKey.pem**  | Path to private key file.                                      |
 | cert                     | **/etc/thingsboard-gateway/certificate.pem** | Path to certificate file.
 |---    
 
-Security subsection in configuration file will look like this: 
+security示例如下：
 
 ```json
   "security":{

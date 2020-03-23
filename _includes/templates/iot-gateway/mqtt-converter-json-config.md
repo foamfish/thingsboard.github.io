@@ -1,6 +1,6 @@
-Json converter is default converter, it looks for deviceName, deviceType, attributes and telemetry in the incoming message from the broker, with rules, described in this subsection:
+Json转换器是默认转换器，它将在代理程序的传入消息中查找设备名称，设备类型，属性和遥测，以及规则，如本小节所述：
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**描述**|
 |:-|:-|-
 | type                        | **json**                  | Provides information to connector that default converter will be uses for converting data from topic.                                     |
 | deviceNameJsonExpression    | **${serialNumber}**       | Simple JSON expression, uses for looking device name in the incoming message (parameter "serialNumber" will be used as device name).      |
@@ -23,7 +23,7 @@ Json converter is default converter, it looks for deviceName, deviceType, attrib
 {% include templates/info-banner.md content=difference %}
 
 
-Mapping subsection for Example 1 will look like:
+示例1的Mapping示例如下：
 
 ```json
     {
@@ -56,7 +56,7 @@ Mapping subsection for Example 1 will look like:
     }
 ```
 
-Mapping for Example 2 will look like:
+示例1的Mapping示例如下：
 
 ```json
     {

@@ -1,5 +1,5 @@
 |---
-| **Parameter**            | **Default value**                            | **Description**                                                |
+| **参数**            | **默认值**                            | **描述**                                                |
 |:-|:-|-
 | type                     | **file**                                     | Storage type (Saving data to hard drive)                       |
 | data_folder_path         | **./data/**                                  | Path to folder, that will contains data (Relative or Absolute).|
@@ -9,9 +9,9 @@
 |---
 
 
-\* -- If receive data when storage has already counted, described in this parameter, new data will lose.
+\* -- 如果已计算存储空间（如该参数所述）时接收数据，则新数据将丢失。
 
-Storage section of configuration file will look like:
+配置文件的“存储”部分将如下所示：
 
 ```yaml
 storage

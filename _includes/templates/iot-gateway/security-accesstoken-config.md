@@ -1,17 +1,13 @@
 
-One type of security configuration is accessToken, 
-to get it you should login into your ThingsBoard platform instance, 
-go to DEVICE tab, press the plus icon, 
-fill the values and check the "Is gateway" option, 
-open this device and press the "COPY ACCESS TOKEN" button and replace default with your value 
+accessToken是一种安全配置要获得它，您应该登录ThingsBoard平台并转到DEVICE标签，按加号图标填写值并选中"Is gateway"选项打开此设备，然后按“COPY ACCESS TOKEN”按钮，然后将默认值替换为您的值。
 
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**描述**|
 |:-|:-|-
 | accessToken              | **FUH2Fonov6eajSHi0Zyw**                     | Access token for the gateway from ThingsBoard server.|
 |---
 
-Security subsection in configuration file will look like this: 
+配置文件中的“安全性”节点如下所示：
 
 ```yaml
 ...

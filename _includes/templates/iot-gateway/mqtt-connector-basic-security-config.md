@@ -1,16 +1,15 @@
 
-One type of security configuration is basic, 
-For authorization will be used combination of username/password, provided in this section in config. 
+通过用户名/密码进行一种基本的安全配置。
 
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**描述**|
 |:-|:-|-
 | type               | **basic**                      | Type of authorization.      |
 | username           | **username**                   | Username for authorization. |
 | password           | **password**                   | Password for authorization. |
 |---
 
-Security subsection in configuration file will look like this: 
+security示例如下：
 
 ```yaml
     "security": {

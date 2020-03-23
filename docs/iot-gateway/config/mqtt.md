@@ -1,38 +1,42 @@
 ---
 layout: docwithnav
-title: MQTT Connector Configuration
-description: MQTT protocol support for ThingsBoard IoT Gateway
+title: MQTT配置
+description: ThingsBoard网关的MQTT协议支持
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you to get familiar with MQTT Connector configuration for ThingsBoard IoT Gateway.
-Use [general configuration](/docs/iot-gateway/configuration/) to enable this Connector. 
-The purpose of this Connector is to connect to external MQTT broker and subscribe to data feed from devices. 
-Connector is also able to push data to MQTT brokers based on the updates/commands from ThingsBoard. 
+本指南将帮助您熟悉ThingsBoard网关的MQTT连接器配置。
+使用[常规配置](/docs/iot-gateway/configuration/)启用此连接器。
 
-This Connector is useful when you have local MQTT broker in your facility or corporate network and you would like to push data from this broker to ThingsBoard.
+该连接器的目的是连接到外部MQTT broker并订阅来自设备的数据收集。
 
-We will describe connector configuration file below.
+连接器还能够根据ThingsBoard的updates/commands将数据推送到MQTT broker。
 
-## Connector configuration: mqtt.json
+当您的应用网络中有MQTT broker并且您希望将数据从相关broker推送到ThingsBoard时应选择MQTT连接器。
 
-Connector configuration is a JSON file that contains information about how to connect to external MQTT broker, 
-what topics to use when subscribing to data feed and how to process the data. 
-Let's review the format of the configuration file using example below.
+我们将在下面描述连接器配置文件。
+
+## 连接器配置: mqtt.json
+
+连接器配置是一个JSON文件其中包含有关如何连接到外部MQTT broker信息，订阅数据收集时使用哪些topics以及如何处理数据信息。
+
+让我们使用以下示例来查看配置文件的格式。
 
 <br>
 <details>
 
 <summary>
-<b>Example of MQTT Connector config file. Press to expand.</b>
+<b>MQTT连接器配置文件示例</b>
 </summary>
 
-Example listed below will connect to MQTT broker in a local network deployed on server with IP 192.168.1.100. 
-Connector will use basic MQTT auth using username and password. 
-Then, connector will subscribe to a list of topics using topic filters from mapping section. See more info in a description below.    
+下面列出的示例将连接到IP地址：192.168.1.100服务器上部署在本地网络中的MQTT broker。
+
+使用户名和密码作为MQTT的基础身份验证。
+
+连接器将使用映射部分中的topic过滤器订阅主题列表。在下面的说明中查看更多信息。
 
 {% highlight json %}
 
@@ -169,19 +173,18 @@ Then, connector will subscribe to a list of topics using topic filters from mapp
 
 </details>
 
+### "broker"说明
 
-### Section "broker"
-
-| **Parameter** | **Default value**              | **Description**                                        |
+| **参数** | **默认值**              | **描述**                                        |
 |:-|:-|-
 | name          | **Default Broker**             | Broker name for logs and saving to persistent devices. |
 | host          | **localhost**                  | Mqtt broker hostname or ip address.                    |
 | port          | **1883**                       | Mqtt port on the broker.                               |
 |---
 
-#### Subsection "security"
+#### "security"说明
 
-Subsection "security" provides configuration for client authorization at Mqtt Broker.
+MQTT Broker在客户端上的安全配置。
  
 {% capture mqttconnectorsecuritytogglespec %}
 Basic<small>Recommended</small>%,%accessToken%,%templates/iot-gateway/mqtt-connector-basic-security-config.md%br%
@@ -190,19 +193,19 @@ Certificates<small>For advanced security</small>%,%tls%,%templates/iot-gateway/m
 
 {% include content-toggle.html content-toggle-id="mqttConnectorCredentialsConfig" toggle-spec=mqttconnectorsecuritytogglespec %}  
 
-### Section "mapping"
+### "mapping"说明
 
-This configuration section contains array of topics that the gateway will subscribe to after connecting to the broker and settings about processing incoming messages (converter).
+mapping部分包含网关连接到代理后将订阅的主题数组和有关处理传入消息（转换器）的设置。
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**描述**|
 |:-|:-|-
 | topicFilter | **/sensor/data** | Topic address for subscribing. |
 |---
 
 
-The **topicFilter** supports special symbols: '#' and '+' to allow to subscribe to multiple topics.
+**topicFilter**支持特殊符号‘＃’和‘+’以允许订阅多个topic。
 
-Let's assume we would like to subscribe and process following data from Thermometer devices:
+假设我们要订阅并处理来自温度计设备的如下数据：
 
 |**Example Name**|**Topic**|**Topic Filter**|**Payload**|**Comments**|
 |:-|:-|:-|-
@@ -210,14 +213,15 @@ Let's assume we would like to subscribe and process following data from Thermome
 | Example 2 | /sensor/SN-001/data | /sensor/+/data | { "sensorType": "Thermometer", "sensorModel": "T1000", "temp":  42, "hum": 58} | Device Name is part of the topic|
 |---
 
-Now let's review how we can configure JSON converter to parse this data
+现在，让我们回顾一下如何配置JSON转换器来解析此数据
 
-#### Subsection "converter"
-This subsection contains configuration for processing incoming messages.  
+#### "converter"说明
+本小节包含用于处理传入消息的配置。
 
-Types of mqtt converters:  
-1. json -- Default converter
-2. custom -- Custom converter (You can write it by yourself, and it will use to convert incoming data from the broker.) 
+mqtt转换器的类型：
+
+1. json -- 默认转换器
+2. custom -- 自定义转换器（您可以自己编写，它将用于转换来自代理的传入数据。）
 
 {% capture mqttconvertertypespec %}
 json<small>Recommended if json will be received in response<</small>%,%json%,%templates/iot-gateway/mqtt-converter-json-config.md%br%
@@ -226,22 +230,27 @@ custom<small>Recommended if bytes or anything else will be received in response<
 {% include content-toggle.html content-toggle-id="MqttConverterTypeConfig" toggle-spec=mqttconvertertypespec %}
 
 
-**Note**: You can specify multiple mapping objects inside the array.
+**注意**：您可以在数组中指定多个映射对象。
 
-Mapping process subscribes to the MQTT topics using **topicFilter** parameter of the mapping object. 
-Each message that is published to this topic by other devices or applications is analyzed to extract device name, type and data (attributes and/or timeseries values).
-By default, gateway uses Json converter, but it is possible to provide custom converter. See examples in the source code.
+Mapping使用映射对象的**topicFilter**订阅MQTT主题。
 
-### Section "connectRequests"
+分析其他设备或应用程序为此主题发布的每条消息，以提取设备名称，类型和数据（属性/时间序列值）。
 
-ThingsBoard allows sending RPC commands and notifications about device attribute updates to the device.
-But in order to send them, the platform needs to know if the target device is connected and what gateway or session is used to connect the device at the moment.
-If your device is constantly sending telemetry data - ThingsBoard already knows how to push notifications.
-If your device just connects to MQTT broker and waits for commands/updates, you need to send a message to the Gateway and inform that device is connected to the broker.
+默认情况下网关使用Json转换器，但是可以提供自定义转换器。请参阅源代码中的示例。
+
+### "connectRequests"说明
+
+ThingsBoard允许向设备发送RPC命令和有关设备属性更新的通知。
+
+但是为了发送它们，平台需要知道目标设备是否已连接以及当前使用什么网关或会话来连接设备。
+
+如果您的设备不断发送遥测数据-ThingsBoard已经知道如何推送通知。
+
+如果您的设备仅连接到MQTT代理并等待commands/updates，则需要向网关发送消息并通知该设备已连接到代理。
  
 **1. Name in a message from broker:**
 
-| **Parameter**                 | **Default value**                     | **Description**                                                                                   |
+| **参数**                 | **默认值**                     | **描述**                                                                                   |
 |:-|:-|-
 | topicFilter                   | **sensors/connect**                   | Topic address on the broker, where the broker sends information about new connected devices.      |
 | deviceNameJsonExpression      | **${SerialNumber}**                 | JSON-path expression, for looking the new device name.                                            |
@@ -249,13 +258,13 @@ If your device just connects to MQTT broker and waits for commands/updates, you 
 
 **2. Name in topic address:**
 
-| **Parameter**                 | **Default value**                     | **Description**                                                                                   |
+| **参数**                 | **默认值**                     | **描述**                                                                                   |
 |:-|:-|-
 | topicFilter                   | **sensors/+/connect**                 | Topic address on the broker, where the broker sends information about new connected devices.      |
 | deviceNameTopicExpression     | **(?<=sensor\/)(.\*?)(?=\/connect)**  | Regular expression for looking the device name in topic path.                                     |
 |---
 
-This section in configuration looks like:  
+示例如下：
 ```json
   "connectRequests": [
     {
@@ -269,7 +278,7 @@ This section in configuration looks like:
   ]
 ```
 
-In this case following messages are valid:
+在这种情况下以下消息有效：
 
 ```bash
 mosquitto_pub -h YOUR_MQTT_BROKER_HOST -p YOUR_MQTT_BROKER_PORT -t "sensors/connect" -m '{"serialNumber":"SN-001"}'
@@ -277,15 +286,15 @@ mosquitto_pub -h YOUR_MQTT_BROKER_HOST -p YOUR_MQTT_BROKER_PORT -t "sensor/SN-00
 ```
 
 
-### Section "disconnectRequest"
+### "disconnectRequest"说明
 
-This configuration section is optional.  
-Configuration, provided in this section will be used to get information from the broker about disconnecting device.  
-If your device just disconnects from MQTT broker and waits for commands/updates, you need to send a message to the Gateway and inform that device is disconnected from the broker.
+此配置部分是可选的。
+本节提供的配置将用于从代理获取有关断开设备的信息。
+如果您的设备仅与MQTT代理断开连接并等待commands/updates，则需要向网关发送消息，并通知设备已与代理断开连接。
  
 **1. Name in a message from broker:**
 
-| **Parameter**                 | **Default value**                     | **Description**                                                                                   |
+| **参数**                 | **默认值**                     | **描述**                                                                                   |
 |:-|:-|-
 | topicFilter                   | **sensors/disconnect**                | Topic address on the broker, where the broker sends information about disconnected devices.       |
 | deviceNameJsonExpression      | **${SerialNumber}**                 | JSON-path expression, for looking the new device name.                                            |
@@ -293,13 +302,13 @@ If your device just disconnects from MQTT broker and waits for commands/updates,
 
 **2. Name in topic address:**
 
-| **Parameter**                 | **Default value**                     | **Description**                                                                                   |
+| **参数**                 | **默认值**                     | **描述**                                                                                   |
 |:-|:-|-
 | topicFilter                   | **sensors/+/disconnect**              | Topic address on the broker, where the broker sends information about disconnected devices.       |
 | deviceNameTopicExpression     | **(?<=sensor\/)(.\*?)(?=\/connect)**  | Regular expression for looking the device name in topic path.                                     |
 |---
 
-This section in configuration file looks like:  
+示例如下：
 
 ```json
   "disconnectRequests": [
@@ -314,23 +323,23 @@ This section in configuration file looks like:
   ]
 ```
 
-In this case following messages are valid:
+在这种情况下以下消息有效：
 
 ```bash
 mosquitto_pub -h YOUR_MQTT_BROKER_HOST -p YOUR_MQTT_BROKER_PORT -t "sensors/disconnect" -m '{"serialNumber":"SN-001"}'
 mosquitto_pub -h YOUR_MQTT_BROKER_HOST -p YOUR_MQTT_BROKER_PORT -t "sensor/SN-001/disconnect" -m ''
 ```
 
-### Section "attributeUpdates"
+### "attributeUpdates"说明
 
-This configuration section is optional.  
-ThingsBoard allows to provision device attributes and fetch some of them from the device application.
-You can treat this as a remote configuration for devices. Your devices are able to request shared attributes from ThingsBoard.
-See [user guide](/docs/user-guide/attributes/) for more details.
+此配置部分是可选的。
+ThingsBoard允许供应设备属性，并从设备应用程序中获取其中的一些属性。
+您可以将此视为设备的远程配置。您的设备能够从ThingsBoard请求共享属性。
+有关更多详细信息，请参见[用户指南](/docs/user-guide/attributes/)。
 
-The "**attributeRequests**" configuration allows configuring the format of the corresponding attribute request and response messages. 
+**attributeRequests**”配置允许配置相应的属性请求和响应消息的格式。
 
-| **Parameter**                 | **Default value**                                     | **Description**                                                                                    |
+| **参数**                 | **默认值**                                     | **描述**                                                                                    |
 |:-|:-|-
 | deviceNameFilter              | **SmartMeter.\***                                     | Regular expression device name filter, uses to determine, which function to execute.               |
 | attributeFilter               | **uploadFrequency**                                   | Regular expression attribute name filter, uses to determine, which function to execute.            |
@@ -339,8 +348,7 @@ The "**attributeRequests**" configuration allows configuring the format of the c
 |---
 
 
-This section in configuration file looks like:  
-
+示例如下：
 ```json
   "attributeUpdates": [
     {
@@ -352,13 +360,13 @@ This section in configuration file looks like:
   ]
 ```
 
-##### Server side RPC commands
+##### 服务端RPC命令
 
-ThingsBoard allows sending [RPC commands](/docs/user-guide/rpc/) to the device that is connected to ThingsBoard directly or via Gateway.
+ThingsBoard允许将[RPC命令](/docs/user-guide/rpc/)发送到直接或通过网关连接到ThingsBoard的设备。
  
-Configuration, provided in this section uses for sending RPC requests from ThingsBoard to device.
+本节提供的配置用于从ThingsBoard向设备发送RPC请求。
 
-| **Parameter**                 | **Default value**                                                 | **Description**                                                                                                           |
+| **参数**                 | **默认值**                                                 | **描述**                                                                                                           |
 |:-|:-|-
 | deviceNameFilter              | **SmartMeter.\***                                                 | Regular expression device name filter, uses to determine, which function to execute.                                      |
 | methodFilter                  | **echo**                                                          | Regular expression method name filter, uses to determine, which function to execute.                                      |
@@ -371,12 +379,13 @@ Configuration, provided in this section uses for sending RPC requests from Thing
 {% capture methodFilterOptions %}
 <br>
 There are 2 options for RPC request:  
-1. **With response** -- If in the configuration exists responseTopicExpression, gateway will try to subscribe on it and wait for response.
-2. **Without response** -- If in the configuration not exists responseTopicExpression, gateway have just send message and won't wait for response.
+RPC请求有2个选项：
+1. **With response** -- -如果配置中存在responseTopicExpression，则网关将尝试对其进行订阅并等待响应
+2. **Without response** -- 如果在配置中不存在responseTopicExpression，则网关仅发送消息，而不会等待响应。
 {% endcapture %}
 {% include templates/info-banner.md content=methodFilterOptions %}
 
-This section in configuration file looks like:  
+示例如下：
 
 ```json
   "serverSideRpc": [
@@ -397,12 +406,12 @@ This section in configuration file looks like:
   ]
 ```
 
-As you can use **deviceNameFilter** and **methodFilter** to apply different mapping rules for different devices/methods.
-Once Gateway receives RPC request from the server to the device, it will publish the corresponding message based on **requestTopicExpression** and **valueExpression**.
-In case you expect the reply to the request from device, you should also specify **responseTopicExpression** and **responseTimeout**. 
-The Gateway will subscribe to the "response" topic and wait for device reply until "responseTimeout" is detected (in milliseconds).
+您可以使用**deviceNameFilter**和**methodFilter**为不同的设备/方法应用不同的映射规则。
+网关接收到从服务器到设备的RPC请求后，它将基于**requestTopicExpression**和**valueExpression**发布相应的消息。
+如果您希望设备回复请求，则还应指定**responseTopicExpression**和**responseTimeout**。
+网关将订阅“response”主题，并等待设备回复，直到检测到“responseTimeout”（以毫秒为单位）。
 
-Example of RPC request (rpc-request.json) that need to be sent from the server:
+需要从服务器发送的RPC请求（rpc-request.json）的示例：
 
 ```json
 {
@@ -413,9 +422,9 @@ Example of RPC request (rpc-request.json) that need to be sent from the server:
 }
 ```
 
-## Next steps
+## 下一步
 
-Explore guides related to main ThingsBoard features:
+探索与ThingsBoard主要功能相关的指南：
 
  - [Data Visualization](/docs/user-guide/visualization/) - how to visualize collected data.
  - [Device attributes](/docs/user-guide/attributes/) - how to use device attributes.

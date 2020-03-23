@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: IoT Gateway Configuration
-description: Installation structure and configuration of ThingsBoard IoT Gateway 
+title: 网关配置
+description: ThingsBoard网关的安装结构和配置 
 
 ---
 
@@ -10,9 +10,9 @@ description: Installation structure and configuration of ThingsBoard IoT Gateway
 {:toc}
 
 
-## Directory structure
+## 目录结构
 
-Please see default directory structure below. 
+请在下面查看默认目录结构。
 
 ```text
 /etc/thingsboard-gateway/config                   - Configuration folder.
@@ -39,17 +39,20 @@ Please see default directory structure below.
     tb_connection.log                             - Logs for connection to the ThingsBoard instance.
 ```
         
-## General configuration file
+## 常规配置文件
 
-The main configuration file that is used for connection to ThingsBoard platform instance and enable/disable connectors. 
-This configuration points to ThingsBoard instance demo.thingsboard.io and uses 
-memory file storage configured to store maximum of 100,000 records. There are 4 different connectors active. 
-If you like to use only one of them - just remove all other connectors. 
+用于连接到ThingsBoard平台实例和启用/禁用连接器的主要配置文件。
+
+该配置指向ThingsBoard实例demo.thingsboard.io并使用
+
+内存文件存储配置为最多存储100,000条记录。有4个不同的活动连接器。
+
+如果您只想使用其中之一-只需移除所有其他连接器即可。
 
 <br>
 <details>
 <summary>
-<b>Example of main configuration file. Press to show.</b>
+<b>主要配置文件示例</b>
 </summary>
 
 {% highlight yaml %}
@@ -82,65 +85,66 @@ connectors:
     configuration: ble.json
 
 {% endhighlight %}
-<b><i>Spaces identity are important.</i></b>  
+<b><i>重要的空间标识</i></b>  
 </details>
 
-#### Sections in config file
+#### 配置文件节点
 
-+ **thingsboard** -- Configuration for connecting to ThingsBoard platform.
-  - *security* -- Configuration for type of encryption and authorization.
-+ **storage** -- Configuration for local storage of incoming data from devices.
-+ **connectors** -- Array of Connectors and their configuration to use.
++ **thingsboard** -- 用于连接ThingsBoard平台的配置
+  - *security* -- 加密和授权类型的配置
++ **storage** -- 配置本地存储来自设备的传入数据。
++ **connectors** -- 连接器阵列及其使用的配置。
 
-#### Connection to ThingsBoard
+#### 连接ThingsBoard
 
-|**Parameter**             | **Default value**                            |   **Description**                                              |
+|**参数**             | **默认值**                            |   **描述**                                              |
 |---                       |---                                           |---                                                             |
 | ***thingsboard***        |                                              | Configuration for connection to server.                        |
 | host                     | **127.0.0.1**                                | Hostname or ip address of ThingsBoard server.                  |
 | port                     | **1883**                                     | Port of mqtt service on ThingsBoard server.                    |
 
-###### Subsection "security"
+###### security配置
 
 {% capture securitytogglespec %}
-Access Token<small>Basic security</small>%,%accessToken%,%templates/iot-gateway/security-accesstoken-config.md%br%
-TLS + Access Token<small>Advanced security</small>%,%tlsToken%,%templates/iot-gateway/security-tls-token-config.md%br%
-TLS + Private Key<small>Advanced security</small>%,%tls%,%templates/iot-gateway/security-tls-config.md{% endcapture %}
+Access Token<small>基本安全</small>%,%accessToken%,%templates/iot-gateway/security-accesstoken-config.md%br%
+TLS + Access Token<small>高级安全</small>%,%tlsToken%,%templates/iot-gateway/security-tls-token-config.md%br%
+TLS + Private Key<small>高级安全</small>%,%tls%,%templates/iot-gateway/security-tls-config.md{% endcapture %}
 
-There are 3 variants of security subsection:
+支持3种安全类型：
 
 {% include content-toggle.html content-toggle-id="securityConfig" toggle-spec=securitytogglespec %}
 
 
-#### Storage configuration
+#### storage配置
 
-Configs in storage subsection provides configuration for saving incoming data before it will be send to ThingsBoard platform.
+storage节点的配置提供了用于在将传入数据发送到ThingsBoard平台之前保存传入数据的配置。
   
-There are 2 variants for this section: memory or file.
-1. **Memory** storage - Received data saving to the RAM memory.
-2. **File** storage - Received data saving to the hard drive.
+支持两种保存方式：
+1. **Memory**配置 - 接收到的数据保存到RAM内存中。
+2. **File**配置 - 接收到的数据保存到硬盘驱动器。
 
 {% capture storagetogglespec %}
-Memory storage<br/> <small>(recommended if there is not enough disk space)</small>%,%memory%,%templates/iot-gateway/storage-memory-config.md%br%
-File storage<br/> <small>(recommended for more persistent)</small>%,%file%,%templates/iot-gateway/storage-file-config.md{% endcapture %}
+Memory storage<br/> <small>(磁盘空间容量较低时使用)</small>%,%memory%,%templates/iot-gateway/storage-memory-config.md%br%
+File storage<br/> <small>(将文件永久保存建议使用)</small>%,%file%,%templates/iot-gateway/storage-file-config.md{% endcapture %}
 
 {% include content-toggle.html content-toggle-id="storageConfig" toggle-spec=storagetogglespec %}
 
-#### Connectors configuration
+#### 连接器配置
 
-Configs in connectors section configuration for connecting to devices by implemented protocols.
-Config for every connector in this section must have parameters as in table below:  
+连接器部分配置中的配置，用于通过已实现的协议连接到设备。
+
+本节中每个连接器的配置必须具有下表中的参数：
  
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**描述**|
 |:-|:-|- 
 | name                     | **MQTT Broker Connector**                    | Name of connector to broker.                                                    |
 | type                     | **mqtt**                                     | Type of connector, must be like a name of folder, contained configuration file. |
 | configuration            | **mqtt.json**                                | Name of the file with configuration in config folder.*                          |
 |---
 
-\* -- Folder with this configuration file.  
+\* -- 带有此配置文件的文件夹。  
 
-Section connectors in your configuration file may differ from shown below, but they should have structure like this:  
+配置文件中的节连接器可能与下面显示的有所不同，但是它们应具有以下结构：
 
 ```yaml
 connectors:
@@ -177,6 +181,6 @@ connectors:
     class: CustomSerialConnector
 ```
 
-**Note:** You can use several similar connectors at same time, but you should provide different names and configuration files to them. 
+**注意：**您可以同时使用多个相同的连接器，但应为其提供不同的名称和配置文件。
 
-If you need different type of connector, you can implement it using [customization guide](/docs/iot-gateway/custom/) or email us: <info@thingsboard.io>.
+如果您需要其他类型的连接器，则可以使用[自定义指南](/docs/iot-gateway/custom/)或通过电子邮件给我们：<info@thingsboard.io>。

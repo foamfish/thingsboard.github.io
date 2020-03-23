@@ -1,14 +1,14 @@
 
  
-Anonymous auth is the most simple option. It is useful for testing on public MQTT brokers, like test.mosquitto.org.  
+对于公共的MQTT broker使用匿名身份验证是一种最简单的方式。
 
 
-|**Parameter**|**Default value**|**Description**|
+|**参数**|**默认值**|**描述**|
 |:-|:-|-
 | type               | **anonymous**                      | Type of authorization.      |
 |---
 
-Security subsection in configuration file will look like this: 
+security示例如下：
 
 ```yaml
     "security": {
