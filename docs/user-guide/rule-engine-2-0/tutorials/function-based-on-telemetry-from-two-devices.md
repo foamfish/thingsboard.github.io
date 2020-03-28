@@ -1,70 +1,73 @@
 ---
 layout: docwithnav
-title: Data function based on telemetry from 2 devices
-description: Data function based on telemetry from 2 devices
+title: 基于2个设备收集遥测数据
+description: 基于2个设备收集遥测数据的功能
 
 ---
 
-This tutorial will show how to calculate temperature delta based on the readings from the indoor outdoor warehouse thermometers.
+本教程将展示如何根据室内和室外仓库温度计的读数计算温度变化量。
 
 * TOC
 {:toc}
 
-## Use case
+## 用例
 
-Let's assume you have a warehouse with two thermometers: indoor and outdoor. In this tutorial, we will configure ThingsBoard Rule Engine to automatically calculate the delta of temperatures inside and outside the warehouse based on the latest readings from temperature sensors.
-Please note that this is just a simple theoretical use case to demonstrate the capabilities of the platform. You can use this tutorial as a basis for much more complex scenarios.
+
+假设您有一个带有室内温度计和室外温度计的仓库：我们将配置ThingsBoard规则引擎以根据温度传感器的最新读数自动计算仓库内部和外部的温度变化量。
+
+请注意这只是一个简单的理论用例用于演示平台的功能。
+
+您可以将本教程用作更复杂场景的基础。
 
  
-## Prerequisites 
+## 先决条件
 
-We assume you have completed the following guides and reviewed the articles listed below:
+我们假设您已完成以下指南并查看了以下文章：
 
-  * [Getting Started](/docs/getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
+  * [入门指南](/docs/getting-started-guides/helloworld/)。
+  * [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)。
   
-## Model definition
+## 模型定义
   
-We will create one asset that has name "Warehouse A" and type "warehouse".
+我们将创建一个名称为“Warehouse A”的资产后输入“warehouse”。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/add-asset.png)
 
-We will create two devices that have names "Inside Thermometer" and "Outside Thermometer" and accordingly with types "inside thermometer" and "outside thermometer". 
+我们将创建两个名称分别为“Inside Thermometer”和“Outside Thermometer”的设备并分别使用“Inside Thermometer”和“Outside Thermometer”类型。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/add-indoor-thermometer.png)
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/add-outdoor-thermometer.png)
 
-We must also create the relation between asset "Warehouse A" and device "Inside Thermometer".
-This relation will be used in the rule chain to change originator of the messages from the thermometer to the warehouse itself
-and also the relation from device "Inside Thermometer" to device "Outside Thermometer" to fetch the latest temperature from "Outside Thermometer".
+我们还必须在资产“Warehouse A”和设备“Inside Thermometer”之间建立关系。
+
+此关系将在规则链中使用以将消息的始发者从温度计更改为仓库本身以及从设备“Inside Thermometer”到设备“Outside Thermometer”的关系，以从“Outside Thermometer”获取最新温度。
 
  
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/add-relation-from-asset.png)
 
 <br>
 
-**Note**: Please review the following [**documentation page**](/docs/user-guide/entities-and-relations/) to learn how to create assets and relations.
+**注意**：请查看以下[**文档页面**](/docs/user-guide/entities-and-relations/)以了解如何创建资产和关系。
 
-## Message Flow
+## 消息流
 
-In this section, we explain the purpose of each node in this tutorial. There will be three rule chains involved:
+在本节中我们将解释本教程中每个节点的用途。将涉及三个规则链：
 
-  - "Thermometer Emulators" - optional rule chain to simulate data from two temperature sensors; 
+  - "Thermometer Emulators"-可选规则链用于模拟来自两个温度传感器的数据。
 
-  - "Root rule chain" - rule chain that actually saves telemetry from devices into the database, and filters messages by device type before redirecting it to "Delta Temperature" chain
+  - "Root rule chain" - 规则链实际上将遥测从设备保存到数据库中并在将设备重定向到"Delta Temperature"链之前按设备类型过滤消息。
    
-  - "Delta Temperature" - rule chain that actually calculates delta temperature between thermometers in the warehouse and outside;
+  - "Delta Temperature" - 规则链用于实际计算仓库内和室外温度计之间的温度增量。
 
-
-### Thermometer Emulators rule chain
+### 温度计模拟器规则链
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/thermostats-emulators-chain.png)
 
-  - **Nodes A and B**: Generator nodes
+  - **节点A和B**：生成器节点
   
-    - Two similar nodes that periodically generate a very simple message with random temperature reading.
+  - 两个类似的节点会定期生成一个非常简单的消息，并带有随机温度读数。
     
-  - **Node A: Indoor Thermometer emulator** 
+  - **节点A：室内温度计模拟器**
            
              {% highlight javascript %}
              var msg = {
@@ -80,7 +83,7 @@ In this section, we explain the purpose of each node in this tutorial. There wil
              };
              {% endhighlight %}
     
-  - **Node B: Outdoor Thermometer emulator**
+  - **节点B：室外温度计模拟器**
             
              {% highlight javascript %}
              var msg = {
@@ -102,32 +105,32 @@ In this section, we explain the purpose of each node in this tutorial. There wil
   
 <br>  
   
-**Note**: in the real case, the device type is set to the message metadata by default.
+**注意**: 在实际情况下，设备类型默认设置为消息metadata。
     
     
-  - **Node C**: Rule Chain node
+  - **节点C**：规则链节点
 
-    - Forwards all messages to default root rule chain.
+    - 将所有邮件转发到默认的根规则链。
     
 <br>
    
-### Root rule chain
+### 根规则链
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/root-rule-chain.png)
 
-   - **Nodes D**: Rule Chain node
+   - **节点D**：规则链节点
  
-     - Forwards incoming Message to specified rule chain "Delta Temperature". 
+     - 将传入消息转发到指定的规则链"Delta Temperature"。
 
 <br>
       
-### Delta Temperature rule chain
+### Delta Temperature 规则链
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/delta-temperature-chain.png)
 
-  - **Node E**: Switch node.
+  - **节点E**: Switch node.
   
-    -  Routes incoming messages by deviceType fetched from message metadata. If deviceType from incoming message is "indoor thermometer" switches to the chain via "indoor" relation type, else if deviceType from incoming message is "outdoor thermometer" switches to the chain via "outdoor" relation type.
+    - 按从消息metadata中获取的deviceType路由传入消息。如果来自传入消息的deviceType是"indoor thermometer"，则通过"indoor"关系类型切换到链，否则如果来自传入消息的deviceType是"outdoor thermometer"，则通过"outdoor"关系类型切换到链。
     
         {% highlight javascript %}
         function nextRelation(metadata, msg) {
@@ -142,13 +145,13 @@ In this section, we explain the purpose of each node in this tutorial. There wil
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/switch-by-type.png)   
     
-  - **Nodes F and G**: Transform script nodes
+  - **节点F和G**: Transform script nodes
   
-    - Two similar nodes that changes key names from message payload from "temperature" to "indoorTemperature" or "outdoorTemperature" depending on relation type from the previous node.  
+    - 两个类似的节点根据来自先前节点的关系类型，将密钥名称从消息有效负载从"temperature"更改为"indoorTemperature"或"outdoorTemperature"。
     
-    - Creates a new outbound message in which it puts the new telemetry. <br>
+    - 创建新的出站消息，并在其中放入新的遥测。 <br>
     
-  - **Node F: Change to Outdoor** 
+  - **节点F: 更改为Outdoor** 
        
          {% highlight javascript %}
          var newMsg = {};
@@ -162,7 +165,7 @@ In this section, we explain the purpose of each node in this tutorial. There wil
          };
          {% endhighlight %}
 
-  - **Node G: Change to Indoor**
+  - **节点G: 更改为Indoor**
         
          {% highlight javascript %}
          var newMsg = {};
@@ -177,25 +180,25 @@ In this section, we explain the purpose of each node in this tutorial. There wil
          {% endhighlight %}
 
    
- - **Node H**: Change originator node.
+ - **节点H**: 更改发起方节点。
   
-    -  Changes the originator from "Inside Thermometer" to the related Asset "Warehouse A" and the submitted message will be processed as a message from the Asset.
+    - 将发起者从"Inside Thermometer"更改为相关资产"Warehouse A"并且所提交的消息将作为来自资产的消息进行处理。
         
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/to-asset.png) 
     
- - **Node I**: Save Timeseries node.
+ - **节点I**: Save Timeseries node.
   
-    -  Saves the TimeSeries data from the incoming Message payload into the database.
+    - 将来自传入消息payload的TimeSeries数据保存到数据库中。
          
- - **Node J**: Originator attributes node.
+ - **节点J**: Originator attributes node.
    
-    -  Adds message originator latest telemetry values into message metadata.
+    -  将消息始发者的最新遥测值添加到消息metadata中。
     
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/fetch-latest-timeseries.png) 
 
- - **Node K**: Transform script node.
+ - **节点K**: Transform script node.
   
-    - Creates a new outbound message in which it puts the new telemetry "deltaTemperature" that calculated like the absolute value between the difference of message metadata telemetry values namely, "indoorTemperature" and "outdoorTemperature". <br>
+    - 创建新的出站消息在该消息中放入新的遥测"deltaTemperature"，其计算方式类似于消息元数据遥测值之差即"indoorTemperature"和"outdoorTemperature"之间的绝对值。 <br>
     
         {% highlight javascript %}
         var newMsg = {};
@@ -211,25 +214,25 @@ In this section, we explain the purpose of each node in this tutorial. There wil
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/temperature-delta.png)         
 
- - **Node L**: Save Timeseries node.
+ - **节点L**: Save Timeseries节点.
   
-    -  Saves the TimeSeries data from the incoming Message payload into the database.
+    - 将来自传入消息payload的TimeSeries数据保存到数据库中。
 
 <br>
 
-## Configuring the Rule Chains
+## 配置Rule Chains
 
-Download and [**import**](/docs/user-guide/ui/rule-chains/#rule-chains-importexport) attached emulators rule chain [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/thermometer_emulators.json) as a new "Thermometer Emulators" rule chain, 
-root rule chain [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/root_rule_chain_function_from_two_devices.json) as a new  "Root rule chain" and "Delta Temperature" [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/delta_temperature.json).
-Please note that some nodes have debug enabled.
+下载并[**导入**](/docs/user-guide/ui/rule-chains/#rule-chains-importexport)附加的模拟器规则链[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/thermometer_emulators.json)作为新的"Thermometer Emulators"规则链，
+根规则链[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/root_rule_chain_function_from_two_devices.json)作为新的"Root rule chain"和"Delta Temperature"[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/delta_temperature.json)。
+请注意，某些节点已启用调试。
 
-## Validating the flow
+## 验证流程
 
-Download and [**import**](/docs/user-guide/ui/dashboards/#iot-dashboard-importexport) attached dashboard [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/warehouse_dashboard.json) as a new "Warehouse dashboard".
+下载并[**导入**](/docs/user-guide/ui/dashboards/#iot-dashboard-importexport)附加的信息中心[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/warehouse_dashboard.json)作为新的"Warehouse dashboard"。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/data-function/dashboard.png) 
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "DataAnalytics" %}{% include templates/guides-banner.md %}
 

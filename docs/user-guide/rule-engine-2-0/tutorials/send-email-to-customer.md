@@ -1,53 +1,56 @@
 ---
 layout: docwithnav
-title: Send Email to Customer
-description: Send Email Workflow
+title: 向客户发送电子邮件
+description: 发送电子邮件流程
 
 ---
 
-This Tutorial is to show you how to send an Email to the customer using the Rule Engine. 
+本教程将向您展示如何使用规则引擎向客户发送电子邮件。
 
 * TOC
 {:toc}
 
 
-#### **Note:**
- This tutorial is based on the [send email on alarm](/docs/user-guide/rule-engine-2-0/tutorials/send-email/#use-case) tutorial and it's use case. We will reuse the rule chains from the above-mentioned tutorial and will add a few more rule nodes to send email to the customer of the assigned device.  
+#### **注意:**
+本教程基于[发送警报时发送电子邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/#use-case)教程并且它是用例。我们将重用上述教程中的规则链，并添加更多规则节点，以将电子邮件发送给指定设备的客户。
 
 <br>
 
-# Use case
+# 用例
 
-Let's assume your device is using DHT22 sensor to collect and push temperature readings to ThingsBoard. 
-DHT22 sensor is good for -40 to 80°C temperature readings.We want to generate Alarms if temperature is out of good range and send the email when the alarm was created.
+假设您的设备正在使用DHT22传感器来收集温度读数并将其推送到ThingsBoard。
 
-In this tutorial we will configure ThingsBoard Rule Engine to: 
+DHT22传感器适用于-40至80°C的温度读数。如果温度超出范围，我们想生成警报，并在警报创建时发送电子邮件。
 
-- Send an email to the customer of the assigned device if the temperature was out of range, namely: less than -40 and more than 80 degrees.
+在本教程中，我们将ThingsBoard规则引擎配置为：
 
-- Add message originator attributes to the message.
+-如果温度超出范围，即：低于-40度且高于80度，则向指定设备的客户发送电子邮件。
 
-- Add additional data to the email body using Script Transform node from the incoming message.
+- 将消息始发者属性添加到消息中。
 
-# Prerequisites 
+- 使用传入消息中的“脚本转换”节点将其他数据添加到电子邮件正文中。
 
-We assume you have completed the following guides and reviewed the articles listed below:
+# 先决条件
 
-  * [Getting Started](/docs/getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
-  * [Create & Clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/) guide.
-  * [Send email on alarm](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) guide.
+我们假设您已完成以下指南并查看了以下文章：
+
+  * [入门指南](/docs/getting-started-guides/helloworld/)。
+  * [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)。
+  * [创建&清除警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/)。
+  * [发送警报邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)。
   
   
-# Create customer and assign device 
+# 创建客户并分配设备
 
-First of all, we need to create Customer and assign device to customer. The following screenshots show you how to do this:
+首先我们需要创建客户并将设备分配给客户。以下屏幕截图显示了如何执行此操作：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email/create-customer.png)
 
 <br>
 
-Customer created. Now we need to assign device **Thermostat Home**(the creation of which was described in the [Create & clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#adding-the-device) tutorial) to the customer.<br> Go to **Manage devices** on Customer page and select our device
+我们需要分配设备**Thermostat Home**（[创建和清除警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#adding-the-device)教程）。<br>
+
+转到客户页面上的**Manage devices**然后选择我们的设备。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email/manage-devices.png)
 
@@ -57,43 +60,43 @@ Customer created. Now we need to assign device **Thermostat Home**(the creation 
 
 <br>
 
-Next our customer should have **server scope** attribute **email**. Note that email will be sent to this email, so write your email for testing.
+接下来我们的客户应具有**server scope**属性的**email**。请注意邮件将发送到该电子邮箱，因此请编写您的电子邮件进行测试。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email/customer-email.png)
  
 <br>
 
-Also we need add server scope attribute - **address** to our device **Thermostat Home**:
+此外，我们还需要向服务器**Thermostat Home**添加服务器作用域属性-**address** **：
 <br>
 
-Go to **Devices** -> **Thermostat Home** -> **Attributes** -> **Server attributes** and press **+** button to add **address**
+转到**Devices** -> **Thermostat Home** -> **Attributes** -> **Server attributes**然后点击 **+** 按钮添加 **address**
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email/add-address.png)
 
 <br>
 
-# Message flow  
+# 消息流  
 
-In this section, we explain the purpose of each node that was added or modified to initial rule chains in this tutorial:
+在本节中，我们将说明在本教程中添加或修改到初始规则链的每个节点的用途：
 
-- Node A: [**Customer attributes**](/docs/user-guide/rule-engine-2-0/enrichment-nodes/#customer-attributes) node.
-  - This node will be used for taking email attribute of the customer and save it in Message Metadata property customerEmail
-- Node B: [**Originator attributes**](/docs/user-guide/rule-engine-2-0/enrichment-nodes/#originator-attributes) node.
-  - This node will be used for taking address server scope attribute of the originator (device is an originator of the incoming message) and save it in the Message Metadata.    
-- Node C: [**To Email**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#to-email-node) node.
-  - This node builds actual email from the configured template.
-- Node D: **Rule Chain** node.
-  - Forwards incoming Message to specified Rule Chain **Create/Clear Alarm & Send Email to Customer**.     
+- 节点A: [**Customer attributes**](/docs/user-guide/rule-engine-2-0/enrichment-nodes/#customer-attributes)。
+ - 此节点将用于获取客户的电子邮件属性，并将其保存在消息metadata属性customerEmail中
+- 节点B: [**Originator attributes**](/docs/user-guide/rule-engine-2-0/enrichment-nodes/#originator-attributes)
+- 此节点将用于获取发起者（设备是传入消息的发起者）的地址服务器范围属性，并将其保存在消息Metadata中。
+- 节点C: [**To Email**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#to-email-node) node.
+  - 此节点从配置的模板构建实际的电子邮件。
+- 节点D：**Rule Chain** 节点。
+  - 将传入消息转发到指定的规则链**Create/Clear Alarm & Send Email to Customer**。
 
 <br/>
 
-# Configure Rule Chains
+# 配置规则链
 
-In this tutorial, we used Rule Chains from [send email on alarm](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) tutorial.
-We modified Rule Chain **Create/Clear Alarm & Send Email** by adding nodes that was described above in the section [Message flow](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/#message-flow)<br>
- and renamed this rule chain to: **Create/Clear Alarm & Send Email to Customer**.
+在本教程中，我们使用了[发送警报邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)。
 
-<br/>The following screenshots show how the above Rule Chains should look like:
+我们通过添加以上在[消息流](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/#message-flow)部分中描述的节点，修改了规则链**Create/Clear Alarm & Send Email**并将此规则链重命名为：**Create/Clear Alarm & Send Email to Customer**。
+
+<br/>以下屏幕截图显示了以上规则链的外观：
  
   - **Create/Clear Alarm & Send Email to Customer:**
 
@@ -105,25 +108,25 @@ We modified Rule Chain **Create/Clear Alarm & Send Email** by adding nodes that 
 
 <br/> 
 
-Download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/create_clear_alarm___send_email_to_customer.json) for the **Create/Clear Alarm & Send Email to Customer:** rule chain. 
-Create Node **D** as shown on the image above in the root rule chain to forward telemetry to the imported rule chain.
+下载json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/create_clear_alarm___send_email_to_customer.json)以用于**Create/Clear Alarm & Send Email to Customer:**规则链。
+如上图所示，在根规则链中创建节点**D**，以将遥测转发到导入的规则链。
 
-The following section shows you how to modify this rule chain, specifically: add rule nodes [**A**](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/#node-a-customer-attributes) and [**B**](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/#node-b-originator-attributes) and modify node [**C**](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/#node-c-to-email).
+以下部分向您展示了如何修改此规则链特别是：添加规则节点[**A**](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/#node-a-customer-attributes)和[**B**](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/#node-b-originator-attributes)并修改节点[**C**](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/#node-c-to-email)。
 <br/> 
 
   
-## Modify **Create & Clear Alarms with details:**
+## 修改**Create & Clear Alarms详情:**
 
-### Modify the required nodes
+### 修改所需的节点
 
-In this rule chain, you will add 2 nodes and modify 1 node as it will be explained in the following sections:
+在此规则链中，您将添加2个节点并修改1个节点，如以下各节所述：
 
-#### Node A: **Customer attributes**
-- Add the **Customer attributes** node and connect it to the **Filter Script** node with a relation type **True**.<br>
-  This node will be used for taking **email** attribute of the customer and save it in 
-  Message Metadata property **customerEmail**
+#### 节点A: **Customer attributes**
+- 添加**Customer attributes**节点并将其连接到关联类型为**True**的**Filter Script**节点。<br>
+  该节点将用于获取客户的**email**属性并将其保存在
+  邮件元数据属性**customerEmail**
   
- - Fill in the fields with the input data shown in the following table: 
+ - 填写下表中输入的数据字段：
  
  <table style="width: 30%">
    <thead>
@@ -151,11 +154,11 @@ In this rule chain, you will add 2 nodes and modify 1 node as it will be explain
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email/get-customer-email.png)
 
-#### Node B: **Originator attributes**
-- Add the **Originator attributes** node and pastes it between the nodes: **Customer attributes** and **Create alarm** with a relation type **Success**.<br>
-  This node will be used for taking address server scope attribute of the originator **(Thermostat Home)**. This attribute will be saved in the Message Metadata property ss_address.
+#### 节点B: **Originator attributes**
+- 添加**Originator attributes**节点并将其粘贴在节点之间：**Customer attributes**和**Create alarm**关系类型为**Success**。<br>
+  该节点将用于获取始发者 **(Thermostat Home)** 的地址服务器范围属性。此属性将保存在消息元数据属性ss_address中。
   
- - Fill in the fields with the input data shown in the following table: 
+ - 填写下表中输入的数据字段：
  
  <table style="width: 30%">
    <thead>
@@ -179,14 +182,14 @@ In this rule chain, you will add 2 nodes and modify 1 node as it will be explain
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email/get-device-address.png)
 
-#### Node C: **To Email**
-- Modify the **To Email** node. For this, we need change some fields in details of this node, namely: 
+#### 节点C: **To Email**
+- 修改**To Email**节点。为此我们需要更改此节点详细信息中的某些字段：
 
     - **To template**.
 
     - **Body tempalte**.
     
-- Fill in the fields with the input data shown in the following table:     
+- 填写下表中输入的数据字段：
     
 <table style="width: 30%">
    <thead>
@@ -209,51 +212,50 @@ In this rule chain, you will add 2 nodes and modify 1 node as it will be explain
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email/modify-to-email.png)  
 
-  
-# Post telemetry and verify
-For posting device telemetry we will use the Rest APIs, [Telemetry upload APIs](/docs/reference/http-api/#telemetry-upload-api). For this we will need to
-copy device access token from then device **Thermostat Home**. 
+   
+# 进行遥测并验证
+对于发布设备遥测我们将使用Rest API[遥测上传API](/docs/reference/http-api/#telemetry-upload-api)。为此我们将需要复制设备**Thermostat Home**的访问令牌。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email v2/copy-token.png)
 
 
-Lets post temperature = 99. Mail should be sent:
+发布temperature = 99. 创建警报:
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":99}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
 
-**you need to replace $ACCESS_TOKEN with actual device token**
+**您需要将$ACCESS_TOKEN替换为实际的设备令牌**
 {% endhighlight %}
 
-You should understand that message won't be sent to the email when the alarm was updated, only in the case when alarm will be created. 
+您应该了解仅在创建警报的情况下，警报更新后才将消息发送到电子邮件。
 
-Finally we can see that email was received with correct values. (Please check your spam folder if you did not receive any email) 
+最后我们可以看到收到的电子邮件具有正确的值。 （如果您没有收到任何电子邮件，请检查您的垃圾邮件文件夹）
 
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email/mail-received.png)
 
 
-Also, you can see the more information about how to:
+此外您可以查看有关如何进行以下操作的更多信息：
 
-- define other additional logic for alarm processing, for example, sending notification to Telegram App using Telegram Bot.
+- 定义其他用于警报处理的逻辑，例如使用Telegram Bot将通知发送到Telegram App。
 
-- configure Alarm Details function in the Create and Clear Alarm nodes and configure the Dashboard by adding an alarm widget to visualize the alarms..
+- 在**Create and Clear Alarm**节点中配置**Alarm Details**功能并通过添加警报部件以可视化警报来配置仪表板。
   
-- create alarm when device is offline.
+- 设备离线时创建警报。
 
-Please refer to the links under the **See Also** section to see how to do this.
+请参阅**另请参阅**部分下的链接，以了解如何执行此操作。
 
 <br/>
 <br/>
 
-# See Also
+# 另请参阅
 
-- [Notifications and Alarms on your smartphone using Telegram Bot](/docs/iot-gateway/integration-with-telegram-bot/) guide
+- [使用Telegram Bot的智能手机上的通知和警报](/docs/iot-gateway/integration-with-telegram-bot/)。
 
-- [Create alarm with details](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/) guide.
+- [使用详细信息创建警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/)。
 
-- [Create Alarm when the Device is offline](/docs/user-guide/rule-engine-2-0/tutorials/create-inactivity-alarm/) guide.
+- [设备离线时创建警报](/docs/user-guide/rule-engine-2-0/tutorials/create-inactivity-alarm/)。
 
-# Next steps
+# 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}  

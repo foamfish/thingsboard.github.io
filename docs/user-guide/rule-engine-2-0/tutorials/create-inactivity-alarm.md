@@ -1,75 +1,75 @@
 ---
 layout: docwithnav
-title: Create Alarm when the Device is offline
-description: To create an alarm when the device is offline for a certain period of time using the Rule Engine.
+title: 设备离线时创建警报
+description: 使用规则引擎在设备离线一段时间后创建警报。
 
 ---
 
 
-This tutorial is to show you how to create an alarm when the device is offline for a certain period of time using RuleEngine.
+本教程将向您展示如何使用RuleEngine在设备离线一段时间后创建警报。
 
 * TOC
 {:toc}
 
 
-# Use Case
+# 用例
 
-Let’s assume the following use case:
+让我们假设以下用例：
 
- - you have a device connected to ThingsBoard and this device has a temperature sensor to collect and push the telemetry data.
+ - 您已将一个设备连接至ThingsBoard，并且该设备具有一个温度传感器以收集并推送遥测数据。
 
- - the temperature sensor may stop pushing the telemetry data due to any kind of faults.
+ - 由于任何类型的故障，温度传感器可能会停止推送遥测数据。
 
 
-Therefore, in this case, you will need to configure ThingsBoard Rule Engine to: 
+因此在这种情况下您需要将ThingsBoard Rule Engine配置为：
 
- - create an alarm if the device remains inactive for a certain period of time. This period of time can be defined in either of two ways:
+ - 如果设备在一段时间内保持非活动状态则创建警报。可以通过以下两种方式之一来定义此时间段：
  
-    - The first way: by changing the global configuration parameter for the inactivity timeout. <br>
-      This parameter is defined in **thingsboard.yml** (state.defaultInactivityTimeoutInSec) and by default it is set to 10 seconds.
+    - 第一种方法：通过更改非活动超时的全局配置参数。 <br>
+      此参数在**thingsboard.yml**(state.defaultInactivityTimeoutInSec)中定义默认情况下设置为10秒。
     
-    - The second way: by overwriting this parameter for a particular device by setting the **“inactivityTimeout”** server-side attribute (value is set in milliseconds). <br>
-      This way will be described in the following sections.
+    - 第二种方式：通过设置服务器端属性**inactivityTimeout**（毫秒为单位）来覆盖特定设备的此参数。 <br>
+      以下各节将介绍这种方式。
  
- - clear the alarm if the device becomes active.
+ - 如果设备处于活动状态清除警报。
 
 
-# Background
-The ThingsBoard Device State service is responsible for monitoring the device connectivity state and triggering the device connectivity events that are pushed to Rule Engine.
+# 背景
+ThingsBoard设备状态服务负责监视设备连接状态并触发推送到规则引擎的设备连接事件。
 
-ThingsBoard supports four types of events:
+ThingsBoard支持四种类型的事件：
 <table style="width: 70%">
   <thead>
       <tr>
-          <td><b>Event Type</b></td><td><b>Description</b></td>
+          <td><b>事件类型</b></td><td><b>描述</b></td>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>Connect</td>
-          <td>triggered when the device connects to ThingsBoard.</td>
+          <td>连接(Connect)</td>
+          <td>在设备连接到ThingsBoard时触发。</td>
       </tr>
       <tr>
-          <td>Disconnect</td>
-          <td>triggered when the device disconnects from ThingsBoard.</td>
+          <td>断开(Disconnect)</td>
+          <td>当设备与ThingsBoard断开连接时触发。</td>
       </tr>
       <tr>
-          <td>Activity</td>
-          <td>triggered when the device pushes a telemetry, an attribute update or RPC command.</td>
+          <td>活动(Activity)</td>
+          <td>在设备推动遥测，属性更新或RPC命令时触发。</td>
       </tr>
       <tr>
-          <td>Inactivity</td>
-          <td>triggered when the device is inactive for a certain period of time.</td>
+          <td>不活(Inactivity)</td>
+          <td>在设备在一段时间内处于非活动状态时触发。</td>
       </tr>
    </tbody>
 </table>
 
 
-This tutorial will explain in details the device Inactivity event and it will show you how to:
+本教程将详细说明设备不活动事件，并将向您展示如何：
 
- - create Inactivity alarms using Rule Engine.
+ - 使用规则引擎创建不活动警报。
 
- - configure a parameter for the inactivity timeout.
+ - 为非活动超时配置参数。
 
 
 <br/>
@@ -77,10 +77,10 @@ This tutorial will explain in details the device Inactivity event and it will sh
 
 
 
-# Adding the Device
+# 添加设备
 
- - Add a Device entity in ThingsBoard.
- - Enter the Device name as **Temperature device**, and the Device type as **Temperature sensor**:
+ - 在ThingsBoard中添加设备实体。
+ - 输入设备名称为**Temperature device**，并输入设备类型为**Temperature sensor**：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/add-device.png)    
 
@@ -89,56 +89,56 @@ This tutorial will explain in details the device Inactivity event and it will sh
 
 # Configuring the Device
 
- - Go to **Devices** -> **Temperature device** -> **Attributes** -> **Server attributes** and Press **Add** button;
+ - 转到**Devices** -> **Temperature device** -> **Attributes** -> **Server attributes** 点击 **Add** 按钮;
 
- - Set **“inactivityTimeout”** attribute, for example, to a value equals 60000 milliseconds.
+ - 例如将**inactivityTimeout**属性设置为等于60000毫秒的值。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/add-attribute.png)    
 
 <br/>
 <br/>
 
-# Configuring the Rule Chain
+# 配置规则链
 
-The following screenshot shows the initial Root Rule Chain. Please, note that the irrelevant rule nodes have been removed from the Root Rule Chain.
+以下屏幕截图显示了初始Root Rule Chain。请注意不相关的规则节点已从Root Rule Chain链中删除。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/initial-chain.png)
 
 
-The default rule chain has been modified by adding the following two action nodes:
+通过添加以下两个操作节点来修改默认规则链：
 
- - The **Create alarm** node: connected to the **Message Type Switch** node with a relationship type **Inactivity Event**;
+ - **Create alarm**节点：以关系类型**Inactivity Event**连接到**Message Type Switch**节点；
  
- - The **Clear alarm** node: connected to the **Message Type Switch** node with a relationship type **Activity Event**.
+ - **Clear alarm**节点：连接到**Message Type Switch**节点，其关系类型为**Activity Event**。
 
-The following screenshot shows how the final Rule Chain should look like:
+以下屏幕截图显示了最终规则链的外观：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/chain.png)
 
-- Download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/tutorial_of_inactivity_event.json) for the rule chain indicated above and import it.
+- 下载上述规则链json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/tutorial_of_inactivity_event.json)并将其导入。
 
-- Don't forget to mark the new rule chain as "root".  
+- 不要忘记将新规则链标记为"root"。
 
-Also, you can create the new Rule Chain from scratch. The following section shows you how to create it.
+另外您可以从头开始创建新的规则链。下一节将向您展示如何创建它。
 
-#### Creating a new Rule Chain (**Tutorial of Inactivity Event**)
+#### 创建新的规则链(**Tutorial of Inactivity Event**)
   
-  - Go to **Rule Chains** -> **Add new Rule Chain** 
+  - 转到**Rule Chains** -> **Add new Rule Chain** 
   	
- - Enter the Name field as **Tutorial of Inactivity Event**, then click the **ADD** button.
+  - 输入名称**Tutorial of Inactivity Event** 点击 **ADD** 按钮。
  
-  - The new Rule Chain is created. Don’t forget to mark it as “root”.
+  - 创建新的规则链。不要忘记将其标记为“root”。
   
   ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/add-chain.png)  ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/root-chain.png) 
 
-##### Adding the required nodes
+##### 添加所需的节点
 
-In this tutorial, you will create 5 nodes as it will be explained in the following sections:
+在本教程中您将创建5个节点如以下各节所述：
 
-###### **Message Type Switch** node
-Add the **Message Type Switch** node and connect it to the **Input** node.
+###### **Message Type Switch**节点
+添加**Message Type Switch**节点并将其连接到**Input**节点。
 
-This node will route the incoming messages according to the message type, namely: 
+该节点将根据消息类型路由传入的消息，即：
   
   - **POST_TELEMETRY_REQUEST**;
 
@@ -148,72 +148,72 @@ This node will route the incoming messages according to the message type, namely
   
   - **INACTIVITY_EVENT**.
   
-Enter the Name field as **Message Type Switch**, then click the **ADD** button.
+ 输入名称**Message Type Switch**点击**ADD**按钮。
+
  
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/message-type-switch.png)
   
 
-###### **Save Timeseries** node 
-Add the **Save TimeSeries** node and connect it to the **Message Type Switch** node with a relationship type **Post telemetry**.  
+###### **Save Timeseries**节点 
+添加**Save TimeSeries**节点并将其连接到**Message Type Switch**节点其关系类型为**Post telemetry**。
 
-This node will store the TimeSeries data from the incoming Message payload into the database and link it to the Device that is identified by the Message Originator.  
+该节点会将来自传入消息payload的TimeSeries数据存储到数据库中，并将其链接到消息发起方标识的设备。
 
-Enter the Name field as **Save Time Series**.
+输入名称**Save Time Series**。
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/save-ts.png)
   
-###### **Save Server Attributes** node 
-Add the **Save Attributes** node and connect it to the **Message Type Switch** node with a relationship type **Post attributes**.  
+###### **Save Server Attributes**节点 
+添加**Save Attributes**节点并将其连接到关系类型为**Post attributes**的**Message Type Switch**节点。
 
-This node will store attributes from the incoming Message payload into the database and link them to the Entity that is identified by the Message Originator.
+该节点会将来自传入消息payload的属性存储到数据库中，并将它们链接到消息发起者标识的实体。
 
-Enter the Name field as **Save Server Attributes**.
+输入名称**Save Server Attributes**。
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/save-attributes.png)  
   
-###### **Create Inactivity alarm** node 
-Add the **Create alarm** node and connect it to the **Message Type Switch** node with a relationship type **Inactivity Event**.
+###### **Create Inactivity alarm**节点
+添加**Create alarm**节点，并将其连接到关系类型为**Inactivity Event**的**Message Type Switch**节点。
 
-This node tries to load the latest Alarm with the configured Alarm Type for the Message Originator. If Uncleared Alarm exists, then this Alarm will be updated, otherwise, a new Alarm will be created.
+该节点尝试使用为消息发起者配置的警报类型加载最新的警报。如果存在未清除的警报则将更新此警报否则将创建一个新的警报。
 
 
-- Enter the Name field as **Create Inactivity Alarm** and the Alarm type as **Inactivity TimeOut**.
-
+- 输入名称**Create Inactivity Alarm**并在警报类型中输入**Inactivity TimeOut**。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/create-alarm.png)
 
 
-###### **Clear Inactivity alarm** node 
-Add the **Clear alarm** node and connect it to the **Message Type Switch** node with a relationship type **Activity Event**.
+###### **Clear Inactivity alarm**节点
+添加**Clear alarm**节点并将其连接到关系类型为**Activity Event**的**Message Type Switch**节点。
 
-This Node loads the latest Alarm with the configured Alarm Type for the Message Originator and Clear the Alarm if it exist.
+该节点使用消息始发者配置的警报类型加载最新的警报并清除警报（如果存在）。
 
-- Enter the Name field as **Clear Inactivity Alarm** and the Alarm type as **Inactivity TimeOut**.
+- 输入名称**Clear Inactivity Alarm**并在警报类型中输入**Inactivity TimeOut**。
 
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/clear-alarm.png)
 
 <br/>
 
-This Rule chain is now ready and you need to save it. 
+现在此规则链已准备就绪您需要保存它。
 
 <br/>
 <br/>
 
-# How to verify the Rule Chain and Post telemetry
+# 如何验证Rule Chain和Post telemetry
 
-- Use the Rest APIs, [Telemetry upload APIs](/docs/reference/http-api/#telemetry-upload-api), for posting the device telemetry. <br>
-  Please, note that you will need to copy the device access token from the device, **Temperature device**, as shown in the following screenshot. 
+- 使用Rest API [遥测上传API](/docs/reference/http-api/#telemetry-upload-api)发布设备遥测。 <br>
+  请注意，您需要从设备**Temperature device**复制设备访问令牌，如以下屏幕截图所示。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/inactivity alarms/access-token.png)
 
 
-Try to post temperature = 20. Alarm should be created a minute after the telemetry post:
+发布temperature = 20应该在遥测发布一分钟后创建警报:
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":20}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
 
-***you need to replace $ACCESS_TOKEN with the actual device token**
+***您需要将$ACCESS_TOKEN替换为实际的设备令牌**
 {% endhighlight %}
 
 
@@ -223,28 +223,28 @@ curl -v -X POST -d '{"temperature":20}' http://localhost:8080/api/v1/$ACCESS_TOK
 
 <br/>
 
-Also, you can:
+另外您可以：
 
-  - configure the Dashboard by adding an alarm widget to visualize the alarms.
+  - 通过添加警报部件以可视化警报来配置仪表板。
   
-  - define an additional logic for alarm processing, for example, sending an email.
+  - 定义用于警报处理的其他逻辑，例如发送电子邮件。
 
-Please refer to the first two links under the **See Also** section to see how to do this.
+请参阅**另请参阅**部分下的前两个链接，以了解如何执行此操作。
 
 
     
 <br/>
 <br/>
 
-# See Also
+# 另请参阅
 
-- [Create & Clear Alarms: configure dashboard](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#configure-device-and-dashboard) guide - to learn how to add an Alarm widget to the dashboard.
+- [创建和清除警报：配置信息中心](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#configure-device-and-dashboard) 指南-了解如何添加仪表板的警报小部件。
 
-- [Send Email](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) guide.
+- [发送邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)。
 
-- [Device Connectivity Status](/docs/user-guide/device-connectivity-status/) guide.
+- [设备连接状态](/docs/user-guide/device-connectivity-status/)。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}
 

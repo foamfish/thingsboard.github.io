@@ -1,138 +1,138 @@
 ---
 layout: docwithnav
-title: Send RPC Request to the Related Device
-description: Send RPC Request to a Device
+title: 将RPC请求发送到相关设备
+description: 将RPC请求发送到相关设备
 
 ---
 
-ThingsBoard allows you to send remote procedure calls [**RPC**](/docs/user-guide/rpc/#server-side-rpc-api) from server-side applications to devices and vice versa. <br>
-This Tutorial is to show you how to send a remote request call to a Related Device using Rule Engine.
+ThingsBoard允许您从服务器端应用程序向设备发送远程过程调用[**RPC**](/docs/user-guide/rpc/#server-side-rpc-api)反之亦然。 <br>
+本教程将向您展示如何使用规则引擎将远程请求调用发送到相关设备。
 
 
 * TOC
 {:toc}
 
-# Use case
-Let’s assume the following use case:
+# 用例
+让我们假设以下用例：
 
-  - you have the following devices connected to ThingsBoard:	
-	- Wind Direction Sensor.	
-	- Rotating System.	
-  - also, you have one asset:
-	- Wind Turbine. 
- - You want to initiate an RPC request to the Rotating System and change the direction of the Wind Turbine according to the direction of the wind.
- - The RPC call will have two properties:
-	- method: **spinLeft** or **spinRight**.
-	- params: **value**.
+  - 您将以下设备连接到ThingsBoard：	
+	- 风向(Direction)传感器
+	- 旋转(Rotating)系统	
+  - 另外您拥有一项asset:
+	- 风力发电机
+ - 您要向旋转系统发起RPC请求，并根据风向更改风力涡轮机的方向
+ - RPC调用将具有两个属性:
+	- 方法: **spinLeft** 或 **spinRight**
+	- 参数: **value**
 
 <table  style="width: 60%">
    <thead>
      <tr>
-	 <td><strong><em>Note:</em></strong></td>
+	 <td><strong><em>注意:</em></strong></td>
      </tr>
    </thead>
    <tbody>
      <tr>
 	<td>
-	<p>Turning the Rotating System to the left or to the right is based on which way is better and faster so that the angle between the direction of the wind and the wind turbine has to be no more than 5 degrees.</p>
+	<p>向左或向右旋转旋转系统是基于哪种方法更好，更快，因此风向与风力涡轮机之间的角度不得超过5度。</p>
 	</td>
      </tr>
    </tbody>
 </table>
 
 
-## Prerequisites
+## 先决条件
 
-We assume you have completed the following guides and reviewed the articles listed below:
+我们假设您已完成以下指南并查看了以下文章：
 
- * [Getting Started](/docs/getting-started-guides/helloworld/) guide.
- * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
+ * [入门指南](/docs/getting-started-guides/helloworld/)。
+ * [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)。
  
  
-# Model definition
-The Wind Turbine has two devices installed: Wind Direction Sensor and Rotating System.
+# 型号定义
+风力涡轮机已安装两个设备：风向(Direction)传感器和旋转(Rotating)系统。
 
-- The Wind turbine is represented as an Asset. Its name is **Wind Turbine** and its type is **Wind turbine**. 
-- The Wind Direction Sensor is represented as a Device. Its name is **Wind Direction Sensor** and its type is **Direction Sensor**.
-- The Rotating System is represented as a Device. Its name is **Rotating System** and its type is **Rotating System**.
-- Create a relation of the type **Contains**:
-	- from **Wind Turbine** to **Wind Direction Sensor**, and
-	- from **Wind Turbine** to **Rotating System**.
-- Create a relation of the type **Uses**:
-	- from **Rotating System** to **Wind Direction Sensor**.
+- 风力涡轮机表示为资产。它的名称为**Wind Turbine**和类型为**Wind turbine**。
+- 风向传感器表示为设备。它的名称为**Wind Direction Sensor**和类型为**Direction Sensor**。
+- 旋转系统表示为设备。它的名称为**Rotating System**和类型为**Rotating System**.
+- 创建类型为**Contains**的关系*:
+	- 从**Wind Turbine**到**Wind Direction Sensor**
+	- 从**Wind Turbine**到**Rotating System**.
+- 创建类型的关系**Uses**:
+  - 从**Rotating System**到 **Wind Direction Sensor**。
 
 
-# Message flow
-In this section, we explain the purpose of each node in this tutorial:
+# 消息流
+在本节中我们将解释本教程中每个节点的用途：
 
-- Node A: [**Message Type Switch**](/docs/user-guide/rule-engine-2-0/filter-nodes/#message-type-switch-node) node.
-  - Routes incoming messages based on the message type.
-- Node B: [**Save Timeseries**](/docs/user-guide/rule-engine-2-0/action-nodes/#save-timeseries-node) node.
-  - Stores messages telemetry from **Wind Direction Sensor** and **Rotating System** into the database. 
-- Node C: [**Related attributes**](/docs/user-guide/rule-engine-2-0/enrichment-nodes/#related-attributes).
-  - Loads the source telemetry **windDirection** of the related **Wind Direction Sensor** and save it into the Message metadata with the name **windDirection**.
-- Node D: [**Change originator**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#change-originator) node.
-  - Change the originator from Devices **Wind Direction Sensor** and **Rotating System** to the related Asset **Wind Turbine** and the submitted message will be processed as a message from Asset.
-- Node E: [**Save Timeseries**](/docs/user-guide/rule-engine-2-0/action-nodes/#save-timeseries-node) node.
-  - Stores messages telemetry from Asset **Wind Turbine** into the database. 
-- Node F: [**Transformation Script**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#script-transformation-node).
-  - Transform an original message into RPC request message. 
-- Node G: [**Filter Script**](/docs/user-guide/rule-engine-2-0/filter-nodes/#script-filter-node) node.
-  - Checks if msgType of incoming message is **RPC message**.
-- Node H: [**RPC call request**](/docs/user-guide/rule-engine-2-0/action-nodes/#rpc-call-request-node) node.
-  - Takes the message payload and sends it as a response to the **Rotating System**.
+- 节点 A: [**Message Type Switch**](/docs/user-guide/rule-engine-2-0/filter-nodes/#message-type-switch-node)
+  - 根据消息类型路由传入的消息。
+- 节点 B: [**Save Timeseries**](/docs/user-guide/rule-engine-2-0/action-nodes/#save-timeseries-node)
+  - 将来自**Wind Direction Sensor**和**Rotating System**的消息遥测存储到数据库中。
+- 节点 C: [**Related attributes**](/docs/user-guide/rule-engine-2-0/enrichment-nodes/#related-attributes)
+  - 加载相关**Wind Direction Sensor**的遥测源**windDirection** 并将其保存到消息元数据中， 名称为**windDirection**。
+- 节点 D: [**Change originator**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#change-originator) node.
+  - 将originator从设备**Wind Direction Sensor**和**Rotating System**更改为相关资产**Wind Turbine** 提交的消息将作为来自资产的消息进行处理。
+- 节点 E: [**Save Timeseries**](/docs/user-guide/rule-engine-2-0/action-nodes/#save-timeseries-node)
+  - 将来自资产**Wind Turbine**的消息遥测存储到数据库中。
+- 节点 F: [**Transformation Script**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#script-transformation-node)
+  - 将原始消息转换为RPC请求消息。
+- 节点 G: [**Filter Script**](/docs/user-guide/rule-engine-2-0/filter-nodes/#script-filter-node)
+  - 检查传入消息的msgType是否为**RPC消息**.
+- 节点 H: [**RPC call request**](/docs/user-guide/rule-engine-2-0/action-nodes/#rpc-call-request-node) node.
+  - 获取消息payload并将其作为响应发送到**Rotating System**。
   
 
 <br/>
 <br/>
 
-# Configuring the Rule Chain
+# 配置规则链
 
-The following screenshot shows how the **Tutorial of RPC Call Request** Rule Chain should look like:
+以下屏幕截图显示了**RPC呼叫请求教程**规则链图片：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/chain.png)
 
-- Download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/tutorial_of_rpc_call_request.json) for the rule chain indicated above and import it.
-- Don't forget to mark the new rule chain as "root".  
+-下载上述规则链的json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/tutorial_of_rpc_call_request.json)并将其导入。
+- 不要忘记将新规则链标记为"root"。
 
-Also, you can create the new Rule Chain from scratch. The following section shows you how to create it.
+另外您可以从头开始创建新的规则链。下一节将向您展示如何创建它。
 
 
-#### Creating a new Rule Chain (**Tutorial of RPC Call Request**)
+#### 创建新的规则链（**RPC调用请求教程**）
 
-- Go to **Rule Chains** -> **Add new Rule Chain** 
-- Enter the Name field as **Tutorial of RPC Call Request**, then click the **ADD** button.
+- 转到时**Rule Chains** -> **Add new Rule Chain** 
+- 输入名称**Tutorial of RPC Call Request**并点击**ADD**按钮。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/create-chain.png) ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/root-chain.png) 
 
-- The new Rule Chain is now created. Don’t forget to mark it as “root”.
+- 现在创建了新的规则链。不要忘记将其标记为“root”。
 
-##### Adding the required nodes
+##### 添加所需的节点
 
-In this tutorial, you will create 8 nodes as it will be explained in the following sections:
+在本教程中您将创建8个节点，如以下各节所述：
 
-###### Node A: **Message Type Switch**
-- Add the **Message Type Switch** node and connect it to the **Input** node. <br>
-  This node will route the incoming messages according to the message type, namely **POST_TELEMETRY_REQUEST**.
+###### 节点A: **Message Type Switch**
+- 添加**Message Type Switch**并将其连接到**Input**节点 <br>
+  该节点将根据消息类型**POST_TELEMETRY_REQUEST**路由传入的消息。
 
-- Enter the Name field as **Message Type Switch**.
+- 输入名称**Message Type Switch**。
 
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/message-type-switch.png)
 
-######  Node B: **Save TimeSeries**
-- Add the **Save TimeSeries** node and connect it to the **Message Type Switch** node with a relation type **Post telemetry**. <br>
-  This node will store TimeSeries data from incoming Message payload to the database and associate them to the Device, that is identified by the Message Originator, namely **Wind Direction Sensor** and **Rotating System**.
+######  节 B: **Save TimeSeries**
+- 添加**Save TimeSeries**节点并将其连接到**Message Type Switch**节点其关联类型为**Post telemetry**. <br>
+  该节点会将来自传入消息payload的TimeSeries数据存储到数据库中，并将它们与消息发起者标识的设备关联，即**Wind Direction Sensor**和**Rotating System**。
   
-- Enter the Name field as **Save Time Series**.
+- 输入名称**Save Time Series**
 
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/save-ts.png)
 
-###### Node C: **Related attributes**
-- Add the **Related attributes** node and connect it to the **Save TimeSeries** node with a relation type **Success**. <br>
-  This node will load the source telemetry **windDirection** from the related **Wind Direction Sensor** to **Rotating System** and save it into the Message metadata with the name **windDirection**.
-- Fill in the fields with the input data shown in the following table: 
+###### 节 C: **Related attributes**
+- 添加**Related attributes**节点并将其连接到关系类型为**Success**的**Save TimeSeries**的节点。<br>
+  该节点从相关的**Wind Direction Sensor**的遥测源**windDirection**加载到**Rotating System**将其保存到消息metadata中。
+- 填写下表中输入的数据字段：
 
 <table style="width: 25%">
   <thead>
@@ -180,11 +180,11 @@ In this tutorial, you will create 8 nodes as it will be explained in the followi
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/get-related.png)
 
-###### Node D: **Change Orignator**
-- Add the **Change Orignator** node and connect it to the **Save TimeSeries** node with a relation type **Success**. <br>
-  This node will change the originator from Devices **Wind Direction Sensor** and **Rotating System** to the Related Asset **Wind Turbine** that has a relation of the type **Contains** from each of them. 
-  <br/>As a result, the submitted message will be processed as a message from this Entity
-- Fill in the fields with the input data shown in the following table: 
+###### 节点 D: **Change Orignator**
+- 添加**Change Orignator**节点，并将其连接到关联类型为**Success**的**Save TimeSeries**节点。<br>
+  该节点会将originator设备**Wind Direction Sensor**和**Rotating System**更改为相关资产**Wind Turbine**，它们之间的关联类型均为**Contains**。
+  <br/>>结果，提交的消息将作为来自该实体的消息进行处理
+- 填写下表中输入的数据字段：
 
 <table style="width: 25%">
   <thead>
@@ -222,26 +222,27 @@ In this tutorial, you will create 8 nodes as it will be explained in the followi
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/change-originator.png)
 
-###### Node E: **Save TimeSeries**
-- Add the **Save TimeSeries** node and connect it to the **Change Orignator** node with a relation type **Success**. <br>
-  This node will store the TimeSeries data from the incoming Message payload into the database from the Asset **Wind Turbine** that is Message Originator.
-- Enter the Name field as **Save Time Series**.
+###### 节 E: **Save TimeSeries**
+- 添加**Save TimeSeries**”节点，并将其连接到关系类型为**Success**的**Change Orignator**节点。 <br>
+  该节点将来自传入消息payload的TimeSeries数据从作为消息Originator的Asset**Wind Turbine**存储到数据库中。
+- 输入名称**Save Time Series**。
 
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/save-ts.png)
 
-###### Node F: **Transform Script**
-- Add the **Transform Script** node and connect it to the **Related attributes** node with a relation type **Success**. <br>
-This node will transform an original message into RPC request message. 
-- The RPC call will have 2 properties:
-	- method: **spinLeft** or **spinRight**.
-	- params: **value**.
+###### 节点F: **Transform Script**
+- 添加**Transform Script**节点并将其连接到关联类型为**Success**的**Related attributes**节点。 <br>
+该节点会将原始消息转换为RPC请求消息。
+- RPC调用将具有2个属性：
+	- 方法: **spinLeft** 或 **spinRight**。
+	- 参数: **value**。
 
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/rpc-message.png)
 
-- Enter the Name field as **New RPC Message**.
-- Add the following Script: {% highlight javascript %}
+- 输入名称**New RPC Message**.
+- 添加以下脚本：
+{% highlight javascript %}
  var newMsg = {};
  var value = Math.abs(msg.turbineDirection - metadata.windDirection);
  if ((value < 180 && msg.turbineDirection < metadata.windDirection)||
@@ -259,54 +260,55 @@ This node will transform an original message into RPC request message.
  return {msg: newMsg, metadata: metadata, msgType: msgType}; {% endhighlight %}
 
 
-###### Node G: **Filter Script**
+###### 节点 G: **Filter Script**
 
-- Add the the **Filter Script** node and connect it to the **Transform Script** node with a relation type **Success**. <br> 
-  This node will check if msgType of incoming message is **RPC message**.
+- 添加**Filter Script**节点并将其连接到关联类型为**Success**的**Transform Script**。 <br> 
+  此节点将检查传入消息的msgType是否为**RPC消息**。
 
-- Enter the Name field as **Check RPC Message**.
-- Add the following Script: {% highlight javascript %}: return msgType == 'RPC message'; {% endhighlight %}
+- 输入名称**Check RPC Message**。
+- 添加以下脚本：
+{% highlight javascript %}: return msgType == 'RPC message'; {% endhighlight %}
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/check-validity.png)
 
 
-###### Node H: **RPC call request**
-- Add the **RPC call request** node and connect it to the **Filter Script** node with a relation type **True**. <br>
-  This node takes the message payload and sends it as a response to the Message Originator.
-- Enter the Name field as **Rotating System**.
-- Enter the Timeout value as 60 seconds.
+###### 节点 H: **RPC call request**
+- 添加**RPC call request**节点并将其连接到关联类型为**True**的**Filter Script**节点。 <br>
+  该节点获取消息payload，并将其作为响应发送到消息始发者。
+- 输入名称**Rotating System**。
+- 输入超时值60秒。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/request.png)
 
 <br/>
 
-This Rule chain is now ready and you need to save it.
+保存已经编辑完成的规则链。
 
 <br/>
 <br/>
 
-# How to verify the Rule Chain
+# 如何验证规则链
 
-- Use the following javascript code to emulate the **Wind Direction Sensor** device.
+- 使用以下javascript代码模拟**Wind Direction Sensor**设备。
     - [**WindDirectionEmulator.js**](/docs/user-guide/rule-engine-2-0/tutorials/resources/WindDirectionEmulator.js).
-- Also, use the following javascript code to emulate the **Rotating System** device. <br>
-  This code contains a method to emulate changing the turbine direction based on the incoming RPC message.
+- 使用以下JavaScript代码来模拟**Rotating System** 设备。 <br>
+   该代码包含一种方法，可根据传入的RPC消息模拟更改涡轮机方向。
     - [**RotatingSystemEmulator.js**](/docs/user-guide/rule-engine-2-0/tutorials/resources/RotatingSystemEmulator.js).
 
 
-To run the scripts, you need to do the following steps:
+要运行脚本，您需要执行以下步骤：
 
-- Copy the **Wind Direction Sensor** device access token and the **Rotating System** device access token, then paste them in the script.  <br>
-  You can copy the access token from the Device page. <br> <br>
-  In this tutorial,
-    - the **Wind Direction Sensor** device access token is **Z61K03FAGSziW9b0nKsm**
-    - the **Rotating System** device access token is **jSuvzrURCbw7q4LGtygc**
+- 复制**Wind Direction Sensor**设备访问令牌和**Rotating System**设备访问令牌，然后将其粘贴到脚本中<br>
+  您可以从设备页面复制访问令牌。 <br> <br>
+  在本教程中，
+    - **Wind Direction Sensor**设备访问令牌为**Z61K03FAGSziW9b0nKsm**
+    - **Rotating System**设备访问令牌**jSuvzrURCbw7q4LGtygc**
 
-  However, these access tokens are unique and you will need to copy the access tokens of your devices.
+  但是这些访问令牌是唯一的，您将需要复制设备的访问令牌。
 
  ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/wind-token.png) ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/rs-token.png)
 
-- Open the terminal and go to the folder that contains these emulator scripts, then run the following commands:
+- 打开终端并转到包含这些仿真器脚本的文件夹，然后运行以下命令：
     - node WindDirectionEmulator.js
     - node RotatingSystemEmulator.js
 
@@ -314,20 +316,20 @@ To run the scripts, you need to do the following steps:
 <br/>
 <br/>
 
-# Configuring Dashboards
-The following screenshot shows how the **Wind Turbine Dashboard** should look like:
+# 配置仪表盘
+以下屏幕截图显示了**Wind Turbine Dashboard**的外观:
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/dashboard.png)
 
-Download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/wind_turbine_dashboard.json) for the dashboard indicated above and import it.
+下载json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/wind_turbine_dashboard.json)并将其导入。
 
-- Go to **Dashboards** -> **Add new Dashboard** -> **Import Dashboard** and drop the downloaded json file.
+- 转到**Dashboards** -> **Add new Dashboard** -> **Import Dashboard**并删除下载的json文件
 
-The next Step is to configure the aliases used by the imported dashboard.
+下一步是配置导入的仪表板使用的别名。
  
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rpc-request/aliases.png)
 
-Click the **Edit alias** button and enter the input data shown in the following table:
+单击**Edit alias**按钮，然后输入下表中显示的输入数据：
 
 <table style="width: 30%">
   <thead>
@@ -402,24 +404,24 @@ Click the **Edit alias** button and enter the input data shown in the following 
 </table>
 
 
-The configuration of the dashboard is now completed and you can verify that it works as expected.
+仪表盘的配置现已完成，您可以验证它是否按预期工作。
 
-Also, you can see:
+此外您可以看到：
 
-  - how to work with **RPC call reply** Rule Node
+  - 如何使用**RPC call reply**规则节点
 
-Please refer to the second link under the **See Also** section to see how to do this.
+请参阅**另请参阅**部分下的第二个链接，以了解如何执行此操作。
 
 <br>
 <br>
 
-# See Also
+# 另请参阅
 
- - For more details about how RPC works in Thignsboard, please refer to the [RPC capabilities](/docs/user-guide/rpc/#server-side-rpc-api) guide.
+ - 有关RPC在Thignsboard中的工作方式的更多详细信息，请参阅[RPC capabilities](/docs/user-guide/rpc/#server-side-rpc-api)指南。
 
- - [RPC Reply With data from Related Device](/docs/user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial/) guide.
+ - [带有来自相关设备的数据的RPC回复](/docs/user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial/)指南。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}
 

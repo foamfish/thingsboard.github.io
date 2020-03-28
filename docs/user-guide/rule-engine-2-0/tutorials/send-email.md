@@ -1,59 +1,59 @@
 ---
 layout: docwithnav
-title: Send email on alarm
-description: Send Email Workflow
+title: 发送警报邮件
+description: 发送邮件流程
 
 ---
 
 
-This Tutorial is to show you how to send an Email to the user using the Rule Engine. 
+本教程将向您展示如何使用规则引擎向用户发送电子邮件。
 
 * TOC
 {:toc}
 
-## Use case
+## 用例
 
 
-In this tutorial we will implement the use case from the tutorial: [create & clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#use-case):
+在本教程中，我们将从教程中实现用例：[创建并清除警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#use-case)：
 
-Let's assume your device is using DHT22 sensor to collect and push temperature readings to ThingsBoard. 
-DHT22 sensor is good for -40 to 80°C temperature readings.We want to generate Alarms if temperature is out of good range and send the email when the alarm was created.
+假设您的设备正在使用DHT22传感器来收集温度读数并将其推送到ThingsBoard。
 
-In this tutorial we will configure ThingsBoard Rule Engine to: 
+DHT22传感器适用于-40至80°C的温度读数。如果温度超出范围，我们想生成警报，并在警报创建时发送电子邮件。
 
-- Send an email to the user if the temperature was out of range, namely: less than -40 and more than 80 degrees.
+在本教程中，我们将ThingsBoard规则引擎配置为：
 
-- Add current temperature to the email body using Script Transform node for saving current temperature in the Message Metadata.
+- 如果温度超出范围，即：低于-40和高​​于80度，请向用户发送电子邮件。
+
+- 使用脚本转换节点将当前温度添加到电子邮件正文中，以将当前温度保存在消息Metadata中。
 
 
-## Prerequisites 
+## 先决条件
 
-We assume you have completed the following guides and reviewed the articles listed below:
+我们假设您已完成以下指南并查看了以下文章：
 
-  * [Getting Started](/docs/getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
-  * [Create & Clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/) guide.
+  * [入门指南](/docs/getting-started-guides/helloworld/)。
+  * [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)。
+  * [创建&清除警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/)。
 
-# Message flow  
+# 消息流
 
-In this section, we explain the purpose of each node in this tutorial:
+在本节中我们将解释本教程中每个节点的用途：
 
-- Node A: [**Transform Script**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#script-transformation-node) node.
-  - This node will use for saving current temperature in the Message Metadata.  
-- Node B: [**To Email**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#to-email-node) node.
-  - this node builds actual email from the configured template.    
-- Node C: [**Send Email**](/docs/user-guide/rule-engine-2-0/external-nodes/#send-email-node) node.
-  - this node will actually send email from the inbound message using system SMTP settings.   
+- 节点A: [**Transform Script**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#script-transformation-node)。
+  - 该节点将用于在消息Metadata中保存当前温度。
+- 节点B: [**To Email**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#to-email-node)。
+  - 此节点从配置的模板构建实际的电子邮件。
+- 节点C: [**Send Email**](/docs/user-guide/rule-engine-2-0/external-nodes/#send-email-node)。
+  - 该节点实际上将使用系统SMTP设置从入站邮件发送电子邮件。
 
 <br/>
 
-# Configure Rule Chains
+# 配置规则链
 
-In this tutorial, we used Rule Chains from [create & clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms) tutorial.
-We modified Rule Chain **Create & Clear Alarms** by adding nodes that was described above in the section [Message flow](/docs/user-guide/rule-engine-2-0/tutorials/send-email/#message-flow)<br>
- and renamed this rule chain to: **Create/Clear Alarm & Send Email**.
+在本教程中我们使用了[创建和清除警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms) 教程中的规则链。
+我们通过添加[消息流](/docs/user-guide/rule-engine-2-0/tutorials/send-email/#message-flow)部分中上文所述的节点，修改了规则链**Create & Clear Alarms**并将此规则链重命名为**Create/Clear Alarm & Send Email**。<br>
 
-<br/>The following screenshots show how the above Rule Chains should look like:
+<br/>以下屏幕截图显示了以上规则链的外观：
  
   - **Create/Clear Alarm & Send Email:**
 
@@ -65,36 +65,36 @@ We modified Rule Chain **Create & Clear Alarms** by adding nodes that was descri
 
 <br/> 
 
-Download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/create_clear_alarm___send_email.json) for the **Create/Clear Alarm & Send Email** rule chain.
+下载附件json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/create_clear_alarm___send_email.json)以用于**Create/Clear Alarm & Send Email**规则链。
 
-The following section shows you how to modify this rule chain from scratch.
+下一节将向您展示如何从头开始修改此规则链。
 <br/> 
  
-## Modify **Create/Clear Alarm & Send Email**
+## 修改**Create/Clear Alarm & Send Email**
 
-### Adding the required nodes
+### 添加所需的节点
 
-In this rule chain, you will create 3 nodes as it will be explained in the following sections:
+在此规则链中您将创建3个节点如以下各节所述：
  
-#### Node A: **Transform Script**
+#### 节点A: **Transform Script**
 
-- Add the **Transform Script** node and place it after the **Filter Script** node with a relation type **True** and than connect it to **Create Alarm** node via relation **Success**.
- <br>This node will use for saving current temperature from Message Data to the Message Metadata using the following script:
+- 添加**Transform Script**节点并将其放置在关联类型为**True**的**Filter Script**节点之后然后通过关联**Success**将其连接到**Create Alarm**节点。
+ <br>此节点将使用以下脚本将当前温度从消息数据保存到消息元数据：
  
  {% highlight javascript %}
  metadata.temperature = msg.temperature;
  return {msg: msg, metadata: metadata, msgType: msgType};{% endhighlight %}
       
-- Enter the Name field as **Add temperature to metadata**.  
+- 输入名称**Add temperature to metadata**.  
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email v2/transform-script.png)
    
-#### Node B: **To Email**
-- Add the **To Email** node and connect it to the **Create Alarm** node with a relation type **Created**.
-  <br>This node does not send actual email it only construct email from configured template.
-  <br>So you can use references to any fields that exist in Message Metadata.
+#### 节点B: **To Email**
+- 添加**To Email**节点并将其连接到关联类型为**Created**的**Create Alarm**节点。
+  <br>此节点不发送实际的电子邮件，它仅从配置的模板构造电子邮件。
+  <br>因此，您可以使用对消息元数据中存在的任何字段的引用。
   
-- Fill in the fields with the input data shown in the following table: 
+- 填写下表中输入的数据字段：
   
   <table style="width: 25%">
     <thead>
@@ -128,20 +128,20 @@ In this rule chain, you will create 3 nodes as it will be explained in the follo
      
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email v2/to-email.png)
 
-#### Node C: **Send Email**
-- Add the **Send Email** node and connect it to the **To Email** node with a relation type **Success**. <br>
-  This node will actually send email from the inbound message using the system SMTP settings.<br>
+#### 节点C: **Send Email**
+- 添加**Send Email**节点并将其连接到关联类型为**Success**的**To Email**节点。 <br>
+  该节点实际上将使用系统SMTP设置从入站邮件发送电子邮件。<br>
 
-- Enter the Name field as **SendGrid SMTP**.
+- 输入名称**SendGrid SMTP**。
 
-- If you don't have access the system administrator account you need make your own SMTP configuration for this node.  
+- 如果您无权访问系统管理员帐户，则需要为此节点进行自己的SMTP配置。
 
-- otherwise, mark a field **Use system SMTP settings**.
+- 否则，标记一个字段**Use system SMTP settings**。
 
+请注意，在Demo Server上已将SendGrid提供程序配置为系统SMTP。
+ <br/>
 
- Please note that at Demo Server was already configured SendGrid provider as system SMTP. <br/>
-
-The instructions of how to configure these settings will be explained in the section below.
+以下部分将说明如何配置这些设置的说明。
 
 <br/>
 
@@ -149,82 +149,81 @@ The instructions of how to configure these settings will be explained in the sec
 
 <br/>
 
-Chain configuration is finished and we need to save it.
+链配置已完成，我们需要保存它。
 
-#### Configuring  system SMTP settings
+#### 配置系统SMTP设置
 
-In this section, we explain to you how  to configure system SMTP settings and try to send the test email:
+在本节中，我们向您介绍如何配置系统SMTP设置并尝试发送测试电子邮件：
 
-- In the scope of this tutorial we will use **SendGrid** as SMTP provider and Thingsboard will send email using this provider. You can sign-up for trial using this [link](https://app.sendgrid.com/signup).
+-在本教程的范围内我们将使用**SendGrid**作为SMTP提供程序，而Thingsboard将使用该提供程序发送电子邮件。您可以使用此[连接]](https://app.sendgrid.com/signup)注册进行试用。
   
-  Once logged in into SendGrid open SMTP relay [configuration page](https://app.sendgrid.com/guide/integrate/langs/smtp).
+  登录到SendGrid后，打开SMTP中继[配置页](https://app.sendgrid.com/guide/integrate/langs/smtp)。
    
   ![image](/images/user-guide/rule-engine-2-0/tutorials/email v2/sendgrid-config.png)
   
-If you have permission to log in to ThingsBoard, with using system administrator account you can customize SMTP settings and send Test Email.
- - For the default system administrator account:
+如果您具有使用系统管理员帐户登录到ThingsBoard的权限，则可以自定义SMTP设置并发送测试电子邮件。
+ - 对于默认的系统管理员帐户：
 
    - login - **sysadmin@thingsboard.org**.
    - password - **sysadmin**.
     
-- Go to **System Settings** -> **Outgoing Mail**  and configure **Outgoing Mail Settings** as described in the following screenshot:
+- 转到**System Settings** -> **Outgoing Mail**并配置**Outgoing Mail Settings**如以下屏幕截图所述：
 
  
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email v2/test-email.png)
 
- - Verify that you configure SMTP, by press button **Send Test Email**<br>
+ - 确认您配置了SMTP方法是按**Send Test Email**按钮 <br>
 
 
-If the System SMTP configure all right: you will see a pop-up message as shown in the screenshot above.<br>
-System SMTP settings configuration is finished. Don’t forget to press button **Save**.
+如果系统SMTP配置正确：您将看到一条弹出消息，如上面的屏幕快照所示。<br>
+系统SMTP设置配置完成。不要忘记按**Save**按钮。
 
-If you can't access to the account of the System administrator you could configured SMTP settings right in the node but you can't be checked that email was successfully sent.
+如果您无法访问系统管理员的帐户，则可以直接在节点中配置SMTP设置，但无法检查电子邮件是否已成功发送。
 
 <br/>
 
-# Post telemetry and verify
-For posting device telemetry we will use the Rest APIs, [Telemetry upload APIs](/docs/reference/http-api/#telemetry-upload-api). For this we will need to
-copy device access token from then device **Thermostat Home**. 
+# 进行遥测并验证
+对于发布设备遥测我们将使用Rest API[遥测上传API](/docs/reference/http-api/#telemetry-upload-api)。为此我们将需要复制设备**Thermostat Home**的访问令牌。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email v2/copy-token.png)
 
 
-Lets post temperature = 180. Alarm should be created:
+发布temperature = 180 创建警报
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":180}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
 
-**you need to replace $ACCESS_TOKEN with actual device token**
+**您需要将$ACCESS_TOKEN替换为实际的设备令牌**
 {% endhighlight %}
 
-You should understand that message won't be sent to the email when the alarm was updated, only in the case when alarm will be created. 
+您应该了解，仅在创建警报的情况下，警报更新后才将消息发送到电子邮件。
 
-Finally we can see that email was received with correct values. (Please check your spam folder if you did not receive any email) 
+最后我们可以看到收到的电子邮件具有正确的值。 （如果您没有收到任何电子邮件，请检查您的垃圾邮件文件夹）
 
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/email v2/mail-received.png)
 
 
-Also, you can see the more information about how to:
+此外您可以查看有关如何进行以下操作的更多信息：
 
- -  Send an email to the Customer of the Device.
+ - 向设备的客户发送电子邮件。
  
- -  Add additional data to the email body from the incoming message.
+ - 从收到的邮件中向电子邮件正文中添加其他数据。
 
-Please refer to the first link under the **See Also** section to see how to do this.
+请参阅**另请参阅**部分下的第一个链接，以了解如何执行此操作。
 
 <br/>
 <br/>
 
-# See Also
+# 另请参阅*
 
-- [Send email to customer](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/) guide.
+- [发送电子邮件给客户](/docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/)。
 
-- [Create Alarm when the Device is offline](/docs/user-guide/rule-engine-2-0/tutorials/create-inactivity-alarm/) guide.
+- [设备离线时创建警报](/docs/user-guide/rule-engine-2-0/tutorials/create-inactivity-alarm/)。
 
-- [Create alarm with details](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/) guide.
+- [使用详细信息创建警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/)。
 
-# Next steps
+# 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}
 

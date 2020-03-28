@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Working with Alarm details
-description: Create and Clear Alarms with details
+title: 处理警报详细信息
+description: 创建和清除带有详细信息的警报
 
 ---
 
@@ -9,46 +9,51 @@ description: Create and Clear Alarms with details
 {:toc}
 
 
-## Use case
+## 用例
 
-This tutorial is based on the [create & clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#use-case) tutorial and it's use case. 
-We will reuse the rule chains from the above-mentioned tutorial and will configure the Alarm Details function in the Create and Clear Alarm nodes.
-Let's assume your device is using DHT22 sensor to collect and push temperature readings to ThingsBoard. 
-DHT22 sensor is good for -40 to 80°C temperature readings. We want generate Alarms if temperature is out of good range.
+本教程基于[创建和清除警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#use-case)教程并且它是用例。
 
-In this tutorial we will configure ThingsBoard Rule Engine to: 
+我们将重用上述教程中的规则链并在创建和清除警报点中配置警报详细信息功能。
 
-- Count number of critical temperature updates for each device and save this info in Alarm details.
-- Save latest critical temperature value in Alarm details.
+假设您的设备正在使用DHT22传感器来收集温度读数并将其推送到ThingsBoard。
 
-## Prerequisites 
+DHT22传感器适用于-40至80°C的温度读数。如果温度超出范围，我们希望生成警报。
 
-We assume you have completed the following guides and reviewed the articles listed below:
+在本教程中我们将ThingsBoard规则引擎配置为：
 
-  * [Getting Started](/docs/getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
-  * [Create & clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/) guide.
+- 计算每个设备的临界温度更新数，并将此信息保存在警报详细信息中。
+
+- 在警报详细信息中保存最新的临界温度值。
+
+## 先决条件
+
+我们假设您已完成以下指南并查看了以下文章：
+
+  * [入门指南](/docs/getting-started-guides/helloworld/)。
+  * [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)。
+  * [创建和清除警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/)。
   
-# Message flow  
+# 消息流  
 
-In this section, we explain the purpose of each node in this tutorial:
+在本节中我们将解释本教程中每个节点的用途：
 
-- Node A: [**Create alarm**](/docs/user-guide/rule-engine-2-0/action-nodes/#create-alarm-node) node.
-  - Creates or Updates an  alarm if the published temperature is not at expected time range (filter script node returns True).    
-- Node B: [**Clear alarm**](/docs/user-guide/rule-engine-2-0/action-nodes/#clear-alarm-node) node.
-  - Clears alarm if it exists in case if the published temperature is in expected time range (script node returns False). 
-- Node C: **Rule Chain** node.
-  - Forwards incoming Message to specified Rule Chain **Create & Clear Alarms with details**.     
+- 节点A: [**Create alarm**](/docs/user-guide/rule-engine-2-0/action-nodes/#create-alarm-node)。
+  - 如果发布的温度不在预期的时间范围内（过滤器脚本节点返回True）则创建或更新警报。
+- 节点B: [**Clear alarm**](/docs/user-guide/rule-engine-2-0/action-nodes/#clear-alarm-node)。
+  - 如果发布的温度在预期的时间范围内（脚本节点返回False）则清除警报（如果存在）。
+- 节点C: **Rule Chain**。
+  - 将传入消息转发到指定的规则链**Create & Clear Alarms with details**。
 
 <br/>  
   
-# Configure Rule Chains  
+# 配置规则链
 
-In this tutorial, we only modified **Create & Clear Alarms** rule chain, namely configured Alarm Details function in nodes that was described above in the section [Message flow](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#message-flow)<br> Also, we renamed this Rule Chain to **Create & Clear Alarms with details**.
+在本教程中我们仅修改了**Create & Clear Alarms**规则链，即在节点中配置了“警报详细信息”功能，如上文[消息流](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#message-flow)<br>
+另外，我们将此规则链重命名为**Create & Clear Alarms with details**。
 
-<br/>The following screenshots show how the above Rule Chains should look like:
+<br/>以下屏幕截图显示了以上规则链的外观：
  
-  - **Create & Clear Alarms with details:**
+  - **Create & Clear Alarms详细信息:**
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/create-clear-alarm-chain.png)
 
@@ -58,27 +63,27 @@ In this tutorial, we only modified **Create & Clear Alarms** rule chain, namely 
 
 <br/> 
 
-Download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/create___clear_alarms_with_details.json) for the **Create & Clear Alarms with details:** rule chain. 
-Create Node **C** as shown on the image above in the root rule chain to forward telemetry to the imported rule chain.
+下载json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/create___clear_alarms_with_details.json)以使用**Create & Clear Alarms with details:**规则链。
+如上图所示，在根规则链中创建节点**C**，以将遥测转发到导入的规则链。
 <br/>
 <br/>
 
-The following section shows you how to modify this rule chain, specifically: rule nodes [**A**](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#node-a-create-alarm) and [**B**](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#node-b-clear-alarm).
+下一节将向您展示如何修改此规则链，特别是：规则节点[**A**](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#node-a-create-alarm)和[**B**](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#node-b-clear-alarm)。
 
 
-## Modify **Create & Clear Alarms with details:**
+## 修改**Create & Clear Alarms详细信息：**
 
-### Modify the required nodes
+### 修改所需的节点
 
-In this rule chain, you will modify 2 nodes as it will be explained in the following sections:
+在此规则链中，您将修改2个节点，如以下各节所述：
 
-#### Node A: **Create alarm**
+#### 节点A: **Create alarm**
 
-If published temperature **is not in** expected time range (**script** node returns **True**) we want to create an Alarm.
-We want to add current **temperature** into Alarm Details field.
-Also we want to increment **count** field in Alarm Details if alarm already exist, otherwise set count to 1.
+如果发布的温度不在预期的时间范围内（**脚本**节点返回**True**）我们想创建一个警报。
+我们要在“警报详细信息”字段中添加当前的**temperature**。
+另外，如果警报已经存在，我们想增“警报详细信息中的**count**字段，否则将计数设置为1。
  
-For making it we will overwrite **Details** function:
+我们将覆盖**Details**函数：
 
 **Details** function:
 {% highlight javascript %}
@@ -95,22 +100,24 @@ if (metadata.prevAlarmDetails) {
 return details;
 {% endhighlight %}
 
-**Details** function create required **details** object with initial parameters. Then, in **if** statement, we verify is it a new Alarm or Alarm already exist.
-If exist - take previous **count** field and increment it.
+**Details**函数使用初始参数创建必需的**Details**对象然后，在**if**语句中我们确认是否存在新的警报或警报已经存在。
+如果存在-取前一个**count**字段并递增。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/create-alarm.png)
 
-If new Alarm was created in **Create Alarm** node it is passed to other nodes via relation **Created** if they exist. 
-If Alarm was updated - it is passed to other nodes via relation **Updated** if they exist. 
+如果在**Create Alarm**节点中创建了新警报，则该警报会通过关系**Created**传递到其他节点（如果存在）。
 
-#### Node B: **Clear Alarm**
+如果Alarm已更新-如果存在，则通过关系**Updated**将其传递到其他节点。
 
-If published temperature **is in** expected time range (**script** node returns **False**) we want to clear an existing Alarm.
-Also during clearing, we want to add latest **temperature** to the existing Alarm details.
+#### 节点B: **Clear Alarm**
 
-For making it we will overwrite **Details** function:
+如果发布的温度在预期的时间范围内（**脚本**节点返回**False**），我们希望清除现有警报。
 
-**Alarm Details** function:
+同样在清除过程中，我们想在现有的警报详细信息中添加最新的**temperature**。
+
+覆盖**Details**函数：
+
+**Alarm Details**函数:
 {% highlight javascript %}
 var details = {};
 if (metadata.prevAlarmDetails) {
@@ -118,47 +125,47 @@ if (metadata.prevAlarmDetails) {
 }
 details.clearedTemperature = msg.temperature;
 
-return details;
+return;
 {% endhighlight %}
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/clear-alarm.png)
 
-If **Clear Alarm** node could not find existing Alarm, nothing is changed and original message is passed to other nodes via relation **False** if they exist. 
-If Alarm do exist - it is cleared and passed to other nodes via relation **Cleared**.
+如果**Clear Alarm**节点找不到现有警报，则不进行任何更改，并将原始消息通过关系**False**传递给其他节点（如果存在）。
+如果确实存在警报，则将其清除并通过**Cleared**关系传递给其他节点。
 
 
-Chain configuration is finished and we need to **save it**.
+链配置已完成，我们需要 **save it**。
 
 <br/>
 
-# Configure Dashboard 
+# 配置仪表板
 
-Download the attached json [**file**](/docs/user-guide/resources/thermostat_dashboard.json) for the dashboard indicated in this tutorial and import it.
+下载本教程中指示的仪表板的附件json[**文件**](/docs/user-guide/resources/thermostat_dashboard.json)并将其导入。
 
-- Go to **Dashboards** -> **Add new Dashboard** -> **Import Dashboard** and drop the downloaded json file.
+- 转到**Dashboards** -> **Add new Dashboard** -> **Import Dashboard** 并删除下载的json文件。
 
-Also you can Create Dashboard from scratch and the following section show you how to do this:
+您也可以从头开始创建仪表板，以下部分向您展示了如何执行此操作：
 
-## Creating Dashboard 
+## 创建仪表板
 
-We will create Dashboard for all **Thermostat** devices and add Alarm widget on it. Create new Dashboard:
+我们将为所有**Thermostat**设备创建仪表板并在其上添加Alarm部件。创建新的仪表板：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/add-dashboard.png)
 
-Press **Edit** dashboard and **add alias** that will be resolved to all devices with type **Thermostat**:
+按**Edit**仪表板，然后**add alias**，这将被解析为所有类型为**Thermostat**的设备：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/add-alias.png)
 
-Add **Alarm widget** to the Dashboard (Add new widget -> Alarm widget bundle -> Alarms). Select configured alias **entity alarm source**. 
-Also, add additional **alarm fields**.
+将**Alarm widget**添加到仪表板(Add new widget -> Alarm widget bundle -> Alarms)。选择已配置的别名**entity alarm source**。
+另外，添加其他**alarm fields**。
 
 - details.temperature.
 - details.count.
 - details.clearedTemperature. 
 
-And rename label of each field by press **edit** button on the field:
+并按字段上的**edit**按钮重命名每个字段的标签：
 
- - From: -> To:
+ - 从: -> 至:
  
    - details.temperature        -> Event Temperature.
    - details.count              -> Events count.
@@ -166,16 +173,16 @@ And rename label of each field by press **edit** button on the field:
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/alarm-widget-config.png)
 
-# Post telemetry and verify
+# 进行遥测并验证
 
-For posting device telemetry we will use Rest API ([link](/docs/reference/http-api/#telemetry-upload-api)). For this we will need to
-copy device access token from then device **Thermostat Home**. 
+为了发布设备遥测，我们将使用Rest API([连接](/docs/reference/http-api/#telemetry-upload-api))。为此，我们将需要复制设备**Thermostat Home**的访问令牌
+
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/copy-access-token.png)
 
-***you need to replace $ACCESS_TOKEN with actual device token**
+**您需要将$ACCESS_TOKEN替换为实际的设备令牌**
 
-Lets post temperature = 99. Alarm should be created:
+发布temperature = 99。创建警报:
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":99}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
@@ -183,7 +190,7 @@ curl -v -X POST -d '{"temperature":99}' http://localhost:8080/api/v1/$ACCESS_TOK
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/alarm-created.png)
 
-Lets post temperature = 180. Alarm should be updated and count field incremented:
+发布temperature = 180。警报应更新，计数字段应增加
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":180}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
@@ -191,7 +198,7 @@ curl -v -X POST -d '{"temperature":180}' http://localhost:8080/api/v1/$ACCESS_TO
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/alarm-updated.png)
 
-Lets post temperature = 30. Alarm should be cleared and cleared temperature should be shown:
+发布temperature = 30。应清除警报并显示清除的温度
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":30}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
@@ -199,20 +206,20 @@ curl -v -X POST -d '{"temperature":30}' http://localhost:8080/api/v1/$ACCESS_TOK
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/alarms/alarm-cleared.png)
 
-Also, you can see how to:
+您还可以查看如何：
 
- - Define an additional logic for alarm processing, for example, sending an email or sending notification to Telegram App.
+ - 定义用于警报处理的其他逻辑例如向Telegram App发送电子邮件或发送通知。
  
- Please refer links under the **See Also** section to see how to do this.
+请参阅“另请参阅”部分下的链接，以了解如何执行此操作。
 
 <br>
 
-# See Also
+# 另请参阅
 
- - [Send Email](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) guide.
+ - [发送邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)。
  
- - [Notifications and Alarms on your smartphone using Telegram Bot](/docs/iot-gateway/integration-with-telegram-bot/) guide.
+ - [使用Telegram Bot的智能手机上的通知和警报](/docs/iot-gateway/integration-with-telegram-bot/)。
 
-# Next steps
+# 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}

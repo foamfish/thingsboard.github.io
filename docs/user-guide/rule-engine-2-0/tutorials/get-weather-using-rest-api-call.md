@@ -1,78 +1,78 @@
 ---
 layout: docwithnav
-title: Weather reading using REST API calls
-description: REST API weather guide
+title: 使用REST API调用进行天气阅读
+description: REST API天气指南
 
 ---
 
 
 
-This tutorial will show how to get weather data using REST API.
+本教程将展示如何使用REST API获取天气数据。
 
 * TOC
 {:toc}
 
-## Use case
+## 用例
 
-Let's assume your need to know the current weather in the asset location. You may use the weather info for certain data 
-processing logic or just to track history and enable visualization of this info on the dashboard.
+假设您需要了解资产位置的当前天气。您可以将天气信息用于某些数据
+处理逻辑或仅用于跟踪历史记录并在仪表板上启用此信息的可视化。
 
-In this tutorial we will configure ThingsBoard Rule Engine to automatically get weather information using REST API.
- You can use this tutorial as a basis for more complex tasks. 
+在本教程中，我们将配置ThingsBoard规则引擎以使用REST API自动获取天气信息。
+您可以将本教程用作更复杂任务的基础。
  
 
-## Prerequisites 
+## 先决条件
 
-We assume you have completed the following guides and reviewed the articles listed below:
+我们假设您已完成以下指南并查看了以下文章：
 
-  * [Getting Started](/docs/getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
-  * [External rule nodes](/docs/user-guide/rule-engine-2-0/external-nodes/).
+  * [入门指南](/docs/getting-started-guides/helloworld/)。
+  * [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)。
+  * [外部规则节点](/docs/user-guide/rule-engine-2-0/external-nodes/)。
 
-## Adding the asset
+## 添加资产
   
-Add Asset entity in ThingsBoard. Its name is **Building A** and its type is **building**.
+在ThingsBoard中添加资产实体。它的名称为**Building A**，类型为**building**。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/rest-api-weather-building.png)
 
-**Note**:If you have Professional Edition, you will need to add asset to customer using Customer Hierarchy the
-following way:  
+**注意**：如果您拥有专业版，则需要使用客户层次结构向客户添加资产
+以下方式：
 
-- Go to **Customers Hierarchy** -> **All** -> **(Current tenant)** -> **Customer groups** -> **(Your customer group)**
+- 转到**Customers Hierarchy** -> **All** -> **(Current tenant)** -> **Customer groups** -> **(Your customer group)**
  -> **(Your customer)** -> **Asset groups** -> **(Your asset group)** -> **Add asset**
  
  ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/add-asset-pe-weather-rest-api.png)
  
-## Assigning asset to customer in Community edition
+## 在社区版中为客户分配资产
 
-- Go to **Assets** -> **Assign to customer** -> **(Your Customer)** -> **Assign**
+- 转到**Assets** -> **Assign to customer** -> **(Your Customer)** -> **Assign**
 
  ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/assign-asset-weather-rest-api.png)
 
-## Registering on data-providing website
+## 在提供数据的网站上注册
 
-In order to get weather data you should register on a website which will provide it. In this case
- [OpenWeatherMap](https://openweathermap.org/) will be used.
+为了获取天气数据，您应该在提供该数据的网站上注册。在这种情况下
+ [OpenWeatherMap](https://openweathermap.org/) 将被使用。
 
-After signing up there go to [this](https://home.openweathermap.org/api_keys) page to get your api key.
+在此处签名后，请转到[这里](https://home.openweathermap.org/api_keys)页面以获取您的api密钥。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/openweathermap-apikey.png)
 
-## Creating attributes
+## 创建属性
 
-To perform REST API call we need the following URL parameters:
-API key, longitude, latitude, and units of measurement.
+要执行REST API调用，我们需要以下URL参数：
+API密钥，经度，纬度和度量单位。
 
-We suggest adding an API key parameter to the customer server-side attribute and other parameters to the asset 
-server-side attributes.
+我们建议将API键参数添加到客户服务器端属性，并将其他参数添加到资产
+服务器端属性。
  
- Customer attribute should look like this:
+客户属性应如下所示：
  
- - Go to **(Assigned customer)** -> **Attributes** -> **Add**
+ - 转到**(Assigned customer)** -> **Attributes** -> **Add**
  
  ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/add-attribute-customer.png)
  
- Add the attribute as following:
+如下添加属性：
  
  <table style="width: 50%">
    <thead>
@@ -89,13 +89,13 @@ server-side attributes.
     </tbody>
  </table> 
  
-Asset attributes should look like this:
+资产属性应如下所示：
 
-- Go to **Building A** -> **Attributes** -> **Add**
+- 转到时**Building A** -> **Attributes** -> **Add**
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/add-new-attribute.png)
 
-- Fill in the attributes with the input data shown in the following table: 
+- 使用下表中显示的输入数据填写属性：
 
 <table style="width: 50%">
   <thead>
@@ -124,45 +124,44 @@ Asset attributes should look like this:
 </table> 
 
 
-In this example the coordinates of New York City and metric units will be used.
+在此示例中，将使用纽约市的坐标和公制单位。
 
 
-## Message flow
+## 消息流
 
-In this section, we explain the purpose of each node in this tutorial. There will be one rule chain involved:
+在本节中，我们将解释本教程中每个节点的用途。将涉及一个规则链：
 
-  - **Outside Temperature/Humidity** - rule chain sends API calls to OpenWeatherMap every 15 seconds and sends data about
-  humidity and temperature to a chosen asset.
+  - **Outside Temperature/Humidity** - 规则链每15秒将API调用发送到OpenWeatherMap，并将有关湿度和温度的数据发送到选定的资产。
 
-The following screenshot show how the above Rule Chain should look like:
+下面的屏幕截图显示了上面的规则链应该是什么样子：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/weather-rule-chain-customer.png)   
    
-Download and [**import**](docs/user-guide/ui/rule-chains/#rule-import) attached
-json [**file**](/docs/user-guide/resources/outside-temperature-humidity-customer.json) with a rule chain for this tutorial.
-Be aware that you need to set the asset you created in the beginning as an originator in the leftmost generator node.
+下载并[**导入**](docs/user-guide/ui/rule-chains/#rule-import)
+json [**文件**](/docs/user-guide/resources/outside-temperature-humidity-customer.json)其中包含本教程的规则链。
+请注意，您需要将最开始创建的资产设置为最左侧生成器节点中的发起者。
 
-The following section shows you how to create this rule chain from scratch.
+下一节将向您展示如何从头开始创建此规则链。
 
-#### Create new Rule Chain (**Outside Temperature/Humidity**)
+#### 创建新的规则链(**Outside Temperature/Humidity**)
 
-Go to **Rule Chains** -> **Add new Rule Chain** 
+转到**Rule Chains** -> **Add new Rule Chain** 
 
-Configuration:
+配置:
 
 - Name : **Outside Temperature/Humidity**
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/add-weather-rest-api-chain.png) 
 
-New Rule Chain is created. Press **Edit** button and configure Chain.
+创建新规则链。按**Edit**按钮并配置链。
 
-###### Adding the required nodes
+###### 添加所需的节点
 
-In this rule chain, you will create 5 nodes as it will be explained in the following sections:
+在此规则链中，您将创建5个节点，如以下各节所述：
 
-###### Node A: **Generator node**
-   - Add the **Generator** node. This rule node Generates empty messages to trigger REST API calls.
-   - Fill its fields the following way:
+###### 节点A A: **Generator node**
+   - 添加**Generator**节点。此规则节点生成空消息以触发REST API调用。
+   - 通过以下方式填写其字段：
    <table style="width: 50%">
      <thead>
          <tr>
@@ -200,11 +199,11 @@ In this rule chain, you will create 5 nodes as it will be explained in the follo
    ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/weather-rule-chain-node-A.png) 
    
    
-###### Node B: **Customer attributes enrichment node**
+###### 节点 B: **Customer attributes enrichment node**
        
-   - Add the **Customer attributes node** and connect it to a  **Generator node** with a relation type **Success**. 
-   This node will put customer attribute APPID into the metadata of message.
-   - Fill its fields the following way:
+   - 添加**Customer attributes node**并将其连接到关联类型为**Success**的**Generator node**节点。
+   该节点会将客户属性APPID放入消息的元数据中。
+   - 通过以下方式填写其字段：
    <table style="width: 50%">
             <thead>
                 <tr>
@@ -232,11 +231,10 @@ In this rule chain, you will create 5 nodes as it will be explained in the follo
    </table>     
    ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/weather-rule-chain-node-B.png) 
       
-###### Node C: **Originator attributes enrichment node**
-   - Add the **Originator attributes enrichment node** and connect it to **Customer attributes node** node with a 
-   relation type **Success**. This node will fetch server attributes latitude, longitude and units of the 
-   originator set up in a **Generator** node into metadata
-   - Fill its fields the following way:
+###### 节点 C: **Originator attributes enrichment node**
+   - 添加**Originator attributes enrichment node**节点并将其连接到关联类型为**Success**的**Customer attributes node**节点该节点将获取服务器属性的纬度，经度和在**Generator**节点中设置的发起者的单位到元数据中。
+
+   - 通过以下方式填写其字段：
        <table style="width: 50%">
          <thead>
              <tr>
@@ -256,10 +254,9 @@ In this rule chain, you will create 5 nodes as it will be explained in the follo
        </table>  
    ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/weather-rule-chain-node-C.png)
   
-###### Node D: **External REST API call node**
-   - Add the **External REST API call node** and connect it to **Originator attributes enrichment node** with a relation 
-   type **Success**. This node will perform REST API calls to OpenWeatherMap.
-   - Fill its fields the following way:
+###### 节点 D: **External REST API call node**
+   - 添加**External REST API call node**并将其连接到关联类型为**Success**的**Originator attributes enrichment node**节点该节点将执行对OpenWeatherMap的REST API调用。
+   - 通过以下方式填写其字段：
       <table style="width: 50%">
              <thead>
                 <tr>
@@ -285,16 +282,13 @@ In this rule chain, you will create 5 nodes as it will be explained in the follo
                 </tr>
              </tbody>
       </table>  
-   - ss_latitude, ss_longitude, ss_units, ss_APPID are server attributes fetched from metadata which were put there
-   by **Originator attributes enrichment node**
+   - ss_latitude, ss_longitude, ss_units, ss_APPID是从元数据中获取的服务器属性，这些元数据由**Originator attributes enrichment node**放置在那里。
    
    ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/weather-rule-chain-node-D.png)
     
-###### Node E: **Script transformation node**
-   - Add the **Script transformation node** and connect it to **External REST API call node** with a relation 
-   type **Success**. This node will put outside temperature, maximal temperature, minimal temperature and humidity into
-   the message.
-   - Fill Transform function the following way:
+###### 节点 E: **Script transformation node**
+   - 添加**Script transformation node**并将其连接到关系类型为**Success**的**External REST API call node**点.该中断外部温度，最高温度，最低温度和湿度插入消息。
+   - 通过以下方式填充变换功能：
      
      
   ```js
@@ -310,24 +304,22 @@ In this rule chain, you will create 5 nodes as it will be explained in the follo
 ```
    ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/weather-rule-chain-node-E.png)     
     
-###### Node F: **Save timeseries node**
+######  节点 F: **Save timeseries node**
         
-   - Add the **Script transformation node** and connect it to **External REST API call node** with a relation 
-        type **Success**. This node will put message into telemetry.
+   - 添加**Script transformation node**并将其连接到关系类型为***Success*的**External REST API call node** 调用节点”。该节点会将消息放入遥测中。
       
    ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/weather-rule-chain-node-F.png)     
 
  
 
-## Setting up dashboard
+## 设置仪表板
 
-Download and [**import**](/docs/user-guide/ui/dashboards/#dashboard-import) attached
-json [**file**](/docs/user-guide/resources/weather_dashboard.json) with a dashboard for this tutorial.
+下载并[**导入**](/docs/user-guide/ui/dashboards/#dashboard-import)上传的仪表板教程[**文件**](/docs/user-guide/resources/weather_dashboard.json)。
 
-The dashboard should look like this:
+仪表板应如下所示：
 ![image](/images/user-guide/rule-engine-2-0/tutorials/rest-api-weather/weather-dashboard.png)   
 
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}

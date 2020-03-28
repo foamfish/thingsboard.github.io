@@ -1,81 +1,82 @@
 ---
 layout: docwithnav
-title: Check Relation between Entities
-description: Check relationship
+title: 检查实体之间的关系
+description: 检查关系
 
 ---
-The purpose of this tutorial is to show how the [**Check Relation**](/docs/user-guide/rule-engine-2-0/filter-nodes/#check-relation-filter-node) node can be used to check the relation between Entities.
+本教程的目的是演示如何可以将[**Check Relation**](/docs/user-guide/rule-engine-2-0/filter-nodes/#check-relation-filter-node)节点设置为用于检查实体之间的关系。
 
 * TOC
 {:toc}
 
-## Use case
+## 用例
 
-Let’s assume the following use case:
+让我们假设以下用例：
 
- - You have 2 devices:
+ - 您有2台设备：
  
-   - **Smoke Detector** with the **Smoke Sensor** which sends data to ThingsBoard when it appears.
+   - 带有**Smoke Detector**的**Smoke Sensor**当数据出现时将数据发送到ThingsBoard。
    
-   - **Fire Alarm System** which provides a fire alarm, when the smoke is present.
+   - **Fire Alarm System**当有烟雾时提供火灾警报。
    
-However, there are different ways for the realization of this case, for example, it can be implemented using the **Switch** node that routes incoming Message to one or multiple output chains.<br/>
-For more information about how to use the **Switch** node, please check the link to **The article of Switch Node** in the  [**See Also**](/docs/user-guide/rule-engine-2-0/tutorials/check-relation-tutorial/#see-also) section.   
+但是有多种实现此情况的方法，例如，可以使用将传入消息路由到一个或多个输出链的**Switch**节点来实现。<br/>
+
+有关如何使用**Switch**节点的更多信息请在[**另请参见**](/docs/user-guide/rule-engine-2-0/tutorials/check-relation-tutorial/#see-also)部分。
  
-## Prerequisites
+## 先决条件
 
-You need to read the following guides before you start this tutorial:
+在开始本教程之前，您需要阅读以下指南：
 
-  * [Getting Started](/docs/getting-started-guides/helloworld/).
-  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
+  * [入门指南](/docs/getting-started-guides/helloworld/)。
+  * [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)。
   
-# Adding the devices and creating the relation between them
+# 添加设备并创建它们之间的关系
   
-  Add two Device entity in ThingsBoard:
+  在ThingsBoard中添加两个Device实体：
   
-   - Smoke Detector is represented as a Device. Its name is **Smoke Detector** and its type is **Smoke Sensor**.
+   - 烟雾探测器表示为设备。它的名称为**Smoke Detector**类型为 **Smoke Sensor**。
+   
+   - 火警系统表示为设备。它的名称是**Fire Alarm System**类型是**Fire Alarm Device**。
   
-   - Fire Alarm System is represented as a Device. Its name is **Fire Alarm System** and its type is **Fire Alarm Device**.
+  创建类型的关系用途：
   
-  Create a relation of the type Uses:
+   - 从烟雾探测器到火灾报警系统；
   
-   - from Smoke Detector to Fire Alarm System;
-  
-  The following screenshots show how to do this:
+  以下屏幕截图显示了如何执行此操作：
   
    ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/smoke-sensor.png) ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/fire-alarm-system.png) <br/>
    ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/add-relation.png)
    
 <br/>
 
-# Message flow  
+# 消息流 
 
-In this section, we explain the purpose of each node in this tutorial:
+在本节中我们将解释本教程中每个节点的用途：
 
-- Node A: [**Check Relation**](/docs/user-guide/rule-engine-2-0/filter-nodes/#check-relation-filter-node) node.
-  - Checks the relation from the Device, **Fire Alarm System**, to the originator of the message **Smoke Detector** using the type and direction of relation. 
-- Node B: [**Change originator**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#change-originator) node.
-  - Change the originator from Devices **Smoke Detector** to the related Device **Fire Alarm System** and the submitted message will be processed as a message from Device **Fire Alarm System**.
-- Node C: [**Transformation Script**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#script-transformation-node).
-  - Transform an original message into RPC request message. 
-- Node D: [**RPC call request**](/docs/user-guide/rule-engine-2-0/action-nodes/#rpc-call-request-node) node.
-  - Takes the message payload and sends it as a response to the **Fire Alarm System**.
-- Node E: [**Filter Script**](/docs/user-guide/rule-engine-2-0/filter-nodes/#script-filter-node) node.
-  - Checks if data of incoming message is **smoke**.
-- Node F: [**Clear alarm**](/docs/user-guide/rule-engine-2-0/action-nodes/#clear-alarm-node) node.
-  - Loads the latest Alarm with configured Alarm Type for Message Originator **Smoke Detector** and Clears the Alarm if it exists.  
-- Node G: [**Create alarm**](/docs/user-guide/rule-engine-2-0/action-nodes/#create-alarm-node) node.
-  - Tries to load the latest Alarm with configured Alarm Type for Message Originator, namely **Smoke Detector**.  
-- Node H: **Rule Chain** node.
-  - Forwards incoming Message to specified Rule Chain **Related Fire Alarm System**. 
+- 节点A: [**Check Relation**](/docs/user-guide/rule-engine-2-0/filter-nodes/#check-relation-filter-node)。
+  - 使用关系的类型和方向检查从设备**Fire Alarm System**到消息**Smoke Detector**的始发者的关系。
+- 节点B: [**Change originator**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#change-originator)。
+  - 将始发者从设备**Smoke Detector**更改为相关设备**Fire Alarm System**，提交的消息将作为来自设备“火灾警报系统”的消息进行处理。
+- 节点C: [**Transformation Script**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#script-transformation-node).
+  - 将原始消息转换为RPC请求消息。
+- 节点D: [**RPC call request**](/docs/user-guide/rule-engine-2-0/action-nodes/#rpc-call-request-node)。
+  - 获取消息payload，并将其作为响应发送到**Fire Alarm System**。
+- 节点E: [**Filter Script**](/docs/user-guide/rule-engine-2-0/filter-nodes/#script-filter-node)。
+  - 检查传入消息的数据是否为**smoke**。
+- 节点F: [**Clear alarm**](/docs/user-guide/rule-engine-2-0/action-nodes/#clear-alarm-node)。
+  - 加载最新警报该警报具有为消息发起者**Smoke Detector**配置的警报类型，并清除警报（如果存在）。
+- 节点G: [**Create alarm**](/docs/user-guide/rule-engine-2-0/action-nodes/#create-alarm-node)。
+  - 尝试为消息发起方加载配置了警报类型的最新警报即**Smoke Detector**。
+- 节点H: **Rule Chain**。
+  - 将传入消息转发到指定的规则链**Related Fire Alarm System**。
 
 <br/>
   
-# Configure Rule Chains
+# 配置规则链
 
-In this tutorial, we modified our **Root Rule Chain** and also created Rule Chain **Related Fire Alarm System**
+在本教程中我们修改了**Root Rule Chain**并创建了**Related Fire Alarm System**
 
-<br/>The following screenshots show how the above Rule Chains should look like:
+<br/>以下屏幕截图显示了以上规则链的外观：
  
   - **Related Fire Alarm System:**
 
@@ -87,42 +88,42 @@ In this tutorial, we modified our **Root Rule Chain** and also created Rule Chai
 
 <br/> 
 
-Download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/check-relation-tutorial.json) for the **Root Rule Chain**. Don't forget to mark this rule chain as **root**.
+下载json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/check-relation-tutorial.json)以获取**Root Rule Chain**。不要忘了将此规则链标记为**root**。
 
 <br/> 
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/root-chain.png)
 
-Also, you need to create **Related Fire Alarm System** Rule Chain or you can download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/related_fire_alarm_system.json) for this Chain and import it.
+另外您需要创建**Related Fire Alarm System**规则链，也可以下载json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/related_fire_alarm_system.json)。
 <br/>
 <br/>
 
- The following section shows you how to create it.
+下一节将向您展示如何创建它。
 
-#### Create new Rule Chain (**Related Fire Alarm System**)
+#### 创建新的规则链 (**Related Fire Alarm System**)
 
-Go to **Rule Chains** -> **Add new Rule Chain** 
+转到**Rule Chains** -> **Add new Rule Chain** 
 
-Configuration:
+配置:
 
-- Name : **Related Fire Alarm System**
+- 名称 : **Related Fire Alarm System**
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/add-fire-alarm-chain.png)
 
-New Rule Chain is created. Press **Edit** button and configure Chain.
+创建新规则链，按点击**Edit**按钮并配置链。
 
-###### Adding the required nodes
+###### 添加所需的节点
 
-In this rule chain, you will create 4 nodes as it will be explained in the following sections:
+在此规则链中您将创建4个节点如以下各节所述：
 
-###### Node A: **Check Relation**
+###### 节点A: **Check Relation**
 
- - Add the **Check Relation** node and connect it to the **Input** node.<br/>
+ - 添加**Check Relation**节点，并将其连接到**Input**节点。<br/>
 
-    This node will check the relation from the Device, **Fire Alarm System**, to the originator of the message **Smoke Detector** using the type and direction of relation. 
-    If the relation exists, the message will be sent through the True chain.
+    该节点将使用关系的类型和方向检查从设备**Fire Alarm System**到消息**Smoke Detector**的始发者的关系。
+    如果存在该关系，则消息将通过True链发送。
 
- - Fill in the fields with the input data shown in the following table: 
+ - 填写下表中输入的数据字段：
  
  <table style="width: 25%">
    <thead>
@@ -156,12 +157,12 @@ In this rule chain, you will create 4 nodes as it will be explained in the follo
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/check-relation.png)
 
-###### Node B: **Change Orignator**
+###### 节点B: **Change Orignator**
 
-- Add the **Change Orignator** node and connect it to the **Check Relation** node with a relation type **True**. <br>
-  This node will change the originator from the Device **Smoke Detector** to the related Device **Fire Alarm System** and the submitted message will be processed as a message from another entity, namely **Fire Alarm System**.
-  
-- Fill in the fields with the input data shown in the following table: 
+- 添加**Change Orignator**节点并将其连接到关联类型为**True**的**Check Relation**节点。 <br>
+  该节点会将始发者从设备**Smoke Detector**更改为相关的设备**Fire Alarm System**并且提交的消息将作为来自另一个实体**Fire Alarm System**的消息进行处理。
+
+- 填写下表中输入的数据字段：
 
 <table style="width: 25%">
   <thead>
@@ -199,12 +200,12 @@ In this rule chain, you will create 4 nodes as it will be explained in the follo
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/change-originator.png)
  
-###### Node C: **Script Transformation**
- - Add the **Script Transformation** node and connect it to the **Change Orignator** node with a relation type **Success**.
+###### 节点C: **Script Transformation**
+ - 添加**Script Transformation**节点并将其连接到关系类型为**Success**的更改**Change Orignator**节点。
 
-This node will transform an original message into RPC request message. 
+该节点会将原始消息转换为RPC请求消息。
 
-- The RPC call will have 2 properties:
+-RPC调用将具有2个属性：
 
     <table style="width: 25%">
       <thead>
@@ -224,7 +225,7 @@ This node will transform an original message into RPC request message.
        </tbody>
     </table>
 	
- - In order to do this, add the following Script:
+ - 请添加以下脚本：
  
   {% highlight javascript %}
     var newMsg = {};
@@ -235,115 +236,115 @@ This node will transform an original message into RPC request message.
     return {msg: newMsg, metadata: metadata, msgType: msgType};{% endhighlight %}
 
 
- - Enter the Name field as **New RPC message**.
+ - 输入名称**New RPC message**。
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/transformation-node.png)  
 
-###### Node D: **RPC call request** node
-- Add the **RPC call request** node and connect it to the **Script Transformation** node with a relation type **Success**. <br>
-  This node takes the message payload and sends it as a response to the Message Originator **Fire Alarm System**.
-- Enter the Name field as **Fire Alarm System**.
-- Enter the Timeout value as 60 seconds.
+###### 节点D: **RPC call request**
+- 添加**RPC call request**节点并将其连接到关系类型为**Success**的**Script Transformation**节点<br>
+  该节点获取消息payload并将其作为响应发送到消息始发者**Fire Alarm System**。
+- 输入名称**Fire Alarm System**。
+- 输入值为60秒。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/rpc-call-request.png)
 
-This Rule chain is ready and we should save it.
+此规则链已准备就绪，我们应该保存它。
 
 
-#### Modify Root Rule Chain
+#### 修改Root Rule Chain
 
-The initial Rule Chain has been modified by adding the following nodes:
+初始规则链已通过添加以下节点进行了修改：
 
-###### Node E: **Filter Script**
-- Add the **Filter Script** node and connect it to the **Save Timeseries** node with a relation type **Success**. <br>
-  This node will check if data of incoming message is **smoke** using the following script:
+###### 节E: **Filter Script**
+- 添加**Filter Script**节点并将其连接到关联类型为**Success**的**Save Timeseries**节点。<br>
+  该节点将使用以下脚本检查传入消息的数据是否为**smoke**：
   
   {% highlight javascript %}return msg.smoke== 'true';{% endhighlight %}
   
-- Enter the Name field as **Smoke Alarm Filter**.  
+- 输入名称**Smoke Alarm Filter**。
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/alarm-filter.png)
  
-###### Node F: **Clear Alarm**
-- Add the **Clear Alarm** node and connect it to the **Filter Script** node with a relation type **False**. <br>
-  This node loads the latest Alarm with configured Alarm Type for Message Originator **Smoke Detector** and Clears the Alarm if it exists.
+###### 节点F: **Clear Alarm**
+- 添加**Clear Alarm**节点并将其连接到关联类型为**False**的**Filter Script**节点。<br>
+  此节点将为消息始发者**Smoke Detector**加载配置了警报类型的最新警报，并清除警报（如果存在）。
   
-- Enter the Name field as **Clear Smoke Alarm** and the Alarm type as **Smoke Alarm**.
+- 输入名称**Clear Smoke Alarm**和警报类型**Smoke Alarm**。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/clear-alarm.png)
   
-###### Node G: **Create alarm**
-- Add the **Create alarm** node and connect it to the **Filter Script** node with a relation type **True**. <br>
-  This node tries to load the latest Alarm with configured Alarm Type for Message Originator, namely **Smoke Detector**.  
+###### 节点G: **Create alarm**
+- 添加**Create alarm**节点，并将其连接到关联类型为**True**的**Filter Script**节点。 <br>
+  该节点尝试为消息发起方加载配置了警报类型的最新警报即**Smoke Detector**。
   
- - Enter the Name field as **Create Smoke Alarm** and the Alarm type as **Smoke Alarm**.
+ - 输入名称**Create Smoke Alarm**和警报类型**Smoke Alarm**。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/create-alarm.png)
 
-###### Node H: **Rule Chain**
-- Add the **Rule Chain** node and connect it to the **Filter Script** node with a relation type **True**. <br>
-  This node forwards incoming Message to specified Rule Chain **Related Fire Alarm System**.
+###### 节点H: **Rule Chain**
+- 添加**Rule Chain**节点并将其连接到关联类型为**True**的**Filter Script**节点。 <br>
+  该节点将传入消息转发到指定的规则链**Related Fire Alarm System**。
 
-- Enter the Name field as **Related Fire Alarm System**.
+- 输入名称**Related Fire Alarm System**。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/add-alarm-chain.png)
   
 
 
-The following screenshot shows how the final **Root Rule Chain** should look like:
+以下屏幕截图显示了最终的**Root Rule Chain**应该是什么样子：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/view-chain.png)
 
 <br/>
 <br/>
 
-# How to verify the Rule Chain and Post telemetry
+# 如何验证Rule Chain和Post telemetry
 
-- Use the following javascript code to emulate the **Fire Alarm System** device.
+- 使用以下JavaScript代码模拟**Fire Alarm System**设备。
 
   - [**FireAlarmEmulator.js**](/docs/user-guide/rule-engine-2-0/tutorials/resources/FireAlarmEmulator.js).
   
-  - To run the script, you need to do the following steps:
+  - 要运行脚本您需要执行以下步骤：
   
-  - Copy the **Fire Alarm System** device access token, then paste them in the script.  <br>
-  You can copy the access token from the Device page. <br> <br>  
+  - 复制**Fire Alarm System**设备访问令牌，然后将其粘贴到脚本中。 <br>
+  您可以从设备页面复制访问令牌。 <br> <br>
   
 
-- Use the Rest APIs, [Telemetry upload APIs](/docs/reference/http-api/#telemetry-upload-api), for posting telemetry from the device **Smoke Detector**. <br>
+- 使用Rest APIs[遥测上传APIs](/docs/reference/http-api/#telemetry-upload-api)从设备**Smoke Detector**发布遥测。<br>
 
 {% highlight bash %}
 curl -v -X POST -d '{"smoke":"true"}' http://demo.thingsboard.io/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
 
-**you need to replace $ACCESS_TOKEN with the actual device token**
+**您需要将$ACCESS_TOKEN替换为实际的设备令牌**
 {% endhighlight %}
 <br/>
 
   ![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/smoke-telemetry.png)![image](/images/user-guide/rule-engine-2-0/tutorials/check relation/fire-alarm-telemetry.png)
 
 <br/>
-Also, you can:
+另外您可以：
 
-  - configure the Dashboard by adding an alarm widget to visualize the alarms.
+  - 通过添加警报部件以可视化警报来配置仪表板。
   
-  - define an additional logic for alarm processing, for example, sending an email.
+  - 定义用于警报处理的其他逻辑例如发送电子邮件。
 
-Please refer to the third and fourth links under the **See Also** section to see how to do this.
+请参阅**另请参阅**部分下的第三和第四链接，以了解如何执行此操作。
   
 <br/>
 
-# See Also
+# 另请参阅
 
-- [Switch Node](/docs/user-guide/rule-engine-2-0/filter-nodes/#switch-node) guide - for more information about how to use Switch Node in Thignsboard.
+- [Switch节点](/docs/user-guide/rule-engine-2-0/filter-nodes/#switch-node)指南-有关如何在Thignsboard中使用Switch节点的更多信息。
 
-- [Validate incoming telemetry](/docs/user-guide/rule-engine-2-0/tutorials/validate-incoming-telemetry/#step-1-adding-temperature-validation-node) tutorial - for more information about how to validate an incoming telemetry using the Script Filter node.
+- [验证传入遥测](/docs/user-guide/rule-engine-2-0/tutorials/validate-incoming-telemetry/#step-1-adding-temperature-validation-node)教程-有关如何操作的更多信息使用脚本过滤器节点来验证传入遥测。
 
-- [Create & Clear Alarms: configure dashboard](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#configure-device-and-dashboard) guide - to learn how to add an Alarm widget to the dashboard.
+- [创建和清除警报：配置信息中心](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/#configure-device-and-dashboard)指南-了解如何添加仪表板的警报部件。
 
-- [Send Email](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) tutorial.
+- [发送邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)教程.
 
-- [RPC capabilities](/docs/user-guide/rpc/#server-side-rpc-api) guide - for more information about how RPC works in Thignsboard, please refer to the RPC capabilities guide.
+- [RPC功能](/docs/user-guide/rpc/#server-side-rpc-api)指南-有关RPC如何在Thignsboard中工作的更多信息，请参考RPC功能指南。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}
 

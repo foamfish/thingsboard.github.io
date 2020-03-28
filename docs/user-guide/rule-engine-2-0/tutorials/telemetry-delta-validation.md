@@ -1,45 +1,47 @@
 ---
 layout: docwithnav
-title: Telemetry delta calculation
-description: Delta validation
+title: 遥测增量计算
+description: 增量验证
 
 ---
 
 * TOC
 {:toc}
 
-## Use case
+## 用例
 
-Let's assume we have a device that uses a temperature sensor to collect and read temperature readings in the ThingsBoard.
-In addition, let's assume that we need to generate the alarm when the delta between the last five-minutes temperature readings and the latest temperature reading does exceed 5 degrees.
-Please note that this is just a simple theoretical use case to demonstrate the capabilities of the platform. You can use this tutorial as a basis for much more complex scenarios.
+假设我们有一台使用温度传感器来收集和读取ThingsBoard中的温度读数的设备。
 
-## Prerequisites 
+另外，我们假设当最后五分钟的温度读数和最新的温度读数之间的差值超过5度时需要生成警报。
 
-We assume you have completed the following guides and reviewed the articles listed below:
+请注意这只是一个简单的理论用例，用于演示平台的功能。您可以将本教程用作更复杂场景的基础。
 
-  * [Getting Started](/docs/getting-started-guides/helloworld/) guide.
-  * [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/).
-  * [Create & clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/) guide.
+## 先决条件
+
+我们假设您已完成以下指南并查看了以下文章：
+
+  * [入门指南](/docs/getting-started-guides/helloworld/)。
+  * [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)。
+  * [创建&清除警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/)指南。
   
-# Adding the device
+# 添加设备
   
-Add Device entity in ThingsBoard. Its name is **Thermometer** and its type is **temperature sensor**.
+在ThingsBoard中添加设备实体。它的名称是**Thermometer**类型是**temperature sensor**。
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/add-thermometer.png)
    
 <br/>
 
-# Message flow  
+# 消息流  
 
-In this section, we explain the purpose of each node in this tutorial. There will be two rule chains involved:
+在本节中我们将解释本教程中每个节点的用途。将涉及两个规则链：
 
-  - **Root rule chain** - rule chain that actually saves telemetry from devices into the database, and redirect the messages to **Temperature delta validation** chain
+  - **Root rule chain** - 实际上将遥测从设备保存到数据库中，并将消息重定向到**Temperature delta validation**链
    
-  - **Temperature delta validation** - rule chain that actually calculates the delta between the last five-minutes temperature and latest temperature readings.
-    <br> As a result, if delta value exceeds 5 degrees, the alarm will be created/updated, otherwise, the alarm will be cleared.
+  - **Temperature delta validation** - 规则链，实际计算最后五分钟的温度与最新的温度读数之间的增量。
+    <br>结果如果增量值超过5度，将创建/更新警报，否则将清除警报。
 
-The following screenshots show how the above Rule Chains should look like:
+以下屏幕截图显示了以上规则链的外观：
  
   - **Temperature delta validation:**
 
@@ -51,65 +53,67 @@ The following screenshots show how the above Rule Chains should look like:
 
 <br/> 
 
-Download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/temperature_delta_validation.json) for the **Temperature delta validation** rule chain. 
+下载json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/temperature_delta_validation.json)以获取**Temperature delta validation**。
 
-Create Node G as shown on the image above in the root rule chain to forward telemetry to the imported rule chain.
+如上图所示在根规则链中创建节点G以将遥测转发到导入的规则链。
 <br/>
 <br/>
 
-The following section shows you how to create this rule chain from scratch.
+下一节将向您展示如何从头开始创建此规则链。
  
-#### Create new Rule Chain (**Temperature delta validation**)
+#### 创建新的规则链(**Temperature delta validation**)
 
-Go to **Rule Chains** -> **Add new Rule Chain** 
+转到**Rule Chains** -> **Add new Rule Chain** 
 
-Configuration:
+配置:
 
-- Name : **Temperature delta validation**
+- 名称 : **Temperature delta validation**
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/add-temperature-delta-validation-chain.png)
 
-New Rule Chain is created. Press **Edit** button and configure Chain.
+创建新规则链。按**Edit**按钮并配置链。
 
-###### Adding the required nodes
+###### 添加所需的节点
 
-In this rule chain, you will create 6 nodes as it will be explained in the following sections:
+在此规则链中您将创建6个节点如以下各节所述：
  
-###### Node A: **Originator telemetry**
-- Add the **Originator telemetry** node and connect it to the **Input** node with a relation type **Success**.
-  This rule node adds selected telemetry of message originator into message metadata for the selected time range. 
+###### 节点A: **Originator telemetry**
+- 添加**Originator telemetry**节点并将其连接到关联类型为**Success**的**Input**节点。
 
-The rule node has three fetch modes:
+  此规则节点将所选消息发起者的遥测信息添加到所选时间范围内的消息元数据中。
 
- - **FIRST**: retrieves telemetry from the database that is closest to the beginning of the time range
+规则节点具有三种获取模式：
 
- - **LAST**: retrieves telemetry from the database that is closest to the end of the time range
+ - **FIRST**: 从最接近时间范围开始处的数据库中检索遥测
 
- - **ALL**: retrieves all telemetry from the database, which is in the specified time range.
+ - **LAST**: 从最接近时间范围末尾的数据库中检索遥测
 
-We will use fetch mode: **LAST**  with the time range from 24 hours ago till 5 minutes.
+ - **ALL**: 从数据库中检索指定时间范围内的所有遥测。
+
+使用模式：**LAST**其时间范围为24小时前到5分钟。
   
- - Enter the Name field as **Latest five-minute old record**.
+ - 在名称字段中输入**Latest five-minute old record**。
  
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/latest-five-minute-old-record.png)
  
-###### Fetch Mode ALL 
+###### 提取模式全部
     
-  Originator telemetry node also supports ability to fetch all telemetry from the particular time range. 
-  We will not use this ability in our tutorial, but it may be useful in the cases if you need to calculate variance for a particular key or to 
-  predict further change of telemetry depending on telemetry changes in the selected time range.
+  发起方遥测节点还支持从特定时间范围获取所有遥测的功能。
+
+  我们不会在本教程中使用此功能但是如果您需要根据特定时间范围内的遥测变化来计算特定键的方差或预测遥测的进一步变化该功能可能会很有用。
   
-  In this case, you need to select the fetch mode **ALL**. It will force rule node to fetch all telemetry from the specified time range and add it to the message metadata as an array.
-  This array will contain JSON objects with the timestamp and value. 
+  在这种情况下您需要选择提取模式**ALL**。它将强制规则节点从指定的时间范围获取所有遥测并将其作为数组添加到消息元数据中。
+
+  该数组将包含带有时间戳和值的JSON对象。
   
-  - Metadata of the outbound message would be JSON document with the following structure:
+  - 出站邮件的元数据将是具有以下结构的JSON文档：
    
   {% highlight javascript %}
   {
     "temperature": "[{\"ts\":1540892498884,\"value\":22.4},{\"ts\":1540892528847,\"value\":20.45},{\"ts\":1540892558845,\"value\":22.3}]"
   }{% endhighlight %}
     
-  - In order to convert the array to the valid JSON document you can use the following function: 
+  - 为了将数组转换为有效的JSON文档，您可以使用以下函数：
     
   {% highlight javascript %}
   var temperatureArray = JSON.parse(metadata.temperature);{% endhighlight %}
@@ -131,10 +135,10 @@ We will use fetch mode: **LAST**  with the time range from 24 hours ago till 5 m
   }{% endhighlight %}  
  
  
-###### Node B: **Script Transformation**
- - Add the **Script Transformation** node and connect it to the **Change Orignator** node with a relation type **Success**.
+###### 节点B: **Script Transformation**
+ - 添加**Script Transformation**节点并将其连接到关系类型为**Success**的**Change Orignator**节点。
  
- This node will calculate the delta between the temperature reading from message payload and the five-minute old temperature reading from the message metadata using the following script:
+ 该节点将使用以下脚本计算从消息payload读取的温度与从消息metadata读取的五分钟旧温度之间的增量：
   
    {% highlight javascript %}
    var newMsg = {};
@@ -143,85 +147,84 @@ We will use fetch mode: **LAST**  with the time range from 24 hours ago till 5 m
      
    return {msg: newMsg, metadata: metadata, msgType: msgType};{% endhighlight %}
   
- - Enter the Name field as **Calculate delta**.
+ - 在名称字段中输入**Calculate delta**。
    
  ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/calculate-delta.png)  
   
-###### Node C: **Save Timeseries**  
- - Add the **Save TimeSeries** node and connect it to the **Script Transformation** node with a relationship type **Success**.  
-   This node will save the TimeSeries data from the incoming Message payload into the database and link it to the Device that is identified as the Message Originator.
+###### 节点C: **Save Timeseries**  
+ - 添加**Save TimeSeries**节点，并将其连接到关系类型为**Success**的**Script Transformation**节点。
+ 该节点会将TimeSeries数据从传入的消息payload中保存到数据库中，并将其链接到被标识为Message Originator的设备。
      
- - Enter the Name field as **Save Time Series**.
+ - 在名称字段中输入**Save Time Series**。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/save-timeseries.png)
 
-###### Node D: **Filter Script**
- - Add the **Filter Script** node and connect it to the **Save TimeSeries** node with a relation type **Success**.
- <br>This node will validate that calculated delta value between the latest temperature reading and five-minutes ago temperature reading did not exceed 5 degrees using the following script:
+###### 节点D: **Filter Script**
+ - 添加**Filter Script**节点并将其连接到关系类型为**Success**的**Save TimeSeries**节点。
+ <br>此节点将使用以下脚本验证最新温度读数与五分钟前温度读数之间的计算出的增量值是否不超过5度：
   
    {% highlight javascript %}
    return msg.deltaTemperature > 5;{% endhighlight %}
       
- - Enter the Name field as **Validate delta**.  
+ - 在名称字段中输入**Validate delta**。
   
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/validate-delta.png)
 
 
-###### Node E: **Create alarm**
- - Add the **Create alarm** node and connect it to the **Filter Script** node with a relation type **True**. <br>
-  This node loads the latest Alarm with configured Alarm Type for Message Originator, namely **Thermometer**<br> if the published delta temperature is not at expected range (filter script node returns True). 
+###### 节点E: **Create alarm**
+ - 添加**Create alarm**节点并将其连接到关联类型为**True**的**Filter Script**节点。 <br>
+   如果发布的增量温度不在预期范围内（过滤器脚本节点返回True）则此节点将加载最新消息，该消息具有配置为Message Originator的警报类型的最新警报，即**Thermometer** <br>。
   
- - Enter the Name field as **Create alarm** and the Alarm type as **General Alarm**.
+ - 在名称字段中输入**Create alarm**并警报类型中输入**General Alarm**。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/create-alarm.png)
 
-###### Node F: **Clear Alarm**
- - Add the **Clear Alarm** node and connect it to the **Filter Script** node with a relation type **False**. <br>
-  This node loads the latest Alarm with configured Alarm Type for Message Originator **Thermometer**<br> and Clears alarm if it exists in case if the published temperature delta is in expected range (script node returns False). 
+###### 节点F: **Clear Alarm**
+ - 添加**Clear Alarm**节点并将其连接到关联类型为**False**的**Filter Script**节点。 <br>
+ 此节点将为消息始发者**Thermometer**<br>加载配置了警报类型的最新警报，并在发布的温度增量在预期范围内的情况下清除警报（如果存在）（脚本节点返回False）。
   
- - Enter the Name field as **Clear Alarm** and the Alarm type as **General Alarm**.
+ - 在名称字段中输入**Clear Alarm**并警报类型中输入**General Alarm**.
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/clear-alarm.png)
 
-#### Modify Root Rule Chain
+#### 修改Root Rule Chain
 
-The initial root Rule Chain has been modified by adding the following node:
+初始根规则链已通过添加以下节点进行了修改：
 
-###### Node G: **Rule Chain**
-- Add the **Rule Chain** node and connect it to the **Save Timeseries** node with a relation type **Success**. <br>
-  This node forwards incoming Message to specified Rule Chain **Temperature delta validation**.
+###### 节点G: **Rule Chain**
+- 添加**Rule Chain**节点并将其连接到关系类型为**Success**“成功”****的**Save Timeseries**节点。 <br>
+  该节点将传入消息转发到指定的规则链**Temperature delta validation**。
 
-- Select the Rule Chain field: **Temperature delta validation**.
+- 选择Rule Chain字段：**Temperature delta validation**。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/add-rule-chain-node.png)
 
 <br/>
 
-The following screenshot shows how the final **Root Rule Chain** should look like:
+以下屏幕截图显示了最终的**Root Rule Chain**应该是什么样子：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/root-rule-chain.png)
 
-- Download the attached json [**file**](/docs/user-guide/rule-engine-2-0/tutorials/resources/root_rule_chain_delta_calculation.json) for the rule chain indicated above and import it.
-- Don't forget to mark the new rule chain as **root**.  
+- 为上述规则链下载json[**文件**](/docs/user-guide/rule-engine-2-0/tutorials/resources/root_rule_chain_delta_calculation.json)并将其导入。
+- 不要忘记将新规则链标记为**root**。
 
 <br/>
 <br/>
 
-# How to verify the Rule Chain and Post telemetry
+# 如何验证规则链和后遥测
 
-For posting device telemetry we will use the Rest APIs, [Telemetry upload APIs](/docs/reference/http-api/#telemetry-upload-api). For this we will need to
-copy device access token from the device **Thermometer**. 
+对于发布设备遥测我们将使用Rest API[遥测上传API](/docs/reference/http-api/#telemetry-upload-api)。为此我们将需要从设备**Thermometer**中复制设备访问令牌。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/access-token.png)
 
-{% highlight bash %}**you need to replace $ACCESS_TOKEN with actual device token**{% endhighlight %}
+{% highlight bash %}**您需要将$ACCESS_TOKEN替换为实际的设备令牌**{% endhighlight %}
 
-To validate that rule chains works as expected, we need to post telemetry twice for the same device, with an interval, not less than 5 minutes and not more than 24 hours.
-<br> Also, let's pushed debug mode button in **Create Alarm** node to verify that alarm will be created after the second post telemetry request.
+为了验证规则链是否按预期工作，我们需要对同一设备两次遥测两次，间隔不小于5分钟且不超过24小时。
+<br>另外，让我们在**Create Alarm**节点中按下调试模式按钮，以验证是否在第二次遥测请求之后创建警报。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/debug-mode-create-alarm.png)<br/>
 
-sent temperature = 20.
+发布temperature = 20
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":20}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
@@ -229,7 +232,7 @@ curl -v -X POST -d '{"temperature":20}' http://localhost:8080/api/v1/$ACCESS_TOK
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/first-post-telemetry.png)
 
-After 5 minutes delay let's sent e.g temperature = 26
+延迟5分钟后，让我们发送例如温度 = 26
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":26}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
@@ -237,35 +240,35 @@ curl -v -X POST -d '{"temperature":26}' http://localhost:8080/api/v1/$ACCESS_TOK
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/second-post-telemetry.png)
 
-Alarm should be created:
+应创建警报：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/delta-validation/alarm-created.png)
 
 <br/>
 
-Also, you can:
+另外您可以：
 
-  - configure Alarm Details function in the Create and Clear Alarm nodes.
+  - 在创建和清除警报节点中配置警报详细信息功能。
     
-  - configure the Dashboard by adding  an alarm widget to visualize the alarms.
+  - 通过添加警报部件以可视化警报来配置仪表板。
   
-  - define an additional logic for alarm processing, for example, sending an email.
+  - 定义用于警报处理的其他逻辑，例如，发送电子邮件。
 
-Please refer to the links from the second to the fourth under the **See Also** section to see how to do this.
+请参阅**另请参阅**分下第二到第四的链接，以了解如何执行此操作。
   
 <br/>
 
-# See Also
+# 另请参阅
 
 
-- [Validate incoming telemetry](/docs/user-guide/rule-engine-2-0/tutorials/validate-incoming-telemetry/) tutorial - for more information about how to validate an incoming telemetry using the Script Filter node.
+- [验证传入遥测](/docs/user-guide/rule-engine-2-0/tutorials/validate-incoming-telemetry/) 教程 - 有关如何使用脚本过滤器节点验证传入遥测的更多信息。
 
-- [Create & Clear Alarms: alarm details:](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#modify-the-required-nodes) guide - to learn how to configure Alarm Details function in Alarm nodes.
+- [创建和清除警报：警报详细信息：](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#modify-the-required-nodes) 指南-了解如何在警报节点中配置“警报详细信息”功能。
 
-- [Create & Clear Alarms: configure dashboard](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#configure-dashboard) guide - to learn how to add an Alarm widget to the dashboard.
+- [创建和清除警报：配置信息中心](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/#configure-dashboard) 指南-了解如何添加仪表板的警报小部件。
 
-- [Send Email](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) tutorial.
+- [发送电子邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)教程。
 
-# Next steps
+# 下一步
 
 {% assign currentGuide = "DataProcessing" %}{% include templates/guides-banner.md %}
