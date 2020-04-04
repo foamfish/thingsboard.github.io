@@ -1,5 +1,5 @@
-bigheader: "ThingsBoard Documentation"
-abstract: "Documentation for using ThingsBoard IoT Platform."
+bigheader: "ThingsBoard文档"
+abstract: "ThingsBoard平台使用文档。"
 toc:
 - title: ThingsBoard Documentation
   path: /docs/

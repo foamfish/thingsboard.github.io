@@ -1,5 +1,5 @@
-bigheader: "ThingsBoard API reference"
-abstract: "Device connectivity and server-side APIs."
+bigheader: "ThingsBoard API参考"
+abstract: "设备连接和服务器端API。"
 toc:
 - title: ThingsBoard API reference
   path: /docs/api/

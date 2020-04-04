@@ -1,5 +1,5 @@
-bigheader: "ThingsBoard IoT Gateway"
-abstract: "Integrate legacy and third-party systems with ThingsBoard platform using IoT Gateway."
+bigheader: "ThingsBoard网关"
+abstract: "使用网关将第三方系统与ThingsBoard集成。"
 toc:
 - title: IoT Gateway
   path: /docs/iot-gateway/

@@ -1,5 +1,5 @@
-bigheader: "Guides"
-abstract: "Explore ThingsBoard tutorials and guides."
+bigheader: "指南"
+abstract: "ThingsBoard教程和指南。"
 hidetoc: "true"
 toc:
 - title: Guides

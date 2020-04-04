@@ -1,5 +1,5 @@
-- title: Getting started guides
-  subtitle: These guides provide quick overview of main ThingsBoard features. Designed to be completed in 15-30 minutes.
+- title: 入门指南
+  subtitle: 本指南提供了ThingsBoard主要功能的快速概述。设计在15-30分钟内完成。
   id: GettingStartedGuides
   section:
     - path: /docs/getting-started-guides/helloworld/

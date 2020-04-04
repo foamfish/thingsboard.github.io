@@ -1,5 +1,5 @@
-bigheader: "Installation"
-abstract: "Documentation for installation and configuration of ThingsBoard IoT Platform."
+bigheader: "安装"
+abstract: "ThingsBoard安装和配置文档。"
 toc:
 - title: ThingsBoard Installation
   path: /docs/installation/

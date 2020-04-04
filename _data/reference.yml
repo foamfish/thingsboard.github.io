@@ -1,5 +1,5 @@
-bigheader: "Architecture"
-abstract: "Design docs, deployment scenarios and performance"
+bigheader: "架构"
+abstract: "设计、部署和性能文档。"
 toc:
 - title: Architecture Overview
   path: /docs/reference/
