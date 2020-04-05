@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Getting Started
-description: Getting started with ThingsBoard open-source IoT platform and simulated IoT devices
+title: 入门
+description: 开始使用ThingsBoard平台
 
 ---
 
@@ -11,56 +11,48 @@ description: Getting started with ThingsBoard open-source IoT platform and simul
 {:toc}
 
 
-## Introduction
+## 介绍
 
-The goal of this tutorial is to demonstrate the basic usage of the most popular ThingsBoard features. 
-You will learn how to:
+本教程演示的ThingsBoard的基本用法，你将从中学到如下功能：
 
- - Provision Assets and Devices in the system;
- - Define relations between Assets and Devices;
- - Push data from a device to ThingsBoard;
- - Build real-time end-user Dashboards;
- - Define thresholds and trigger alarms;
- - Push notification about new alarms over email.
+ - 创建资产和设备;
+ - 定义资产和设备间的关系;
+ - 发送设备数据至ThingsBoard;
+ - 创建实时仪表板;
+ - 定义阀值并报警;
+ - 将警报通过邮件发送.
  
-The tutorial is based on a popular facility monitoring use-case. 
-We will show how to monitor temperature in a different parts of the building,
-raise alarms when temperature exceeds certain threshold and visualize collected data and alarms.
+我们将展示如何监视物体不同部分的温度，如何在温度超过特定阈值时发出警报以及如何可视化收集的数据和警报。
  
-## Video tutorial 
+## 视频教程
  
-We recommend you to review the following video tutorial. 
-All the resources used in this tutorial are listed below for your convenience.
+我们建议您观看以下视频教程。为了方便起见，下面列出了本教程中使用的所有资源。
  
 &nbsp; 
   
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/TwJJbxwQX5k" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://thingsboard.oss-cn-chengdu.aliyuncs.com/Getting%20started%20with%20ThingsBoard%20v2.0%2B.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
-## Tutorial resources
+## 教程资源
 
-#### Live Demo and the installation guides
+#### 在线实例和安装指南
 
-If you don't have access to a running ThingsBoard instance, 
-use either [Live Demo](https://demo.thingsboard.io/signup) or
-[Installation Guide](/docs/user-guide/install/installation-options/)
-to fix this. 
+如果你无法运行实例请通过[在线实例](https://demo.thingsboard.io/signup) 或者
+[安装指南](/docs/user-guide/install/installation-options/)
+进行学习。 
 
-In case you decided to install your own ThingsBoard server and loaded the demo data ( "--loadDemo" option, according to the installation guides), 
-the list of default accounts (login/password) and device credentials is located [here](/docs/samples/demo-account/). 
+如果你安装在本地计算机上并使用 **--loadDemo** 进行初始化则使用默认的用户名及密码，你可以通过[此连接](/docs/samples/demo-account/)进行查看。
 
-#### Pushing data from the device
+#### 发送设备数据
 
-In order to simplify this guide, we will push data using HTTP, MQTT or CoAP protocol from your local PC. 
-Please review [connect your device](/docs/guides#AnchorIDConnectYourDevice) guides for all available connectivity solutions and options and 
-[hardware samples](/docs/guides#AnchorIDHardwareSamples) to learn how to connect various hardware platforms to ThingsBoard.
+我们使用HTTP，MQTT或CoAP协议从你的本地PC发送数据。请查看[设备连接](/docs/guides#AnchorIDConnectYourDevice)指南以获取所有的连接解决方​​案和选项以及[硬件示例](/docs/guides#AnchorIDHardwareSamples)，以了解如何将各种硬件平台连接到ThingsBoard
 
-#### Client-side libraries installation
+#### 客户端安装
 
-Install preferred HTTP (cURL), MQTT (Mosquitto or MQTT.js) or CoAP (CoAP.js) client using following commands.
+使用如下命令安装 HTTP (cURL), MQTT (Mosquitto 或者 MQTT.js) 或者 CoAP (CoAP.js) 。
 
 {% capture tabspec %}mqtt-client
 ClientA,cURL (Windows),shell,resources/curl-win.sh,/docs/getting-started-guides/resources/curl-win.sh
@@ -72,9 +64,9 @@ ClientF,Mosquitto (macOS),shell,resources/mosquitto-macos.sh,/docs/getting-start
 ClientG,CoAP.js,shell,resources/node-coap.sh,/docs/getting-started-guides/resources/node-coap.sh{% endcapture %}
 {% include tabs.html %}
 
-#### Sample cURL command used in the video tutorial
+#### 视频教程中使用cURL
 
-This command works for Windows, Ubuntu and macOS, assuming that cURL tool is installed. 
+如果你已经安装cURL工具则此命令适用于Windows, Ubuntu 和 macOS。 
 
 ```bash
 # Please replace $HOST_NAME and $ACCESS_TOKEN with corresponding values.
@@ -87,7 +79,7 @@ curl -v -X POST -d "{\"temperature\": 25}" https://demo.thingsboard.io/api/v1/$A
 curl -v -X POST -d "{\"temperature\": 25}" http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
 ```
 
-#### Sample generator script
+#### 生成脚本
 
 ```javascript
 var msg = { temperature: +(Math.random()*5 + 25).toFixed(1)};
@@ -97,37 +89,33 @@ var msgType = "POST_TELEMETRY_REQUEST";
 return { msg: msg, metadata: metadata, msgType: msgType };
 ```
 
-#### Rule Engine guides
+#### 规则引擎指南
 
-[Rule Engine overview](/docs/user-guide/rule-engine-2-0/overview/) - learn the Rule Engine basics and architecture.
+[规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/) - 了解规则引擎的基础知识和架构。
 
-[Rule Engine guides](/docs/guides#AnchorIDDataProcessing) - learn how to use ThingsBoard Rule Engine.
+[规则引擎指南](/docs/guides#AnchorIDDataProcessing) - 解如何使用ThingsBoard规则引擎。
 
-#### Mail settings
+#### 邮件设置
 
-Use this [guide](/docs/user-guide/ui/mail-settings/#step-31-sendgrid-configuration-example) to configure SendGrid or use any other SMTP server available.
+使用本[指南](/docs/user-guide/ui/mail-settings/#step-31-sendgrid-configuration-example)来配置SendGrid或使用任何其他可用的SMTP服务器。
 
-#### Other sample data files
+#### 其他测试数据文件
 
-**Create some folder** to store all necessary files for this tutorial.
-Download to this folder or create the following data files:
+**创建一个文件夹** 来存储本教程的所有必需文件。下载到此文件夹或创建以下数据文件:
 
- - {% include ghlink.html content='**attributes-data.json**' ghlink='/docs/getting-started-guides/resources/attributes-data.json' %} - contains two device attributes values: firmware version and serial number.
- - {% include ghlink.html content='**telemetry-data.json**' ghlink='/docs/getting-started-guides/resources/telemetry-data.json' %} - contains three time-series values: temperature, humidity and active flag.
+ - {% include ghlink.html content='**attributes-data.json**' ghlink='/docs/getting-started-guides/resources/attributes-data.json' %} - 包含两个设备属性值: 固件版本和序列号。
+ - {% include ghlink.html content='**telemetry-data.json**' ghlink='/docs/getting-started-guides/resources/telemetry-data.json' %} - 包含三个时间序列值: 温度，湿度和活动标记。
  
-Please note that data in this files is basically in key-value format. You can use your own keys and values. 
-See [MQTT](/docs/reference/mqtt-api/#key-value-format), [CoAP](/docs/reference/coap-api/#key-value-format)
-or [HTTP](/docs/reference/http-api/#key-value-format) protocol reference for more details. 
+请注意，此文件中的数据基本上是键值格式。您可以使用自己的键和值。有关更多详细信息，请参见[MQTT](/docs/reference/mqtt-api/#key-value-format)，[CoAP](/docs/reference/coap-api/#key-value-format) 或[HTTP](/docs/reference/http-api/#key-value-format)协议参考。
 
 {% capture tabspec %}data
 A,attributes-data.json,json,resources/attributes-data.json,/docs/getting-started-guides/resources/attributes-data.json
 B,telemetry-data.json,json,resources/telemetry-data.json,/docs/getting-started-guides/resources/telemetry-data.json{% endcapture %}
 {% include tabs.html %}
 
-#### Pushing data using MQTT, CoAP or HTTP
+#### 使用MQTT，CoAP或HTTP推送数据
 
-Download the following files to **previously created folder** according to the preferred client:
-
+根据使用的客户端下载对应的文件至文件夹中
  - **MQTT.js (MQTT)**
    - {% include ghlink.html content='mqtt-js.sh' ghlink='/docs/getting-started-guides/resources/mqtt-js.sh' %} (Ubuntu & MacOS) or {% include ghlink.html content='mqtt-js.bat' ghlink='/docs/getting-started-guides/resources/mqtt-js.bat' %} (Windows)
    - {% include ghlink.html content='publish.js' ghlink='/docs/getting-started-guides/resources/publish.js' %}
@@ -138,20 +126,20 @@ Download the following files to **previously created folder** according to the p
  - **cURL (HTTP)**
    - {% include ghlink.html content='curl.sh' ghlink='/docs/getting-started-guides/resources/curl.sh' %}
 
-If you are using a shell script (*.sh) make sure that it is executable:
+如果您使用的是Shell脚本（* .sh），请确保该脚本是可执行的:
 
 ```shell
 chmod +x *.sh
 ```
 
-Before executing script don't forget to: 
+在执行脚本之前，请不要忘记执行以下操作: 
 
- - replace **$ACCESS_TOKEN** with one from **Device credentials** window.
- - replace **$THINGSBOARD_HOST** with either **127.0.0.1** (in case of local installation) or **demo.thingsboard.io** (in case of live-demo).
+ - 替换 **$ACCESS_TOKEN** 成 **设备凭证**。
+ - 替换 **$THINGSBOARD_HOST** 成 **127.0.0.1** (本地电脑) or **demo.thingsboard.io** (在线实例)。
 
-Finally, execute corresponding *.sh or *.bat script to push data to the server.
+最后，执行相应的* .sh或* .bat脚本将数据推送到服务器。
 
-Below are tabs with the content of the scripts provided. 
+以下是包含所提供脚本内容的选项卡。
  
 {% capture tabspec %}mqtt-telemetry-upload
 A,MQTT.js (Ubuntu & MacOS),shell,resources/mqtt-js.sh,/docs/getting-started-guides/resources/mqtt-js.sh
@@ -162,21 +150,20 @@ E,CoAP.js (CoAP),shell,resources/coap-js.sh,/docs/getting-started-guides/resourc
 F,cURL (HTTP),shell,resources/curl.sh,/docs/getting-started-guides/resources/curl.sh{% endcapture %}
 {% include tabs.html %}
 
-## ThingsBoard Community Edition education course
+## ThingsBoard社区版教程
  
  <div id="video">  
      <div id="video_wrapper">
-         <iframe src="https://www.youtube.com/embed/videoseries?list=PLYEKB_XwLCZJ6T8RPLTjRwMw0eoabpEKO" frameborder="0" allowfullscreen></iframe>
+         <iframe src="https://thingsboard.oss-cn-chengdu.aliyuncs.com/ThingsBoard%20CE%20education_%20Lesson%201.Tenancy.mp4" frameborder="0" allowfullscreen></iframe>
      </div>
  </div>
  <p></p>
-
-  
-## Next steps
+ 
+## 下一步
 
 {% assign currentGuide = "GettingStartedGuides" %}{% include templates/guides-banner.md %}
 
-## Your feedback
+## 意见
 
-Don't hesitate to star ThingsBoard on **[github](https://github.com/thingsboard/thingsboard)** to help us spread the word.
-If you have some questions about this sample - post it on the **[forum](https://groups.google.com/forum/#!forum/thingsboard)**.
+
+不要犹豫，在 **[github](https://github.com/thingsboard/thingsboard)** 上加注ThingsBoard 来帮助我们传播这个词。如果您对此样本有任何疑问，请将其发布在 **[论坛](https://groups.google.com/forum/#!forum/thingsboard)**。

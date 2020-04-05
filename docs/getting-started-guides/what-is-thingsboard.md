@@ -2,43 +2,41 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: What is ThingsBoard?
-description: ThingsBoard key features and advantages for the rapid development of IoT projects and applications.
+title: ThingsBoard是什么?
+description: ThingsBoard为物联网项目和应用的快速发展提供的主要功能。
 ---
 
 
-ThingsBoard is an open-source IoT platform that enables rapid development, management and scaling of IoT projects. 
-Our goal is to provide the out-of-the-box IoT cloud or on-premises solution that will enable server-side infrastructure for your IoT applications. 
+ThingsBoard是一个开源物联网平台，可实现物联网项目的快速开发、管理和扩展。我们的目标是提供成熟的IoT云或本地解决方案，以此做为您的IoT应用程序服务端基础架构。. 
 
-#### Features
+#### 特点
 
-With ThingsBoard, you are able to:
+ThingsBoard可用于:
 
- - Provision devices, assets and customers and define relations between them.
- - Collect and visualize data from devices and assets. 
- - Analyze incoming telemetry and trigger alarms with complex event processing.
- - Control your devices using remote procedure calls (RPC).
- - Build work-flows based on device life-cycle event, REST API event, RPC request, etc
- - Design dynamic and responsive dashboards and present device or asset telemetry  and insights to your customers  
- - Enable use-case specific features using customizable rule chains.
- - Push device data to other systems.
- - Much more...
+ - 管理设备，资产和客户并定义他们之间的关系。
+ - 基于设备和资产收集数据并进行可视化。
+ - 采集遥测数据并进行相关的事件处理进行警报响应。
+ - 基于远程RPC调用进行设备控制。
+ - 基于生命周期事件、REST API事件、RPC请求构建工作流。
+ - 基于动态设计和响应仪表板向你的客户提供设备或资产的遥测数据。  
+ - 基于规则链自定义特定功能。
+ - 发布设备数据至第三方系统。
+ - 更多...
  
-See [**ThingsBoard features list**](/docs/#community-edition-features) for more features and useful links to the specific feature documentation. 
+了解更多功能请参见[**ThingsBoard功能列表**](/docs/#community-edition-features) 。
 
-#### Architecture
+#### 架构
 
-ThingsBoard is designed to be:
+ThingsBoard设计为:
 
-* **scalable**: horizontally scalable platform, build using leading open-source technologies.
-* **fault-tolerant**: no single-point-of-failure, every node in the cluster is identical.
-* **robust and efficient**: single server node can handle tens or even hundreds thousands of devices depending on use-case. 
-ThingsBoard cluster can handle millions of devices.
-* **customizable**: adding new functionality is easy with customizable widgets and rule engine nodes.
-* **durable**: never lose your data.
+* 可扩展: 使用领先开源技术构建的可水平扩展平台。
+* 容错：无单点故障，集群中的每个节点都是相同的。
+* 性能卓越：单个服务器节点可以根据用例处理几十甚至数十万个设备。ThingsBoard集群可以处理数百万台设备。
+* 灵活：开发新功能可以方便的使用自定义部件、规则引擎等。
+* 持久：数据永久保存
 
-See [**ThingsBoard Architecture**](/docs/reference) for more details.
+了解更多知识请参见 [**ThingsBoard架构**](/docs/reference) 。
 
-#### Ready to get started?
+#### 准备开始了吗?
 
-<p><a href="/docs/getting-started-guides/helloworld" class="button">Hello World Application</a></p>
+<p><a href="/docs/getting-started-guides/helloworld" class="button">Hello World 应用程序</a></p>
