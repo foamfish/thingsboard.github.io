@@ -1,254 +1,254 @@
 bigheader: "ThingsBoard文档"
 abstract: "ThingsBoard平台使用文档。"
 toc:
-- title: ThingsBoard Documentation
+- title: ThingsBoard文档
   path: /docs/
-- title: What is ThingsBoard?
+- title: ThingsBoard是什么?
   path: /docs/getting-started-guides/what-is-thingsboard/
-- title: How to connect your device?
+- title: 如何连接你的设备?
   path: /docs/getting-started-guides/connectivity/
-- title: Features
+- title: 特色
   section:
-  - title: Entities and relations
+  - title: 实例与关系
     path: /docs/user-guide/entities-and-relations/
-  - title: Working with device attributes
+  - title: 设备属性
     path: /docs/user-guide/attributes/
-  - title: Working with telemetry data
+  - title: 遥测数据
     path: /docs/user-guide/telemetry/
-  - title: Working with alarms
+  - title: 警报
     path: /docs/user-guide/alarms/
-  - title: Device Connectivity Status
+  - title: 设备连接状态
     path: /docs/user-guide/device-connectivity-status/
-  - title: Claiming Devices
+  - title: 声明设备
     path: /docs/user-guide/claiming-devices/
     new: true
-  - title: Entity Views
+  - title: 实体视图
     path: /docs/user-guide/entity-views/
-  - title: Using RPC capabilities
+  - title: RPC功能
     path: /docs/user-guide/rpc/
-  - title: Data visualization
+  - title: 数据可视化
     path: /docs/user-guide/visualization/
-  - title: Advanced RBAC for IoT
-    path: /docs/user-guide/rbac/
-    pe: true
-  - title: White-labeling
-    path: /docs/user-guide/white-labeling/
-    pe: true
-  - title: Self-registration
-    path: /docs/user-guide/self-registration/
-    pe: true
-  - title: Custom Translations
-    path: /docs/user-guide/custom-translation/
-    pe: true
-  - title: Custom Menu
-    path: /docs/user-guide/custom-menu/
-    pe: true
-  - title: Platform Integrations
-    path: /docs/user-guide/integrations/#overview
-    pe: true
-  - title: Entity Groups
-    path: /docs/user-guide/groups/
-    pe: true
-  - title: Scheduler
-    path: /docs/user-guide/scheduler/
-    pe: true
-  - title: Reporting
-    path: /docs/user-guide/reporting/
-    pe: true
-  - title: CSV/XLS data export
-    path: /docs/user-guide/csv-xls-data-export/
-    pe: true
-  - title: Bulk Provisioning
-    new: true
-    path: /docs/user-guide/bulk-provisioning/
-  - title: File Storage
-    path: /docs/user-guide/file-storage/
-    pe: true
-  - title: Audit Log
+  # - title: Advanced RBAC for IoT
+  #   path: /docs/user-guide/rbac/
+  #   pe: true
+  # - title: White-labeling
+  #   path: /docs/user-guide/white-labeling/
+  #   pe: true
+  # - title: Self-registration
+  #   path: /docs/user-guide/self-registration/
+  #   pe: true
+  # - title: Custom Translations
+  #   path: /docs/user-guide/custom-translation/
+  #   pe: true
+  # - title: Custom Menu
+  #   path: /docs/user-guide/custom-menu/
+  #   pe: true
+  # - title: Platform Integrations
+  #   path: /docs/user-guide/integrations/#overview
+  #   pe: true
+  # - title: Entity Groups
+  #   path: /docs/user-guide/groups/
+  #   pe: true
+  # - title: Scheduler
+  #   path: /docs/user-guide/scheduler/
+  #   pe: true
+  # - title: Reporting
+  #   path: /docs/user-guide/reporting/
+  #   pe: true
+  # - title: CSV/XLS data export
+  #   path: /docs/user-guide/csv-xls-data-export/
+  #   pe: true
+  # - title: 批量配置
+  #   new: true
+  #   path: /docs/user-guide/bulk-provisioning/
+  # - title: 文件存储
+  #   path: /docs/user-guide/file-storage/
+  #   pe: true
+  - title: 审计日志
     path: /docs/user-guide/audit-log/
-  - title: API Limits
+  - title: API限制
     path: /docs/user-guide/api-limits/
-- title: Rule engine
+- title: 规则引擎
   section:
-  - title: Getting Started
+  - title: 入门
     path: /docs/user-guide/rule-engine-2-0/re-getting-started/
-  - title: Overview
+  - title: 概述
     path: /docs/user-guide/rule-engine-2-0/overview/
-  - title: Architecture
+  - title: 架构
     path: /docs/user-guide/rule-engine-2-0/architecture/
-  - title: Nodes
+  - title: 节点
     section:
-    - title: Filter Nodes
+    - title: 过滤节点
       path: /docs/user-guide/rule-engine-2-0/filter-nodes/
-    - title: Enrichment Nodes
+    - title: 富集节点
       path: /docs/user-guide/rule-engine-2-0/enrichment-nodes/
-    - title: Transformation Nodes
+    - title: 转换节点
       path: /docs/user-guide/rule-engine-2-0/transformation-nodes/
-    - title: Action Nodes
+    - title: 动作节点
       path: /docs/user-guide/rule-engine-2-0/action-nodes/
-    - title: External Nodes
+    - title: 外部节点
       path: /docs/user-guide/rule-engine-2-0/external-nodes/
-  - title: PE Nodes
-    pe: true
-    section:
-    - title: Transformation Nodes
-      path: /docs/user-guide/rule-engine-2-0/pe/transformation-nodes/
-    - title: Action Nodes
-      path: /docs/user-guide/rule-engine-2-0/pe/action-nodes/
-    - title: Analytics Nodes
-      path: /docs/user-guide/rule-engine-2-0/pe/analytics-nodes/
-- title: Integrations
-  pe: true
-  section:
-  - title: Overview
-    path: /docs/user-guide/integrations/
-  - title: Remote Integrations
-    path: /docs/user-guide/integrations/remote-integrations/
-    new: true
-  - title: HTTP
-    path: /docs/user-guide/integrations/http/
-  - title: MQTT
-    path: /docs/user-guide/integrations/mqtt/
-  - title: OPC-UA
-    path: /docs/user-guide/integrations/opc-ua/
-  - title: Actility ThingPark
-    path: /docs/user-guide/integrations/thingpark/
-  - title: TheThingsNetwork
-    path: /docs/user-guide/integrations/ttn/
-  - title: AWS IoT
-    path: /docs/user-guide/integrations/aws-iot/
-  - title: AWS Kinesis
-    path: /docs/user-guide/integrations/aws-kinesis/
-  - title: IBM Watson
-    path: /docs/user-guide/integrations/ibm-watson-iot/
-  - title: Azure Event Hub
-    path: /docs/user-guide/integrations/azure-event-hub/
-  - title: TCP
-    path: /docs/user-guide/integrations/tcp/
-  - title: UDP
-    path: /docs/user-guide/integrations/udp/
-  - title: SigFox
-    path: /docs/user-guide/integrations/sigfox/
-  - title: Ocean Connect
-    path: /docs/user-guide/integrations/ocean-connect/
-  - title: Custom Integration development guide
-    path: /docs/user-guide/integrations/custom/
-  - title: Notifications and Alarms on your smartphone using Telegram Bot
-    path: /docs/user-guide/rule-engine-2-0/tutorials/integration-with-telegram-bot/
-- title: Analytics
+  # - title: PE Nodes
+  #   pe: true
+  #   section:
+  #   - title: Transformation Nodes
+  #     path: /docs/user-guide/rule-engine-2-0/pe/transformation-nodes/
+  #   - title: Action Nodes
+  #     path: /docs/user-guide/rule-engine-2-0/pe/action-nodes/
+  #   - title: Analytics Nodes
+  #     path: /docs/user-guide/rule-engine-2-0/pe/analytics-nodes/
+# - title: Integrations
+#   pe: true
+#   section:
+#   - title: Overview
+#     path: /docs/user-guide/integrations/
+#   - title: Remote Integrations
+#     path: /docs/user-guide/integrations/remote-integrations/
+#     new: true
+#   - title: HTTP
+#     path: /docs/user-guide/integrations/http/
+#   - title: MQTT
+#     path: /docs/user-guide/integrations/mqtt/
+#   - title: OPC-UA
+#     path: /docs/user-guide/integrations/opc-ua/
+#   - title: Actility ThingPark
+#     path: /docs/user-guide/integrations/thingpark/
+#   - title: TheThingsNetwork
+#     path: /docs/user-guide/integrations/ttn/
+#   - title: AWS IoT
+#     path: /docs/user-guide/integrations/aws-iot/
+#   - title: AWS Kinesis
+#     path: /docs/user-guide/integrations/aws-kinesis/
+#   - title: IBM Watson
+#     path: /docs/user-guide/integrations/ibm-watson-iot/
+#   - title: Azure Event Hub
+#     path: /docs/user-guide/integrations/azure-event-hub/
+#   - title: TCP
+#     path: /docs/user-guide/integrations/tcp/
+#   - title: UDP
+#     path: /docs/user-guide/integrations/udp/
+#   - title: SigFox
+#     path: /docs/user-guide/integrations/sigfox/
+#   - title: Ocean Connect
+#     path: /docs/user-guide/integrations/ocean-connect/
+#   - title: Custom Integration development guide
+#     path: /docs/user-guide/integrations/custom/
+#   - title: Notifications and Alarms on your smartphone using Telegram Bot
+#     path: /docs/user-guide/rule-engine-2-0/tutorials/integration-with-telegram-bot/
+- title: 分析
   new: true
   section:
-  - title: Trendz Analytics
+  - title: Trendz分析
     new: true
     section:
-      - title: Getting Started
+      - title: 入门
         path: /docs/trendz/
-      - title: Connect Trendz to Thingsboard
+      - title: 将Trendz连接到Thingsboard
         path: /docs/trendz/connect-thingsboard/
-      - title: Available Visualizations
+      - title: 可视化
         path: /docs/trendz/visualizations/
-      - title: Clear, Filter, Group and Aggregate
+      - title: 清除, 过滤, 分组和聚合
         path: /docs/trendz/view-builder/
-      - title: Share and embed Visualizations
+      - title: 共享和嵌入可视化
         path: /docs/trendz/embed-visuals/
-  - title: Kafka Streams
+  - title: Kafka
     new: true
     path: /docs/samples/analytics/kafka-streams/
-- title: Security
+- title: 安全
   section:
-  - title: MQTT over SSL
+  - title: MQTT证书认证
     path: /docs/user-guide/mqtt-over-ssl/
-  - title: Device authentication options
+  - title: 设备身份认证
     path: /docs/user-guide/device-credentials/
-  - title: Access Token based authentication
+  - title: 访问令牌认证
     path: /docs/user-guide/access-token/
-  - title: X.509 Certificate based authentication
+  - title: X.509证书认证
     path: /docs/user-guide/certificates/
-- title: Administration UI
+- title: 管理界面
   section:
-  - title: Tenants
+  - title: 租户
     path: /docs/user-guide/ui/tenants/
-  - title: Customers
+  - title: 客户
     path: /docs/user-guide/ui/customers/
-  - title: Users
+  - title: 用户
     path: /docs/user-guide/ui/users/
-  - title: Assets
+  - title: 资产
     path: /docs/user-guide/ui/assets/
-  - title: Devices
+  - title: 设备
     path: /docs/user-guide/ui/devices/
-  - title: Rule Chains
+  - title: 规制链
     path: /docs/user-guide/ui/rule-chains/
-  - title: Widgets
+  - title: 部件
     section:
-    - title: Trip Animation Widget
+    - title: 动画
       path: /docs/user-guide/ui/trip-animation-widget/
-    - title: Widgets Library
+    - title: 部件库
       path: /docs/user-guide/ui/widget-library/
-  - title: Dashboards
+  - title: 面板
     path: /docs/user-guide/ui/dashboards/
-  - title: Mail Settings
+  - title: 邮件设置
     path: /docs/user-guide/ui/mail-settings/
-  - title: Aliases
+  - title: 别名
     path: /docs/user-guide/ui/aliases/
-- title: IoT Gateway
+- title: 网关
   path: /docs/iot-gateway/
   new: true
   section:
-  - title: What is ThingsBoard IoT Gateway?
+  - title: ThingsBoard网关是什么？
     path: /docs/iot-gateway/what-is-iot-gateway/
-  - title: Getting Started
+  - title: 入门
     path: /docs/iot-gateway/getting-started/
-  - title: Installation guide
+  - title: 安装指南
     section:
-      - title: Installation options
+      - title: 安装选项
         path: /docs/iot-gateway/installation/
-      - title: IoT Gateway installation on Ubuntu (DEB)
+      - title: Ubuntu (DEB)
         path: /docs/iot-gateway/install/deb-installation/
-      - title: IoT Gateway installation on CentOS/RHEL (RPM)
+      - title: CentOS/RHEL (RPM)
         path: /docs/iot-gateway/install/rpm-installation/
-      - title: IoT Gateway installation using Docker (Linux and Mac OS)
+      - title: Docker (Linux and Mac OS)
         path: /docs/iot-gateway/install/docker-installation/
-      - title: IoT Gateway installation using Docker (Windows)
+      - title: Docker (Windows)
         path: /docs/iot-gateway/install/docker-windows/
-      - title: Installation from pip
+      - title: pip安装
         path: /docs/iot-gateway/install/pip-installation/
-      - title: Installation from sources (Latest version)
+      - title: 源码(最新)安装
         path: /docs/iot-gateway/install/source-installation/
-      - title: Upgrade instructions
+      - title: 升级
         path: /docs/iot-gateway/install/upgrade-instructions/
-  - title: Configuration guide
+  - title: 配置指南
     section:
-      - title: General configuration
+      - title: 常规配置
         path: /docs/iot-gateway/configuration/
-      - title: MQTT Connector
+      - title: MQTT
         path: /docs/iot-gateway/config/mqtt/
-      - title: Modbus Connector
+      - title: Modbus
         path: /docs/iot-gateway/config/modbus/
-      - title: OPC-UA Connector
+      - title: OPC-UA
         path: /docs/iot-gateway/config/opc-ua/
-      - title: BLE Connector
+      - title: BLE
         path: /docs/iot-gateway/config/ble/
-      - title: Request Connector
+      - title: Request
         path: /docs/iot-gateway/config/request/
-      - title: CAN Connector
+      - title: CAN
         path: /docs/iot-gateway/config/can/
-  - title: Customization guide
+  - title: 自定义指南
     path: /docs/iot-gateway/custom/
-  - title: IoT Gateway features
+  - title: 网关功能
     path: /docs/iot-gateway/features/
-  - title: IoT Gateway Roadmap
+  - title: 网关路线图
     path: /docs/iot-gateway/roadmap/
-- title: Troubleshooting
+- title: 故障排除
   path: /docs/user-guide/troubleshooting/
-- title: Contribution Guide
+- title: 贡献指南
   section:
-    - title: How to contribute
+    - title: 如何贡献
       path: /docs/user-guide/contribution/how-to-contribute/
-    - title: Rule Node development
+    - title: 规则节点开发
       path: /docs/user-guide/contribution/rule-node-development/
-    - title: Widgets development
+    - title: 部件开发
       path: /docs/user-guide/contribution/widgets-development/
-- title: Release Notes
+- title: 发行说明
   path: /docs/reference/releases/
-- title: Roadmap
+- title: 路线图
   path: /docs/reference/roadmap/
