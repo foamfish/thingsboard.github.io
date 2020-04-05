@@ -1,23 +1,23 @@
 bigheader: "架构"
 abstract: "设计、部署和性能文档。"
 toc:
-- title: Architecture Overview
+- title: 架构概述
   path: /docs/reference/
-- title: Monolithic architecture
+- title: 整体架构
   path: /docs/reference/monolithic/
-- title: Microservices architecture
+- title: 微服务架构
   path: /docs/reference/msa/
-- title: Deployment scenarios
+- title: 部署方案
   path: /docs/reference/iot-platform-deployment-scenarios/
-- title: ThingsBoard Performance
+- title: 性能
   section:
-    - title: Data Collection Performance
-      path: /docs/reference/performance/
-#    - title: 20K IoT devices on single ThingsBoard server
-#      path: /docs/reference/20k-devices-test/
-#    - title: 1M IoT devices on ThingsBoard cluster with Kubernetes and Amazon EC2
-#      path: /docs/reference/1m-devices-test/
-    - title: Single instance performance on different AWS instances
-      path: /docs/reference/performance-aws-instances/
-- title: ThingsBoard PE Cloud Getting Started
-  path: /docs/reference/pe-demo-getting-started/
+   - title: 数据收集
+     path: /docs/reference/performance/
+  #  - title: ThingsBoard单体
+  #    path: /docs/reference/20k-devices-test/
+  #  - title: ThingsBoard集群
+  #    path: /docs/reference/1m-devices-test/
+   - title: AWS单体
+     path: /docs/reference/performance-aws-instances/
+# - title: ThingsBoard PE Cloud Getting Started
+#   path: /docs/reference/pe-demo-getting-started/
