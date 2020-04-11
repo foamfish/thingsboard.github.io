@@ -5,11 +5,11 @@
     "name": "Espressif Systems",
     "logo": "espressif.svg",
     "links": {
-      "Site": {
+      "网址": {
         "href": "https://www.espressif.com/",
         "target": "_blank"
       },
-      "Integration guide": {
+      "集成指南": {
         "href": "/docs/samples/esp32/gpio-control-pico-kit-dht22-sensor/"
       }
     },
@@ -21,11 +21,11 @@
     "name": "SODAQ",
     "logo": "sodaq.jpg",
     "links": {
-      "Site": {
+      "网址": {
         "href": "https://sodaq.com/",
         "target": "_blank"
       },
-      "Integration guide": {
+      "集成指南": {
         "href": "/docs/user-guide/integrations/sodaq/"
       }
     },
@@ -37,7 +37,7 @@
     "name": "TEKTELIC Communications Inc.",
     "logo": "tektelic.png",
     "links": {
-      "Site": {
+      "网址": {
         "href": "https://tektelic.com/",
         "target": "_blank"
       }
@@ -50,11 +50,11 @@
     "name": "Nettra",
     "logo": "nettra.png",
     "links": {
-      "Site": {
+      "网址": {
         "href": "http://nettra.tech/",
         "target": "_blank"
       },
-      "Integration guide": {
+      "集成指南": {
         "href": "/docs/samples/nettrartu+/rtu_temp_sensor/"
       }
     },
@@ -66,11 +66,11 @@
     "name": "Actility",
     "logo": "actility.png",
     "links": {
-      "Site": {
+      "网址": {
         "href": "https://www.actility.com/",
         "target": "_blank"
       },
-      "Integration guide": {
+      "集成指南": {
         "href": "/docs/samples/abeeway/tracker"
       }
     },
@@ -82,11 +82,11 @@
     "name": "Seeed Technology Co.,Ltd.",
     "logo": "seeed.png",
     "links": {
-      "Site": {
+      "网址": {
         "href": "https://www.seeedstudio.com/",
         "target": "_blank"
       },
-      "Integration guide": {
+      "集成指南": {
         "href": "/docs/samples/raspberry/grove/"
       }
     },

@@ -1,6 +1,6 @@
 ---
 layout: partner-program
-title: Apply for Hardware Partner Program
+title: 申请成为硬件合作伙伴
 description: 
 ---
 

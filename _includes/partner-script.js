@@ -83,7 +83,7 @@
 
         var div = document.createElement('div');
         var p = document.createElement('p');
-        p.textContent = 'Want to become ThingsBoard Hardware Partner?';
+        p.textContent = '想成为ThingsBoard硬件合作伙伴吗？';
         p.className = 'become-partner';
         div.appendChild(p);
 
@@ -91,7 +91,7 @@
         linksElement.className = 'links';
 
         var a = document.createElement('a');
-        a.textContent = 'Apply for Hardware Partner Program';
+        a.textContent = '申请成为硬件合作伙伴';
         a.href = '/partners/hardware/program/';
         linksElement.appendChild(a);
 
