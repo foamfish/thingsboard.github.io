@@ -1,18 +1,23 @@
 ---
 layout: docwithnav
-title: IoT use cases
-description: ThingsBoard IoT Platform use cases
+title: 案例
+description: ThingsBoard相关案例
 horizontaltoc: "true"
 
 --- 
 
-Being robust, scalable and user friendly, ThingsBoard IoT platform supports various IoT use cases by providing flexible and powerful out-of-the-box features to cut down time to market of your connected products and smart solutions. The platform is device-agnostic, so you can feed and analyze telemetry data from any sensor, connected device or application. ThingsBoard comprehensive features and rich platform APIs allow you to save time and resources on routine IoT tasks and concentrate on specific features of your IoT solution.
 
-Some of the industry use cases where ThingsBoard is being successfully utilized are listed below. Each use case is equipped with PoC dashboard and reference solution architecture.
+ThingsBoard IoT平台具有强大的功能，可扩展性和用户友好性，它通过提供灵活而强大的即用型功能来缩短各种互联产品和智能解决方案的上市时间，从而支持各种IoT用例。
 
-Should you have any comments or questions please feel free to [Contact US](/docs/contact-us/).
+该平台与设备无关，因此您可以从任何传感器，连接的设备或应用程序中馈送和分析遥测数据。 
 
-<a style="margin: 10px;" href="/smart-metering/" class="button">Smart metering</a>
-<a style="margin: 10px;" href="/smart-energy/" class="button">Smart energy</a>
-<a style="margin: 10px;" href="/smart-farming/" class="button">Smart farming</a>
-<a style="margin: 10px;" href="/fleet-tracking/" class="button">Fleet tracking</a>
+ThingsBoard的全面功能和丰富的平台API可让您节省日常IoT任务的时间和资源，并专注于IoT解决方案的特定功能。
+
+下面列出了一些成功使用ThingsBoard的行业用例。每个用例都配有PoC仪表板和参考解决方案体系结构。
+
+如果您有任何意见或疑问，请随时[Contact US](/docs/contact-us/)。
+
+<a style="margin: 10px;" href="/smart-metering/" class="button">智能电表</a>
+<a style="margin: 10px;" href="/smart-energy/" class="button">能源监控</a>
+<a style="margin: 10px;" href="/smart-farming/" class="button">智慧农业</a>
+<a style="margin: 10px;" href="/fleet-tracking/" class="button">位置跟踪</a>

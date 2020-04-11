@@ -1,13 +1,13 @@
 bigheader: "案例"
 abstract: "使用ThingsBoard成功应用于实际项目的案例。"
 toc:
-- title: Use cases
+- title: 案例
   path: /iot-use-cases/
-- title: Smart metering
+- title: 智能电表
   path: /smart-metering/
-- title: Smart energy
+- title: 能源监控
   path: /smart-energy/
-- title: Smart farming
+- title: 智慧农业
   path: /smart-farming/
-- title: Fleet tracking
+- title: 位置跟踪
   path: /fleet-tracking/
