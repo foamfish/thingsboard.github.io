@@ -2,19 +2,16 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Device Connectivity Protocols
-description: Supported IoT protocols for IoT device connectivity
+title: 设备连接协议
+description: 支持的物联网协议，用于物联网设备连接
 
 ---
 
-ThingsBoard supports following protocols for device connectivity:
+ThingsBoard支持以下设备连接协议：
 
  - **[MQTT](/docs/reference/mqtt-api)**
  - **[CoAP](/docs/reference/coap-api)**
  - **[HTTP](/docs/reference/http-api)** 
- 
-See protocol specific documentation for more details. More protocols are coming soon.
 
-**Note** You can also connect **existing** devices to the platform using **[ThingsBoard Gateway](/docs/iot-gateway/what-is-iot-gateway/)**
-or design your own gateway using **[Gateway MQTT API](/docs/reference/gateway-mqtt-api/)**.
+**注意** 你还可以使用 **[ThingsBoard Gateway](/docs/iot-gateway/what-is-iot-gateway/)** 将现有设备连接到平台或者使用 **[Gateway MQTT API](/docs/reference/gateway-mqtt-api/)** 设计自己的网关
 

@@ -2,78 +2,77 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: MQTT Device API Reference
-description: Supported MQTT API Reference for IoT Devices 
+title: MQTT设备API参考
+description: 支持物联网设备的MQTT API参考
 
 ---
 
 * TOC
 {:toc}
 
-## Getting started
+## 入门
 
-##### MQTT basics
+##### MQTT基础
 
-[MQTT](https://en.wikipedia.org/wiki/MQTT) is a lightweight publish-subscribe messaging protocol which probably makes it the most suitable for various IoT devices. You can find more information about MQTT [here](http://mqtt.org/).
+[MQTT](https://en.wikipedia.org/wiki/MQTT)是一种轻量级的发布-订阅消息传递协议，它可能最适合各种物联网设备。你可以在[此处](http://mqtt.org/)找到有关MQTT的更多信息。
 
-ThingsBoard server nodes act as an MQTT Broker that supports QoS levels 0 (at most once) and 1 (at least once) and a set of predefined topics.
+ThingsBoard服务器节点充当支持QoS级别0（最多一次）和QoS级别1（至少一次）以及一组预定义主题的MQTT代理。
 
-##### Client libraries setup
+##### 客户端
 
-You can find a large number of MQTT client libraries on the web. Examples in this article will be based on Mosquitto and MQTT.js.
-In order to setup one of those tools, you can use instructions in our [Hello World](/docs/getting-started-guides/helloworld/) guide.
+你可以在网上找到大量的MQTT客户端库。本文中的示例将基于Mosquitto和MQTT.js。您可以使用我们的[Hello World](/docs/getting-started-guides/helloworld/)指南中的说明。
 
-##### MQTT Connect
 
-We will use *access token* device credentials in this article and they will be referred to later as **$ACCESS_TOKEN**.
-The application needs to send MQTT CONNECT message with username that contains **$ACCESS_TOKEN**.
-Possible return codes and their reasons during connect sequence:
+##### MQTT连接
 
-* **0x00 Connected** - Successfully connected to ThingsBoard MQTT server.
-* **0x04 Connection Refused, bad user name or password** - Username is empty.
-* **0x05 Connection Refused, not authorized** - Username contains invalid **$ACCESS_TOKEN**. 
+我们将在本文中使用令牌凭据对进行设备访问，这些凭证稍后将称为  **$ACCESS_TOKEN** 。应用程序需要发送用户名包含  **$ACCESS_TOKEN** 的MQTT CONNECT消息。
+连接期间可能的返回码及其原因：
 
-## Key-value format
+* **0x00 连接成功** - 成功连接
+* **0x04 连接失败** - 用户名或密码错误。
+* **0x05 连接未授权** - -用户名包含无效的 **$ACCESS_TOKEN**。
 
-By default, ThingsBoard supports key-value content in JSON. Key is always a string, while value can be either string, boolean, double or long.
-Using custom binary format or some serialization framework is also possible. See [protocol customization](#protocol-customization) for more details.
-For example:
+## Key-value格式
+
+ThingsBoard支持JSON以key-value的格式。键始终是一个字符串，而值可以是字符串，布尔值，双精度或长整数。也可以使用自定义二进制格式或某些序列化框架。有关更多详细信息，请参见协议[自定义](#protocol-customization)。
+
+例如：
 
 ```json
 {"stringKey":"value1", "booleanKey":true, "doubleKey":42.0, "longKey":73}
 ```
 
-## Telemetry upload API
+## 遥测上传API
 
-In order to publish telemetry data to ThingsBoard server node, send PUBLISH message to the following topic:
+为了将遥测数据发布到ThingsBoard服务器节点，请将PUBLISH消息发送到以下主题：
  
 ```shell
 v1/devices/me/telemetry
 ```
 
-The simplest supported data formats are:
+支持的最简单的数据格式是：
 
 ```json
 {"key1":"value1", "key2":"value2"}
 ```
 
-or
+或者
 
 ```json
 [{"key1":"value1"}, {"key2":"value2"}]
 ```
 
-**Please note** that in this case, the server-side timestamp will be assigned to uploaded data!
+**请注意** 在这种情况下，服务器端时间戳将分配给上传的数据!
 
-In case your device is able to get the client-side timestamp, you can use following format:
+如果您的设备能够获得客户端时间戳，则可以使用以下格式：
 
 
 ```json
 {"ts":1451649600512, "values":{"key1":"value1", "key2":"value2"}}
 ```
 
-In the example above, we assume that "1451649600512" is a [unix timestamp](https://en.wikipedia.org/wiki/Unix_time) with milliseconds precision.
-For example, the value '1451649600512' corresponds to 'Fri, 01 Jan 2016 12:00:00.512 GMT'
+在上面的示例中，我们假设“1451649600512”是具有毫秒精度的[Unix时间戳](https://en.wikipedia.org/wiki/Unix_time)。例如，值'1451649600512'对应于'星期五，2016年1月1日12：00：00.512 GMT'
+
 
 {% capture tabspec %}mqtt-telemetry-upload
 A,Mosquitto,shell,resources/mosquitto-telemetry.sh,/docs/reference/resources/mosquitto-telemetry.sh
@@ -84,17 +83,17 @@ E,telemetry-data-with-ts.json,json,resources/telemetry-data-with-ts.json,/docs/r
 {% include tabs.html %}
 
  
-## Attributes API
+## 属性API
 
-ThingsBoard attributes API allows devices to
+ThingsBoard属性API能够使设备具备如下功能
 
-* Upload [client-side](/docs/user-guide/attributes/#attribute-types) device attributes to the server.
-* Request [client-side](/docs/user-guide/attributes/#attribute-types) and [shared](/docs/user-guide/attributes/#attribute-types) device attributes from the server.
-* Subscribe to [shared](/docs/user-guide/attributes/#attribute-types) device attributes from the server.
+* 将[客户端](/docs/user-guide/attributes/#attribute-types)设备属性上载到服务器
+* 从服务器请求[客户端和共享](/docs/user-guide/attributes/#attribute-types)设备属性
+* 从服务器订阅 [共享](/docs/user-guide/attributes/#attribute-types)设备属性
  
-##### Publish attribute update to the server
+##### 将属性更新发布到服务器
 
-In order to publish client-side device attributes to ThingsBoard server node, send PUBLISH message to the following topic:
+为了将客户端设备属性发布到ThingsBoard服务器节点，请将PUBLISH消息发送到以下主题:
 
 ```shell
 v1/devices/me/attributes
@@ -106,23 +105,21 @@ B,MQTT.js,shell,resources/mqtt-js-attributes-publish.sh,/docs/reference/resource
 C,new-attributes-values.json,json,resources/new-attributes-values.json,/docs/reference/resources/new-attributes-values.json{% endcapture %}
 {% include tabs.html %}
 
-##### Request attribute values from the server
+##### 从服务器请求属性值
 
-In order to request client-side or shared device attributes to ThingsBoard server node, send PUBLISH message to the following topic:
+为了向ThingsBoard服务器节点请求客户端或共享设备属性，请将PUBLISH消息发送到以下主题:
 
 ```shell
 v1/devices/me/attributes/request/$request_id
 ```
 
-where **$request_id** is your integer request identifier.
-Before sending PUBLISH message with the request, client need to subscribe to 
+其中 **$request_id** 是您的整数请求标识符。在发送带有请求的PUBLISH消息之前，客户端需要订阅
 
 ```shell
 v1/devices/me/attributes/response/+
 ```
 
-The following example is written in javascript and is based on mqtt.js. 
-Pure command-line examples are not available because subscribe and publish need to happen in the same mqtt session.
+以下示例是用javascript编写的，基于mqtt.js。纯命令行示例不可用，因为订阅和发布需要在同一mqtt会话中进行。
 
 {% capture tabspec %}mqtt-attributes-request
 A,MQTT.js,shell,resources/mqtt-js-attributes-request.sh,/docs/reference/resources/mqtt-js-attributes-request.sh
@@ -130,18 +127,17 @@ B,mqtt-js-attributes-request.js,javascript,resources/mqtt-js-attributes-request.
 C,Result,json,resources/attributes-response.json,/docs/reference/resources/attributes-response.json{% endcapture %}
 {% include tabs.html %}
 
-**Please note**, the intersection of client-side and shared device attribute keys is a bad practice! 
-However, it is still possible to have same keys for client, shared or even server-side attributes.
+**请注意**, 客户端和共享设备属性键的交集是不好的做法！但是，对于客户端，共享甚至服务器端属性，仍然可能具有相同的密钥。
 
-##### Subscribe to attribute updates from the server
+##### 从服务器订阅属性更新
 
-In order to subscribe to shared device attribute changes, send SUBSCRIBE message to the following topic:
+为了订阅共享设备属性更改，请发送SUBSCRIBE消息到以下主题：
 
 ```shell
 v1/devices/me/attributes
 ```
 
-When a shared attribute is changed by one of the server-side components (such as the REST API or the Rule Chain), the client will receive the following update: 
+当服务器端组件之一（例如REST API或规则链）更改了共享属性时，客户端将收到以下更新：
 
 ```json
 {"key1":"value1"}
@@ -154,83 +150,79 @@ B,MQTT.js,shell,resources/mqtt-js-attributes-subscribe.sh,/docs/reference/resour
 
 ## RPC API
 
-### Server-side RPC
+### 服务器端RPC
 
-In order to subscribe to RPC commands from the server, send SUBSCRIBE message to the following topic:
+为了从服务器订阅RPC命令，请将SUBSCRIBE消息发送到以下主题：
 
 ```shell
 v1/devices/me/rpc/request/+
 ```
 
-Once subscribed, the client will receive individual commands as a PUBLISH message to the corresponding topic:
+订阅后，客户端将收到一条单独的命令，作为对相应主题的发布消息：
 
 ```shell
 v1/devices/me/rpc/request/$request_id
 ```
 
-where **$request_id** is an integer request identifier.
+其中 **$request_id** 是整数请求标识符。
 
-The client should publish the response to the following topic:
+客户应发布对以下主题的响应：
 
 ```shell
 v1/devices/me/rpc/response/$request_id
 ```
 
-The following example is written in javascript and is based on mqtt.js. 
-Pure command-line examples are not available because subscribe and publish need to happen in the same mqtt session.
+以下示例是用javascript编写的，基于mqtt.js。纯命令行示例不可用，因为订阅和发布需要在同一mqtt会话中进行。
 
 {% capture tabspec %}mqtt-rpc-from-server
 A,MQTT.js,shell,resources/mqtt-js-rpc-from-server.sh,/docs/reference/resources/mqtt-js-rpc-from-server.sh
 B,mqtt-js-rpc-from-server.js,javascript,resources/mqtt-js-rpc-from-server.js,/docs/reference/resources/mqtt-js-rpc-from-server.js{% endcapture %}  
 {% include tabs.html %}
 
-### Client-side RPC
+### 客户端RPC
 
-In order to send RPC commands to server, send PUBLISH message to the following topic:
+为了将RPC命令发送到服务器，请将PUBLISH消息发送到以下主题：
 
 ```shell
 v1/devices/me/rpc/request/$request_id
 ```
 
-where **$request_id** is an integer request identifier.
-The response from server will be published to the following topic:
+其中 **$request_id** 是整数请求标识符。来自服务器的响应将发布到以下主题：
 
 ```shell
 v1/devices/me/rpc/response/$request_id
 ```
 
-The following example is written in javascript and is based on mqtt.js. 
-Pure command-line examples are not available because subscribe and publish need to happen in the same mqtt session.
+以下示例是用javascript编写的，基于mqtt.js。纯命令行示例不可用，因为订阅和发布需要在同一mqtt会话中进行。
 
 {% capture tabspec %}mqtt-rpc-from-client
 A,MQTT.js,shell,resources/mqtt-js-rpc-from-client.sh,/docs/reference/resources/mqtt-js-rpc-from-client.sh
 B,mqtt-js-rpc-from-client.js,javascript,resources/mqtt-js-rpc-from-client.js,/docs/reference/resources/mqtt-js-rpc-from-client.js{% endcapture %}  
 {% include tabs.html %}
 
-## Claiming devices
+## 声明设备
 
-Please see the corresponding article to get more information about the [Claiming devices](/docs/user-guide/claiming-devices) feature.
+请参阅相应的文章以获取有关[声明设备](/docs/user-guide/claiming-devices)功能的更多信息。
 
-In order to initiate claiming device, send PUBLISH message to the following topic:
+为了启动声明设备，请向以下主题发送PUBLISH消息：
 
 ```shell
 v1/devices/me/claim
 ```
 
-The supported data format is:
+支持的数据格式为：
 
 ```json
 {"secretKey":"value", "durationMs":60000}
 ```
 
-**Please note** that the above fields are optional. In case the **secretKey** is not specified, the empty string as a default value is used.
-In case the **durationMs** is not specified, the system parameter **device.claim.duration** is used (in the file **/etc/thingsboard/conf/thingsboard.yml**).
+**请注意** 以上字段是可选的。如果未指定**secretKey**，则使用空字符串作为默认值。**device.claim.duration**毫秒未指定时，系统参数device.claim.duration被使用（在文件 **/etc/thingsboard/conf/thingsboard.yml** ）
 
-## Protocol customization
+## 自定义协议
 
-MQTT transport can be fully customized for specific use-case by changing the corresponding [module](https://github.com/thingsboard/thingsboard/tree/master/transport/mqtt).
+通过更改相应的[模块](https://github.com/thingsboard/thingsboard/tree/master/transport/mqtt)，可以针对特定用例完全定制MQTT传输。
 
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/guides-banner.md %}

@@ -2,118 +2,116 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: MQTT Gateway API Reference
-description: Supported MQTT Gateway API Reference for IoT Devices
-
+title: MQTT网关API参考
+description: 支持物联网设备的MQTT网关API参考
 ---
 
 * TOC
 {:toc}
 
-## Introduction
+## 集成
 
-The Gateway is a special type of device in ThingsBoard that is able to act as a bridge between external devices connected to different systems and ThingsBoard.
-Gateway API provides the ability to exchange data between **multiple devices** and the platform using **single MQTT connection**.
-The Gateway also acts as a ThingsBoard device and can leverage existing [MQTT Device API](/docs/reference/mqtt-api/) to report stats, receive configuration updates and much more.
+网关是ThingsBoard中的一种特殊类型的设备，能够充当连接到不同系统的外部设备和ThingsBoard之间的桥梁。
+网关API提供了使用**单个MQTT**连接在**多个设备**和平台之间交换数据的功能。
+网关还充当ThingsBoard设备，并且可以利用现有的[MQTT设备API](/docs/reference/mqtt-api/)来报告统计信息，接收配置更新等等。
 
-The API listed below is used by [**ThingsBoard open-source IoT Gateway**](/docs/iot-gateway/what-is-iot-gateway/).
+以下列出的API由[ThiTngsBoard开源IoT网关](/docs/iot-gateway/what-is-iot-gateway/)使用。
 
-## Basic MQTT API
+## 基础MQTT API
 
-Please refer to generic [MQTT Device API](/docs/reference/mqtt-api/) to get information about data format, authentication options, etc.
+请参考[通用MQTT设备](/docs/reference/mqtt-api/)API以获取有关数据格式，身份验证选项等的信息
  
-## Device Connect API
+## 设备连接API
 
-In order to inform ThingsBoard that device is connected to the Gateway, one needs to publish following message:
+通知ThingsBoard设备已连接到网关，需要发布以下消息：
  
 ```shell
 Topic: v1/gateway/connect
 Message: {"device":"Device A"}
 ```
 
-where **Device A** is your device name.
+**Device A** 代表你的设备名称。
 
-Once received, ThingsBoard will lookup or create a device with the name specified.
-Also, ThingsBoard will publish messages about new attribute updates and RPC commands for a particular device to this Gateway.
+收到后ThingsBoard将查找或创建具有指定名称的设备。另外，ThingsBoard还将向该网关发布有关特定设备的新属性更新和RPC命令的消息。
 
-## Device Disconnect API
+## 设备断开API
 
-In order to inform ThingsBoard that device is disconnected from the Gateway, one needs to publish following message:
+为了通知ThingsBoard设备已与网关断开连接，需要发布以下消息：
  
 ```shell
 Topic: v1/gateway/disconnect
 Message: {"device":"Device A"}
 ```
 
-where **Device A** is your device name.
+**Device A** 代表你的设备名称。
 
-Once received, ThingsBoard will no longer publish updates for this particular device to this Gateway.
+一旦收到ThingsBoard将不再将此特定设备的更新发布到此网关。
 
-## Attributes API
+## 属性API
 
-ThingsBoard attributes API allows devices to
+ThingsBoard属性API能够使设备具备如下功能
 
-* Upload [client-side](/docs/user-guide/attributes/#attribute-types) device attributes to the server.
-* Request [client-side](/docs/user-guide/attributes/#attribute-types) and [shared](/docs/user-guide/attributes/#attribute-types) device attributes from the server.
-* Subscribe to [shared](/docs/user-guide/attributes/#attribute-types) device attributes from the server.
+* 将[客户端](/docs/user-guide/attributes/#attribute-types)设备属性上载到服务器
+* 从服务器请求[客户端和共享](/docs/user-guide/attributes/#attribute-types)设备属性
+* 从服务器订阅 [共享](/docs/user-guide/attributes/#attribute-types)设备属性
  
-##### Publish attribute update to the server
+##### 将属性更新发布到服务器
 
-In order to publish client-side device attributes to ThingsBoard server node, send PUBLISH message to the following topic:
+为了将客户端设备属性发布到ThingsBoard服务器节点，请将PUBLISH消息发送到以下主题：
 
 ```shell
 Topic: v1/gateway/attributes
 Message: {"Device A":{"attribute1":"value1", "attribute2": 42}, "Device B":{"attribute1":"value1", "attribute2": 42}}
 ```
 
-where **Device A** and **Device B** are your device names, **attribute1** and **attribute2** are attribute keys.
+其中**Device A**和**Device B**是你的设备名称，**attribute1**和**attribute2**是属性键。
 
-##### Request attribute values from the server
+##### 从服务器请求属性值
 
-In order to request client-side or shared device attributes to ThingsBoard server node, send PUBLISH message to the following topic:
+为了向ThingsBoard服务器节点请求客户端或共享设备属性，请将PUBLISH消息发送到以下主题：
 
 ```shell
 Topic: v1/gateway/attributes/request
 Message: {"id": $request_id, "device": "Device A", "client": true, "key": "attribute1"}
 ```
 
-where **$request_id** is your integer request identifier, **Device A** is your device name, **client** identifies a client or shared attribute scope and **key** is the attribute key.
+其中 **$request_id** 是您的整数请求标识符，**Device A**是你的设备名称，**client**标识客户端或共享属性范围，而**key**是属性键。
 
-Before sending PUBLISH message with the request, client need to subscribe to 
+在发送带有请求的PUBLISH消息之前，客户端需要订阅
 
 ```shell
 Topic: v1/gateway/attributes/response
 ```
 
-and expect messages with result in the following format:
+消息结果格式如下：
 
 ```shell
 Message: {"id": $request_id, "device": "Device A", "value": "value1"}
 ```
 
-##### Subscribe to attribute updates from the server
+##### 从服务器订阅属性更新
 
-In order to subscribe to shared device attribute changes, send SUBSCRIBE message to the following topic:
+为了订阅共享设备属性更改，请发送SUBSCRIBE消息到以下主题
 
 ```shell
 v1/gateway/attributes
 ```
 
-and expect messages with result in the following format:
+消息结果格式如下：
 
 ```shell
 Message: {"device": "Device A", "data": {"attribute1": "value1", "attribute2": 42}}
 ```
 
-## Telemetry upload API
+## 遥测上传API
 
-In order to publish device telemetry to ThingsBoard server node, send PUBLISH message to the following topic:
+为了将设备遥测发布到ThingsBoard服务器节点，请将PUBLISH消息发送到以下主题：
 
 ```shell
 Topic: v1/gateway/telemetry
 ```
 
-Message:
+消息结构:
 
 ```json
 {
@@ -145,43 +143,42 @@ Message:
 }
 ```
 
-where **Device A** and **Device B** are your device names, **temperature** and **humidity** are telemetry keys and **ts** is unix timestamp in milliseconds.
+其中**Device A**和**Device B**是你的设备名称，“**temperature**和**humidity**”是遥测键，**ts**是unix时间戳（以毫秒为单位）。
 
 ## RPC API
 
-### Server-side RPC
+### 服务器端RPC
 
-In order to subscribe to RPC commands from the server, send SUBSCRIBE message to the following topic:
+为了从服务器订阅RPC命令，请将SUBSCRIBE消息发送到以下主题：
 
 ```shell
 v1/gateway/rpc
 ```
 
-and expect messages with individual commands in the following format:
+使用以下带有单个命令的消息格式：
 
 ```shell
 {"device": "Device A", "data": {"id": $request_id, "method": "toggle_gpio", "params": {"pin":1}}}
 ```
 
-Once command is processed by device, gateway can send commands back using following format:
+设备处理完命令后，网关可以使用以下格式将命令发送回：
 
 ```shell
 {"device": "Device A", "id": $request_id, "data": {"success": true}}
 ```
+**$request_id**是你的整数请求标识符，**Device A**是你的设备名称，方法是您的RPC方法**method**。 
 
-where **$request_id** is your integer request identifier, **Device A** is your device name and **method** is your RPC method name. 
+## 声明设备API
 
-## Claiming devices API
+请参阅相应的文章以获取有关[声明设备](/docs/user-guide/claiming-devices)功能的更多信息。
 
-Please see the corresponding article to get more information about the [Claiming devices](/docs/user-guide/claiming-devices) feature.
-
-In order to initiate claiming device, send PUBLISH message to the following topic:
+为了启动声明设备，请向以下主题发送PUBLISH消息：
 
 ```shell
 Topic: v1/gateway/claim
 ```
 
-Message:
+消息结构:
 
 ```json
 {
@@ -196,15 +193,12 @@ Message:
 }
 ```
 
-where **Device A** and **Device B** are your device names, **secretKey** and **durationMs** are optional keys.
-In case the **secretKey** is not specified, the empty string as a default value is used.
-In case the **durationMs** is not specified, the system parameter **device.claim.duration** is used (in the file **/etc/thingsboard/conf/thingsboard.yml**).
+其中**Device A** 和 **Device B**是你的设备名称，**secretKey** 和 **durationMs**是可选密钥。如果未指定 **secretKey** ，则使用空字符串作为默认值。万一 **device.claim.duration** 毫秒未指定时，系统参数 **device.claim.duration** 被使用（在文件 **/etc/thingsboard/conf/thingsboard.yml** ）。
 
-## Protocol customization
+## 自定义协议
 
-MQTT transport can be fully customized for specific use-case by changing the corresponding [module](https://github.com/thingsboard/thingsboard/tree/master/transport/mqtt).
+通过更改相应的[模块](https://github.com/thingsboard/thingsboard/tree/master/transport/mqtt)，可以针对特定用例完全定制MQTT传输。
 
-
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/guides-banner.md %}

@@ -2,71 +2,65 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: CoAP Device API Reference
+title: CoAP设备API参考
 
 ---
 
 * TOC
 {:toc}
 
-## Getting started
+## 入门
 
-##### CoAP basics
+##### CoAP基础
 
-[CoAP](https://en.wikipedia.org/wiki/Constrained_Application_Protocol) is a light-weight IoT protocol for constrained devices. You can find more information about CoAP [here](https://tools.ietf.org/html/rfc7252).
-CoAP protocol is UDP based, but similar to HTTP it uses request-response model. 
-CoAP observes [option](https://tools.ietf.org/html/rfc7641) allows to subscribe to resources and receive notifications on resource change.
+[CoAP](https://en.wikipedia.org/wiki/Constrained_Application_Protocol)是轻量级物联网协议用于受限的设备。您可以在[此处](https://tools.ietf.org/html/rfc7252)找到有关CoAP的更多信息。CoAP协议基于UDP，但与HTTP类似它使用请求-响应模型。CoAP观察[选项](https://tools.ietf.org/html/rfc7641)允许订阅资源并接收有关资源更改的通知。
 
-ThingsBoard server nodes act as a CoAP Server that supports both regular and observe requests.
+ThingsBoard服务器节点充当支持常规请求和观察请求的CoAP服务器。
 
-##### Client libraries setup
+##### 客户端
 
-You can find CoAP client libraries for different programming languages on the web. Examples in this article will be based on [CoAP cli](https://www.npmjs.com/package/coap-cli).
-In order to setup this tool, you can use instructions in our [Hello World](/docs/getting-started-guides/helloworld/) guide.
+你可以在网上找到针对不同编程语言的CoAP客户端库。本文中的示例将基于[CoAP cli](https://www.npmjs.com/package/coap-cli)作为使用工具，您可以使用我们的[Hello World](/docs/getting-started-guides/helloworld/)指南中的说明。
 
-##### CoAP Authentication and error codes
+##### CoAP身份验证和错误代码
 
-We will use *access token* device credentials in this article and they will be referred to later as **$ACCESS_TOKEN**.
-The application needs to include **$ACCESS_TOKEN** as a path parameter into each CoAP request.
-Possible error codes and their reasons:
+我们将在本文中使用令牌凭证访问设备，这些凭证稍后将称为 **$ACCESS_TOKEN**。应用程序需要在每个CoAP请求中包括 **$ACCESS_TOKEN** 作为路径参数。可能的错误代码及其原因：
 
-* **4.00 Bad Request** - Invalid URL, request parameters or body.
-* **4.01 Unauthorized** - Invalid **$ACCESS_TOKEN**.
-* **4.04 Not Found** - Resource not found.
+* **4.00 请求无效** - 请求参数与正文错误，请求无效。
+* **4.01 未授权** - **$ACCESS_TOKEN**无效。
+* **4.04 未找到** - 找不到资源。
 
-## Key-value format
+## Key-value格式
 
-By default, ThingsBoard supports key-value content in JSON. Key is always a string, while value can be either string, boolean, double or long.
-Using custom binary format or some serialization framework is also possible. See [protocol customization](#protocol-customization) for more details.
-For example:
+ThingsBoard支持JSON中的key-value内容。键始终是一个字符串，而值可以是字符串，布尔值，双精度或长整数。也可以使用自定义二进制格式或某些序列化框架。有关更多详细信息，请参见[自定义协议](#protocol-customization)协议。
+例如：
 
 ```json
 {"stringKey":"value1", "booleanKey":true, "doubleKey":42.0, "longKey":73}
 ```
 
-## Telemetry upload API
+## 遥测上传API
 
-In order to publish telemetry data to ThingsBoard server node, send POST request to the following URL:
+为了将遥测数据发布到ThingsBoard服务器节点，请将POST请求发送到以下URL：
  
 ```shell
 coap://host/api/v1/$ACCESS_TOKEN/telemetry
 ```
 
-The simplest supported data formats are:
+支持的最简单的数据格式是：
 
 ```json
 {"key1":"value1", "key2":"value2"}
 ```
 
-or
+或者
 
 ```json
 [{"key1":"value1"}, {"key2":"value2"}]
 ```
 
-**Please note** that in this case, the server-side timestamp will be assigned to uploaded data!
+**请注意**，在这种情况下，服务器端时间戳将分配给上传的数据！
 
-In case your device is able to get the client-side timestamp, you can use following format:
+如果您的设备能够获得客户端时间戳，则可以使用以下格式：
 
 
 ```json
@@ -84,17 +78,17 @@ D,telemetry-data-with-ts.json,json,resources/telemetry-data-with-ts.json,/docs/r
 {% include tabs.html %}
 
  
-## Attributes API
+## 属性API
 
-ThingsBoard attributes API allows devices to
+ThingsBoard属性API能够使设备具备如下功能
 
-* Upload [client-side](/docs/user-guide/attributes/#attribute-types) device attributes to the server.
-* Request [client-side](/docs/user-guide/attributes/#attribute-types) and [shared](/docs/user-guide/attributes/#attribute-types) device attributes from the server.
-* Subscribe to [shared](/docs/user-guide/attributes/#attribute-types) device attributes from the server.
+* 将[客户端](/docs/user-guide/attributes/#attribute-types)设备属性上载到服务器
+* 从服务器请求[客户端和共享](/docs/user-guide/attributes/#attribute-types)设备属性
+* 从服务器订阅 [共享](/docs/user-guide/attributes/#attribute-types)设备属性
  
-##### Publish attribute update to the server
+##### 将属性更新发布到服务器
 
-In order to publish client-side device attributes to ThingsBoard server node, send POST request to the following URL:
+为了将客户端设备属性发布到ThingsBoard服务器节点，请将POST请求发送到以下URL：
 
 ```shell
 coap://host/api/v1/$ACCESS_TOKEN/attributes
@@ -105,9 +99,9 @@ A,Example,shell,resources/coap-attributes-publish.sh,/docs/reference/resources/c
 B,new-attributes-values.json,json,resources/new-attributes-values.json,/docs/reference/resources/new-attributes-values.json{% endcapture %}
 {% include tabs.html %}
 
-##### Request attribute values from the server
+##### 从服务器请求属性值
 
-In order to request client-side or shared device attributes to ThingsBoard server node, send GET request to the following URL:
+为了向ThingsBoard服务器节点请求客户端或共享设备属性，请将GET请求发送到以下URL：
 
 ```shell
 coap://host/api/v1/$ACCESS_TOKEN/attributes?clientKeys=attribute1,attribute2&sharedKeys=shared1,shared2
@@ -119,18 +113,17 @@ A,Example,shell,resources/coap-attributes-request.sh,/docs/reference/resources/c
 B,Result,json,resources/attributes-response.json,/docs/reference/resources/attributes-response.json{% endcapture %}
 {% include tabs.html %}
 
-**Please note**, the intersection of client-side and shared device attribute keys is a bad practice! 
-However, it is still possible to have same keys for client, shared or even server-side attributes.
+**请注意**，客户端和共享设备属性键的交集是不好的做法！但是，对于客户端，共享甚至服务器端属性，仍然可能具有相同的密钥。
 
-##### Subscribe to attribute updates from the server
+##### 从服务器订阅属性更新
 
-In order to subscribe to shared device attribute changes, send GET request with Observe option to the following URL:
+为了订阅共享设备属性更改，请将带有Observe选项的GET请求发送到以下URL：
 
 ```shell
 coap://host/api/v1/$ACCESS_TOKEN/attributes
 ```
 
-Once shared attribute will be changed by one of the server-side components (REST API or Rule Chain) the client will receive the following update: 
+一旦服务器端组件之一（REST API或规则链）更改了共享属性，客户端将收到以下更新：
 
 {% capture tabspec %}coap-attributes-subscribe
 A,Example,shell,resources/coap-attributes-subscribe.sh,/docs/reference/resources/coap-attributes-subscribe.sh
@@ -139,15 +132,15 @@ B,Result,json,resources/attributes-response.json,/docs/reference/resources/attri
 
 ## RPC API
 
-##### Server-side RPC
+##### 服务器端RPC
 
-In order to subscribe to RPC commands from the server, send GET request with observe flag to the following URL:
+为了从服务器订阅RPC命令，请将带有观察标志的GET请求发送到以下URL：
 
 ```shell
 coap://host/api/v1/$ACCESS_TOKEN/rpc
 ```
 
-Once subscribed, a client may receive rpc requests. An example of RPC request body is shown below:
+订阅后，客户端可以接收rpc请求。RPC请求正文的示例如下所示：
 
 ```json
 {
@@ -160,19 +153,17 @@ Once subscribed, a client may receive rpc requests. An example of RPC request bo
 }
 ```
 
-where 
+ - **id** - 请求ID，int
+ - **method** - RPC方法名称, string
+ - **params** - -RPC方法参数，自定义json对象 
 
- - **id** - request id, integer request identifier
- - **method** - RPC method name, string
- - **params** - RPC method params, custom json object 
-
-and can reply to them using POST request to the following URL:
+并可以使用POST请求回复以下网址：
 
 ```shell
 coap://host/api/v1/$ACCESS_TOKEN/rpc/{$id}
 ```
 
-where **$id** is an integer request identifier.
+其中 **$id** 是整数请求标识符。
 
 {% capture tabspec %}coap-rpc-command
 A,Example Subscribe,shell,resources/coap-rpc-subscribe.sh,/docs/reference/resources/coap-rpc-subscribe.sh
@@ -180,15 +171,15 @@ B,Example Reply,shell,resources/coap-rpc-reply.sh,/docs/reference/resources/coap
 C,Reply Body,shell,resources/rpc-response.json,/docs/reference/resources/rpc-response.json{% endcapture %}
 {% include tabs.html %}
 
-##### Client-side RPC
+##### 客户端RPC
 
-In order to send RPC commands to the server, send POST request to the following URL:
+为了将RPC命令发送到服务器，请将POST请求发送到以下URL：
 
 ```shell
 coap://host/api/v1/$ACCESS_TOKEN/rpc
 ```
 
-Both request and response body should be valid JSON documents. The content of the documents is specific to the rule node that will handle your request.
+请求和响应主体都应该是有效的JSON文档。文档的内容特定于将处理您的请求的规则节点。
 
 {% capture tabspec %}coap-rpc-from-client
 A,Example Request,shell,resources/coap-rpc-from-client.sh,/docs/reference/resources/coap-rpc-from-client.sh
@@ -196,30 +187,29 @@ B,Request Body,shell,resources/rpc-client-request.json,/docs/reference/resources
 C,Response Body,shell,resources/rpc-server-response.json,/docs/reference/resources/rpc-server-response.json{% endcapture %}
 {% include tabs.html %}
   
-## Claiming devices
+## 声明设备
 
-Please see the corresponding article to get more information about the [Claiming devices](/docs/user-guide/claiming-devices) feature.
+请参阅相应的文章以获取有关[声明设备](/docs/user-guide/claiming-devices)功能的更多信息。
 
-In order to initiate claiming device, send POST request to the following URL:
+为了启动声明设备，请将POST请求发送到以下URL：
  
 ```shell
 coap://host/api/v1/$ACCESS_TOKEN/claim
 ```
 
-The supported data format is:
+支持的数据格式为：
 
 ```json
 {"secretKey":"value", "durationMs":60000}
 ```
 
-**Please note** that the above fields are optional. In case the **secretKey** is not specified, the empty string as a default value is used.
-In case the **durationMs** is not specified, the system parameter **device.claim.duration** is used (in the file **/etc/thingsboard/conf/thingsboard.yml**).
+**请注意**，以上字段是可选的。如果未指定**secretKey**，则使用空字符串作为默认值。万一**durationMs**毫秒未指定时，系统参数**device.claim.duration**被使用（在文件**/etc/thingsboard/conf/thingsboard.yml**）。
   
-## Protocol customization
+## 自定义协议
 
-CoAP transport can be fully customized for specific use-case by changing the corresponding [module](https://github.com/thingsboard/thingsboard/tree/master/transport/coap).
+通过更改相应的[模型](https://github.com/thingsboard/thingsboard/tree/master/transport/coap)，可以针对特定用例完全定制CoAP传输。
 
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "ConnectYourDevice" %}{% include templates/guides-banner.md %}

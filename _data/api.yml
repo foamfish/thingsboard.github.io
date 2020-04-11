@@ -1,19 +1,17 @@
 bigheader: "ThingsBoard API参考"
 abstract: "设备连接和服务器端API。"
 toc:
-- title: ThingsBoard API reference
+- title: ThingsBoard API参考
   path: /docs/api/
-- title: Device Connectivity Protocols
+- title: 设备连接协议
   path: /docs/reference/protocols/
-- title: MQTT Device API
+- title: MQTT设备API
   path: /docs/reference/mqtt-api/
-- title: CoAP Device API
+- title: CoAP设备API
   path: /docs/reference/coap-api/
-- title: HTTP Device API
+- title: HTTP设备API
   path: /docs/reference/http-api/
-- title: Administration REST API
+- title: REST API
   path: /docs/reference/rest-api/
-- title: MQTT Gateway API Reference
+- title: MQTT网关API参考
   path: /docs/reference/gateway-mqtt-api/
-- title: REST Client
-  path: /docs/reference/rest-client/

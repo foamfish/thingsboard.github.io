@@ -3,7 +3,7 @@ layout: docwithnav
 assignees:
 - ashvayka
 title: REST API
-description: Supported REST API Reference for server-side integration of your IoT projects
+description: 支持的REST API引用，用于物联网项目的服务器端集成
 
 ---
 
@@ -12,46 +12,38 @@ description: Supported REST API Reference for server-side integration of your Io
 
 ## Swagger UI
 
-ThingsBoard REST API may be explored using Swagger UI.
-You can explore REST API of the live-demo server using this **[Swagger UI link.](https://demo.thingsboard.io/swagger-ui.html)**
+使用 **[Swagger UI](https://demo.thingsboard.io/swagger-ui.html)** 调用ThingsBoard REST API。
+使用 **[Swagger UI](https://cloud.thingsboard.io/swagger-ui.html)** 调用ThingsBoard专业版REST API服务。
 
-To explore REST API provided by ThingsBoard Professional Edition please use the following **[Swagger UI link.](https://cloud.thingsboard.io/swagger-ui.html)**
-
-Once you will install ThingsBoard server you can open UI using the following URL:
+只要安装了ThingsBoard服务，就可以使用以下URL打开UI：
     
 ``` 
 http://YOUR_HOST:PORT/swagger-ui.html
 ```
 
-## REST API Auth
+## REST API 认证
 
-ThingsBoard uses JWT for request auth.
-You will need to populate "X-Authorization" header using "Authorize" button in the top-right corner of the Swagger UI.
+ThingsBoard使用JWT进行请求身份验证。
+您将需要使用Swagger UI右上角的”Authorization“按钮填充“X-Authorization”标题。
 
  ![image](/images/reference/swagger-ui.png)
 
-In order to get the JWT token, you need to execute the following request:
+获得JWT令牌，你需要执行以下请求：
 
-In case of local installation:
+本地安装：
  
- - replace **$THINGSBOARD_URL** with **127.0.0.1:8080**
+ - 替换 **$THINGSBOARD_URL** 为 **127.0.0.1:8080**
 
-In case of live-demo server:
+在线演示:
  
- - replace **$THINGSBOARD_URL** with **demo.thingsboard.io**
- - replace **tenant@thingsboard.org** with your live-demo username (email)
- - replace **tenant** password with your live-demo password
-See **[live-demo](/docs/user-guide/live-demo/)** page for more details how to get your account.
+ - 替换 **$THINGSBOARD_URL** 为 **demo.thingsboard.io**
+ - 替换演示帐号 为 **tenant@thingsboard.org** 用户名
+ - 替换演示密码 为 **tenant** 密码
+获取更多详细信息，请参见[在线演示](/docs/user-guide/live-demo/)页面。
 
 {% capture tabspec %}token
 A,get-token.sh,shell,resources/get-token.sh,/docs/reference/resources/get-token.sh
 B,resonse.json,json,resources/get-token-response.json,/docs/reference/resources/get-token-response.json{% endcapture %}
 {% include tabs.html %}
 
- - Now, you should set  'X-Authorization' to "Bearer $YOUR_JWT_TOKEN"  
- 
- 
-## Java REST API Client
-
-ThingsBoard team provides client library written in Java to simplify consumption of the REST API. 
-Please see Java REST API Client [documentation page](/docs/reference/rest-client/) for more details.  
+ - 现在你应该将“X-Authorization”设置为“Bearer $YOUR_JWT_TOKEN”
