@@ -1,43 +1,43 @@
 ---
 layout: docwithnav
-title: Troubleshooting
-description: ThingsBoard IoT Platform troubleshooting
+title: 故障排除
+description: ThingsBoard故障排除
 
 ---
 
-ThingsBoard logs are stored in the following directory:
+ThingsBoard日志存储在以下目录中:
  
 ```bash
 /var/log/thingsboard
 ```
 
-You can issue the following command in order to check if there are any errors on the backend side:
+您可以发出以下命令以检查后端是否有任何错误:
  
 ```bash
 cat /var/log/thingsboard/thingsboard.log | grep ERROR
 ```
 
-### Getting help
+### 在线帮助
 
 <section id="talkToUs">
     <main>
         <div id="gettingHelp">
             <div>
-                <a href="https://gitter.im/thingsboard/chat">Community chat</a>
-                <p>Our Gitter channel is the best way to contact our engineers and share your ideas with them.</p>
+                <a href="https://gitter.im/thingsboard/chat">社区</a>
+                <p>我们的Gitter渠道是联系我们的工程师并与他们分享您的想法的最佳方式。</p>
             </div>
             <div>
-                <a href="https://groups.google.com/forum/#!forum/thingsboard">Q&A forum</a>
-                <p>Our user forum is a great place to go for community support.</p>
+                <a href="https://groups.google.com/forum/#!forum/thingsboard">论坛</a>
+                <p>我们的用户论坛是寻求社区支持的好地方。</p>
             </div>
             <div>
                 <a href="http://stackoverflow.com/questions/tagged/thingsboard">Stack Overflow</a>
-                <p>The ThingsBoard team will also monitor posts tagged thingsboard. If there aren’t any existing questions that help, please ask a new one!</p>
+                <p>ThingsBoard团队还将监视标记有东西板的帖子。如果没有任何现有问题可以帮助您，请再提出一个问题！</p>
             </div>
         </div>
     </main>
 </section>
 
-If your problem isn't answered by any of the guides above, feel free to contact ThingsBoard team.
+如果以上任何指南都不能解决您的问题，请随时与ThingsBoard团队联系。
 
-<a class="button" href="/docs/contact-us/">Contact us</a>
+<a class="button" href="/docs/contact-us/">联系我们</a>
