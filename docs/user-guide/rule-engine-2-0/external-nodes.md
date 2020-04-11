@@ -1,11 +1,11 @@
 ---
 layout: docwithnav
-title: External Nodes
-description: Rule Engine 2.0 External Nodes
+title: 外部节点
+description: 规则引擎2.0外部节点
 
 ---
 
-External Nodes used are used to interact with external systems.
+所使用的外部节点用于与外部系统进行交互。
 
 * TOC
 {:toc}
@@ -23,37 +23,34 @@ External Nodes used are used to interact with external systems.
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-aws-sns.png)
 
-Node publish messages to AWS SNS (Amazon Simple Notification Service).
+外部节点指用来与外部系统交互的节点 AWS SNS (Amazon Simple Notification Service).
 
-Configuration:
+配置:
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-aws-sns-config.png)
 
-- **Topic ARN pattern** - can be set direct topic name for message publishing 
-or pattern can be used, that will be resolved to the real ARN Topic name using Message metadata. 
-- **AWS Access Key ID** and **AWS Secret Access Key** are the credentials of an AWS IAM User with programmatic access. More information on AWS access keys can be found [here](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). 
-- **AWS Region** must correspond to the one in which the SNS Topic(s) are created. Current list of AWS Regions can be found [here](http://docs.aws.amazon.com/general/latest/gr/rande.html).
+- **Topic ARN pattern** - 可以为消息发布设置直接主题名，也可以使用模式，使用消息元数据将其解析为真正的主题名. 
+- **AWS Access Key ID** and **AWS Secret Access Key** 是具有编程访问权限的AWS IAM用户凭据。更多关于AWS访问密钥的信息，请访问[这里](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)找到。 
+- **AWS Region** 必须对应于创建SNS主题的区域。AWS区域当前列表可以在[这里](http://docs.aws.amazon.com/general/latest/gr/rande.html)找到。
 
-In the following example, topic name depends on Device Type and there is a Message that contains **deviceType** field in Metadata:
+在下面的例子中，主题名取决于设备类型，在元数据中有一条消息包含**deviceType**字段
 {% highlight javascript %}
 {
     deviceType: controller
 }
 {% endhighlight %}
 
-For publishing message in **controller**'s topic, we will set this pattern in **Topic ARN pattern**:
+我们将在**Topic ARN pattern**中设置**controller**的topic中发布消息:
 
 {% highlight bash %}
 arn:aws:sns:us-east-1:123456789012:${deviceType}
 {% endhighlight %}
 
-In runtime, pattern will be resolved to <code>arn:aws:sns:us-east-1:123456789012:controller</code>
+在运行时，模式将解析为 <code>arn:aws:sns:us-east-1:123456789012:controller</code>
 
-**Published payload** - Node will publish full Message payload to the SNS.
-If required, Rule Chain can be configured to use chain of Transformation Nodes for sending correct Payload to the SNS.
+**Published payload** - —节点将向SNS发布完整的有效消息负载。如果有需要的话，可以配置规则链，使用转换节点链向SNS发送正确的负载。
 
-**Outbound message** from this node will contain response **messageId** and **requestId**
- in Message metadata. Original Message payload, type and originator will not be changed.
+**Outbound message** 将包含消息元数据中的响应**messageId**和**requestId**。原始消息有效负载、类型和发送方不会被更改。
 
 <br/>
 
@@ -69,21 +66,20 @@ If required, Rule Chain can be configured to use chain of Transformation Nodes f
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-aws-sqs.png)
 
-Node publish messages to the AWS SQS (Amazon Simple Queue Service).
+节点将消息发布到AWS SQS (亚马逊简单队列服务)。
 
-Configuration:
+配置:
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-aws-sqs-config.png)
 
-- **Queue Type** - SQS queue type. Can be *Standard* or *FIFO*.
-- **Queue URL Pattern** - Pattern for building Queue URL. For example <code>${deviceType}</code>.
-Can be set direct Queue URL for message publishing or pattern can be used, that will be resolved to the real Queue URL using Message metadata.
-- **Delay** - delay in seconds, used to delay a specific message.
-- **Message attributes** - optional list of message attributes to publish.
-- **AWS Access Key ID** and **AWS Secret Access Key** are the credentials of an AWS IAM User with programmatic access. More information on AWS access keys can be found [here](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html). 
-- **AWS Region** must correspond to the one in which the SQS Queue(s) are created. Current list of AWS Regions can be found [here](http://docs.aws.amazon.com/general/latest/gr/rande.html).
+- **Queue Type** -SQS队列类型可以是*Standard*，也可以是先进先出类型*FIFO*.
+- **Queue URL Pattern** - 用于构建队列URL的模式。例如,<code>${deviceType}</code>。可以为消息发布设置直接队列URL，或使用模式，使用消息元数据将该模式解析为真正的队列URL。
+- **Delay** - 以秒为单位的延迟，用于延迟特定的消息.
+- **Message attributes** - 可选的要发布的消息属性列表.
+- **AWS Access Key ID** and **AWS Secret Access Key** 是具有编程访问权限的AWS IAM用户的凭证。可以在[此处](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)找到有关AWS访问密钥的更多信息
+- **AWS Region** 必须与创建SQS队列的区域相对应。可在[此处](http://docs.aws.amazon.com/general/latest/gr/rande.html)找到AWS区域的最新列表。
 
-In the following example, Queue URL depends on Device Type and there is a Message that contains **deviceType** field in Metadata:
+在以下示例中，队列URL取决于设备类型，并且在元数据中有一个包含 **deviceType** 字段的消息:
 
 {% highlight json %}
 {
@@ -91,24 +87,22 @@ In the following example, Queue URL depends on Device Type and there is a Messag
 }
 {% endhighlight %}
 
-For publishing message in **controller**'s Queue, we will set this pattern in **Queue URL pattern**:
+为了在 **controller**'s 的Queue中发布消息，我们将在**Queue URL pattern**模式中设置此模式:
 
 {% highlight bash %}
 https://sqs.us-east-1.amazonaws.com/123456789012/${deviceType}
 {% endhighlight %}
 
-In runtime, pattern will be resolved to <code>https://sqs.us-east-1.amazonaws.com/123456789012/controller</code>
+在运行时，模式将解析为<code>https://sqs.us-east-1.amazonaws.com/123456789012/controller</code>
 
-**Published body** - Node will publish full Message payload to the SQS. 
-If required, Rule Chain can be configured to use chain of Transformation Nodes for sending correct Payload to the SQS.
+**Published body** - 节点将向SQS发布完整的消息有效负载。如果需要，可以将规则链配置为使用转换节点链，以将正确的有效负载发送到SQS。
 
-**Published attributes** - optional list of attributes can be added for publishing message in SQS. It is a collection of <NAME> - <VALUE> pairs.
-Both, NAME and VALUE, could be a static values or patterns that will be resolved using Message metadata.
+**Published attributes** - 可以添加可选的属性列表以在SQS中发布消息。这是一个集合 -- 对。NAME和VALUE都可以是静态值或模式，可以使用消息元数据进行解析。
 
-If **FIFO** queue is selected, then Message ID will be used as **deduplication ID** and Message originator as **group ID**.
+如果选择了**FIFO**队列，则消息ID将用作重复数据**deduplication ID**，消息发起者将用作**group ID**。
 
-**Outbound message** from this node will contain response **messageId**, **requestId**, **messageBodyMd5**, **messageAttributesMd5** 
-and **sequenceNumber** in Message metadata. Original Message payload, type and originator will not be changed. 
+**Outbound message** 这个节点的出站消息将包含消息元数据中的响应 **messageId**, **requestId**, **messageBodyMd5**, **messageAttributesMd5** 
+和 **sequenceNumber** 原始消息payload、类型和发送方不会被更改。
 
 <br/>
 
@@ -124,28 +118,26 @@ and **sequenceNumber** in Message metadata. Original Message payload, type and o
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-kafka.png)
 
-Kafka Node sends messages to Kafka brokers. Expects messages with any message type. Will send record via Kafka producer to Kafka server.
+Kafka节点向Kafka代理发送消息。消息可具有任何消息类型。将通过Kafka生产者发送记录到Kafka服务器.
 
-Configuration:
+配置:
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-kafka-config.png)
 
-- **Topic pattern** - can be a static string, or pattern that is resolved using Message Metadata properties. For example <code>${deviceType}</code>
-- **bootstrap servers** - list of kafka brokers separated with comma.
-- **Automatically retry times** - number of attempts to resend message if connection fails.
-- **Produces batch size** - batch size in bytes for grouping messages with the same partition.
-- **Time to buffer locally** - max local buffering window duration in ms.
-- **Client buffer max size** - max buffer size in bytes for sending messages.
-- **Number of acknowledgments** - number of acknowledgments node requires to received before considering a request complete.
-- **Key serializer** - by default org.apache.kafka.common.serialization.StringSerializer
-- **Value serializer** - by default org.apache.kafka.common.serialization.StringSerializer
-- **Other properties** - any other additional properties could be provided for kafka broker connection.
+- **Topic pattern** - 可以是静态字符串，也可以是使用消息元数据属性解析的模式。例如<code>${deviceType}</code>
+- **bootstrap servers** - 用逗号分隔的kafka代理列表.
+- **Automatically retry times** - 如果连接失败，尝试重发消息的次数.
+- **Produces batch size** - 以字节为单位的批处理大小，用于对具有相同分区的消息进行分组.
+- **Time to buffer locally** - ms中最大的本地缓冲窗口持续时间.
+- **Client buffer max size** - 发送消息的最大缓冲区大小(以字节为单位).
+- **Number of acknowledgments** - 确认节点在考虑请求完成之前需要接收的数量.
+- **Key serializer** - 默认是org.apache.kafka.common.serialization.StringSerializer
+- **Value serializer** - 默认是org.apache.kafka.common.serialization.StringSerializer
+- **Other properties** - 可以为kafka代理连接提供任何其他属性.
 
-**Published body** - Node will send full Message payload to the Kafka topic. 
-If required, Rule Chain can be configured to use chain of Transformation Nodes for sending correct Payload to the Kafka.
+**Published body** - Node将向Kafka主题发送完整的消息负载。如果需要可以配置规则链，使用转换节点链向Kafka发送正确的payload.
 
-**Outbound message** from this node will contain response **offset**, **partition** and **topic** properties in the Message metadata. 
-Original Message payload, type and originator will not be changed.
+**Outbound message** 此节点的出站消息将在消息元数据中包含响应**offset**, **partition** and **topic**属性。原始消息payload、类型和发送方不会被更改。
 
 <br/>
 
@@ -161,40 +153,38 @@ Original Message payload, type and originator will not be changed.
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-mqtt.png)
 
-Publish incoming message payload to the topic of the configured MQTT broker with QoS **AT_LEAST_ONCE**. 
+使用QoS **AT_LEAST_ONCE**将传入消息有效负载发布到已配置的MQTT代理的主题
 
-Configuration:
+配置:
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-mqtt-config.png)
 
-- **Topic pattern** - can be a static string, or pattern that is resolved using Message Metadata properties. For example <code>${deviceType}</code>.
-- **Host** - MQTT broker host.
-- **Port** - MQTT broker port.
-- **Connection timeout** - timeout in seconds for connecting to MQTT broker.
-- **Client ID** - optional client identifier used for connecting to MQTT broker. If not specified, default generated clientId will be used.
-- **SSL Enable/Disable** - enable/disable secure communication.  
-- **Credentials** - MQTT connection credentials. Can be either *Anonymous*, *Basic* or *PEM*.
+- **Topic pattern** - 可以是静态字符串，也可以是使用消息元数据属性解析的模式。例如<code>${deviceType}</code>.
+- **Host** - MQTT代理主机.
+- **Port** - MQTT代理端口.
+- **Connection timeout** - 连接到MQTT代理的超时(秒).
+- **Client ID** - 可选的客户端标识符，用于连接到MQTT代理。如果没有指定，将使用默认生成的clientId.
+- **SSL Enable/Disable** - 启用/禁用安全通信.  
+- **Credentials** - MQTT连接凭据。可以是匿名的，基本的或者PEM。
 
-Different Authentication credentials are supported for external MQTT broker:
+外部MQTT代理支持不同的身份验证凭证:
 
-- Anonymous - no authentication
-- Basic - username\password pair is used for authenticating
-- PEM - PEM certificates are used for Authentication
+- Anonymous - 没有身份验证
+- Basic - 用户名\密码对用于认证
+- PEM - PEM证书用于身份验证
 
-If **PEM** credentials type is selected, the following configuration should be provided:
+**PEM** PEM证书用于身份验证 如果选择PEM凭证类型:
 
-- CA certificate file
-- Certificate file
-- Private key file
-- Private key password
+- CA证书文件
+- 证书文件
+- 私钥文件
+- 私钥密码
 
 <br/>
 
-**Published body** - Node will send full Message payload to the MQTT topic.
-If required, Rule Chain can be configured to use chain of Transformation Nodes for sending correct Payload to the MQTT broker.
+**Published body** - 节点将向MQTT主题发送完整的消息有效负载。如果需要，可以将规则链配置为使用转换节点链，以将正确的有效负载发送到MQTT代理.
 
-In case of successful message publishing, original Message will be passed to the next nodes via **Success** chain, 
-otherwise **Failure** chain is used.
+在成功发布消息的情况下，原始消息将通过**Success**链传递到下一个节点，否则将使用**Failure**链。
 
 <br/>
 
@@ -210,30 +200,28 @@ otherwise **Failure** chain is used.
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-rabbitmq.png)
 
-Publish incoming message payload to the RabbitMQ.
+将传入的消息有效负载发布到RabbitMQ.
 
-Configuration:
+配置:
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-rabbitmq-config.png)
 
-- **Exchange name pattern** - the exchange to publish the message to. Can be a static string, or pattern that is resolved using Message Metadata properties. For example <code>${deviceType}</code> .
-- **Routing key pattern** - the routing key. Can be a static string, or pattern that is resolved using Message Metadata properties. For example <code>${deviceType}</code> .
-- **Message properties** - optional routing headers. Supported headers *BASIC*, *TEXT_PLAIN*, *MINIMAL_BASIC*, *MINIMAL_PERSISTENT_BASIC*, *PERSISTENT_BASIC*, *PERSISTENT_TEXT_PLAIN*
-- **Host** - default host to use for connections
-- **Port** - default port to use for connections
-- **Virtual host** - the virtual host to use when connecting to the broker
-- **Username** - AMQP user name to use when connecting to the broker
-- **Password** - AMQP password to use when connecting to the broker
-- **Automatic recovery** - enables or disables automatic connection recovery
-- **Connection timeout** - connection TCP establishment timeout in milliseconds; zero for infinite
-- **Handshake timeout** - the AMQP0-9-1 protocol handshake timeout, in milliseconds
-- **Client properties** - additional properties that are sent to the server during connection startup 
+- **Exchange name pattern** - 发布消息时所做的交换。可以是静态字符串，也可以是使用消息元数据属性解析的模式。例如<code>${deviceType}</code> .
+- **Routing key pattern** - 路由密钥。可以是静态字符串，也可以是使用消息元数据属性解析的模式。例如 <code>${deviceType}</code> .
+- **Message properties** - 可选的路由headers。支持*TEXT_PLAIN*, *MINIMAL_BASIC*, *MINIMAL_PERSISTENT_BASIC*, *PERSISTENT_BASIC*, *PERSISTENT_TEXT_PLAIN*
+- **Host** - 用于连接的默认主机
+- **Port** - 用于连接的默认端口
+- **Virtual host** - 连接代理时要使用的虚拟主机
+- **Username** - AMQP用户名，在连接代理时使用
+- **Password** - AMQP连接代理时使用的密码
+- **Automatic recovery** - 启用或禁用自动连接恢复
+- **Connection timeout** - 连接建立TCP超时，以毫秒为单位;零表示无限
+- **Handshake timeout** - AMQP0-9-1协议握手超时，以毫秒为单位
+- **Client properties** - 启动连接时发送到服务器的附加属性 
 
-**Published body** - Node will send full Message payload to the RabbitMQ. 
-If required, Rule Chain can be configured to use chain of Transformation Nodes for sending correct Payload.
+**Published body** - 已发布的主体-节点将向RabbitMQ发送完整的消息有效负载。
 
-In case of successful message publishing, original Message will be passed to the next nodes via **Success** chain, 
-otherwise **Failure** chain is used.
+如果需要，可以配置规则链，使用转换节点链发送正确的负载。 如果消息发布成功，原始消息将通过**Success**链传递到下一个节点，否则将使用**Failure**链。
 
 <br/>
 
@@ -249,43 +237,39 @@ otherwise **Failure** chain is used.
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-rest-api-call.png)
 
-Invoke REST API calls to the external REST server.
+REST API调用外部REST服务器。
 
-Configuration:
+配置:
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-rest-api-call-config.png)
 
-- **Endpoint URL pattern** - Can be a static string, or pattern that is resolved using Message Metadata properties. For example <code>${deviceType}</code>
+- **Endpoint URL pattern** - 可以是静态字符串，也可以是使用消息元数据属性解决的模式。例如 <code>${deviceType}</code>
 - **Request method** - *GET*, *POST*, *PUT*, *DELETE*
-- **Headers** - request headers, header or value can be a static string, or pattern that is resolved using Message Metadata properties.
+- **Headers** - 请求Headers、Headers或值可以是静态字符串，也可以是使用消息元数据属性解析的模式。
 
 **Endpoint URL**
 
-URL can be a static string or a pattern. Only Message metadata is used for resolving patterns. 
-So property names that are used in the patterns must exist in the Message Metadata, otherwise raw pattern will be added into URL.
+URL可以是静态字符串或patterns。只使用消息元数据解析模式。因此，模式中使用的属性名必须存在于消息元数据中，否则原始模式将被添加到URL中。 
 
-For example, if Message payload contains property **deviceType** with value **container**, then this pattern: 
+例如，如果消息payload包含带有值**container**的属性**deviceType**，则此模式: 
 
 <code>http://localhost/api/${deviceType}/update</code> 
 
-will be resolved to 
+被解析为
 
 <code>http://localhost/api/container/update</code>   
 
 **Headers**
 
-Collection of header name/value can be configured. Those headers will be added into Rest request. Pattern should be used for configured both header name and header value.
-For example <code>${deviceType}</code>. Only Message metadata is used for resolving patterns. 
-So property names that are used in the pattern must exist in the Message Metadata, otherwise raw pattern will be added into header. 
+可以配置标题名称/值的集合。 这些标题将被添加到Rest请求中。 模式应用于配置标头名称和标头值。
+例如 <code>${deviceType}</code>. 仅消息元数据用于解决模式。因此，模式中使用的属性名称必须存在于消息元数据中，否则原始模式将添加到标头中。 
 
-**Request body** - Node will send full Message payload to the configured REST endpoint. 
-If required, Rule Chain can be configured to use chain of Transformation Nodes for sending correct Payload.
+**Request body** -节点将向配置的REST端点发送完整的消息Payload。如果需要，可以将规则链配置为使用转换节点链来发送正确的Payload。
 
-**Outbound message** from this node will contain response **status**, **statusCode**, **statusReason** and responce **headers** in the Message metadata.
-Outbound Message payload will be the same as response body. Original Message type and originator will not be changed.
+**Outbound message** 将在消息元数据中包含响应状态，**status**, **statusCode**, **statusReason**和**headers**。
+出站消息有效负载将与响应正文相同。原始邮件类型和原始发件人将不会更改。
 
-In case of successful request, outbound message will be passed to the next nodes via **Success** chain, 
-otherwise **Failure** chain is used.
+如果请求成功，则出站消息将通过**Success**链传递到下一个节点，否则将使用**Failure**链
 
 <br/>
 
@@ -301,45 +285,45 @@ otherwise **Failure** chain is used.
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-send-email.png)
 
-Node sends incoming message using configured Mail Server. This Node works only with messages that where created using 
-[**To Email**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#to-email-node) transformation Node, please connect this Node with **To Email** Node using **Success** chain.
+节点通过已配置的邮件服务器发送传入消息。此节点只适用于在创建时使用[**Email**](/docs/user-guide/rule-engine-2-0/transformation-nodes/#to-email-node)的消息，请使用**Success**链将此节点与**To Email**节点连接。
 
-Configuration:
+配置:
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-send-email-config.png)
 
-- **Use system SMTP settings** - if enabled default Mail Server configured on System level will be used
-- **Protocol** - Mail Server transport protocol: *SMTP* or *SMTPS*
-- **SMTP host** - Mail Server host
-- **SMTP port** - Mail Server port
-- **Timeout ms** - read timeout in milliseconds
-- **Enable TLS** - if true, enables the use of the STARTTLS command (if supported by the server)
-- **Username** - username for the account at the mail host, if any
-- **Password** - password for the account at the mail host, if any
+- **Use system SMTP settings** - 如果启用，将使用在系统级别配置的默认邮件服务器
+- **Protocol** - 邮件服务器传输协议：*SMTP* 或 *SMTPS*
+- **SMTP host** - 邮件服务器主机
+- **SMTP port** - 邮件服务器端口
+- **Timeout ms** - 读取超时，以毫秒为单位
+- **Enable TLS** - 如果为true，则启用STARTTLS命令的使用（如果服务器支持）
+- **Username** - 邮件主机上帐户的用户名（如果有）
+- **Password** - 邮件主机上帐户的密码（如果有）
 
-This Node can work with default Mail Server configured on System level.
-Please find more details about [how to configure default System SMTP Settings.](/docs/user-guide/ui/mail-settings/)
+该节点可以与在系统级别配置的默认邮件服务器一起使用。
+请找到有关 [如何配置默认系统SMTP设置的详细信息](/docs/user-guide/ui/mail-settings/)
 
-If specific Mail Server is required for this node - disable **Use system SMTP settings** checkbox and configure Mail Server manually.
-
-<br/>
-
-Additionally this node can create email attachments if incoming message has prepared **attachments** field with reference to files stored in DataBase. 
-
-**NOTE**: This is part of [File Storage](/docs/user-guide/file-storage/) feature supported by [ThingsBoard Professional Edition](/products/thingsboard-pe/).
+如果此节点需要特定的邮件服务器，请禁用**Use system SMTP settings**复选框，并手动配置邮件服务器。
+该节点可以与在系统级别配置的默认邮件服务器一起使用。[有关如何配置默认系统SMTP设置](/docs/user-guide/ui/mail-settings/)请找到的更多详细信息。
+如果此节点需要特定的邮件服务器，请禁用使用系统SMTP设置复选框并手动配置邮件服务器
 
 <br/>
 
-In case of successful mail sending, original Message will be passed to the next nodes via **Success** chain, 
-otherwise **Failure** chain is used.
+另外，如果传入消息已参考数据库中存储的文件准备了**附件**字段，则此节点可以创建电子邮件附件。
 
-You can see the real life example, where this node is used, in the next tutorial:
-
-- [Send Email](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)
+**注意**: 这是[ThingsBoard Professional Edition](/products/thingsboard-pe/)支持的[文件存储](/docs/user-guide/file-storage/)功能的一部分。
 
 <br/>
 
-# Twilio SMS Node
+如果成功发送邮件，原始消息将通过**Success**链传递到下一个节点，否则将使用**Failure**链。
+
+在下一个教程中，您可以看到使用该节点的真实示例:
+
+- [邮件发送](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)
+
+<br/>
+
+# Twilio SMS 节点
 
 <table  style="width:12%">
    <thead>
@@ -353,18 +337,17 @@ You can see the real life example, where this node is used, in the next tutorial
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-twilio-sms.png)
 
-Sends incoming message payload as SMS message via Twilio service.
+通过Twilio服务将传入消息有效负载作为SMS消息发送。
 
-Configuration:
+配置:
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/external-twilio-sms-config.png)
 
-- **Phone Number From** - can be set direct phone number as Number From of SMS
-                          or pattern can be used, that will be resolved to the real Number From using Message metadata.
-- **Phone Numbers To** - comma separated recipient Phone Numbers list. Can be set direct phone numbers or pattern can be used, that will be resolved to the real phone numbers using Message metadata.
-- **Twilio Account SID** - your Account Sid at twilio.com/console
-- **Twilio Account Token** - your Account Token at twilio.com/console
+- **Phone Number From** - 可以设置直接电话号码，因为可以使用SMS的号码发件人或可以使用模式，将其解析为使用消息元数据的真实号码发件人。
+- **Phone Numbers To** - 逗号分隔的收件人电话号码列表。可以设置直接电话号码，也可以使用模式，这将使用消息元数据解析为真实电话号码。
+- **Twilio Account SID** - 位于twilio.com/console的Sid帐号
+- **Twilio Account Token** -  位于twilio.com/console的令牌
 
-SMS message will be sent to all recipients taken from **Phone Numbers To** list.
+SMS消息将发送至**电话号码至**列表中的所有收件人。
 
-If SMS message will be sent to all recipients successfully, original Message will be passed to the next nodes via **Success** chain, otherwise **Failure** chain is used.
+如果将SMS消息成功发送给所有收件人，则原始消息将通过**Success**链传递到下一个节点，否则将使用**Failure**链。

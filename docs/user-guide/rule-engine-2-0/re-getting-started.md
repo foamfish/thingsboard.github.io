@@ -1,48 +1,47 @@
 ---
 layout: docwithnav
-title: Getting Started with Rule Engine
-description: Getting Started with Rule Engine
+title: 规则引擎入门
+description: 规则引擎入门
 
 ---
 
 * TOC
 {:toc}
 
-## What is ThingsBoard Rule Engine?
-Rule Engine is an easy to use framework for building event-based workflows. There are 3 main components:
+## 什么是规则引擎?
+规则引擎是基于事件构建的工作流是易于使用的框架。有3个主要组成部分:
 
-- **Message** - any incoming event. It can be an incoming data from devices, device life-cycle event, REST API event, RPC request, etc.
-- **Rule Node** - a function that is executed on an incoming message. There are many different Node types that can filter, transform or execute some action on incoming Message. 
-- **Rule Chain** - nodes are connected with each other with relations, so the outbound message from rule node is sent to next connected rule nodes.
+- **Message** - 接收任何事件。它可以是来自Device，设备生命周期事件，REST API事件，RPC请求等的传入数据。
+- **Rule Node** - 处理消息执行的功能。对接收的节点进行过滤、转换或者执行的能力。 
+- **Rule Chain** - 关联节点之的连接，接收来自节点的出站消息将其发送至下一个节点。
 
 
-## Typical Use Cases 
-ThingsBoard Rule Engine is a highly customizable framework for complex event processing. Here are some common use cases that one can configure via ThingsBoard Rule Chains:
+## 典型实例 
+ThingsBoard Rule Engine是一个高度可定制的框架，用于复杂事件的处理。以下是一些可以通过ThingsBoard规则链配置的常见用例：
 
-- Data validation and modification for incoming telemetry or attributes before saving to the database.
-- Copy telemetry or attributes from devices to related assets so you can aggregate telemetry. For example data from multiple devices can be aggregated
-in related Asset.
-- Create/Update/Clear alarms based on defined conditions.
-- Trigger actions based on device life-cycle events. For example, create alerts if Device is Online/Offline.
-- Load additional data required for processing. For example, load temperature threshold value for a device that is defined in Device's Customer or Tenant attribute.
-- Trigger REST API calls to external systems.
-- Send emails when complex event occurs and use attributes of other entities inside Email Template.
-- Take into account User preferences during event processing.
-- Make RPC calls based on defined condition.
-- Integrate with external pipelines like Kafka, Spark, AWS services, etc.
+- 在保存到数据库之前，对接收的遥测数据或属性进行验证和修改。
+- 将遥测或属性从设备复制到相关资产，以便可以汇总遥测。例如，可以将多个设备中的数据汇总到相关资产中。
+- 根据定义的条件对alarms进行创建、更新、清除。
+- 根据设备生命周期事件触发操作。例如，如果设备处于在线/离线状态，则创建警告。
+- 加载所需的其他处理数据。例如，在客户设备或租户属性中定义的设备的负载温度阈值。
+- 触发对外部系统的REST API调用。
+- 发生复杂事件时发送电子邮件，并使用“电子邮件模板”中其他实体的属性。
+- 在事件处理期间要考虑用户的偏好。
+- 根据定义的条件进行RPC调用。
+- 与外部管道（如Kafka，Spark，AWS服务等）集成。
 
-## Hello-World Example
-Let’s assume your device is using DHT22 sensor to collect and push temperature to the ThingsBoard. 
-DHT22 sensor can measure temperature from -40°C to +80°C.
+## Hello World 实例
 
-In this tutorial we will configure ThingsBoard Rule Engine to store all temperature within -40 to 80°C range and log all other readings to the system log.
+你可以使用ThingsBoard平台将DHT22温度传感器采集的-40°C至+ 80°C温度值进行收集。
 
-#### Adding temperature validation node
-In Thingsboard UI go to **Rule Chains** section and open **Root Rule Chain**.
+在此教程中我们将配置ThingsBoard Rule Engine来存储-40至80°C范围内的所有温度，并将所有数据记录到系统日志中。
+
+#### 添加温度并验节点
+进入Thingsboard UI中**Rule Chains**转到**Root Rule Chain**.
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/initial-root-chain.png)
 
-Drag and Drop **Script Filter** rule node to the chain. Node configuration window will be opened. We will use this script for data validation:
+拖动**Script Filter** 规则节点放入链中并配置如下脚本:
 
 {% highlight javascript %}
 return typeof msg.temperature === 'undefined' 
@@ -51,52 +50,48 @@ return typeof msg.temperature === 'undefined'
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/script-config.png)
 
-If temperature property not defined or temperature is valid - script will return **True**, otherwise it will return **False**.
-If script returns **True** incoming message will be routed to the next nodes that are connected with **True** relation.
+如果未定义温度属性或温度有效则脚本将返回**True**，否则将返回**False**。如果脚本返回**True**则传入消息将被关联到与**True**关系连接的下一个节点。
  
-Now we want that all **telemetry requests** pass through this validation script. We need to remove the existing **Post Telemetry** 
-relation between **Message Type Switch** node and **Save Telemetry** node:
+我们希望所有的**telemetry requests**都通过此脚本进行验证. 删除**Message Type Switch**节点和**Save Telemetry**节点之间的**Post Telemetry**关系节点。
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/remove-relation.png)
   
-And connect **Message Type Switch** node with **Script Filter** node using **Post Telemetry** relation:
+将**Message Type Switch**节点和将**Script Filter**使用**Post Telemetry**进行连接:
    
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/realtion-window.png)
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/connect-script.png)
 
-Next, we need to connect **Script Filter** node with **Save Telemetry** node using **True** relation. So all valid telemetry will be saved:
+将**Script Filter**节点与**Save Telemetry**节点使用关系**True**进行连接：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/script-to-save.png)
 
-Also, we will connect **Script Filter** node with **Log Other** node using **False** relation. So that all not valid telemetry will be logged in the system log:
+将**Script Filter**节点与**Log Other**节点使用关系**False**进行连接这样无效数据将被记录在系统日志中：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/false-log.png)
 
-Press Save button to apply changes.
+点击保存按钮应用更新。
 
-#### Validate results
-For validating results we will need to create Device and submit telemetry to the Thingsboard. So go to **Devices** section and create new Device:
+#### 验证结果
+创建设备并将遥测提交到Thingsboard，点击**Devices**并创建新的设备：
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/create-device.png)
 
-For posting device telemetry we will use [Rest API](/docs/reference/http-api/#telemetry-upload-api). To do this this we will need to
-copy device access token from the device **Thermostat Home**. 
-
+可以使用设备令牌进行[Rest API](/docs/reference/http-api/#telemetry-upload-api)提交遥测数据提交，
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/copy-access-token.png)
 
-Lets post temperature = 99. We will see that telemetry **was not** added in Device **Latest Telemetry** section:
+提交temperature = 99的值，可以进行**Latest Telemetry**中查看，发现并未加成功：
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":99}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
 {% endhighlight %}
 
-***you need to replace $ACCESS_TOKEN with actual device token**
+***替换掉$ACCESS_TOKEN为实际设备的Token**
 
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/empty-telemetry.png)
 
 
-Lets post temperature = 24. We will see that telemetry was saved successfully.
+提交temperature = 24可以看见遥测数据保存成功
 
 {% highlight bash %}
 curl -v -X POST -d '{"temperature":24}' http://localhost:8080/api/v1/$ACCESS_TOKEN/telemetry --header "Content-Type:application/json"
@@ -105,27 +100,27 @@ curl -v -X POST -d '{"temperature":24}' http://localhost:8080/api/v1/$ACCESS_TOK
 ![image](/images/user-guide/rule-engine-2-0/tutorials/getting-started/saved-ok.png)
 
 
-## See Also:
+## 相关文档:
 
-You can use the next links for learning more about Thingsboard Rule Engine:
+你可以通过以下链接了解Thingsboard Rule Engine的更多信息：
 
-- [Rule Engine Overview](/docs/user-guide/rule-engine-2-0/overview/)
-- [Rule Engine Architecture](/docs/user-guide/rule-engine-2-0/architecture/)
-- [Debug Node Execution](/docs/user-guide/rule-engine-2-0/overview/#debugging)
-- [Validate incoming telemetry](/docs/user-guide/rule-engine-2-0/tutorials/validate-incoming-telemetry/)
-- [Transform incoming telemetry](/docs/user-guide/rule-engine-2-0/tutorials/transform-incoming-telemetry/)
-- [Transform telemetry using previous record](/docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/)
-- [Create & clear alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/)
-- [Send email on alarm](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)
-- [Create alarm when the device is offline](/docs/user-guide/rule-engine-2-0/tutorials/create-inactivity-alarm/)
-- [Check Relation between Entities](/docs/user-guide/rule-engine-2-0/tutorials/check-relation-tutorial/)
-- [RPC Request to Related Device](/docs/user-guide/rule-engine-2-0/tutorials/rpc-request-tutorial/)
-- [Add & remove devices to group dynamically](/docs/user-guide/rule-engine-2-0/tutorials/add-devices-to-group/)
-- [Aggregate incoming data stream](/docs/user-guide/rule-engine-2-0/tutorials/aggregate-incoming-data-stream/)
+- [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)
+- [规则引擎架构](/docs/user-guide/rule-engine-2-0/architecture/)
+- [调试节点执行](/docs/user-guide/rule-engine-2-0/overview/#debugging)
+- [验证传入遥测](/docs/user-guide/rule-engine-2-0/tutorials/validate-incoming-telemetry/)
+- [转换输入遥测](/docs/user-guide/rule-engine-2-0/tutorials/transform-incoming-telemetry/)
+- [历史记录转换遥测](/docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/)
+- [创建&清除警报](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/)
+- [发送警报邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)
+- [设备离线创建警报](/docs/user-guide/rule-engine-2-0/tutorials/create-inactivity-alarm/)
+- [检查实体之间关系](/docs/user-guide/rule-engine-2-0/tutorials/check-relation-tutorial/)
+- [RPC请求相关设备](/docs/user-guide/rule-engine-2-0/tutorials/rpc-request-tutorial/)
+- [动态分组中添加删除设备](/docs/user-guide/rule-engine-2-0/tutorials/add-devices-to-group/)
+- [汇总传入数据流](/docs/user-guide/rule-engine-2-0/tutorials/aggregate-incoming-data-stream/)
 
 <br/>
 <br/>
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "GettingStartedGuides" %}{% include templates/guides-banner.md %}

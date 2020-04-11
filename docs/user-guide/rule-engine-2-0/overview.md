@@ -1,66 +1,64 @@
 ---
 layout: docwithnav
-title: Rule Engine Overview
-description: Rule Engine Overview
+title: 规则引擎概述
+description: 规则引擎概述
 
 ---
 
 * TOC
 {:toc}
 
-ThingsBoard Rule Engine is a highly customizable and configurable system for complex event processing. 
-With rule engine you are able to filter, enrich and transform incoming messages originated by IoT devices and related assets. 
-You are also able to trigger various actions, for example, notifications or communication with external systems.
+ThingsBoard Rule Engine是用于复杂事件处理的高度可定制和可配置的系统。使用规则引擎，您可以过滤，丰富和转换由IoT设备和相关资产发出的传入消息。您还可以触发各种操作，例如，通知或与外部系统的通信。
   
-## Key Concepts
+## 关键概念
 
-#### Rule Engine Message 
+#### 规则引擎消息
 
-Rule Engine Message is a serializable, immutable data structure that represent various messages in the system. For example:
+规则引擎消息是可以被序列化的有着规定的数据结构，表示系统中的各种消息。例如：
 
-  * Incoming [telemetry](/docs/user-guide/telemetry/), [attribute update](/docs/user-guide/attributes/) or [RPC call](/docs/user-guide/rpc/) from device;
-  * Entity life-cycle event: created, updated, deleted, assigned, unassigned, attributes updated;
-  * Device status event: connected, disconnected, active, inactive, etc;
-  * Other system events.
+  * 对来自设备传入的[遥测](/docs/user-guide/telemetry/),[属性更新](/docs/user-guide/attributes/)或[RPC调用](/docs/user-guide/rpc/) from device;
+  * 实体生命周期事件: created, updated, deleted, assigned, unassigned, attributes updated;
+  * 设备状态事件: connected, disconnected, active, inactive, etc;
+  * 其他系统事件。
   
-Rule Engine Message contains the following information:
+规则引擎消息包含以下信息:
 
-  * Message ID: time based, universally unique identifier;
-  * Originator of the message: Device, Asset or other [Entity](/docs/user-guide/entities-and-relations/) identifier;
-  * Type of the message: "Post telemetry" or "Inactivity Event", etc;
-  * Payload of the message: JSON body with actual message payload;
-  * Metadata: List of key-value pairs with additional data about the message. 
+  * 消息ID（Message ID）：基于时间的通用唯一标识符;
+  * 消息发起者（Originator of the message）：Device，Asset或其他[Entity](/docs/user-guide/entities-and-relations/)标识符;
+  * 消息类型（Type of the message）：遥测或不活动的事件等;
+  * 消息负载（Payload of the message）：带有实际消息有效负载的JSON正文;
+  * 元数据（Metadata）键值对的列表以及与消息有关的其他数据. 
 
-##### Predefined Message Types
+##### 预定义的消息类型
 
-List of the predefined Message Types is presented in the following table:
+下表列出了预定义的消息类型：
 
 <table>
   <thead>
       <tr>
-          <td><b>Message Type</b></td><td><b>Display Name</b></td><td><b>Description</b></td><td><b>Message metadata</b></td><td><b>Message payload</b></td>
+          <td><b>消息类型</b></td><td><b>显示名称</b></td><td><b>描述</b></td><td><b>消息元数据</b></td><td><b>Message payload</b></td>
       </tr>
   </thead>
   <tbody>
       <tr>
           <td>POST_ATTRIBUTES_REQUEST</td>
-          <td><b>Post attributes</b></td>
-          <td>Request from device to publish <a href="/docs/user-guide/attributes/#attribute-types">client side</a> attributes (see <a href="/docs/reference/mqtt-api/#publish-attribute-update-to-the-server">attributes api</a> for reference)</td>
-          <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type</td>
+          <td><b>发布属性</b></td>
+          <td>请求从设备发布到 <a href="/docs/user-guide/attributes/#attribute-types">客户端属性</a> (请参见 <a href="/docs/reference/mqtt-api/#publish-attribute-update-to-the-server">属性api</a> 获取参考)</td>
+          <td><b>deviceName</b> - 设备原始名称,<br><b>deviceType</b> - 设备原始类型</td>
           <td>key/value json: <br> <code style="font-size: 12px;">{ <br> &nbsp;&nbsp;"currentState": "IDLE" <br> }</code></td>
       </tr>
       <tr>
           <td>POST_TELEMETRY_REQUEST</td>
           <td><b>Post telemetry</b></td>
           <td>Request from device to publish telemetry (see <a href="/docs/reference/mqtt-api/#telemetry-upload-api">telemetry upload api</a> for reference)</td>
-          <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type,<br><b>ts</b> - timestamp (milliseconds)</td>
+          <td><b>deviceName</b> - 设备原始名称,<br><b>deviceType</b> - 设备原始类型,<br><b>ts</b> - timestamp (milliseconds)</td>
           <td>key/value json: <br> <code style="font-size: 12px;">{ <br> &nbsp;&nbsp;"temperature": 22.7 <br> }</code></td>
       </tr>
       <tr>
           <td>TO_SERVER_RPC_REQUEST</td>
           <td><b>RPC Request from Device</b></td>
           <td>RPC request from device (see <a href="/docs/reference/mqtt-api/#client-side-rpc">client side rpc</a> for reference)</td>
-          <td><b>deviceName</b> - originator device name,<br><b>deviceType</b> - originator device type,<br><b>requestId</b> - RPC request Id provided by client</td>
+          <td><b>deviceName</b> - 设备原始名称,<br><b>deviceType</b> - 设备原始类型,<br><b>requestId</b> - RPC request Id provided by client</td>
           <td>json containing <b>method</b> and <b>params</b>: <br> <code style="font-size: 12px;">{ <br> &nbsp;&nbsp;"method": "getTime", <br>&nbsp;&nbsp;"params": { "param1": "val1" } <br> }</code></td>
       </tr>
       <tr>
@@ -208,130 +206,126 @@ List of the predefined Message Types is presented in the following table:
    </tbody>
 </table>
 
-#### Rule Node
+#### 规则节点
 
-Rule Node is a basic component of Rule Engine that process single incoming message at a time and produce one or more outgoing messages. 
-Rule Node is a main logical unit of the Rule Engine. Rule Node can filter, enrich, transform incoming messages, perform action or communicate with external systems.
+规则节点是规则引擎的基本组件，每次处理单个传入消息并生成一个或多个传出消息。
 
-#### Rule Node Relation
+规则节点是规则引擎的主要逻辑单元。
 
-Rule Nodes may be related to other rule nodes. Each relation has relation type, a label used to identify logical meaning of the relation. 
-When rule node produces the outgoing message it always specifies the relation type which is used to route message to next nodes.
- 
-Typical rule node relations are "Success" and "Failure". 
-Rule nodes that represent logical operations may use "True" or "False". 
-Some specific rule nodes may use completely different relation types, for example: "Post Telemetry", "Attributes Updated", "Entity Created", etc. 
+规则节点可以是filter, enrich, transform传入消息，执行操作或与外部系统通信。
 
-#### Rule Chain
+#### 规则节点关系
 
-Rule Chain is a logical group of rule nodes and their relations. For example, the rule chain below will:
+规则节点可能与其他规则节点相关。每个关系都有关系类型，这是用于标识关系的逻辑含义的标签。
 
-  * save all telemetry messages to the database;
-  * raise "High Temperature Alarm" if temperature field in the message will be higher then 50 degrees;
-  * raise "Low Temperature Alarm" if temperature field in the message will be lower then -40 degrees;
-  * log failure to execute the temperature check scripts to console in case of logical or syntax error in the script. 
+当规则节点生成传出消息时，它总是指定用于将消息路由到下一个节点的关系类型。
+
+典型的规则节点关系是“成功”和“失败”。表示逻辑运算的规则节点可以使用“ True”或“ False”。
+
+一些特定的规则节点可能使用完全不同的关系类型，例如：“Post Telemetry”，“Attributes Updated”，“Entity Created”等。
+
+#### 规则链
+
+规则链是规则节点及其关系的逻辑组。例如，下面的规则链将：
+
+  * 将所有遥测消息保存到数据库中;
+  * 如果消息中的温度字段高于50度，则发出“高温警报”;
+  * 如果消息中的温度字段低于-40度，则发出“低温警报”;
+  * 如果在脚本中发生逻辑或语法错误时，则无法执行温度脚本检查控制台记录。 
 
 ![image](/images/user-guide/rule-engine-2-0/rule-node-relations.png)
 
+租户管理员可以定义一个**Root Rule Chain**，还可以定义多个其他规则链。根规则链处理所有传入的消息，并将其转发到其他规则链以进行其他处理。
 
-Tenant administrator is able to define one **Root Rule Chain** and optionally multiple other rule chains. 
-Root rule chain handles all incoming messages and may forward them to other rule chains for additional processing.
-Other rule chains may also forward messages to different rule chains.
+例如，下面的规则链将：
 
-For example, the rule chain below will:
-
-  * raise "High Temperature Alarm" if temperature field in the message will be higher then 50 degrees;
-  * clear "High Temperature Alarm" if temperature field in the message will be less then 50 degrees;
-  * forward events about "Created" and "Cleared" alarms to external rule chain that handles notifications to corresponding users.
+  * 如果消息中的温度字段高于50度，则发出“高温警报”；
+  * 如果消息中的温度字段小于50度，则清除“高温警报”
+  * 将有关“已创建”和“已清除”警报的事件转发到外部规则链，该规则链处理向相应用户的通知。
  
 ![image](/images/user-guide/rule-engine-2-0/rule-chain-references.png)
  
-## Rule Node Types
+## 规则节点类型
 
-All available rule nodes are grouped in correspondence with their nature:
+根据其性质将所有可用规则节点分组：
 
-  * [**Filter Nodes**](/docs/user-guide/rule-engine-2-0/filter-nodes/) are used for message filtering and routing;
-  * [**Enrichment Nodes**](/docs/user-guide/rule-engine-2-0/enrichment-nodes/) are used to update meta-data of the incoming Message;
-  * [**Transformation Nodes**](/docs/user-guide/rule-engine-2-0/transformation-nodes/) are used for changing incoming Message fields like Originator, Type, Payload, Metadata;
-  * [**Action Nodes**](/docs/user-guide/rule-engine-2-0/action-nodes/) execute various actions based on incoming Message;
-  * [**External Nodes**](/docs/user-guide/rule-engine-2-0/external-nodes/) are used to interact with external systems.
+  * [**Filter Nodes**](/docs/user-guide/rule-engine-2-0/filter-nodes/)用于消息过滤和路由;
+  * [**Enrichment Nodes**](/docs/user-guide/rule-engine-2-0/enrichment-nodes/)用于更新传入消息的元数据;
+  * [**Transformation Nodes**](/docs/user-guide/rule-engine-2-0/transformation-nodes/)用于更改传入的消息字段，例如Originator, Type, Payload, Metadata;
+  * [**Action Nodes**](/docs/user-guide/rule-engine-2-0/action-nodes/)根据传入的消息执行各种动作;
+  * [**External Nodes**](/docs/user-guide/rule-engine-2-0/external-nodes/)用于与外部系统进行交互.
 
-## Configuration
+## 配置
 
-Each Rule Node may have specific configuration parameters that depend on the Rule Node Implementation. 
-For example, "Filter - script" rule node is configurable via custom JS function that process incoming data. 
-"External - send email" node configuration allows to specify mail server connection parameters.
+每一个规则节点具有特定的参数配置，例如：Filter节点可以通过自定义JS函数。External节点可以通过参数配置实现外部邮件服务器连接设置
   
-Rule Node configuration window may be opened by double-clicking on the node in the Rule Chain editor:    
+可以通过在“规则链”编辑器中双击节点来打开“规则节点”配置窗口：
   
 ![image](/images/user-guide/rule-engine-2-0/rule-node-configuration.png)
 
-### Test JavaScript functions
+### Javascript函数
 
-Some rule nodes have specific UI feature that allow users to test JS functions. 
-Once you click on the **Test Filter Function** you will see the JS Editor that allows you to substitute input parameters and verify the output of the function.
-    
+一些规则节点具有特定的UI功能，允许用户测试JS函数。单击**Test Filter Function**后，您将看到JS编辑器，可使用该编辑器替换输入参数并验证函数的输出。
+
 ![image](/images/user-guide/rule-engine-2-0/rule-node-test-function.png)
 
-You can define:
+你可以定义:
 
-- **Message Type** in the top left field.
-- **Message payload** in the left Message section.
-- **Metadata** in right Metadata section.
-- Actual **JS script** in Filter section.
+- **Message Type** 左上角.
+- **Message payload** 左侧中间.
+- **Metadata** 右上角.
+- **JS script** 实际脚本.
 
-After pressing **Test** output will be returned in right **Output** section.
+点击**Test**按钮将在右侧**Output**返回值
 
-## Debugging
+## 调试
 
-ThingsBoard provides ability to review incoming and outgoing messages for each Rule Node.
-To enable debug, user need to ensure that "Debug mode" checkbox is selected in the main configuration window 
-(see first image in the [Configuration](/docs/user-guide/rule-engine-2-0/overview/#configuration) section). 
+ThingsBoard提供了查看每个规则节点的传入和传出消息的功能。要启用调试，用户需要确保在主配置窗口中选中了“调试模式”复选框。启用调试后，只要相应的关系类型，用户就可以查看传入和传出消息的信息。（请参见上面[配置](/docs/user-guide/rule-engine-2-0/overview/#configuration)）。
 
-Once debug is enabled, user is able to see incoming and outgoing messages info as long as corresponding relation types.
-See image below for a sample debug messages view:
+
+启用调试后，只要相应的关系类型，用户就可以查看传入和传出消息的信息。请参阅下图，获取示例调试消息视图：:
   
 ![image](/images/user-guide/rule-engine-2-0/rule-node-debug.png)  
 
-## Import/Export
+## 导入导出
 
-You are able to export your rule chain to JSON format and import it to the same or another ThingsBoard instance.
-
-In order to export rule chain, you should navigate to the **Rule Chains** page and click on the export button located on the particular rule chain card.
- 
+您可以将规则链导出为JSON格式，并将其导入到相同或其他ThingsBoard实例。
+为了导出规则链，您应该导航到**Rule Chains**页面，然后单击位于特定规则链卡上的导出按钮。
+	
 ![image](/images/user-guide/rule-engine-2-0/rule-chain-export.png)
 
-Similar, to import the rule chain you should navigate to the **Rules Chains** page and click on the big "+" button in the bottom-right part of the screen and then click on the import button. 
+类似地，要导入规则链，您应该导航到**Rules Chains**页面，然后单击屏幕右下角的大“ +”按钮，然后单击导入按钮。
 
-## Architecture
+## 架构
 
-To learn more about internals of the rule engine, see [architecture](/docs/user-guide/rule-engine-2-0/architecture/) page.
+要了解有关规则引擎内部的更多信息，请参阅[架构](/docs/user-guide/rule-engine-2-0/architecture/)页面.
 
-## Custom REST API calls to Rule Engine
+## 自定义REST API调用规则引擎
 
 {% assign feature = "Custom Rule Engine REST API calls" %}{% include templates/pe-feature-banner.md %}
 
-ThingsBoard provides API to send custom REST API calls to the rule engine, process the payload of the request and return result of the processing in response body. 
-This is useful for a number of use cases. For example:
+ThingsBoard提供了将自定义REST API调用发送到规则引擎，处理请求的有效负载并在响应正文中返回处理结果的API。
+这对于许多用例很有用。例如：
+
  
- - extend existing REST API of the platform with custom API calls;
- - enrich REST API call with the attributes of device/asset/customer and forward to external system for complex processing;
- - provide custom API for your custom widgets.
+ - 通过自定义API调用扩展平台的现有REST API;
+ - 利用设备/资产/客户的属性丰富REST API调用，并转发给外部系统以进行复杂处理;
+ - 为您的自定义小部件提供自定义API.
  
-To execute the REST API call, you may use rule-engine-controller [REST APIs](/docs/reference/rest-api/): 
+要执行REST API调用，您可以使用规则引擎控制器[REST APIs](/docs/reference/rest-api/): 
  
 ![image](/images/user-guide/rule-engine-2-0/rest-api.png) 
 
-Note: the entity id you have specified in the call will be the originator of Rule Engine message. If you do not specify the entity id parameters, your user entity will become an originator of the message.
+注意：您在呼叫中指定的实体ID将是“规则引擎”消息的始发者。如果您未指定实体ID参数，则您的用户实体将成为消息的发起者。
 
-## Tutorials
+## 教程
 
-ThingsBoard authors have prepared several tutorials to help you get started with designing rule chains by example:
+ThingsBoard的作者准备了一些教程，以帮助您通过示例开始设计规则链:
 
-  * [**Transform incoming messages from device**](/docs/user-guide/rule-engine-2-0/tutorials/transform-incoming-telemetry/) 
-  * [**Transform incoming messages using previous messages from device**](/docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/) 
-  * [**Create and clear alarms on incoming device messages**](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/)
-  * [**Send emails to customer on device alarm**](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) 
-  * [**Send messages between related devices**](/docs/user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial/)
+  * [**转换设备消息**](/docs/user-guide/rule-engine-2-0/tutorials/transform-incoming-telemetry/) 
+  * [**转换设备历史消息**](/docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/) 
+  * [**创建并清除设备警报消息**](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/)
+  * [**发送设备邮件警报**](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) 
+  * [**设备互发消息**](/docs/user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial/)
   
-See more tutorials [here](https://thingsboard.io/docs/guides/).
+点击此处查看更多教程[here](https://thingsboard.io/docs/guides/).

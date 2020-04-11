@@ -1,94 +1,88 @@
 ---
 layout: docwithnav
-title: Enrichment Nodes
-description: Rule Engine 2.0 Enrichment Nodes
+title: 富集节点
+description: 规则引擎2.0富集节点
 
 ---
 
-Enrichment Nodes are used to update meta-data of the incoming Message.
+丰富节点用于更新传入消息的元数据。
 
 * TOC
 {:toc}
 
-##### Customer attributes
+##### 客户属性
 
 <table  style="width:12%">
    <thead>
      <tr>
-	 <td style="text-align: center"><strong><em>Since TB Version 2.0</em></strong></td>
+	 <td style="text-align: center"><strong><em>支持Thingsboard2.0+</em></strong></td>
      </tr>
    </thead>
 </table> 
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-customer-attributes.png)
 
-Node finds Customer of the Message Originator entity and adds Customers Attributes or Latest Telemetry value into Message Metadata. 
+节点找到消息发起者实体的客户，并将客户属性或最新遥测值添加到消息元数据中。
 
-Administrator can configure the mapping between original attribute name and Metadata attribute name.
+管理员可以配置原始属性名称和元数据属性名称之间的映射。
 
-There is **Latest Telemetry** checkbox in the Node configuration. 
-If this checkbox selected, Node will fetch Latest telemetry for configured keys. Otherwise, Node will fetch server scope attributes.
+节点配置中有**Latest Telemetry**复选框。如果选中此复选框，则节点将获取已配置密钥的最新遥测。否则，Node将获取服务器作用域属性。
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-customer-attributes-config.png)
 
-Outbound Message Metadata will contain configured attributes if they exist.
-To access fetched attributes in other nodes you can use this template '<code>metadata.temperature</code>'
+出站邮件元数据将包含已配置的属性（如果存在）。要访问其他节点中获取的属性，可以使用此模板'<code>metadata.temperature</code>'
 
-Following Message Originator types are allowed: **Customer**, **User**, **Asset**, **Device**.
- 
-If unsupported Originator type found, an error is thrown.
+允许以下消息发起者类型： **Customer**, **User**, **Asset**, **Device**。
 
-If Originator does not have assigned Customer Entity **Failure** chain is used, otherwise **Success** chain.
+如果找到了不受支持的原始发件人类型，则会引发错误。
+如果未为Originator分配客户实体**Failure**链，则使用**Success**链。
+在下一个教程中，您可以看到使用该节点的真实示例：
+- [发送邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)
 
-You can see the real life example, where this node is used, in the next tutorial:
-
-- [Send Email](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)
-
-##### Device attributes
+##### 设备属性
 
 <table  style="width:12%">
    <thead>
      <tr>
-	 <td style="text-align: center"><strong><em>Since TB Version 2.0</em></strong></td>
+	 <td style="text-align: center"><strong><em>支持Thingsboard2.0+</em></strong></td>
      </tr>
    </thead>
 </table> 
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-device-attributes.png)
 
-Node finds Related Device of the Message Originator entity using configured query and adds Attributes (client\shared\server scope) 
-and Latest Telemetry value into Message Metadata.
+节点使用配置的Query查找消息发起者实体的相关设备，并将属性(client\shared\server scope) 和最新的遥测值添加到消息元数据中。 
 
-Attributes are added into metadata with scope prefix:
+属性添加到带有范围前缀的元数据中
 
-- shared attribute -> <code>shared_</code>
-- client attribute -> <code>cs_</code>
-- server attribute -> <code>ss_</code>
-- telemetry -> no prefix used 
+- shared属性 -> <code>shared_</code>
+- client属性 -> <code>cs_</code>
+- server属性 -> <code>ss_</code>
+- telemetry -> 无前缀
 
-For example, shared attribute 'version' will be added into Metadata with the name 'shared_version'. Client attributes will use 'cs_' prefix. 
-Server attributes use 'ss_' prefix. Latest telemetry value added into Message Metadata as is, without prefix.
+例如，共享属性“版本”将以名称“ shared_version”添加到元数据中。客户端属性将使用“ cs_”前缀。服务器属性使用“ ss_”前缀。按原样添加到消息元数据中的最新遥测值，不带前缀。
 
-In 'Device relations query' configuration Administrator can select required **Direction** and **relation depth level**.
-Also **Relation type** can be configured with required set of **Device types**.
+在“设备关系查询”配置中，管理员可以选择所需的**Direction**和**relation depth level**。还可以使用所需的**Device types**集配置**Relation type**。
+
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-device-attributes-config.png)
 
-If multiple Related Entities were found, **_only the first Entity is used_** for attributes enrichment, other entities will be discarded.
+如果找到多个相关实体，则仅第一个实体用于属性丰富，其他实体将被丢弃。
 
-**Failure** chain is used if no Related Entity was found, otherwise - **Success** chain.
+如果未找到相关实体，则使用**Failure**链，否则- **Success**链。
 
-If attribute or telemetry was not found, it is not added into Message Metadata and still routed via **Success** chain.
+如果找不到属性或遥测，则不会将其添加到消息元数据中，并且仍会通过**Success**链进行路由。
 
-Outbound Message Metadata will contain configured attributes only if they exist.
+出站邮件元数据将仅包含配置的属性（如果存在）。
 
-To access fetched attributes in other nodes you can use this template '<code>metadata.temperature</code>'
+要访问其他节点中获取的属性，可以使用此模板'<code>metadata.temperature</code>'
 
-**Note:** Since TB Version 2.3.1 the rule node has the ability to enable/disable reporting **Failure** if at least one selected key doesn't exist in the outbound message.
+
+**注意:**  从TB版本2.3.1开始，如果出站消息中没有至少一个选定的密钥，则规则节点可以启用/禁用报告**Failure**。
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-orignator-and-device-attributes-tell-failure.png)
 
-##### Originator attributes
+##### 发起者属性
 
 <table  style="width:12%">
    <thead>
@@ -100,34 +94,31 @@ To access fetched attributes in other nodes you can use this template '<code>met
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-originator-attributes.png)
 
-Add Message Originator Attributes (client\shared\server scope) and Latest Telemetry value into Message Metadata. 
+在消息元数据中添加消息发起者属性(client\shared\server scope)和最新的遥测值。 将属性添加到有范围前缀的元数据中:
 
-Attributes are added into metadata with scope prefix:
+- shared属性   -> <code>shared_</code>
+- client属性  -> <code>cs_</code>
+- server属性  -> <code>ss_</code>
+- telemetry -> 无前缀
 
-- shared attribute -> <code>shared_</code>
-- client attribute -> <code>cs_</code>
-- server attribute -> <code>ss_</code>
-- telemetry -> no prefix used 
-
-For example, shared attribute 'version' will be added into Metadata with the name 'shared_version'. Client attributes will use 'cs_' prefix. 
-Server attributes use 'ss_' prefix. Latest telemetry value added into Message Metadata as is, without prefix.
+例如，共享属性' version '将被添加到名为' sharedversion '的元数据中。客户端属性将使用' cs '前缀。服务器属性使用“ss_”前缀。将最新的遥测值添加到无前缀的消息元数据中。
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-originator-attributes-config.png)
 
-Outbound Message Metadata will contain configured attributes if they exist.
+出站消息元数据包含已配置的属性(如果存在)。
 
-To access fetched attributes in other nodes you can use this template '<code>metadata.cs_temperature</code>'
+要访问其他节点中获取的属性，可以使用此模板'<code>metadata.cs_temperature</code>'
 
-**Note:** Since TB Version 2.3.1 the rule node has the ability to enable/disable reporting **Failure** if at least one selected key doesn't exist in the outbound message.
+**Note:** 从TB版本2.3.1开始，如果出站消息中没有至少一个选定的密钥，则规则节点可以启用/禁用报告**Failure**
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-orignator-and-device-attributes-tell-failure.png)
 
-You can see the real life example, where this node is used, in the following tutorials:
+在以下教程中，您可以看到使用该节点的真实示例:
 
-- [Transform telemetry using previous record](/docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/)
-- [Send Email](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)
+- [转换设备历史消息](/docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/)
+- [发送邮件](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)
 
-##### Originator fields
+##### 发起者字段
 
 <table  style="width:12%">
    <thead>
@@ -140,23 +131,21 @@ You can see the real life example, where this node is used, in the following tut
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-originator-fields.png)
 
-Node fetches fields values of the Message Originator entity and adds them into Message Metadata. 
-Administrator can configure the mapping between field name and Metadata attribute name.
-If specified field is not part of Message Originator entity fields it will be ignored.
+节点获取Message Originator实体的字段值，并将其添加到Message Metadata中。管理员可以配置字段名称和元数据属性名称之间的映射。如果指定的字段不是Message Originator实体字段的一部分，它将被忽略。
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-originator-fields-config.png)
 
-Following Message Originator types are allowed: **Tenant**, **Customer**, **User**, **Asset**, **Device**, **Alarm**, **Rule Chain**.
+允许以下消息发起者类型: **Tenant**, **Customer**, **User**, **Asset**, **Device**, **Alarm**, **Rule Chain**。
 
-**Failure** chain is used If unsupported Originator type found, otherwise - **Success** chain.
+如果发现不支持的发起者类型，则使用**Failure**链否则使用**Success**链.
 
-If field value was not found, it is not added into Message Metadata and still routed via **Success** chain.
+如果没有找到字段值，则不会将其添加到消息元数据中，而是通过成功链进行路由。 
 
-Outbound Message Metadata will contain configured attributes only if they exist.
+出站消息元数据将只包含已配置的属性。 
 
-To access fetched attributes in other nodes you can use this template '<code>metadata.devType</code>'
+要访问其他节点中获取的属性，可以使用这个模板'<code>metadata.devType</code>'
 
-##### Related attributes
+##### 相关属性
 
 <table  style="width:12%">
    <thead>
@@ -168,31 +157,30 @@ To access fetched attributes in other nodes you can use this template '<code>met
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-related-attributes.png)
 
-Node finds Related Entity of the Message Originator entity using configured query and adds Attributes or Latest Telemetry value into Message Metadata.
+节点使用配置的查询查找“消息发起者”实体的“相关实体”，并将“属性”或“最新遥测”值添加到“消息元数据”中。
  
-Administrator can configure the mapping between original attribute name and Metadata attribute name.
+管理员可以配置原始属性名称和元数据属性名称之间的映射。
 
-In 'Relations query' configuration Administrator can select required **Direction** and **relation depth level**. 
-Also set of **Relation filters** can be configured with required Relation type and Entity Types.
+在“关系查询”配置中，管理员可以选择所需的**Direction**和**relation depth level**. 
+还可以使用必需的关系类型和实体类型配置**Relation filters**。
 
-There is **Latest Telemetry** checkbox in the Node configuration. If this checkbox selected, Node will fetch Latest telemetry for configured keys. 
-Otherwise, Node will fetch server scope attributes.
+选中**Latest Telemetry**复选框则节点将获取已配置密钥的最新遥测否则使用Node将获取服务器作用域属性. 
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-related-attributes-config.png)
 
-If multiple Related Entities are found, **_only first Entity is used_** for attributes enrichment, other entities are discarded.
+如果找到多个相关实体**_only first Entity is used_**属性丰富，其他实体则被丢弃.
 
-If no Related Entity found **Failure** chain is used, otherwise **Success** chain.
+如果未找到相关实体，则使用**Failure**链否则使用**Success**链.
 
-Outbound Message Metadata will contain configured attributes if they exist.
+出站邮件元数据将包含已配置的属性（如果存在）.
 
-To access fetched attributes in other nodes you can use this template '<code>metadata.tempo</code>'
+要访问其他节点中获取的属性，可以使用此模板'<code>metadata.tempo</code>'
 
-You can see the real life example, where this node is used, in the next tutorial:
+在下一个教程中，您可以看到使用该节点的真实示例:
 
-- [Reply to RPC Calls](/docs/user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial/#add-related-attributes-node)
+- [回复RPC调用](/docs/user-guide/rule-engine-2-0/tutorials/rpc-reply-tutorial/#add-related-attributes-node)
 
-##### Tenant attributes
+##### 租户属性
 
 <table  style="width:12%">
    <thead>
@@ -204,23 +192,23 @@ You can see the real life example, where this node is used, in the next tutorial
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-tenant-attributes.png)
 
-Node finds Tenant of the Message Originator entity and adds Tenant Attributes or Latest Telemetry value into Message Metadata. 
+节点找到消息始发者实体的租户，并将租户属性或最新遥测值添加到消息元数据中。
 
-Administrator can configure the mapping between original attribute name and Metadata attribute name.
+管理员可以配置原始属性名称和元数据属性名称之间的映射。
 
-There is **Latest Telemetry** checkbox in the Node configuration. If this checkbox selected, Node will fetch Latest telemetry for configured keys. Otherwise, Node will fetch server scope attributes.
+选中**Latest Telemetry**复选框则节点将获取已配置密钥的最新遥测否则使用Node将获取服务器作用域属性. 
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-tenant-attributes-config.png)
 
-Outbound Message Metadata will contain configured attributes if they exist. To access fetched attributes in other nodes you can use this template '<code>metadata.tempo</code>'
+出站邮件元数据将包含已配置的属性（如果存在）。要访问其他节点中获取的属性，可以使用此模板'<code>metadata.tempo</code>'
 
-Following Message Originator types are allowed: **Tenant**, **Customer**, **User**, **Asset**, **Device**, **Alarm**, **Rule Chain**.
+允许以下消息发起者类型: **Tenant**, **Customer**, **User**, **Asset**, **Device**, **Alarm**, **Rule Chain**.
 
-If unsupported Originator type found, an error is thrown.
+如果找到了不受支持的原始发件人类型，则会引发错误。
 
-**Failure** chain is used if Originator does not have assigned Tenant Entity, otherwise - **Success** chain.
+如果发起者尚未分配租户实体，则使用**Failure**链否则**Success**链.
 
-##### Originator telemetry
+##### 发起者遥测
 
 <table  style="width:12%">
    <thead>
@@ -232,83 +220,83 @@ If unsupported Originator type found, an error is thrown.
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-originator-telemetry.png)
 
-Adds Message Originator telemetry values from particular time range that was selected in node configuration to the Message Metadata. 
+将在节点配置中选择的特定时间范围内的消息发起者遥测值添加到消息元数据中。 
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-originator-telemetry-config.png)
 
-Telemetry values added to Message Metadata without prefix.
+遥测值添加到不带前缀的消息元数据中.
 
-The rule node has three fetch modes:
+规则节点具有三种获取模式:
 
- - FIRST: retrieves telemetry from the database that is closest to the beginning of the time range
+ - FIRST: 从数据库中检索最接近时间范围开始的遥测
 
- - LAST: retrieves telemetry from the database that is closest to the end of the time range
+ - LAST: 从最接近时间范围末尾的数据库中检索遥测
 
- - ALL: retrieves all telemetry from the database, which is in the specified time range.
+ - ALL: 在指定时间范围内从数据库检索所有遥测.
  
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-originator-telemetry-fetch-mode.png)
 
-If selected fetch mode **FIRST** or **LAST**, Outbound Message Metadata would contain JSON elements(key/value)
+如果选择获取模式**FIRST**或**LAST**, 则出站消息元数据将包含JSON元素(key/value)
 
-Otherwise if the selected fetch mode **ALL**, telemetry would be fetched as an array.
+否则，如果选定的获取模式**ALL**,则遥测将作为数组获取.
 
 <table  style="width: 60%">
    <thead>
      <tr>
-	 <td><strong><em>Note:</em></strong></td>
+	 <td><strong><em>注意:</em></strong></td>
      </tr>
    </thead>
    <tbody>
      <tr>
 	<td>
-	<p>The rule node can extract a limit size of records into array: 1000 records</p>
+	<p>规则节点可以将记录的限制大小提取到数组中：1000个记录</p>
 	</td>
      </tr>
    </tbody>
 </table>
 
-This array will contain JSON objects with the timestamp and value. 
+该数组将包含带有时间戳和值的JSON对象。
 
 <table  style="width: 60%">
    <thead>
      <tr>
-	 <td><strong><em>Note:</em></strong></td>
+	 <td><strong><em>注意:</em></strong></td>
      </tr>
    </thead>
    <tbody>
      <tr>
 	<td>
-	<p>End of the interval must always be less than the beginning of the interval.</p>
+	<p>间隔的结尾必须始终小于间隔的开头</p>
 	</td>
      </tr>
    </tbody>
 </table>
 
-If selected checkbox: **Use metadata interval patterns**, rule node will use Start Interval and End Interval patterns from metadata.
+如果选中**Use metadata interval patterns**复选框则规则节点将使用元数据中的Start Interval和End Interval模式。
 
-Patterns units sets in the milliseconds since the UNIX epoch (January 1, 1970 00:00:00 UTC)
+自UNIX时代(January 1, 1970 00:00:00 UTC)以来，模式单位以毫秒为单位设置。
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-originator-telemetry-patterns.png)
 
- - If any pattern will be absent in the Message metadata, the outbound message will be routed via **failure** chain.
+ - 如果消息元数据中不存在任何模式，则出站消息将通过**failure**链进行路由.
  
- - In addition, if any pattern will have invalid data type, the outbound message will be also routed via **failure** chain.
+ - 另外，如果任何模式的数据类型无效，则出站消息还将通过**failure**链进行路由.
 
-Outbound Message Metadata will contain configured telemetry fields if they exist and belong to the selected range.
+出站邮件元数据将包含已配置的遥测字段（如果存在且属于所选范围）.
 
-If attribute or telemetry was not found, it is not added into Message Metadata and still routed via **Success** chain. 
+如果找不到属性或遥测，则不会将其添加到消息元数据中，并且仍会通过**Success**链进行路由. 
  
-To access fetched telemetry in other nodes you can use this template: <code>JSON.parse(metadata.temperature)</code>
+要访问其他节点中的获取的遥测，可以使用以下模板: <code>JSON.parse(metadata.temperature)</code>
 
-**Note:** Since TB Version 2.3 the rule node has the ability to choose telemetry sampling order when selected Fetch mode: **ALL**.
+**注意:** 从TB 2.3版开始，当选择“访存”模式: **ALL**时，规则节点可以选择遥测采样顺序。
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-originator-telemetry-order-by.png)
 
-You can see the real-life example, where this node is used, in the following tutorials:
+在以下教程中，您可以看到使用该节点的真实示例：
 
-- [Telemetry delta calculation](/docs/user-guide/rule-engine-2-0/tutorials/telemetry-delta-validation/)
+- [遥测增量计算](/docs/user-guide/rule-engine-2-0/tutorials/telemetry-delta-validation/)
 
-##### Tenant details
+##### 租户详细信息
 
 <table  style="width:12%">
    <thead>
@@ -320,23 +308,23 @@ You can see the real-life example, where this node is used, in the following tut
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-tenant-details.png)
 
-Rule Node Adds fields from Tenant details to the message body or metadata.
+规则节点将字段从“租户”详细信息添加到消息正文或元数据
 
-There is **Add selected details to the message metadata** checkbox in the Node configuration. If this checkbox selected, existing fields will be added to the message metadata instead of message data.
+选中**Add selected details to the message metadata**复选框则现有字段将添加到消息元数据中，而不是消息数据中。
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-tenant-details-config.png)
 
-Selected details are added into metadata with prefix: **tenant_**. Outbound Message will contain configured details if they exist.
+选定的详细信息将添加到带有前缀: **tenant_**. 元数据中。出站邮件将包含已配置的详细信息（如果存在）.
 
-To access fetched details in other nodes you can use one of the following template: 
+要访问其他节点中的获取的详细信息，可以使用以下模板之一: 
 
 - <code>metadata.tenant_address</code>
 
 - <code>msg.tenant_address</code>
 
-**Failure** chain is used if Originator does not have assigned Tenant Entity, otherwise - **Success** chain.
+如果发起者尚未分配租户实体，则使用**Failure**链，否则**Success**链.
 
-##### Customer details
+##### 顾客信息
 
 <table  style="width:12%">
    <thead>
@@ -348,22 +336,22 @@ To access fetched details in other nodes you can use one of the following templa
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-customer-details.png)
 
-Rule Node Adds fields from Customer details to the message body or metadata.
+规则节点将“客户详细信息”中的字段添加到消息正文或元数据。
 
-There is **Add selected details to the message metadata** checkbox in the Node configuration. If this checkbox selected, existing fields will be added to the message metadata instead of message data.
+选中**Add selected details to the message metadata**复选框则现有字段将添加到消息元数据中，而不是消息数据中。
 
 ![image](/images/user-guide/rule-engine-2-0/nodes/enrichment-customer-details-config.png)
 
-Selected details are added into metadata with prefix: **customer_**. Outbound Message will contain configured details if they exist.
+选定的详细信息将添加到带有前缀: **customer_**. 元数据中。出站邮件将包含已配置的详细信息（如果存在）.
 
-To access fetched details in other nodes you can use one of the following template: 
+要访问其他节点中的获取的详细信息，可以使用以下模板之一: 
 
 - <code>metadata.customer_email</code>
 
 - <code>msg.customer_email</code>
 
-Following Message Originator types are allowed: **Asset**, **Device**, **Entity View**.
+允许以下消息发起者类型: **Asset**, **Device**, **Entity View**.
   
-If unsupported Originator type found, an error is thrown.
+如果找到了不受支持的原始发件人类型，则会引发错误.
  
-If Originator does not have assigned Customer Entity **Failure** chain is used, otherwise **Success** chain.
+如果未为Originator分配客户实体**Failure**链则使用**Success**链.
