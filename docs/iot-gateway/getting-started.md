@@ -117,7 +117,6 @@ systemctl restart thingsboard-gateway.service
 
 为了进行正确的配置，请使用[本文](/docs/iot-gateway/configuration/#section-connectors)。
  
-<<<<<<< HEAD
 ## 步骤7：配置连接器
 
 成功安装后，您应该配置连接器以连接到不同的设备，请使用以文档对连接器进行相关配置：
@@ -126,15 +125,3 @@ systemctl restart thingsboard-gateway.service
  - [**Modbus**](/docs/iot-gateway/config/modbus/)
  - [**BLE**](/docs/iot-gateway/config/ble/)
  - [**自定义**](/docs/iot-gateway/custom/)
-=======
-## Step 7: Configure connectors
-
-After successful installation you should configure the connectors to connect to different devices, please use one (or more) following articles to configure connector files:  
- - [**MQTT** connector](/docs/iot-gateway/config/mqtt/)
- - [**OPC-UA** connector](/docs/iot-gateway/config/opc-ua/)
- - [**Modbus** connector](/docs/iot-gateway/config/modbus/)
- - [**BLE** connector](/docs/iot-gateway/config/ble/)
- - [**Request** connector](/docs/iot-gateway/config/request/)
- - [**CAN** connector](/docs/iot-gateway/config/can/)
- - [**Custom** connector](/docs/iot-gateway/custom/)
->>>>>>> 60998c9f8de4fabf0dca7662aa6da14e1bf9225a
