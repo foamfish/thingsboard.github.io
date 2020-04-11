@@ -1,17 +1,17 @@
 bigheader: "行业"
-abstract: "Customers orginized by industries"
+abstract: "按行业分组"
 toc:
-- title: Industries
+- title: 行业
   path: /industries/
-- title: Smart Energy
+- title: 能源监控
   path: /industries/smart-energy/
-- title: Agriculture
+- title: 智慧农业
   path: /industries/agriculture/
-- title: Smart Buildings
+- title: 智能建筑
   path: /industries/smart-buildings/
-- title: Smart City
+- title: 智慧城市
   path: /industries/smart-city/
-- title: Telecom
+- title: 电信
   path: /industries/telecom/
-- title: Industry 4.0
+- title: 工业4.0
   path: /industries/industry40/
