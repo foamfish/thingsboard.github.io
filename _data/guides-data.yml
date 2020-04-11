@@ -4,329 +4,317 @@
   section:
     - path: /docs/getting-started-guides/helloworld/
       title: Hello world
-      subtitle: Learn how to collect IoT device data using MQTT, HTTP or CoAP and visualize it on a simple dashboard. Provides variety of sample scripts that you can run on your PC or laptop to simulate the device.
+      subtitle: 了解如何使用MQTT，HTTP或CoAP收集IoT设备数据并在简单的仪表板上对其进行可视化。提供各种示例脚本，您可以在PC或笔记本电脑上运行这些脚本来模拟设备。
       keywords: mqtt http coap visualization helloworld
       video: true
       pe: false
     - path: /docs/iot-video-tutorials/#working-with-users-devices-and-dashboards
-      title: End user IoT dashboards
-      subtitle: Learn how to perform basic operations over Devices, Customers, and Dashboards.
+      title: IoT仪表板
+      subtitle: 了解如何在设备、客户和仪表板进行基本操作
       keywords: devices customers dashboards
       video: true
       pe: false
     - path: /docs/iot-video-tutorials/#device-data-management-using-thingsboard
-      title: Device data management
-      subtitle: Learn how to perform basic operations over device attributes to implement practical device management use cases.
+      title: 管理设备数据
+      subtitle: 了解如何对设备属性执行基本操作以实现实际的设备管理用例。
       keywords: device management attributes
       video: true
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/re-getting-started/
-      title: Getting started with Rule Engine
-      subtitle: Learn about ThingsBoard rule engine and typical use cases you can implement. Review Hello World example and learn how-to enable filtering of incoming telemetry messages.
+      title: 规则引擎入门
+      subtitle: 了解ThingsBoard规则引擎和可以实现的典型用例。查看Hello World示例，并了解如何启用对传入遥测消息的过滤。
       keywords: device management attributes
       video: false
       pe: false
     - path: /docs/reference/pe-demo-getting-started/
-      title: ThingsBoard PE Cloud Getting Started
-      subtitle: Learn about different ThingsBoard PE features using Demo Smart Metering application.
+      title: ThingsBoard PE Cloud 入门
+      subtitle: 使用演示智能计量应用程序了解不同的ThingsBoard PE功能。
       keywords: professional edition
       video: true
       pe: true
-- title: Installation guides
-  subtitle: Learn how to setup ThingsBoard on various available operating systems.
+- title: 安装指南
+  subtitle: 了解如何在其它的操作系统上安装ThingsBoard
   id: InstallationGuides
   section:
     - path: /docs/user-guide/install/windows/
-      title: Installing ThingsBoard on Windows
-      subtitle: Learn how to install ThingsBoard platform and all third-party on Windows OS.
+      title: 在Windows上安装ThingsBoard
+      subtitle: 了解如何在Windows OS上安装ThingsBoard平台和所有第三方。
       keywords: install windows
       video: false
       pe: false
     - path: /docs/user-guide/install/linux/
-      title: Installing ThingsBoard on Linux
-      subtitle: Learn how to install ThingsBoard platform and all third-party on Ubuntu or CentOS.
+      title: 在Linux上安装ThingsBoard
+      subtitle: 了解如何在Ubuntu或CentOS上安装ThingsBoard平台和所有第三方。
       keywords: install linux ubuntu centos
       video: false
       pe: false
     - path: /docs/user-guide/install/rpi/
-      title: Installing ThingsBoard on Raspberry Pi 3
-      subtitle: Learn how to install ThingsBoard platform and all third-party on Raspberry Pi 3 Model B.
+      title: 在Raspberry Pi 3上安装ThingsBoard
+      subtitle: 了解如何在Raspberry Pi 3 Model B上安装ThingsBoard平台和所有第三方。
       keywords: install linux rpi raspberry pi
       video: false
       pe: false
     - path: /docs/user-guide/install/kubernetes/
-      title: Installing ThingsBoard on Kubernetes
-      subtitle: Learn how to install ThingsBoard platform on Kubernetes.
+      title: 在Kubernetes上安装ThingsBoard
+      subtitle: 了解如何在Kubernetes上安装ThingsBoard平台。
       keywords: install linux kubernetes
       video: false
       pe: false
     - path: /docs/user-guide/install/docker/
-      title: Installing ThingsBoard on Docker
-      subtitle: Learn how to install ThingsBoard platform on Docker.
+      title: 在Docker上安装ThingsBoard
+      subtitle: 了解如何在Docker上安装ThingsBoard平台。
       keywords: install docker
       video: false
       pe: false
     - path: /docs/user-guide/install/docker/
-      title: Installing ThingsBoard on Docker (Windows)
-      subtitle: Learn how to install ThingsBoard platform on Docker (Windows).
+      title: 在Docker上安装ThingsBoard（Windows）
+      subtitle: 了解如何在Docker（Windows）上安装ThingsBoard平台。
       keywords: install docker windows
       video: false
       pe: false
     - path: /docs/user-guide/install/upgrade-instructions/
-      title: Upgrade your ThingsBoard instance
-      subtitle: Learn how to upgrade ThingsBoard platform to a newer version.
+      title: 升级ThingsBoard实例
+      subtitle: 了解如何将ThingsBoard平台升级到较新版本。
       keywords: install upgrade
       video: false
       pe: false
     - path: /docs/user-guide/install/cluster-setup/
-      title: Cluster setup
-      subtitle: Learn how to setup ThingsBoard cluster.
+      title: 集群设置
+      subtitle: 了解如何设置ThingsBoard集群。
       keywords: install cluster
       video: false
       pe: false
-- title: Connect your device
-  subtitle: Learn how to connect devices based on your connectivity technology or solution.
+- title: 连接你的设备
+  subtitle: 了解如何根据你的连接技术或解决方案连接设备。
   id: ConnectYourDevice
   section:
     - path: /docs/reference/http-api/
-      title: Connect devices using ThingsBoard HTTP API
-      subtitle: Learn how to connect your devices using HTTP protocol and ThingsBoard built-in payload format.
+      title: 使用ThingsBoard HTTP API连接设备
+      subtitle: 了解如何使用HTTP协议和ThingsBoard内置的payload格式连接设备。
       keywords: http connect
       pe: false
       video: false
     - path: /docs/reference/mqtt-api/
-      title: Connect devices using ThingsBoard MQTT API
-      subtitle: Learn how to connect your devices using MQTT protocol and ThingsBoard built-in payload format.
+      title: 使用ThingsBoard MQTT API连接设备
+      subtitle: 了解如何使用MQTT协议和ThingsBoard内置的payload格式连接设备。
       keywords: mqtt connect
       pe: false
       video: false
     - path: /docs/reference/coap-api/
-      title: Connect devices using ThingsBoard CoAP API
-      subtitle: Learn how to connect your devices using CoAP protocol and ThingsBoard built-in payload format.
+      title: 使用ThingsBoard CoAP API连接设备
+      subtitle: 了解如何使用CoAP协议和ThingsBoard内置的payload格式连接设备。
       keywords: coap connect
       pe: false
       video: false
     - path: /docs/iot-gateway/getting-started/
-      title: Connect devices through ThingsBoard IoT Gateway
-      subtitle: Learn how to deploy IoT Gateway in your local network and route messages from your devices to the cloud.
+      title: 通过ThingsBoard IoT网关连接设备
+      subtitle: 了解如何在本地网络中部署IoT网关以及如何将消息从设备路由到云。
       keywords: gateway connect
       pe: false
       video: false
     - path: /docs/user-guide/integrations/
-      title: ThingsBoard Integrations basics
-      subtitle: Learn about ThingsBoard Integrations feature and how you can use it to connect devices and apps that use custom payload formats.
+      title: ThingsBoard集成基础知识
+      subtitle: 了解ThingsBoard Integrations功能以及如何使用它来连接使用自定义有效载荷格式的设备和应用程序。
       keywords:
       pe: false
       video: false
     - path: /docs/user-guide/integrations/#platform-integrations-vs-iot-gateway
-      title: ThingsBoard Integrations vs IoT Gateway
-      subtitle: Learn the differences between the Platform Integrations and IoT Gateway.
+      title: ThingsBoard集成与IoT网关
+      subtitle: 了解平台集成和IoT网关之间的区别。
       keywords:
       pe: false
       video: false
     - path: /docs/user-guide/integrations/http/
-      title: Connect devices with custom payload using ThingsBoard HTTP Integration
-      subtitle: Convert existing protocols and payload formats to ThingsBoard message format.
+      title: 使用ThingsBoard HTTP集成将具有自定义payload的设备连接起来
+      subtitle: 将现有协议和payload格式转换为ThingsBoard消息格式。
       keywords: http connect
       pe: true
       video: true
     - path: /docs/user-guide/integrations/mqtt/
-      title: Connect devices with custom payload using ThingsBoard MQTT Integration.
-      subtitle: Connect to external brokers and consume MQTT data stream
+      title: 使用ThingsBoard MQTT集成将具有自定义负载的设备连接起来。
+      subtitle: 连接到外部代理并使用MQTT数据流。
       keywords: mqtt connect
       pe: true
       video: true
     - path: /docs/user-guide/integrations/sigfox/
-      title: Connect SigFox devices using TB PE Integration
-      subtitle: Learn how to route messages from Sigfox backend to ThingsBoard and decode binary device payloads.
+      title: 使用TB PE集成连接SigFox设备
+      subtitle: 了解如何将消息从Sigfox后端路由到ThingsBoard并解码二进制设备payload。
       keywords: sigfox connect
       pe: true
       video: true
     - path: /docs/user-guide/integrations/ttn/
-      title: Connect LoRaWAN devices using TheThingsNetwork
-      subtitle: Learn how to route messages from TheThingsNetwork backend to ThingsBoard and vise-versa.
+      title: 使用TheThingsNetwork连接LoRaWAN设备
+      subtitle: 了解如何将消息从TheThingsNetwork后端路由到ThingsBoard，反之亦然。.
       keywords: ttn connect
       pe: true
       video: false
     - path: /docs/user-guide/integrations/opc-ua/
-      title: Connect OPC-UA servers to ThingsBoard
-      subtitle: Learn how to connect OPC-UA devices to ThingsBoard.
+      title: 将OPC-UA服务器连接到ThingsBoard
+      subtitle: 了解如何将OPC-UA设备连接到ThingsBoard。
       keywords: opcua connect
       pe: true
       video: true
     - path: /docs/user-guide/integrations/thingpark/
-      title: Connect LoRaWAN devices using Actility ThingPark
-      subtitle: Learn how to route messages from ThingPark to ThingsBoard and vise-versa.
+      title: 使用Actility ThingPark连接LoRaWAN设备
+      subtitle: 了解如何将消息从ThingPark路由到ThingsBoard，反之亦然。
       keywords:
       pe: true
       video: false
     - path: /docs/user-guide/integrations/aws-iot/
-      title: Connect devices through AWS IoT
-      subtitle: Learn how to connect to AWS IoT broker, transform the incoming messages and generate the downlinks using ThingsBoard.
+      title: 通过AWS IoT连接设备
+      subtitle: 了解如何使用ThingsBoard连接到AWS IoT代理，转换传入消息并生成下行链路。
       keywords:
       pe: true
       video: true
-    - path: /docs/user-guide/integrations/aws-kinesis/
-      title: Connect devices through AWS Kinesis
-      subtitle: Learn how to connect to AWS Kinesis stream, transform the incoming messages and generate the downlinks using ThingsBoard.
-      keywords:
-      pe: true
-      video: false
     - path: /docs/user-guide/integrations/ibm-watson-iot/
-      title: Connect devices through IBM Watson IoT
-      subtitle: Learn how to connect to IBM Watson IoT broker, transform the incoming messages and generate the downlinks using ThingsBoard.
+      title: 通过IBM Watson IoT连接设备
+      subtitle: 了解如何使用ThingsBoard连接到IBM Watson IoT代理，转换传入消息并生成下行链路。
       keywords:
       pe: true
       video: true
     - path: /docs/user-guide/integrations/azure-event-hub/
-      title: Connect devices through Azure Event Hub
-      subtitle: Learn how to connect to Azure Event Hub, transform the incoming messages and generate the downlinks using ThingsBoard.
+      title: 通过Azure Event Hub连接设备
+      subtitle: 了解如何使用ThingsBoard连接到Azure Event Hub，转换传入消息并生成下行链路。
       keywords:
       pe: true
       video: true
     - path: /docs/user-guide/integrations/tcp/
-      title: Devices uses TCP protocol
-      subtitle: How to connect to ThingsBoard TCP-server, transform the incoming messages and generate the downlinks using ThingsBoard.
+      title: 设备使用TCP协议
+      subtitle: 如何使用ThingsBoard连接到ThingsBoard TCP服务器，转换传入消息并生成下行链路。
       keywords: Connect TCP devices
       pe: true
       video: true
     - path: /docs/user-guide/integrations/tcp/
-      title: Devices uses UDP protocol
-      subtitle: How to connect to ThingsBoard UDP-server, transform the incoming messages and generate the downlinks using ThingsBoard.
+      title: 设备使用UDP协议
+      subtitle: 如何使用ThingsBoard连接到ThingsBoard UDP服务器，转换传入消息并生成下行链路。
       keywords: Connect UDP devices
       pe: true
       video: true
-- title: Data visualization
-  subtitle: These guides contain instructions how to configure complex ThingsBoard dashboards
+- title: 数据可视化
+  subtitle: 这些指南包含有关如何配置复杂的ThingsBoard仪表板的说明
   id: DataVisualization
   section:
     - path: /docs/iot-video-tutorials/#dashboard-development-guide-part-1-of-3-visualizing-assets-data-using-maps-and-tables
-      title: Visualizing assets data using Maps and Tables
-      subtitle: "Learn how to: create assets and devices and define their relationships; add the server attributes and create a new dashboard; visualize data from the asset attributes using “Entities Table” and “Map” widgets."
+      title: 使用地图和表格可视化资产数据
+      subtitle: "了解如何：创建资产和设备并定义它们之间的关系；添加服务器属性并创建一个新的仪表板；使用“实体表”和“地图”小部件可视化资产属性中的数据。"
       keywords:
       pe: false
       video: true
     - path: /docs/iot-video-tutorials/#dashboard-development-guide-part-2-of-3-dashboard-states-aliases-and-widget-actions
-      title: Dashboard states, aliases and widget actions
-      subtitle: "Learn how to: add and configure new dashboard states; create various aliases; visualize the attributes data using the Image Map widget; create actions in different widgets in order to navigate between states; visualize the telemetry data using Analogue and Digital gauges and the Timeseries widget."
+      title: 仪表板状态，别名和小部件操作
+      subtitle: "了解如何：添加和配置新的仪表板状态；创建各种别名；使用图像映射小部件可视化属性数据；在不同的小部件中创建动作，以便在状态之间导航；使用模拟和数字仪表以及“时间序列”小部件可视化遥测数据。"
       keywords:
       pe: false
       video: true
     - path: /docs/iot-video-tutorials/#dashboard-development-guide-part-3-of-3-remote-device-control-and-alarm-management
-      title: Remote device control and alarm management
-      subtitle: "Learn how to: add and use the Knob Control widget; create alarm rules; handle alarms using the Alarms widget; make a dashboard public."
+      title: 远程设备控制和警报管理
+      subtitle: "了解如何：添加和使用旋钮控件小部件；创建警报规则；使用“警报”小部件处理警报；公开仪表板。"
       keywords:
       pe: false
       video: true
     - path: /docs/iot-video-tutorials/#widget-configuration-guide-part-1-of-3-basic-settings
-      title: Basic widget settings
-      subtitle: "Learn how to: change widget title, background, colors, fonts, shadows, etc."
+      title: 基本小部件设置
+      subtitle: "了解如何：更改小部件标题，背景，颜色，字体，阴影等。"
       keywords:
       pe: false
       video: true
     - path: /docs/iot-video-tutorials/#widget-configuration-guide-part-2-of-3-latest-values-map-widget
-      title: Latest Values Map widget
-      subtitle: "Learn how to create Map widget, based on latitude and longitude, and customize the Map widget layout and properties."
+      title: 最新值地图小部件
+      subtitle: "了解如何基于纬度和经度创建地图小部件以及如何自定义地图小部件的布局和属性。"
       keywords:
       pe: false
       video: true
     - path: /docs/iot-video-tutorials/#widget-configuration-guide-part-3-of-3-time-series-map-widget
-      title: Time Series Map widget
-      subtitle: "Learn how to display your devices with the latest telemetry data on the Time Series Map widget and modify the widget properties."
+      title: 时间序列图小部件
+      subtitle: "了解如何在“时间序列图”窗口小部件上显示具有最新遥测数据的设备以及如何修改窗口小部件属性。"
       keywords:
       pe: false
       video: true
-    - path: /docs/user-guide/ui/trip-animation-widget
-      title: Trip Animation widget
-      subtitle: "Learn how to display your devices with the latest telemetry data on the Trip Animation widget and modify the widget properties."
-      keywords: 
-      pe: false
-      video: true
-- title: Data processing & actions
-  subtitle: Learn how to use ThingsBoard Rule Engine.
+- title: 数据处理与动作
+  subtitle: 了解如何使用ThingsBoard规则引擎。
   id: DataProcessing
   section:
     - path: /docs/user-guide/rule-engine-2-0/tutorials/validate-incoming-telemetry/
-      title: Validate incoming telemetry
-      subtitle: Learn how to configure Rule Engine to discard invalid telemetry readings based on JavaScript filter function.
+      title: 验证传入遥测
+      subtitle: "了解如何配置规则引擎以基于JavaScript过滤器功能丢弃无效的遥测读数。"
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/telemetry-delta-validation/
-      title: Telemetry delta calculation
-      subtitle: Learn how to configure Rule Engine to calculate telemetry delta readings based on Originator telemetry rule node.
+      title: 遥测增量计算
+      subtitle: "了解如何配置Rule Engine以基于Originator遥测规则节点计算遥测增量读数。"
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/function-based-on-telemetry-from-two-devices/
-      title: Data function based on telemetry from 2 devices
-      subtitle: Learn how to configure Rule Engine to create new telemetry based on telemetry readings from multiple devices.
+      title: 基于2个设备的遥测数据功能
+      subtitle: "了解如何配置Rule Engine以根据来自多个设备的遥测读数创建新的遥测。"
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/transform-incoming-telemetry/
-      title: Transform incoming telemetry
-      subtitle: Learn how to configure Rule Engine to transform incoming telemetry based on JavaScript function before it is stored to the database.
+      title: 转换输入遥测
+      subtitle: "了解如何配置规则引擎以将传入的遥测存储在数据库中之前基于JavaScript函数对其进行转换。"
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/transform-telemetry-using-previous-record/
-      title: Transform telemetry using previous record
-      subtitle: Learn how to configure Rule Engine to calculate “delta” of the counter readings based on current and previous reading.
+      title: 使用以前的记录转换遥测
+      subtitle: "了解如何配置规则引擎以基于当前和先前的读数计算计数器读数的增量。"
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/
-      title: Create & clear alarms
-      subtitle: Learn how to configure Rule Engine to create and clear alarms based on incoming data from devices.
+      title: 创建和清除警报
+      subtitle: 了解如何配置Rule Engine以根据来自设备的传入数据创建和清除警报。
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms-with-details/
-      title: Working with Alarm details
-      subtitle: Learn how to configure Alarm Details function in Alarm nodes and how to add an Alarm widget to the dashboard.
+      title: 处理警报详细信息
+      subtitle: "了解如何在“警报”节点中配置“警报详细信息”功能，以及如何将“警报”小部件添加到仪表板。"
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/send-email/
-      title: Send email on alarm
-      subtitle: Learn how to configure Rule Engine to send email when new alarm is created.
+      title: 发送警报电子邮件
+      subtitle: "了解如何配置规则引擎以在创建新警报时发送电子邮件。"
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/send-email-to-customer/
-      title: Send email to customer
-      subtitle: Learn how to configure Rule Engine to send email to the customer of the assigned device.
+      title: 发送电子邮件给客户
+      subtitle: "了解如何配置规则引擎以将电子邮件发送给指定设备的客户。"
       pe: false
-    - path: /docs/user-guide/rule-engine-2-0/tutorials/integration-with-telegram-bot/
-      title: Notifications and Alarms on your smartphone using Telegram Bot
-      subtitle: Learn how to configure Rule Engine to send notification using Telegram Bot when new alarm is created.
+    - path: /docs/iot-gateway/integration-with-telegram-bot/
+      title: 使用Telegram Bot的智能手机上的通知和警报
+      subtitle: "了解如何配置规则引擎，以便在创建新警报时使用Telegram Bot发送通知。"
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/create-inactivity-alarm/
-      title: Create alarm when the device is offline
-      subtitle: Learn how to create an alarm when the device is offline for a certain period of time using RuleEngine.
+      title: 设备离线时创建警报
+      subtitle: "了解如何使用RuleEngine在设备离线一段时间后创建警报。"
       keys: active inactive connected disconnected online offline
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/check-relation-tutorial/
-      title: Check relation between Entities
-      subtitle: Learn how the Check Relation node can be used to check the relation between Entities.
+      title: 检查实体之间的关系
+      subtitle: "了解如何使用“检查关系”节点检查实体之间的关系。"
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/rpc-request-tutorial/
-      title: RPC Request to related Device
-      subtitle: Learn how to send a remote request call to a Related Device using Rule Engine.
+      title: 到相关设备的RPC请求
+      subtitle: "了解如何使用规则引擎将远程请求调用发送到相关设备。"
       keys: rpc Request
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/get-weather-using-rest-api-call/
-      title: Using REST API to get weather data
-      subtitle: Learn how to use REST API to get weather data in a specified location.
+      title: 使用REST API获取天气数据
+      subtitle: "了解如何使用REST API获取指定位置的天气数据。"
       keys: rest api
       pe: false
     - path: /docs/user-guide/rule-engine-2-0/tutorials/add-devices-to-group/
-      title: Add & remove devices to group dynamically
-      subtitle: Learn how to how to dynamically add & remove device from the device group based on incoming data from device.
+      title: 添加和删​​除设备以动态分组
+      subtitle: "解如何基于来自设备的传入数据动态地从设备组添加和删除设备。"
       keys: device group dynamic relation
       pe: true
     - path: /docs/user-guide/integrations/send-data-external-mqtt-brokers/
-      title: Send data to external MQTT brokers
-      subtitle: Connect to external brokers and send MQTT data stream
+      title: 将数据发送到外部MQTT代理
+      subtitle: "连接到外部代理并发送MQTT数据流。"
       keys: mqtt connect
       pe: true
-- title: IoT Data analytics
-  subtitle: Learn how to use rule engine to perform basic analytics tasks.
+- title: IoT数据分析
+  subtitle: "了解如何使用规则引擎执行基本分析任务。"
   id: DataAnalytics
   section:
     - path: /docs/user-guide/rule-engine-2-0/tutorials/aggregate-incoming-data-stream/
-      title: Aggregate incoming data stream
-      subtitle: Calculate total water consumption in the building based on readings from multiple water meters within a building.
+      title: 汇总传入数据流
+      subtitle: 根据建筑物内多个水表的读数计算建筑物的总用水量。
       keywords: aggregation water meter analytics rule engine
       pe: true
     - path: /docs/user-guide/rule-engine-2-0/tutorials/aggregate-latest-data/
-      title: Aggregate latest telemetry values periodically
-      subtitle: Calculate average temperature in the warehouse based on readings from multiple temperature sensors.
+      title: 定期汇总最新遥测值
+      subtitle: 根据多个温度传感器的读数计算仓库中的平均温度。
       keywords: average temperature analytics rule engine
       pe: true
 #- title: Pushing data to external systems
@@ -337,140 +325,140 @@
 #      subtitle: lorem ipsum dolor
 #      keywords: key1 key2 key3
 #      pe: false
-- title: Hardware samples
-  subtitle: Learn how to connect various hardware platforms to ThingsBoard.
+- title: 硬件样品
+  subtitle: "了解如何将各种硬件平台连接到ThingsBoard。"
   id: HardwareSamples
   section:
     - path: /docs/samples/esp32/ota/
-      title: ESP32 OTA using ThingsBoard
-      subtitle: Learn how to make ESP32 OTA update using ThingsBoard custom widget, rule chain and dashboard
+      title: 使用ThingsBoard的ESP32 OTA
+      subtitle: "了解如何使用ThingsBoard自定义小部件，规则链和仪表板进行ESP32 OTA更新"
       pe: false
       video: true
     - path: /docs/samples/esp32/gpio-control-pico-kit-dht22-sensor/
-      title: ESP32 Pico Kit GPIO control and DHT22 sensor monitor using ThingsBoard Arduino SDK
-      subtitle: Contains wiring diagram, sketch and dashboard setup guide.
+      title: 使用ThingsBoard Arduino SDK的ESP32 Pico Kit GPIO控制和DHT22传感器监控器
+      subtitle: "包含接线图，草图和仪表板设置指南。"
       pe: false
       video: false
     - path: /docs/samples/arduino/temperature/
-      title: Temperature upload over MQTT using Arduino UNO, ESP8266 and DHT22 sensor
-      subtitle: Contains wiring diagram, sketch and dashboard setup guide.
+      title: 使用Arduino UNO，ESP8266和DHT22传感器通过MQTT上传温度
+      subtitle: "包含接线图，草图和仪表板设置指南。"
       pe: false
-    - title: Humidity and temperature upload over HTTP using Arduino UNO, SIM808 Shield and HTU21D sensor
+    - title: 使用Arduino UNO，SIM808 Shield和HTU21D传感器通过HTTP上传湿度和温度
       path: /docs/samples/arduino/sim808-htu21d/
-      subtitle: Contains wiring diagram, sketch and dashboard setup guide.
+      subtitle: "包含接线图，草图和仪表板设置指南。"
       pe: false
     - path: /docs/samples/esp8266/temperature/
-      title: Temperature upload over MQTT using ESP8266 and DHT22 sensor
-      subtitle: Contains wiring diagram, sketch, dashboard setup guide and demonstration video.
+      title: 使用ESP8266和DHT22传感器通过MQTT上传温度
+      subtitle: "包含接线图，草图，仪表板设置指南和演示视频。"
       pe: false
       video: true
     - path: /docs/samples/esp8266/gpio/
-      title: ESP8266 GPIO control over MQTT using ThingsBoard
-      subtitle: Contains wiring diagram, sketch, dashboard setup guide and demonstration video.
+      title: ESP8266使用ThingsBoard通过MQTT进行GPIO控制
+      subtitle: "包含接线图，草图，仪表板设置指南和演示视频。"
       pe: false
       video: true
     - path: /docs/samples/nodemcu/temperature/
-      title: Temperature upload over MQTT using NodeMCU and DHT11 sensor
-      subtitle: Contains wiring diagram, sketch and dashboard setup guide.
+      title: "使用NodeMCU和DHT11传感器通过MQTT上传温度。"
+      subtitle: "包含接线图，草图和仪表板设置指南。"
       pe: false
       video: false
     - path: /docs/samples/raspberry/gpio/
-      title: Raspberry Pi GPIO control over MQTT using ThingsBoard
-      subtitle: Contains wiring diagram, source code, dashboard setup guide and demonstration video.
+      title: 使用ThingsBoard对MQTT进行Raspberry Pi GPIO控制
+      subtitle: "包含接线图，源代码，仪表板设置指南和演示视频。"
       pe: false
       video: true
     - path: /docs/samples/raspberry/gpio-android-things/
-      title: Raspberry Pi GPIO control using Android Things and ThingsBoard
-      subtitle: Contains wiring diagram, source code, dashboard setup guide and demonstration video.
+      title: 使用Android Things和ThingsBoard的Raspberry Pi GPIO控制
+      subtitle: "包含接线图，源代码，仪表板设置指南和演示视频。"
       pe: false
       video: true
     - path: /docs/samples/raspberry/temperature/
-      title: Temperature upload over MQTT using Raspberry Pi and DHT22 sensor
-      subtitle: Contains wiring diagram, sketch, dashboard setup guide and demonstration video.
+      title: 使用Raspberry Pi和DHT22传感器通过MQTT上传温度
+      subtitle: "包含接线图，草图，仪表板设置指南和演示视频。"
       pe: false
       video: true
     - path: /docs/samples/linkit-one/gps/
-      title: GPS data upload and visualization using LinkIt ONE and ThingsBoard
-      subtitle: Contains wiring diagram, sketch and dashboard setup guide.
+      title: 使用LinkIt ONE和ThingsBoard进行GPS数据上传和可视化
+      subtitle: "包含接线图，草图和仪表板设置指南。"
       pe: false
       video: false
     - path: /docs/user-guide/integrations/sodaq/
-      title: Learn how to connect your SODAQ Universal Tracker to ThingsBoard
-      subtitle: Learn how to connect your SODAQ Universal Tracker to ThingsBoard via T-Mobile – IoT CDP Integration.
+      title: 了解如何将您的SODAQ Universal Tracker连接到ThingsBoard
+      subtitle: "了解如何通过T-Mobile – IoT CDP集成将SODAQ Universal Tracker连接到ThingsBoard。"
       keywords: NB IoT, NB-IoT, T-Mobile, SODAQ, 5G
       pe: true
       video: false
     - path: /docs/user-guide/integrations/sodaq-udp
-      title: Learn how to connect your SODAQ Universal Tracker to ThingsBoard
-      subtitle: Learn how to connect your SODAQ Universal Tracker to ThingsBoard via UDP Integration.
+      title: 了解如何将您的SODAQ Universal Tracker连接到ThingsBoard
+      subtitle: "了解如何通过UDP集成将SODAQ Universal Tracker连接到ThingsBoard。"
       keywords: NB IoT, NB-IoT, T-Mobile, SODAQ, 5G
       pe: true
       video: false
     - path: /docs/samples/ble/raspberry-esp32-xiaomi-sensor-htu21d.md
-      title: ThingsBoard BLE Demo with Raspberry PI, ESP32, Xiaomi MI and HTU21D sensors
-      subtitle: Contains wiring diagram and dashboard setup guide.
+      title: "具有Raspberry PI，ESP32，小米MI和HTU21D传感器的ThingsBoard BLE演示。"
+      subtitle: "包含接线图和仪表板安装指南。"
       pe: false
       video: false
     - path: /docs/samples/nettrartu+/rtu_temp_sensor/
-      title: Temperature upload over MQTT using Nettra RTU
-      subtitle: Contains wiring diagram and dashboard setup guide.
+      title: 使用Nettra RTU通过MQTT上载温度
+      subtitle: "包含接线图和仪表板安装指南。"
       pe: false
       video: false
-- title: Advanced features
-  subtitle: Learn about advanced ThingsBoard features
+- title: 高级特性
+  subtitle: 了解高级ThingsBoard功能
   id: AdvancedFeatures
   section:
     - path: /docs/user-guide/device-connectivity-status/
-      title: Connectivity status
-      subtitle: "Learn how to track connectivity status of the devices: connected, disconnected, active, inactive"
+      title: 连接状态
+      subtitle: "了解如何跟踪设备的连接状态：已连接，已断开连接，活动，非活动"
       pe: false
       video: false
     - path: /docs/user-guide/audit-log/
-      title: Audit log
-      subtitle: Learn how to track user actions in order to keep audit log.
+      title: 审计日志
+      subtitle: "了解如何跟踪用户操作以保留审核日志。"
       pe: false
       video: false
     - path: /docs/user-guide/api-limits/
-      title: API limits
-      subtitle: Learn how to control API usage, by limiting number of requests from single host during single time unit (Minutes, Hours, etc.)
+      title: API限制
+      subtitle: "了解如何通过限制单个时间单位（分钟，小时等）中来自单个主机的请求数来控制API使用情况。"
       pe: false
       video: false
     - path: /docs/user-guide/white-labeling/
-      title: White-labeling
-      subtitle: Learn how to configure your company or product logo and color scheme in 2 minutes with zero coding efforts.
+      title: White标签
+      subtitle: "了解如何在2分钟内以零编码的方式配置公司或产品徽标和配色方案。"
       pe: true
       video: true
     - path: /docs/user-guide/groups/
-      title: Device and Asset groups
-      subtitle: Learn how to work with entity groups and perform bulk operations
+      title: 设备和资产组
+      subtitle: "了解如何使用实体组和执行批量操作。"
       pe: true
       video: true
     - path: /docs/user-guide/scheduler/
       title: Scheduler
-      subtitle: Learn how to schedule various types of events and trigger actions.
+      subtitle: "了解如何配置各种类的事件和触发操作。"
       pe: true
       video: true
     - path: /docs/user-guide/reporting/
-      title: Reporting
-      subtitle: Learn how to schedule and generate reports based on existing dashboards.
+      title: 报告
+      subtitle: "了解如何根据现有仪表板计划和生成报告。"
       pe: true
       video: true
-- title: Contribution and Development
-  subtitle: Learn how to contribute to Thingsboard, customize & develop custom widgets and rule nodes
+- title: 贡献和开发
+  subtitle: "了解如何为Thingsboard做出贡献，自定义和开发自定义小部件和规则节点。"
   id: Contribution
   section:
     - path: /docs/user-guide/contribution/how-to-contribute/
-      title: How to Contribute
-      subtitle: "Learn how to contribute to Thingsboard"
+      title: 如何贡献
+      subtitle: "了解如何为Thingsboard做出贡献"
       pe: false
       video: false
     - path: /docs/user-guide/contribution/rule-node-development/
-      title: Rule Node Development Guide
-      subtitle: "Learn how to customize and create custom rule nodes"
+      title: 规则节点开发指南
+      subtitle: "了解如何自定义和创建自定义规则节点"
       pe: false
       video: false
     - path: /docs/user-guide/contribution/widgets-development/
-      title: Widgets Development Guide
-      subtitle: "Learn how to customize and create custom widgets"
+      title: 部件开发指南
+      subtitle: "了解如何自定义和创建自定义部件"
       pe: false
       video: false
