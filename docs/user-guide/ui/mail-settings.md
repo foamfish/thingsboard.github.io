@@ -2,102 +2,89 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Mail Settings
-description: ThingsBoard IoT platform mail settings
+title: 邮件设置
+description: ThingsBoard IoT平台邮件设置
 
 ---
 
-ThingsBoard System Administrator is able to configure a connection to a SMTP server that will be used to distribute activation and password reset emails to users.
-This configuration step is required in production environments. 
-If you are evaluating the platform, pre-provisioned [**demo accounts**](/docs/samples/demo-account/#demo-tenant) are sufficient in most of the use cases.
+ThingsBoard系统管理员可以配置与SMTP服务器相关信息，该服务器将用于向用户发送激活和密码重置电子邮件。
+在生产环境中需要此配置步骤。如果你正在学习了解本平台在大多数用例中预配置的[**演示帐户**](/docs/samples/demo-account/#demo-tenant)就足够了。
   
-**NOTE** System Mail settings are used only during user creation and password reset process and are controlled by a system administrator. 
-Tenant administrator is able to [**setup email rule node**](/docs/user-guide/rule-engine-2-0/tutorials/send-email/) to distribute alarms produced by [**rule engine**](/docs/user-guide/rule-engine-2-0/re-getting-started/).  
+**注意**系统邮件设置仅在用户创建和密码重置过程中使用，并由系统管理员控制。
+租户管理员可以[**设置电子邮件规则节点**](/docs/user-guide/rule-engine-2-0/tutorials/send-email/)以分发[**规则引擎**](/docs/user-guide/rule-engine-2-0/re-getting-started/)产生的警报。 
 
 * TOC
 {:toc}
 
-Following steps are required to configure system mail settings.
+需要执行以下步骤来配置系统邮件设置。
 
-#### Step 1. Login as system administrator
+#### 步骤1.以系统管理员身份登录
 
-Login to your ThingsBoard instance WEB UI as a system administrator using default [**account**](/docs/samples/demo-account/#system-administrator).
+使用默认[**帐户**](/docs/samples/demo-account/#system-administrator)作为系统管理员登录到ThingsBoard实例WEB UI。
 
-#### Step 2. Change administrator email address 
+#### 步骤2.更改管理员电子邮件地址 
 
-Right click on the burger in the top-right corner of the WEB UI and select 'Profile'.
-Change 'sysadmin@thingsboard.org' to your email address. Now re-login as administrator again. 
+右键单击WEB UI右上角的汉堡，然后选择配置文件。将“sysadmin@thingsboard.org” 更改为您的电子邮件地址。现在再次以管理员身份重新登录。
 
-#### Step 3. Open 'Outgoing Mail' and populate SMTP server settings
+#### 步骤3.打开“外发邮件”并填充SMTP服务器设置
 
-Navigate to **System Settings -> Outgoing Mail** and populate the form. Click on 'Send Test Email' button. 
-A test email will be sent to the email address that you have specified in 'Step 2'.
-In case of error in configuration, you should receive a popup with the error log.
+导航至 **System Settings -> Outgoing Mail** 然后填写表格。点击“发送测试电子邮件”按钮。测试电子邮件将发送到您在“步骤2”中指定的电子邮件地址。如果配置错误，您应该会收到一个带有错误日志的弹出窗口。
 
-##### Step 3.1. Sendgrid configuration example
+##### 步骤3.1 Sendgrid配置示例
 
-SendGrid configuration is fairly simple and straightforward. First, you need to create [SendGrid](https://sendgrid.com/) account. 
-You can try it for free and the free plan is most likely enough for platform evaluation.
+SendGrid配置非常简单明了。首先，您需要创建[SendGrid](https://sendgrid.com/)帐户。
 
-Once you create your account, you will be forwarded to the welcome page. Now you can provision your SMTP Relay credentials. See the screen-shot below. 
+创建帐户后，您将被转到欢迎页面。现在，您可以配置SMTP中继凭据。请参见下面的屏幕截图。
 
 {:refdef: style="text-align: center;"}
 ![image](/images/user-guide/ui/mail/sendgrid-welcome.png)
 {: refdef}
 
-Please choose SMTP relay on the next page.
+请在下一页选择SMTP中继。
 
 {:refdef: style="text-align: center;"}
 ![image](/images/user-guide/ui/mail/sendgrid-smtp-relay.png)
 {: refdef}
 
-Once you populate the API key name and generate it, you will be able to copy-paste settings from the screen to ThingsBoard mail settings form.
+填充并生成API密钥名称后，您就可以将设置从屏幕复制粘贴到ThingsBoard邮件设置表单中。
 
 {:refdef: style="text-align: center;"}
 ![image](/images/user-guide/ui/mail/sendgrid-token.png)
 {: refdef}
 
-Copy-paste the settings, update 'Mail From' field and click on 'Send Test Mail' button. 
+复制并粘贴设置，更新“Mail From”字段，然后单击“Send Test Mail”按钮。
 
 {:refdef: style="text-align: center;"}
 ![image](/images/user-guide/ui/mail/sendgrid-settings.png)
 {: refdef}
 
-Once you receive the notification about a successfull test, save populated data. You can also complete verification on the SendGrid website.
+收到有关成功测试的通知后，保存填充的数据。您也可以在SendGrid网站上完成验证。
 
 {:refdef: style="text-align: center;"}
 ![image](/images/user-guide/ui/mail/sendgrid-it-works.png)
 {: refdef}
 
+##### 步骤3.2 Gmail配置示例
 
-
-
-
-##### Step 3.2. Gmail configuration example
-
-In order to use G-mail, you will need to do two extra steps. 
-First, you need to allow [**less secure apps**](https://support.google.com/accounts/answer/6010255?hl=en).
-Second, you need to enable two-step verification and generate an [**app password**](https://support.google.com/accounts/answer/185833?hl=en).
-Although the second step is not mandatory, it is highly recommended.
+为了使用G-mail，你将需要执行两个额外的步骤。首先，你需要 [**允许安全性较低的应用程序**](https://support.google.com/accounts/answer/6010255?hl=en)。其次，您需要启用两步验证并生成[**应用密码**](https://support.google.com/accounts/answer/185833?hl=en)。尽管第二步不是强制性的，但强烈建议您这样做。
 
 {:refdef: style="text-align: center;"}
 ![image](/images/user-guide/ui/mail/app-password.png)
 {: refdef}
 
-Once this is ready, you should be able to setup Gmail account using the information below
+准备就绪后，您应该可以使用以下信息设置Gmail帐户
 
 {:refdef: style="text-align: center;"}
 ![image](/images/user-guide/ui/mail/gmail-settings.png)
 {: refdef}
 
-Similar settings are available for G-suite accounts, however, you may need to contact your system administrator to enable less secure apps, etc.
-Note that you can also enable/disable TLS using checkbox.
+类似的设置可用于G-suite帐户，但是，您可能需要与系统管理员联系以启用安全性较低的应用程序等。请注意，您还可以使用复选框启用/禁用TLS。
 
 {:refdef: style="text-align: center;"}
 ![image](/images/user-guide/ui/mail/gsuite-settings.png)
 {: refdef}
 
 
-#### Step 4. Save configuration
+#### 步骤4.保存配置
 
-Once you will receive test email you can save SMTP server configuration.
+收到测试电子邮件后，您可以保存SMTP服务器配置。

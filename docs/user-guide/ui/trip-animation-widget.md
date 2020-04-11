@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: Trip animation widget
-description: Trip animation widget guide 
+title: 轨迹动画部件
+description: 轨迹动画部件 
 
 ---
 
@@ -10,60 +10,60 @@ description: Trip animation widget guide
 * TOC
 {:toc}
 
-## Overview
+## 概述
 
-In this example, we'll study trip animation widget functionality. 
+在此示例中，我们将研究画部件功能。
 
-This widget might be useful for different use cases, but mainly it might be used for a Tracking in a realtime, researching movement of the entities and visualizing it.
+该小部件可能适用于不同的用例，但主要是可以用于实时跟踪，研究实体的运动并对其进行可视化。
 
-This guide was written on a [cloud](https://cloud.thingsboard.io) version-2.4.2 of ThingsBoard Professional Edition, so some steps will be a little different from Community Edition. 
+本指南是在ThingsBoard专业版的[cloud]（https://cloud.thingsboard.io）版本2.4.2上编写的，因此某些步骤与Community Edition有所不同。
 
-It's capable of all further versions.
+它具有所有其他版本的功能。
 
-## Setting up Trip Animation Widget
+## 轨迹设置动画部件
 
-Firstly you need to create a device from which will collect telemetry.
+首先，您需要创建一个将收集遥测信息的设备。
 
-Also, you may use any device you have with a coordinates telemetry (longitude and latitude). 
+另外，您可以使用具有遥测坐标（经度和纬度）的设备。
 
-This can be any device which receives its coordinates in a realtime. 
+这可以是任何实时接收其坐标的设备。
 
-Our device receives its longitude, latitude, speed, status, and coordinates of polygon. 
+我们的设备会接收其经度，纬度，速度，状态和多边形坐标。
 
-Longitude and latitude are the key data for map visualization so that you'll see it on a widget at the dashboard which you chose.
+经度和纬度是地图可视化的关键数据，因此您将在所选仪表板的小部件上看到它。
 
-In our example, we use an [emulator](/docs/user-guide/resources/timeseries-map-bus.js)
- written in javascript to receive telemetry and visualize it on the dashboard. 
+在我们的示例中，我们使用[模拟器](/docs/user-guide/resources/timeseries-map-bus.js)
+用javascript编写以接收遥测并在仪表板上可视化它。
 
-### Creating a dashboard
+### 创建仪表板
 
-We need to create a dashboard where our telemetry will be visualized. It might be useful if your goal is to track how your entity moved in a specific period. 
+我们需要创建一个仪表板，在其中可以看到遥测。如果您的目标是跟踪实体在特定时期内的移动方式，这可能会很有用。
 
-We can use an existing one or create a new dashboard for our new use case. 
+我们可以使用现有的或为我们的新用例创建一个新的仪表板。
 
-In our example, we create a new dashboard called “Dashboard1” for our guide reasons. 
+在我们的示例中，出于指导目的，我们创建了一个名为“ Dashboard1”的新仪表板。
 
-### Adding widget
+### 添加部件
 
-Now we will open our empty dashboard and edit it. 
+现在，我们将打开空的仪表板并进行编辑。
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/1.png)
 
-Now we have an empty dashboard. Let's fill it with some content.
+现在我们有一个空的仪表板。让我们填充一些内容。
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/2.png)
 
-Firstly we need to create an **alias** to specify entity from which we’ll receive telemetry data. 
+首先，我们需要创建一个**alias**以指定将从中接收遥测数据的实体。
 
-Our entity in this guide will be **“Tracker1”** device which we created previously. We’ll give **“GeoData1”** name to our alias. 
+本指南中的实体将是我们先前创建的 **“Tracker1”** 设备。我们将使用 **“GeoData1”** 名称作为别名。
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/3.png)
 
-Now we go for adding a widget!
+现在我们要添加一个小部件！
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/4.png)
 
-Trip animation widget is located in Maps bundle 
+轨迹动画部件位于地图中
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/5.png)
 
@@ -85,62 +85,62 @@ Finally, we turn on our emulator (link on it you may find below, in "Device emul
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/9.png)
 
-### Widget is ready
+### 部件已准备就绪
 
-Now we can take a look at how our device is being moving for the last minute in a realtime. 
+现在，我们可以实时查看设备在最后一分钟的运行情况。
 
-We also can speed up our timeline cursor up to 1,5,10,25 times so that we can make a check on its routing much faster. 
+我们还可以将时间轴游标加速多达1,5,10,25倍，以便我们可以更快地检查其路线。
 
-Don’t forget to press the “Start” button. 
+不要忘记按“Start”按钮。
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/3.gif)
 
-## Customization
+## 定制
 
-### Settings tab
+### 设置标签
 
-Now, when we got the basics of what our widget can provide, let us go for editing its settings to make it more functional and eye-catching. Firstly we go to settings, there we can specify:
+现在，当我们了解了小部件可以提供的基本知识后，让我们开始编辑其设置，使其更具功能性和醒目性。首先，我们进入设置，在那里我们可以指定：
 
-* Title of widget, its style
+* 部件的标题，其样式
 
-* Title icon, icon colour, icon size in a px 
+* 标题图标，图标颜色，像素大小（以px为单位）
 
-* Title tooltip Show/Hide 
+* 标题工具提示显示/隐藏
 
-* Enable/disable drop shadow 
+* 启用/禁用阴影
 
-* Enable/disable fullscreen mode for widget
+* 启用/禁用小部件的全屏模式
 
-* Change widget style 
+* 更改部件样式
 
-* Enable/disable data export 
+* 启用/禁用数据导出
 
-* Background color, text color, padding, margin
+* 背景颜色，文本颜色，填充，边距
 
-* Specify mobile settings
+* 指定手机设置
 
 
-Let's see how it works.
+让我们看看它是如何工作的。
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/4.gif)
 
-### Advanced tab
+### 高级标签
 
-In a settings tab, we can specify unique parametres for Trip animation widget for functionality that only it can provide. We have:
+在设置选项卡中，我们可以为轨迹动画部件指定唯一的参数，以实现仅其可以提供的功能。我们有：
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/15.png)
 
-* Map provider 
+* 地图提供者
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/16.png)
 
-* Normalization data step (ms) 
+* 归一化数据步长（ms）
 
-* Latitude & Longitude key names - you can specify name based on which widget will be updated. It uses data based on the label of the data. So that you may specify label “data-1” for the longitude key value and get longitude from the alias after we edit longitude key name as “data-1”. 
+* 纬度和经度键名称-您可以根据要更新的小部件指定名称。它使用基于数据标签的数据。这样您就可以为经度键值指定标签“data-1”，并在我们将经度键名称编辑为“data-1”后从别名中获取经度。
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/7.gif)
 
-* Widget label, or specify label function (you may change data contained in a widget label based on data, dsData, dsIndex)
+* 部件标签，或指定标签功能（您可以根据数据，dsData，dsIndex更改小部件标签中包含的数据）
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/5.gif)
  
@@ -157,11 +157,11 @@ return res;
 
 ```
 
-* Show/Hide Tooltip, its color, its font color,the opacity of tooltip and tooltip text or use tooltip function (you may change data contained in a tooltip based on data, dsData, dsIndex)
+* 显示/隐藏工具提示，其颜色，其字体颜色，工具提示和工具提示文本的不透明度或使用工具提示功能（您可以根据数据，dsData，dsIndex更改工具提示中包含的数据）
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/6.gif)
 
-Tooltip function:
+工具提示功能：
 ```javascript
 var speed = dsData['speed'];
 var res;
@@ -174,11 +174,11 @@ return res;
 
 ```
 
-* Path color or specify path color function (you may change data contained in a tooltip based on data, dsData, dsIndex) - the color of the marker moves 
+* 路径颜色或指定路径颜色功能（您可以根据数据，dsData，dsIndex更改工具提示中包含的数据）-标记移动的颜色
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/26.png)
 
-Path color function:
+路径颜色功能：
 ```javascript
 var speed = dsData['speed'];
 var res;
@@ -190,71 +190,71 @@ if (speed > 50) {
 return res;
 ```
 
-* Path decorator, its size in px, end/beginning offset, decorator repeater, stroke weight and stroke opacity
+* 路径装饰器，其大小（以px为单位），结束/起点偏移量，装饰器中继器，笔触粗细和笔触不透明度
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/27.png)
 
-#### Polygon options
+#### 多边形选项
 
-What’s a polygon? It’s a plane figure that’s described by a finite number of dots. We use polygon which is based on coordinates that are specified within the device we use, but you can use any other entity. 
+什么是多边形？这是由有限数量的点描述的平面图形。我们使用的多边形基于所使用设备中指定的坐标，但是您可以使用任何其他实体。
 
-You may mark your assets and any other entities with a polygon option. For the polygon, we can specify the next settings. Polygon coordinates are being received in a format:
+您可以使用多边形选项标记您的资产和其他任何实体。对于多边形，我们可以指定下一个设置。多边形坐标的接收格式如下：
 
 ```
 [[1CoordinateLatitude,1CoordinateLatitude],[2CoordinateLatitude,2CoordinateLatitude]...[nCoordinateLatitude,nCoordinateLatitude]]
 ``` 
 
-where **n** - number of coordinates which polygon is described by.
+其中**n**-描述多边形的坐标数。
 
-* Show/Hide polygon
+* 显示/隐藏多边形
 
-* Polygon tooltip text or polygon tooltip function (you may change data contained in a polygon tooltip based on data, dsData, dsIndex) 
+* 多边形工具提示文本或多边形工具提示功能（您可以根据数据，dsData，dsIndex更改包含在多边形工具提示中的数据）
 
-* Polygon color, opacity
+* 多边形颜色，不透明度
 
-* Polygon border color, opacity, weight 
+* 多边形边框颜色，不透明度，权重
 
-* Polygon color function  (you may change polygon color based on data, dsData, dsIndex)
+* 多边形颜色功能（您可以根据数据，dsData和dsIndex更改多边形颜色）
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/28.png)
 
-#### Points options
+#### 点数选项
 
-The next option is a show points option. Points are a telemetry data updates so that you can check each. For the points next options are available.
+下一个选项是显示点选项。点是遥测数据更新，因此您可以检查每个点。对于这些点，可以使用下一个选项。
 
-* Show/Hide points
+* 显示/隐藏点
 
-* Point color
+* 点颜色
 
-* Point size px
+* 点大小px
 
-* Use point as an anchor, point as an anchor function (you may change data contained in a polygon tooltip based on data, dsData, dsIndex)
+* 将点用作锚点，将点用作锚点函数（您可以根据数据，dsData，dsIndex更改包含在多边形工具提示中的数据）
 
-* Independent point tooltip
+* 独立点工具提示
 
-* Auto-close point popup 
+* 自动关闭点弹出
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/2.gif)
 
-#### Marker options
+#### 标记选项
 
-In addition to all of this, there are some settings for the marker and you can specify next settings for it:
+除此之外，标记还有一些设置，您可以为其指定下一个设置：
 
-* Color for default marker
+* 默认标记的颜色
 
-* Custom marker image 
+* 自定义标记图像
 
-* Custom marker image size px 
+* 自定义标记图片大小px
 
-* Set additional rotation angle for marker
+* 设置标记的附加旋转角度
 
-* Marker image function (you may change marker image, marker image color based on data, dsData, dsIndex)
+* 标记图像功能（您可以根据数据，dsData，dsIndex更改标记图像，标记图像颜色）
 
-* Specify other possible marker images, which can be used in a marker image function
+* 指定其他可能的标记图像，可以在标记图像功能中使用
 
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/1.gif)
 
-Marker image function:
+标记图像功能：
 ```javascript
 var speed = dsData['speed'];
 var res;
@@ -266,9 +266,9 @@ if (speed > 55) {
 return res;
 ```
 
-## Video tutorial 
+## 视频教程
  
-We also recommend you to review this video tutorial.
+我们也建议您阅读此视频教程。
 
   
 <div id="video">  
@@ -278,17 +278,17 @@ We also recommend you to review this video tutorial.
 </div>
 
 
-## Device emulator
+## 设备模拟器
  
-[Emulator](/docs/user-guide/resources/timeseries-map-bus.js)
+[模拟器](/docs/user-guide/resources/timeseries-map-bus.js)
 
-In order to execute script go for a command line:
+为了执行脚本，请使用命令行：
 ```bash
 node timeseries-map-bus.js $ACCESSTOKEN
 ```
-Where **$ACCESSTOKEN** is your **Device** **access token**.
+其中 **$ACCESSTOKEN** 是您的 **Device** **access token**。
 
-**$ACCESSTOKEN** is located in a **Device details**. 
+**$ACCESSTOKEN** 位于 **Device details**。
 ![image](/images/user-guide/ui/widgets/trip-animation-widget/34.png)
 
-Emulator is capable with Node.js v8.10.0
+模拟器与Node.js v8.10.0兼容

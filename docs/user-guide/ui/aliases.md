@@ -2,158 +2,137 @@
 layout: docwithnav
 assignees:
 - yefimov-andrey
-title: Aliases
-description: ThingsBoard Aliases
+title: 别名
+description: ThingsBoard别名
 
 ---
 
 * TOC
 {:toc}
 
-In order to create a dashboard, aliases have to be created first in order to define data from which entities will be 
-used. Aliases can be as easy as referring to a single device or as complicated as creating a complex search query for 
-specific assets from a list.
+创建仪表板必须首先创建别名，以便定义将使用实体的数据。别名可以像引用单个设备一样容易，也可以像为列表中的特定资产创建复杂的搜索查询一样复杂。
 
-In this guide aliases will be used on a system with a following scheme:
+在本指南中，别名将在具有以下方案的系统上使用：
 
 ![image](/images/user-guide/ui/alias-scheme.png)
 
-and all devices have "water_level" generated values coming to them.
+并且所有设备都具有“ water_level”生成的值。
 
-## Alias types
+## 别名类型
 
-### Single entity
+### 单一实体
 
-This alias allows to choose a single entity, which can be device, asset, entity view, tenant, customer, dashboard, 
-data converter, scheduler event, blob entity or current customer.
+该别名允许选择一个实体，可以是设备，资产，实体视图，租户，客户，仪表板，数据转换器，调度程序事件，blob实体或当前客户。
 
 <img data-gifffer="/images/user-guide/ui/single-entity-alias.gif" />
 
-This alias filters one device, which in this case is Device A.
+此别名过滤一个设备，在这种情况下为设备A.
 
-### Group entities
+### 实体组
 
-This alias allows to choose a single group of entities, which can be a customer group, an asset group or a device group.
+该别名允许选择单个实体组，可以是客户组，资产组或设备组。
 
 <img data-gifffer="/images/user-guide/ui/group-entity-alias.gif" />
 
-This alias filters group of devices, which in this case is Irrigation systems.
+该别名过滤设备组在这种情况下为灌溉系统。
 
-### Entity list
+### 实体列表
 
-This alias allows to choose several entities manually without entering query, which can be device(s), asset(s), entity 
-view(s), tenant(s), customer(s), dashboard(s), data converter(s), scheduler event(s), blob entity(-ies) or customer(s).
+该别名允许无需输入查询即可手动选择多个实体，这些实体可以是设备，资产，实体视图，租户，客户，仪表板，数据转换器），调度程序事件，blob实体或客户。
 
 <img data-gifffer="/images/user-guide/ui/entity-list-alias.gif" />
 
-This alias filters a list of several devices, which in this case are Device A and Device B.
+### 实体名称
 
-### Entity name
-
-This alias allows to choose one or more entities names of which start with entered query, which can be device(s), 
-asset(s), entity view(s), tenant(s), customer(s), dashboard(s), data converter(s), scheduler event(s), blob entity(-ies)
- or customer(s).
+此别名允许选择一个或多个实体名称，该实体名称以输入的查询开头，可以是设备，资产，实体视图，承租人，客户，仪表板，数据转换器，调度程序事件，blob实体或客户。
  
 <img data-gifffer="/images/user-guide/ui/entity-name-alias.gif" />
 
- This alias filters devices whose names start with ‘Device’.
+ 该别名过滤名称以“ Device”开头的设备。
  
-### Entity group list
+### 实体组列表
 
-This alias allows to choose several entity groups manually without entering query, which can be device group(s), 
-asset group(s), entity view group(s), customer group(s), dashboard group(s) or user group(s). 
+该别名允许无需输入查询即可手动选择多个实体组，可以是设备组，资产组，实体视图组，客户组，仪表板组或用户组。
 
 <img data-gifffer="/images/user-guide/ui/entity-group-list-alias.gif" />
  
- This alias filters a list of device groups, which in this case are ‘Irrigation systems’ and ‘Moisture sensors’.
- 
-### Entity group name
+### 实体组名称
 
-This alias allows to choose several entity groups names of which start with entered query, which can be device group(s),
-asset group(s), entity view group(s), customer group(s), dashboard group(s) or user group(s). 
+该别名允许选择几个以输入的查询开头的实体组名称，可以是设备组，资产组，实体视图组，客户组，仪表板组或用户组。
 
-For this example an empty device group named 'Irrigation machines' was created.
+对于此示例，创建了一个名为“灌溉机器”的空设备组。
 
 <img data-gifffer="/images/user-guide/ui/entity-group-name-alias.gif" />
  
- This alias filters device groups whose names start with ‘Irrigation’.
+ 该别名过滤名称以“ Irrigation”开头的设备组。
  
-### Entity from dashboard state
-This alias allows to choose entity(-ies) from dashboard state which can be device, asset, entity view, tenant, customer,
- dashboard, data converter, scheduler event, blob entity or current customer. 
-  
-It is used for filtering data for other dashboard states, for example, if Timeseries widget is created on a 
-root dashboard state with several entities displayed on it and you want to create a dashboard state which will display
-a widget with the entity you clicked on, you need to use this alias. 
- 
- In the following example the alias is used after group entities alias was created.
+### 仪表板状态中的实体
+
+该别名允许从仪表板状态选择实体，这些实体可以是设备，资产，实体视图，租户，客户，仪表板，数据转换器，调度程序事件，blob实体或当前客户。
+
+它用于过滤其他仪表板状态的数据，例如，如果“时间序列”小部件是在根仪表板状态上创建的，上面显示了几个实体，而您想创建一个仪表板状态，该状态将显示带有您单击的实体的小部件，您需要使用此别名。
+
+在以下示例中，别名在创建组实体别名后使用。
  
  <img data-gifffer="/images/user-guide/ui/entity-dashboard-state-alias.gif" />
 
-### Asset type
+### 资产类型
 
-This alias allows to choose assets of entered type (and, if needed) names of which start with entered query.
+该别名允许选择输入类型（如果需要）的资产，其名称以输入的查询开头。
 
  <img data-gifffer="/images/user-guide/ui/asset-type-alias.gif" />
  
- This alias filters assets of type ‘field’ and with name starting with ‘House’.
+该别名过滤类型为“ field”且名称以“ House”开头的资产。
  
-### Device type
+### 设备类型
 
-This alias allows to choose devices of entered type (and, if needed) names of which start with entered query.
+该别名允许选择输入类型（如果需要）的设备，其名称以输入的查询开头。
 
  <img data-gifffer="/images/user-guide/ui/device-type-alias.gif" />
  
- This alias filters devices of type ‘Device’.
+ 此别名过滤“设备”类型的设备。
  
-### Entity view type
+### 实体视图类型
 
-This alias allows to choose entity views of entered type (and, if needed) names of which start with entered query.
+使用该别名可以选择输入类型（如果需要）的实体视图，其名称以输入的查询开头。
 
-An entity view called 'Device-D-entity-view' was created with a type 'example-type' which provides access to
- 'water_level' timeseries from Device D.
+创建了一个名为“设备-D-实体视图”的实体视图，其类型为“示例类型”，可从设备D访问“ water_level”时间序列。
 
  <img data-gifffer="/images/user-guide/ui/entity-view-type-alias.gif" />
  
-This alias filters entity Views of type ‘example-type’ and with name starting with ‘Device’.
+此别名过滤类型为“ example-type”且名称以“ Device”开头的实体视图。
 
-### Relations query
+### 关系查询
 
-This alias allows to choose entities which are related to specified originator up to specified level and in specified 
-direction.
+该别名允许选择与指定的发起者相关的实体，直到指定的级别和指定的方向。
 
  <img data-gifffer="/images/user-guide/ui/relations-query-alias.gif" />
 
-This alias filters entities that have any relation from Asset ‘Street A’ up to relation level 2.
+此别名过滤从资产“街道A”到关系级别2之间具有任何关系的实体。
 
-### Asset search query
+### 资产搜索查询
 
-This alias allows to choose assets of specified type which are related to specified originator up to specified level and
-in specified direction.
+该别名允许选择与指定的发起者相关的指定类型的资产，直到指定级别和方向为止。
 
  <img data-gifffer="/images/user-guide/ui/Asset-search-query-alias.gif" />
 
-This alias filters assets with types ‘field’ that have any relation to Device ‘Device D’ with relation level 1.
+此别名过滤类型为“字段”的资产，该资产与级别为1的设备“设备D”有任何关系。
 
-### Device search query
+### 设备搜索查询
 
-This alias allows to choose devices of specified type which are related to specified originator up to specified level
-and in specified direction. 
+该别名允许选择与指定的发起者相关的指定类型的设备，直到指定级别和指定方向为止。
 
  <img data-gifffer="/images/user-guide/ui/Device-search-query-alias.gif" />
 
-This alias filters devices with types ‘Device’ that have any relation from Asset ‘House C’ up to relation level 1.
+此别名过滤类型为“设备”的设备，这些设备具有从资产“房屋C”到关系级别1的任何关系。
 
-### Entity view search query
+### 实体视图搜索查询
 
-This alias allows to choose entity views of specified type which are related to specified originator up to specified
-level and in specified direction.
+此别名允许选择指定类型的实体视图，这些视图与指定的始发者相关联，直到指定的级别和方向为止。
 
-An entity view called 'Device-D-entity-view' which has 'contains' relation to it from Device D was created with a type
- 'example-type' which provides access to 'water_level' timeseries from Device D.
+使用类型“ example-type”创建了一个名为“设备-D-实体视图”的实体视图，该视图与设备D具有“包含”关系，该实体视图提供了对设备D的“ water_level”时间序列的访问。
 
  <img data-gifffer="/images/user-guide/ui/entity-view-type-search-query-alias.gif" />
  
-This alias filters entity views with types ‘example-type’ that have any relation from device ‘Device D’ up to
-relation level 1.
+此别名过滤类型为“ example-type”的实体视图，该视图具有从设备“设备D”到关系级别1的任何关系。
 

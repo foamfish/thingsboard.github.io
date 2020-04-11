@@ -2,68 +2,65 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Devices
-description: ThingsBoard IoT Device management
+title: 设备
+description: ThingsBoard IoT设备管理
 
 ---
 
-ThingsBoard support following device management features using Web UI and [REST API](/docs/reference/rest-api/).
+ThingsBoard使用Web UI和[REST API](/docs/reference/rest-api/)支持以下设备管理功能。
 
 * TOC
 {:toc}
 
-## Add and delete devices
+## 添加和删​​除设备
 
-Tenant administrator is able to register new devices or delete them from ThingsBoard.
+租户管理员可以注册新设备或从ThingsBoard删除它们。
 
 ![image](/images/user-guide/ui/devices.png)
 
-## Manage device credentials
+## 管理设备凭证
 
-Tenant administrator is able to manage device credentials. 
-Current release supports Access Token and X.509 Certificates based credentials.
+租户管理员能够管理设备凭据。当前版本支持基于访问令牌和X.509证书的凭据。
 
 ![image](/images/user-guide/ui/manage-device-credentials.png)
 
-## Get Device Id
+## 获取设备ID
   
-Tenant administrator and customer users are able to copy device id to the clipboard using "Copy Device Id" button.
+租户管理员和客户用户可以使用“复制设备ID”按钮将设备ID复制到剪贴板。
 
  ![image](/images/user-guide/ui/device-id.png)
 
-## Assign devices to customers
+## 将设备分配给客户
 
-Tenant administrator is able to assign devices to certain [customer](/docs/user-guide/ui/customers/).
-This will allow Customer users to fetch device data using REST APIs or Web UI.
+租户管理员可以将设备分配给某些[客户](/docs/user-guide/ui/customers/)。这将允许客户用户使用REST API或Web UI来获取设备数据。
  
  ![image](/images/user-guide/ui/assign-device-to-customer.png)
 
-## Browse device attributes
+## 浏览设备属性
 
-Tenant administrator and customer users are able to browse device [attributes](/docs/user-guide/attributes).
+租户管理员和客户用户可以浏览设备[属性](/docs/user-guide/attributes)。
 
  ![image](/images/user-guide/ui/device-attributes.png)
 
-## Browse device telemetry
+## 浏览设备遥测
 
-Tenant administrator and customer users are able to browse device [telemetry data](/docs/user-guide/telemetry).
+租户管理员和客户用户可以浏览设备[遥测数据](/docs/user-guide/telemetry)。
 
  ![image](/images/user-guide/ui/device-telemetry.png)
 
-## Browse device alarms
+## 浏览设备警报
 
-Tenant administrator and customer users are able to browse device [alarms](/docs/user-guide/alarms).
+租户管理员和客户用户可以浏览设备[警报](/docs/user-guide/alarms)。
 
  ![image](/images/user-guide/ui/device-alarms.png)
  
-## Browse device events
+## 浏览设备事件
   
-Tenant administrator and customer users are able to browse events related to a particular device using "Events" tab.
-Lifecycle events and statistics are coming soon.
+租户管理员和客户用户可以使用“事件”选项卡浏览与特定设备有关的事件。生命周期事件和统计数据即将推出。
 
-## Manage device relations
+## 管理设备关系
  
-Tenant administrator and customer users are able to manage device [relations](/docs/user-guide/entities-and-relations).
+租户管理员和客户用户可以管理设备[关系](/docs/user-guide/entities-and-relations)。
 
  ![image](/images/user-guide/ui/device-relations.png)
  

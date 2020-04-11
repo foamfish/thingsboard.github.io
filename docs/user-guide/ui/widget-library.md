@@ -2,23 +2,21 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Widgets Library
-description: ThingsBoard Dashboard Widgets Library
+title: 部件库
+description: ThingsBoard仪表板部件库
 
 ---
 
 * TOC
 {:toc}
 
-## Introduction
+## 简介
 
-All [IoT Dashboards](/docs/user-guide/ui/dashboards/) are constructed using **ThingsBoard widgets** that are defined in Widget Library.
-Each widget provides end-user functions such as data visualization, remote device control, alarms management and displaying static custom html content.
+所有[IoT仪表板](/docs/user-guide/ui/dashboards/)都是使用ThingsBoard平台中的部件库中定义的Widget进行构建。每个部件都提供对应功能让用户进行操作，例如数据可视化，远程设备控制，警报管理以及显示静态自定义html内容。
 
-## Widget Types
+## 部件类型
 
-According to the provided features, each widget definition represents specific widget type.
-At the moment there are five widget types:
+根据提供的功能每个部件窗口定义代表特定的部件类型窗口。平台提供五种类型：
 
  - [Latest values](#latest-values)
  - [Time-series](#time-series)
@@ -26,184 +24,180 @@ At the moment there are five widget types:
  - [Alarm widget](#alarm-widget)
  - [Static](#static)
  
-Each widget type has own specific datasource configuration and corresponding widget API.
-Each widget requires datasource for data visualization. Types of the available datasource depend on widget type of the widget:
+每种部件类型都有自己特定的数据源配置和相应的部件API。
 
- - Target device - this datasource type is used in RPC. Basically, you need to specify target device for RPC widget
- - Alarm source - this datasource type is used in Alarm widgets. This datasource requires source entity to display related alarms and corresponding alarm fields.
- - Entity - this datasource type is used in both time-series and latest values widgets. Basically, you need to specify target entity and timeseries key or attribute name.
- - Function - this datasource type is used in both time-series and latest values widgets for debug purposes. 
-   Basically, you are able to specify a javascript function that will emulate data from a device in order to tune visualization.
+每个小部件都需要数据源才能进行数据可视化。
+
+可用数据源的类型取决于窗口部件的窗口部件类型：
+
+ - 目标设备 - RPC中使用此数据源类型。 基本上你需要为RPC部件指定目标设备
+ - 警报源 - 警报部件中使用此数据源类型. 此数据源要求源实体显示相关的警报和相应的警报字段。
+ - 实体 - 时间序列和最新值部件均使用此数据源类型. 基本上你需要指定目标实体和时间序列key或attribute名称。
+ - 函数 - 此数据源类型在时间序列和最新值部件中均用于调试。基本上你可以指定一个javascript函数，该函数将模拟设备中的数据以调整可视化效果。
 
 ### Latest values
 
-Displays latest values of particular entity attribute or timeseries data point (for ex. any Gauge Widget or Entities Table widget).
-This kind of widgets uses values of entity attribute(s) or timeseries as datasource.   
+显示特定实体属性或时间序列数据点的最新值（例如，任何“仪表”部件或“实体列表”部件）。这种小部件使用实体属性或时间序列的值作为数据源。
  
 ![image](/images/user-guide/ui/widgets/latest-values-datasource.png)
 
-Below is an example of latest values widget - Digital Gauge displaying current power value. 
+以下是最新值部件的示例-显示当前功率值的数字仪表。
 
 ![image](/images/user-guide/ui/widgets/latest-values-widget-example.png)
 
 ### Time-series
-
-Displays historical values for the selected time period or latest values in the certain time window (for ex. "Timeseries - Flot" or "Timeseries table").
-This kind of widgets uses only values of entity timeseries as datasource.
-In order to specify the time frame of displayed values, **Timewindow** settings are used.
-Timewindow can be specified on the dashboard level or on the widget level. It can be either realtime - dynamically changed time frame for some latest interval, or history - fixed historical time frame.
-All these settings are part of **Time-series** widget configuration.          
+       
+显示选定时间段的历史值或特定时间窗口中的最新值（例如“时间序列-浮点”或“时间序列表”）。
+这种部件仅将实体时间序列的值用作数据源。
+为了指定显示值的时间范围，使用**Timewindow**设置。
+可以在仪表板级别或部件级别指定Timewindow。
+它可以是实时-动态更改某个最近间隔的时间范围，也可以是历史-固定历史时间范围。所有这些设置都是 **Time-series**窗口部件配置的一部分。 
  
 ![image](/images/user-guide/ui/widgets/time-series-datasource.png)
 
-Below is an example of time series widget - "Timeseries - Flot" displaying amperage values of three devices in real-time. 
+以下是时间序列部件的示例-“Timeseries - Flot”实时显示三个设备的安培数。
 
 ![image](/images/user-guide/ui/widgets/time-series-widget-example.png)
 
-### RPC (Control widget)
+### RPC (Control部件)
 
-Allows to send RPC commands to devices and handles/visualize reply from the device (for ex. "Raspberry Pi GPIO Control").
-RPC widgets are configured by specifying target device as target endpoint for RPC commands.
+允许将RPC命令发送到设备并处理/可视化来自设备的答复（例如“ Raspberry Pi GPIO控制”）。通过将目标设备指定为RPC命令的目标端点来配置RPC窗口小部件。
 
 ![image](/images/user-guide/ui/widgets/rpc-datasource.png)
 
-Below is an example of RPC widget - "Basic GPIO Control" - sending GPIO switch commands and detecting current GPIOs switch status.
+以下是RPC小部件的示例-“基本GPIO控制”-发送GPIO切换命令并检测当前的GPIO切换状态。
 
 ![image](/images/user-guide/ui/widgets/rpc-widget-example.png)
 
-### Alarm Widget
+### Alarm部件
 
-Display alarms related to the specified entity in the certain time window (for ex. "Alarms table").
-Alarm widgets are configured by specifying entity as alarms source and corresponding alarm fields.
-Like **Time-series widgets** alarm widgets have the timewindow configuration in order to specify the time frame of displayed alarms.
-Additionally configuration contains "Alarm status" and "Alarms polling interval" parameters.
-"Alarm status" parameter specifies the status of alarms being fetched. "Alarms polling interval" controls alarms fetching frequency in seconds. 
+在特定时间窗口中显示与指定实体相关的警报（例如“警报表”）。
+通过将实体指定为警报源和相应的警报字段来配置警报窗口小部件。
+像**Time-series widgets**一样，警报部件具有时间窗口配置，以便指定显示警报的时间范围。另外，配置还包含“Alarm status”和“Alarms polling interval”参数。“ Alarm status”参数指定正在获取的警报的状态。“Alarms polling interval”控制警报获取频率（以秒为单位）。
 
 ![image](/images/user-guide/ui/widgets/alarm-datasource.png) 
 
-Below is an example of Alarm widget - "Alarms table" displaying latest alarms for the asset in real-time. 
+以下是“警报”窗口小部件的示例-“警报表”实时显示资产的最新警报
 
 ![image](/images/user-guide/ui/widgets/alarm-widget-example.png)
 
 ### Static
 
-Displays static customizable html content (for ex. "HTML card").
-Static widgets don't use any datasources and usually configured by specifying static html content and optionally css styles.
+显示静态的可定制html内容（例如“ HTML卡”）。静态小部件不使用任何数据源，通常通过指定静态html内容和可选的CSS样式进行配置
 
 ![image](/images/user-guide/ui/widgets/static-html.png)
 
-Below is an example of a Static widget - "HTML card" displaying specified html content. 
+以下是一个静态小部件的示例-显示指定html内容的“ HTML卡”。
 
 ![image](/images/user-guide/ui/widgets/static-widget-example.png) 
  
 ## Widgets Library (Bundles)
 
-Widget definitions are grouped into widget bundles according to their purpose. There are System level and Tenant level **Widgets Bundles**.
-Initial ThingsBoard installation is shipped with the basic set of system level **Widgets Bundles**.
-There are more than thirty widgets in seven widget bundles available out-of-the-box.
-System level bundles can be managed by a **System administrator** and are available for use by any tenant in the system.
-Tenant level bundles can be managed by a **Tenant administrator** and are available for use only by this tenant and its customers. 
-You can always implement and add your widgets by following this [guide](/docs/user-guide/contribution/widgets-development/).
+部件定义根据其用途分为部件包。有系统级别和租户级别的**部件包**。
+最初的ThingsBoard安装随附基本的系统级**部件包**。
+现成可用的七个部件包中有三十多个部件。
+系统级别部件包可以由**系统管理员管理**，并且可供系统中的任何租户使用。
+租户级别部件包可以由**租户管理员管理**，并且只能由该租户及其客户使用。您始终可以按照本[指南](/docs/user-guide/contribution/widgets-development/)实施和添加小部件。
  
 ![image](/images/user-guide/ui/widget-bundles.png)
  
 ### Digital Gauges
  
-Useful for visualization of temperature, humidity, speed and other integer or float values.
+用于可视化温度，湿度，速度和其他整数或浮点值。
 
 ![image](/images/user-guide/ui/digital-gauges.png)
 
 ### Analog Gauges
  
-Similar to digital gauges, but have a different style. 
+与数字压力计相似，但样式不同。
 
 ![image](/images/user-guide/ui/analog-gauges.png)
 
 
 ### Charts
  
-Useful for visualization of historical or real-time data with a time window.
+使用时间窗口可视化历史或实时数据很有用。
 
 ![image](/images/user-guide/ui/charts.png)
 
-### GPIO widgets
+### GPIO部件
  
-Useful for visualization and control of GPIO state for target devices.
+用于可视化和控制目标设备的GPIO状态。
 
 ![image](/images/user-guide/ui/gpio-widgets.png)
 
-### Control widgets
+### Control部件
  
-Useful for visualization of current state and sending RPC commands to target devices.
+用于可视化当前状态并将RPC命令发送到目标设备。
 
 ![image](/images/user-guide/ui/control-widgets.png)
 
-### Maps widgets
+### Maps部件
  
-Useful for visualization of devices geo locations and tracking devices routes both in real-time and history mode.
+对于可视化设备地理位置以及跟踪实时和历史记录模式的设备路线很有用。
 
 ![image](/images/user-guide/ui/maps-widgets.png)
 
 ### Cards
  
-Useful for visualization of timeseries data or attributes in a table or card widget.
+用于可视化表格或卡片部件中的时间序列数据或属性。
 
 ![image](/images/user-guide/ui/cards.png)
 
-### Alarm widgets
+### Alarm部件
 
-Useful for visualization of alarms for specific entities both in real-time and history mode.
+对于实时和历史模式下特定实体的警报可视化很有用。
 
 ![image](/images/user-guide/ui/alarm-widgets.png)
 
-### Gateway widgets
+### Gateway部件
 
-Useful for managing extensions.
+对管理扩展很有用。
 
 ![image](/images/user-guide/ui/gateway-widgets.png)
 
-### Input widgets
+### Input部件
 
-Useful for changing entity attributes.
+对于更改实体属性很有用。
 
 ![image](/images/user-guide/ui/input-widgets.png)
 
-## Widgets Bundles import/export
+## Widgets Bundles 导入/导出
 
-#### Widgets Bundle export
+#### Widgets Bundle导出
 
-You are able to export widgets bundle to JSON format and import it to the same or another ThingsBoard instance.
 
-In order to export widgets bundle, you should navigate to the **Widgets Library** page and click on the export button located on the particular widgets bundle card.
- 
+您可以将部件导出为JSON格式，然后将其导入相同或另一个ThingsBoard实例。
+
+为了导出部件包，您应该导航到**Widgets Library**页面，然后单击位于特定部件包卡上的导出按钮。
 ![image](/images/user-guide/ui/export-widgets-bundle.png)
 
-#### Widgets Bundle import
+#### Widgets Bundle导入
 
-Similar, to import the widgets bundle you should navigate to the **Widgets Library** page and click on the big "+" button in the bottom-right part of the screen and then click on the import button. 
+将需要导入窗口部件类型，您应该导航到“窗口小部件库”页面，然后打开窗口小部件包，然后单击屏幕右下方的大“ +”按钮，然后单击导入按钮。
 
 ![image](/images/user-guide/ui/import-widgets-bundle.png)
 
-The widgets bundle import window should a popup and you will be prompted to upload the json file.
+窗口小部件类型导入窗口将显示一个弹出窗口，并且将提示您上传json文件。
 
 ![image](/images/user-guide/ui/import-widgets-bundle-window.png)
 
-## Widgets Types import/export
+## Widgets Types 导入/导出
 
-#### Widget Type export
+#### Widget Type导出
 
-You are able to export particular widget type from widgets bundle to JSON format and import it to the same or another ThingsBoard instance.
+您可以将部件导出为JSON格式，然后将其导入相同或另一个ThingsBoard实例。
 
-In order to export widget type, you should navigate to the **Widgets Library** page, then open desired widgets bundle and finally click on the export button located on the particular widget type card.
+为了导出部件包，您应该导航到**Widgets Library**页面，然后单击位于特定部件包卡上的导出按钮。
  
 ![image](/images/user-guide/ui/export-widget-type.png)
 
-#### Widget Type import
+#### Widget Type导入
 
-Similar, to import the widget type you should navigate to the **Widgets Library** page, then open your widgets bundle and click on the big "+" button in the bottom-right part of the screen and then click on the import button. 
+将需要导入窗口部件类型，您应该导航到“窗口小部件库”页面，然后打开窗口小部件包，然后单击屏幕右下方的大“ +”按钮，然后单击导入按钮。
 
 ![image](/images/user-guide/ui/import-widget-type.png)
 
-The widget type import window will show a popup and you will be prompted to upload the json file.
+窗口小部件类型导入窗口将显示一个弹出窗口，并且将提示您上传json文件。
 
 ![image](/images/user-guide/ui/import-widget-type-window.png)

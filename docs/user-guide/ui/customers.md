@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Customers
-description: ThingsBoard Customers management
+title: 客户
+description: ThingsBoard客户管理
 
 ---
 

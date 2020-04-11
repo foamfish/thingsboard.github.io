@@ -2,55 +2,52 @@
 layout: docwithnav
 assignees:
 - ikulikov
-title: Assets
-description: Thingsboard IoT Asset management
+title: 资产
+description: Thingsboard IoT资产管理
 
 ---
 
-Thingsboard support following asset management features using Web UI and [REST API](/docs/reference/rest-api/).
+Thingsboard支持以下使用Web UI和[REST API](/docs/reference/rest-api/)的资产管理功能。
 
 * TOC
 {:toc}
 
-## Add and delete assets
+## 添加和删​​除资产
 
-Tenant administrator is able to register new assets or delete them from Thingsboard.
+租户管理员可以注册新资产或将其从Thingsboard中删除。
 
 ![image](/images/user-guide/ui/assets.png)
 
-## Get Asset Id
+## 获取资产ID
   
-Tenant administrator and customer users are able to copy asset id to clipboard using "Copy Asset Id" button.
+租户管理员和客户用户可以使用“复制资产ID”按钮将资产ID复制到剪贴板。
 
  ![image](/images/user-guide/ui/asset-id.png)
 
-## Assign assets to customers
+## 向客户分配资产
 
-Tenant administrator is able to assign assets to certain [customer](/docs/user-guide/ui/customers/).
-This will allow Customer users to fetch asset data using REST APIs or Web UI.
+租户管理员可以将资产分配给某些[客户](/docs/user-guide/ui/customers/)。这将允许客户用户使用REST API或Web UI来获取资产数据。
  
  ![image](/images/user-guide/ui/assign-asset-to-customer.png)
 
-## Manage asset attributes
+## 管理资产属性
 
-Tenant administrator and customer users are able to manage asset server-side [attributes](/docs/user-guide/attributes).
-
+租户管理员和客户用户能够管理资产服务器端[属性](/docs/user-guide/attributes)。
  ![image](/images/user-guide/ui/asset-attributes.png)
 
-## Browse asset alarms
+## 浏览资产警报
 
-Tenant administrator and customer users are able to browse asset [alarms](/docs/user-guide/alarms).
+租户管理员和客户用户可以浏览资产[警报](/docs/user-guide/alarms)。
 
  ![image](/images/user-guide/ui/asset-alarms.png)
  
-## Browse asset events
+## 浏览资产事件
   
-Tenant administrator and customer users are able to browse events related to particular asset using "Events" tab.
-Lifecycle events and statistics are coming soon.
+租户管理员和客户用户可以使用“事件”选项卡浏览与特定资产相关的事件。生命周期事件和统计数据即将推出。
 
-## Manage asset relations
+## 管理资产关系
  
-Tenant administrator and customer users are able to manage asset [relations](/docs/user-guide/entities-and-relations).
+租户管理员和客户用户可以管理资产[关系](/docs/user-guide/entities-and-relations)。
 
  ![image](/images/user-guide/ui/asset-relations.png)
  

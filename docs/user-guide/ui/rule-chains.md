@@ -2,50 +2,49 @@
 layout: docwithnav
 assignees:
 - vparomskiy
-title: Rule Chains
-description: ThingsBoard Rule Chains management
+title: 规则链
+description: ThingsBoard 规则链管理
 
 ---
 
 * TOC
 {:toc}
 
-## Rule Chains page
+## 规则链页面
 
-Rule Chains Administration UI page displays a table of configured tenant rule chains. Each rule chain has a separate card.
-You are able to do following operations:
+规则链管理UI页面显示配置的租户规则链表。每个规则链都有一个单独的卡。您可以执行以下操作：
 
- - Import Or Create new Rule Chain
- - Export Rule Chain to JSON
- - Mark Rule Chain as **Root Rule Chain**
- - Delete the Rule Chain
+ - 导入或创建新规则链
+ - 将规则链导出到JSON
+ - 将规则链标记为**Root Rule Chain**
+ - 删除规则链
  
-See [**Rule Engine**](/docs/user-guide/rule-engine-2-0/re-getting-started/) documentation for more details.
+有关更多详细信息，请参见[**规则引擎**](/docs/user-guide/rule-engine-2-0/re-getting-started/)文档。
 
 ![image](/images/user-guide/ui/rule-chain-page.png)
 
-## Rule Chains import/export
+## 规则链导入/导出
 
-#### Rule Chain export
+#### 规则链出口
 
-You are able to export your rule chain to JSON format and import it to the same or another ThingsBoard instance.
+您可以将规则链导出为JSON格式，并将其导入到相同或其他ThingsBoard实例。
 
-In order to export rule chain, you should navigate to the **Rule Chains** page and click on the export button located on the particular rule chain card.
+为了导出规则链，您应该导航到**规则链**页面，然后单击位于特定规则链卡上的导出按钮。
  
 ![image](/images/user-guide/ui/export-rule-chain.png)
 
-#### Rule import
+#### 规则导入
 
-Similar, to import the rule chain you should navigate to the **Rule Chains** page and click on the big "+" button in the bottom-right part of the screen and then click on the import button. 
+要导入规则链你应该导航到**规则链**页面，然后单击屏幕右下角的大“+”按钮然后单击导入按钮。
 
 ![image](/images/user-guide/ui/rule-import.png)
 
-**Note 1:** All imported Rule chains are **Not** Root Rule Chains.
+**注意1:** 所有导入的规则链不是**Root Rule Chains**。
  
-**Note 2:** If imported Rule Chain contains references to other Rule Chains (via **Rule Chain** node), then you will need to update those references before saving Rule Chain. 
+**注意2:** 如果导入的规则链包含对其他规则链的引用（通过“规则链”节点），则在保存规则链之前，您将需要更新这些引用。
 
-#### Troubleshooting
+#### 故障排除
 
-Possible issues while importing the rule:
+导入规则时可能出现的问题：
 
- - References to other Rule Chains via **Rule Chain** node should be updated before saving changes.
+ - 保存更改之前应更新通过**Rule Chain**节点对其他规则链的引用。

@@ -2,15 +2,15 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Dashboards
-description: ThingsBoard IoT Dashboards
+title: 面板
+description: ThingsBoard IoT 面板
 
 ---
 
 * TOC
 {:toc}
 
-## Video tutorial
+## 视频教程
 
 <div id="video">  
     <div id="video_wrapper">
@@ -18,46 +18,45 @@ description: ThingsBoard IoT Dashboards
     </div>
 </div>
 
-## Default IoT dashboard for customer user
+## 用户默认的IoT仪表板
 
-Since ThingsBoard 1.2 you are now able to define default IoT dashboard for your customer users in 2 simple steps:
+从ThingsBoard 1.2开始，你现在可以通过两个简单步骤为用户定义默认的IoT仪表板：
 
-#### Step 1. Assign IoT dashboard to customer
+#### 步骤1.将IoT仪表板分配给客户
 
-See embedded video tutorial above on tips how to do this.
+请参阅上面的嵌入式视频教程，以获取有关如何执行此操作的提示。
 
-#### Step 2. Open customer user details
+#### 步骤2.打开客户用户详细信息
 
-Navigate to "**Customers** -> Your customer -> **Customer Users**" and toggle edit mode using 'pencil' button in the top-right corner of the screen.
+导航至 "**Customers** -> 你的客户 -> **Customer Users**" 然后使用屏幕右上角的“铅笔”按钮切换编辑模式。
 
-#### Step 3. Select IoT dashboard 
+#### 步骤3.选择IoT仪表板
 
-select the IoT dashboard from the list and apply changes. Please note that you can also check the "Always Fullscreen" mode to prevent a user from navigating to different dashboards/screens. 
+从列表中选择IoT仪表板并应用更改。请注意，你还可以检查“始终全屏”模式，以防止用户导航到其他仪表板/屏幕。
 
 ![image](/images/user-guide/ui/default-dashboard.png)
 
-## IoT Dashboard import/export
+## IoT仪表板导入/导出
 
-#### Dashboard export
+#### 仪表板导出
 
-You are able to export your dashboard to JSON format and import it to the same or another ThingsBoard instance.
+你可以将仪表板导出为JSON格式，然后将其导入相同或另一个ThingsBoard实例。
 
-In order to export dashboard, you should navigate to the **Dashboards** page and click on the export button located on the particular dashboard card.
+为了导出仪表盘，您应该导航到**Dashboards**页面，然后单击位于特定仪表盘卡上的导出按钮。
  
 ![image](/images/user-guide/ui/export-dashboard.png)
 
-#### Dashboard import
+#### 仪表板导入
 
-Similar, to import the dashboard you should navigate to the **Dashboards** page and click on the big "+" button in the bottom-right part of the screen and then click on the import button. 
+同样，要导入仪表板，您应该导航至**Dashboards**页面，然后单击屏幕右下角的大“ +”按钮，然后单击导入按钮。
 
 ![image](/images/user-guide/ui/import-dashboard.png)
 
-The dashboard import window should popup and you will be prompted to upload the json file.
+仪表板导入窗口应弹出，并提示您上传json文件。
 
 ![image](/images/user-guide/ui/import-dashboard-window.png)
 
-Once you click on the "import" button you will need to specify the device aliases. 
-This basically allows you to set what device(s) correspond to dashboard alias.
+单击“导入”按钮后，您将需要指定设备别名。基本上这使您可以设置与仪表板别名对应的设备。
 
 ![image](/images/user-guide/ui/import-dashboard-aliases.png)
 
