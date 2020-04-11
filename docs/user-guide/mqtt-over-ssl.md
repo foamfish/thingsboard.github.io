@@ -2,28 +2,26 @@
 layout: docwithnav
 assignees:
 - vsosliuk
-title: MQTT over SSL
-description: Launching ThingsBoard with secure MQTT protocol to connect your IoT devices and projects.
+title: 基于SSL的MQTT认证
+description: 使用基于SSL的的MQTT认证协议启动ThingsBoard以连接你的IoT设备和项目。
+
 
 ---
 
 * TOC
 {:toc}
 
-ThingsBoard provides the ability to run MQTT server over SSL. Both one-way and two-way SSL are supported.
-To enable SSL, you will need to obtain a valid or generate a self-signed SSL certificate and add it to the keystore.
-Once added, you will need to specify the keystore information in **thingsboard.yml** file.
-See the instructions on how to generate SSL certificate and use it in your ThingsBoard installation below.
-You can skip certificate generation step if you already have a certificate.
+ThingsBoard提供了基于SSL认证运行MQTT服务的功能，同时支持单向和双向SSL。你可以使用有效的证书或生成自签名的SSL证书并将其添加到密钥库来启用SSL功能。你需要在　**thingsboard.yml**　文件中指定密钥库信息。请参阅下面的有关如何生成SSL证书并在你的ThingsBoard安装并使用。
 
-### Self-signed certificate generation
+### 生成自签名证书
 
-**Note** This step requires Linux based OS with Java installed.
+**注意** 此步骤必须在基于Linux的操作中安装java.
 
-Download [**server.keygen.sh**](https://raw.githubusercontent.com/thingsboard/thingsboard/master/tools/src/main/shell/server.keygen.sh) from the official ThingsBoard repository to your working directory.
+从官方ThingsBoard仓库中下载[**server.keygen.sh**](https://raw.githubusercontent.com/thingsboard/thingsboard/master/tools/src/main/shell/server.keygen.sh)到你的工作目录。
 
-Download [**keygen.properties**](https://raw.githubusercontent.com/thingsboard/thingsboard/master/tools/src/main/shell/keygen.properties) file to your working directory and populate it with desired values. 
-For example:
+将[**keygen.properties**](https://raw.githubusercontent.com/thingsboard/thingsboard/master/tools/src/main/shell/keygen.properties)文件下载到你的工作目录，并填充所需的值。
+
+例如：
 
 ```bash
 DOMAIN_SUFFIX="$(hostname)"
@@ -50,50 +48,49 @@ CLIENT_FILE_PREFIX="mqttclient"
 
 where 
 
- - **DOMAIN_SUFFIX** - Corresponds to **CN** value of the certificate. Must correspond to the target server domain (wildcards are allowed). Defaults to the current hostname 
- - **ORGANIZATIONAL_UNIT** - Corresponds to **OU** value of the certificate.
- - **ORGANIZATION** - Corresponds to **O** value of the certificate.
- - **CITY** - Corresponds to **L** value of the certificate.
- - **STATE_OR_PROVINCE** - Corresponds to **ST** value of the certificate.
- - **TWO_LETTER_COUNTRY_CODE** - Corresponds to **C** value of the certificate.
- - **SERVER_KEYSTORE_PASSWORD** - Server Keystore password
- - **SERVER_KEY_PASSWORD** - Server Key password. May or may not be the same as SERVER_KEYSTORE_PASSWORD
- - **SERVER_KEY_ALIAS** - Server key alias. Must be unique within the keystore
- - **SERVER_FILE_PREFIX** - Prefix to all server keygen-related output files
- - **SERVER_KEYSTORE_DIR** - The default location where the key would be optionally copied. Can be overriden by -d option in **server.keygen.sh** script or entered manually upon the scrip run
+ - **DOMAIN_SUFFIX** - 对应于证书的**CN**值。必须与目标服务器域相对应（允许使用通配符）。默认为当前主机名。
+ - **ORGANIZATIONAL_UNIT** - 对应于证书的 **OU** 值。
+ - **ORGANIZATION** -  -对应于证书的 **O** 值。
+ - **CITY** -  -对应于证书的 **L** 值。
+ - **STATE_OR_PROVINCE** - 对应于证书的 **ST** 值。
+ - **TWO_LETTER_COUNTRY_CODE** - 对应于证书的 **C** 值。
+ - **SERVER_KEYSTORE_PASSWORD** - 服务器密钥库密码
+ - **SERVER_KEY_PASSWORD** - 服务器密钥密码。可能与SERVER_KEYSTORE_PASSWORD不相同。
+ - **SERVER_KEY_ALIAS** - 服务器密钥别名。在密钥库中必须唯一
+ - **SERVER_FILE_PREFIX** - 所有与服务器密钥生成有关的输出文件的前缀
+ - **SERVER_KEYSTORE_DIR** - 可以选择复制密钥的默认位置。 可以由**server.keygen.sh** 脚本中的-d选项覆盖，或在脚本运行时手动输入
 
-The rest of the values are not important for the server keystore generation 
+其余值对于服务器密钥库的生成并不重要
 
-To run the server keystore generation, use following commands.
+要运行服务器密钥库生成，请使用以下命令。
  
 ```bash
 chmod +x server.keygen.sh
 sudo ./server.keygen.sh
 ```
 
-You may run this script with no arguments, or alternatively, you can specify the following optional arguments:
+您可以不带任何参数运行此脚本或者可以指定以下可选参数:
 
- - **-c \| --copy** - Specifies if the keystore should be copied to the server directory. Defaults to **true**
- - **-d \| --dir** - Server keystore directory, where the generated **SERVER_FILE_PREFIX**.jks keystore file will be copied. If specified, overrides the value from the properties file
- - **-p \| --props \| --properties** - Specifies the relative path to the properties file. Defaults to **./keygen.properties**
+ - **-c \| --copy** - 指定是否将密钥库复制到服务器目录。默认为 **true**
+ - **-d \| --dir** - 服务器密钥库目录，将在其中复制生成的**SERVER_FILE_PREFIX**.jks密钥库文件。如果指定，则覆盖属性文件中的值
+ - **-p \| --props \| --properties** - 指定属性文件的相对路径。默认为 **./keygen.properties** 
 
-This script will run keytool using the configuration specified. It will generate the following output files:
+该脚本将使用指定的配置运行keytool。它将生成以下输出文件：
 
- - **SERVER_FILE_PREFIX.jks** - Java keystore file. This is the file which will be used by ThingsBoard MQTT Service
- - **SERVER_FILE_PREFIX.cer** - Server public key file. It will be then imported to client's .jks keystore file.
- - **SERVER_FILE_PREFIX.pub.pem** - Server public key in **PEM** format, which can be then used as a keystore or imported by non-Java clients.   
+ - **SERVER_FILE_PREFIX.jks** - Java密钥库文件。这是ThingsBoard MQTT服务将使用的文件
+ - **SERVER_FILE_PREFIX.cer** - 服务器公用密钥文件。然后将其导入到客户端的.jks密钥库文件中。
+ - **SERVER_FILE_PREFIX.pub.pem** - **PEM** 格式的服务器公共密钥，然后可以用作密钥存储或由非Java客户端导入。
 
-If you specified not to copy the keystore file, then upload it manually to a directory which is in server's classpath.
-You may want to modify owner and permissions for the keystore file:
+如果您指定不复制密钥库文件，则将其手动上传到服务器的类路径中的目录。您可能要修改密钥库文件的所有者和权限：
 
 ```bash
 sudo chmod 400 /etc/thingsboard/conf/mqttserver.jks
 sudo chown thingsboard:thingsboard /etc/thingsboard/conf/mqttserver.jks
 ```
 
-### Server configuration
+### 服务器配置
 
-Locate your **thingsboard.yml** file and uncomment the lines after "*# Uncomment the following lines to enable ssl for MQTT*":
+找到您的 **thingsboard.yml** 文件，并取消注释"＃取消注释以下行以为MQTT启用ssl之后的行"：
 
 ```bash
 # MQTT server parameters
@@ -110,18 +107,17 @@ mqtt:
     key_store_type: JKS
 ```
 
-You may also want to change **mqtt.bind_port** to 8883 which is recommended for MQTT over SSL servers.
+您可能还希望将 **mqtt.bind_port** 更改为8883，基于SSL认证的MQTT推荐使用。
 
-The **key_store** Property must point to the **.jks** file location. **key_store_password** and **key_password** must be the same as were used in keystore generation.
+此 **key_store** 属性必须指向.jks文件位置。**key_store_password**和**key_password**必须与生成密钥库时使用的相同。
 
-**NOTE:** ThingsBoard supports **.p12** keystores as well. if this is the case, set **key_store_type** value to **'PKCS12'**
+**注意:** ThingsBoard也支持 **.p12** 密钥库。如果是这种情况，请将**key_store_type**e值设置为 **'PKCS12'**
 
-After these values are set, launch or restart your thingsboard server.
+设置这些值之后，启动或重新启动Thingsboard服务器。
 
-## Client Examples
+## 客户实例
 
-See following resources:
-
- - [Device Authentication options](/docs/user-guide/device-credentials/) for authentication options overview
- - [Access Token based authentication](/docs/user-guide/access-token/) for example of **one-way SSL** connection 
- - [X.509 Certificate based authentication](/docs/user-guide/certificates/) for example of **two-way SSL** connection
+请参阅以下资源:
+ - [设备身份认证](/docs/user-guide/device-credentials/)
+ - [单向SSL令牌身份认证](/docs/user-guide/access-token/)
+ - [X.509身份双向认证](/docs/user-guide/certificates/)

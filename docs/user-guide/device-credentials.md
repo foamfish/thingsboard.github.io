@@ -2,27 +2,25 @@
 layout: docwithnav
 assignees:
 - vsosliuk
-title: Device authentication options
-description: ThingsBoard IoT Device authentication options.
+title: 设备认证
+description: ThingsBoard IoT设备认证。
 
 ---
 
-Device credentials are used in order to connect to the ThingsBoard server by applications that are running on the device.
-ThingsBoard is designed to support different device credentials. There are two supported credentials types at the moment:
+设备凭证用于在设备上运行的应用程序连接到ThingsBoard服务器。
 
- - [**Access Tokens**](/docs/user-guide/access-token/) - general purpose credentials that are suitable for wide range of devices. 
- Access Token based authentication may be used in not encrypted or one-way SSL mode.
-   - **Advantages:** supported by resource constrained devices. Low network overhead. Easy to provision and use.
-   - **Disadvantages:** may be easily intercepted while using un-encrypted network connection (HTTP instead of HTTPS, MQTT without TLS/SSL, etc).
- - [**X.509 Certificates**](/docs/user-guide/certificates/) - [PKI](https://en.wikipedia.org/wiki/Public_key_infrastructure) and [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) standard. 
- X.509 Certificate based authentication is used in two-way SSL mode.
-   - **Advantages:** high level of security using the encrypted network connection and public key infrastructure.
-   - **Disadvantages:** not supported by some resource constrained devices. Affects battery and CPU usage.
+ThingsBoard旨在支持不同的设备凭据，目前有两种受支持的凭据类型：
 
-Device credentials need to be provisioned to corresponding device entity on the server. 
-There are multiple ways to do this:
+ - [**访问令牌**](/docs/user-guide/access-token/) - 基于访问令牌身份验证模式可以在未加密或单向SSL模式下使用，适合于通用的设备认证。
+   - **优点:** 易于配置和使用且占用带宽低和支持设备广泛。
+   - **缺点:** 使用未加密码的网络易被拦截。
+ - [**X.509凭据**](/docs/user-guide/certificates/) - X.509认证凭据是基于[PKI](https://en.wikipedia.org/wiki/Public_key_infrastructure)和[TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) 标准的双向SSL模式认证。 
+   - **优点:** 使用加密的凭据进行连接安全性较高。
+   - **缺点:** 某些设备不支持耗电并消耗CPU资源较高。
 
- - **Automatically**, using ThingsBoard [REST API](/docs/reference/rest-api/). For example during manufacturing, QA or purchase order fulfilment.
- - **Manually**, using ThingsBoard [Web UI](/docs/user-guide/ui/devices/#manage-device-credentials). For example for development purposes, or by system administrator.
+需要将设备凭据提供给服务器上相应的设备实体，有如下方法可以做到这一点;
+
+ - **自动**：使用ThingsBoard [REST API](/docs/reference/rest-api/) 应用场景在制造、QA或采购时使用。
+ - **手动**：使用ThingsBoard [Web UI](/docs/user-guide/ui/devices/#manage-device-credentials) 应用场景在开发或系统管理时使用。
 
 
