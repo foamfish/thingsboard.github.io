@@ -2,83 +2,83 @@
 layout: docwithnav
 assignees:
 - vbabak
-title: Contribution Guide
+title: 贡献指南
 
 ---
 
 * TOC
 {:toc}
 
-We are constantly looking for a feedback from our community on how to improve ThingsBoard.
-If you have an idea or you have some new features in mind, please open an issue at ThingsBoard [**GitHub issue page**](https://github.com/thingsboard/thingsboard/issues).
-Please make sure that the same ticket is not already opened in the issues list (or something very similar).
+我们一直在寻找社区中有关如何改进ThingsBoard的反馈。
+如果您有想法或要考虑一些新功能，请在ThingsBoard [**GitHub问题页面**](https://github.com/thingsboard/thingsboard/issues)新建一个问题。
+请确保问题列表中没有相同的问题（或类似问题）。
 
-Before you start any implementation please wait from the ThingsBoard team to comment on your ticket. We'll try to get back to you ASAP.
+在开始任何实施之前，请等待ThingsBoard团队对您的票进行评论。我们将尽快与您联系。
 
-#### Required tools
+#### 必备工具
 
-To build and run ThingsBoard instance make sure that you have **Java** and **Maven** installed onto your system.
+要构建和运行ThingsBoard实例，请确保已在系统上安装了**Java**和**Maven**。
 
-Please refer to [**Building from sources**](/docs/user-guide/install/building-from-source) section where [**Java**](/docs/user-guide/install/building-from-source/#java) and [**Maven**](/docs/user-guide/install/building-from-source/#maven) install processes are described.
+请参考[**从源代码构建**](/docs/user-guide/install/building-from-source)部分，其中[**Java**](/docs/user-guide/install/building-from-source/#java)和[**Maven**](/docs/user-guide/install/building-from-source/#maven)安装过程进行了描述。
 
-#### Fork and build ThingsBoard repository
+#### 分支并构建ThingsBoard代码库
 
-Once you have completed installation of required tools please fork official [**ThingsBoard repository**](https://github.com/thingsboard/thingsboard).
+完成所需工具的安装后，请克隆正式的[**ThingsBoard代码库**](https://github.com/thingsboard/thingsboard)分支。
 
-Now you can clone source code of the forked project. 
+现在您可以克隆分支项目的源代码。
 
-**NOTE:** We will refer later to the folder where you have cloned repository as **${TB_WORK_DIR}**.
+**注意：** 我们稍后将以 **${TB_WORK_DIR}** 指代您已经克隆的代码库文件夹。
 
-If are building on Windows for the first time, you may need to run these commands to ensure the required npm dependencies are available: 
+如果是首次在Windows上构建，则可能需要运行以下命令以确保所需的npm依赖项可用：
 ```bat 
 npm install -g cross-env 
 npm install -g webpack 
 ``` 
 
-Before importing the project into the *IDE* please build it using **Maven** tool from the root folder:
+在将项目导入*IDE*之前请使用**Maven**工具从根文件夹中进行构建：
 
 ```bash
 cd ${TB_WORK_DIR}
 mvn clean install -DskipTests
 ```
 
-A build will generate all the *protobuf* files in the *application* module that are needed for the correct compilation in your *IDE*.
+使用*IDE*编译*application*模块时会生成必须的*protobuf*文件。
 
-Next, import the project into your favorite *IDE* as **Maven** project. 
-See separate instructions for [**IDEA**](https://www.jetbrains.com/help/idea/2016.3/importing-project-from-maven-model.html) and [**Eclipse**](http://javapapers.com/java/import-maven-project-into-eclipse/).   
+接下来，将该项目作为**Maven**项目导入到您最喜欢的*IDE*中。  
+请参阅[**IDEA**](https://www.jetbrains.com/help/idea/2016.3/importing-project-from-maven-model.html)和[**Eclipse**](http://javapapers.com/java/import-maven-project-into-eclipse/)。
 
-**NOTE:** If you are using Eclipse, after the maven project is imported to the IDE, We recommend you to disable Maven Project builder on **ui** project. This will improve the Eclipse performance *a lot*, because it will avoid Eclipse Maven builder from digging in node_modules directory (which is unnecessary and only causes Eclipse to hang). To do this, right-click on **ui** project, go to **Properties -> Builders**, and then uncheck the **Maven Project Builder** checkbox and then click **Ok**.
+**注意：** 如果您使用的是Eclipse，则在将maven项目导入到IDE之后，建议您在**ui**项目上禁用Maven项目构建器。这将极大地提高Eclipse性能，因为它将避免Eclipse Maven构建生成node_modules目录（这是不必要的，只会导致Eclipse挂起）。为此，右键单击**ui**项目，转到**Properties-> Builders**，然后取消选中**Maven Project Builder**”复选框，然后单击**确定**。
 
-#### Database
+#### 数据库
 
-By default, ThingsBoard uses embedded HSQLDB instance which is very convenient for evaluation or development purposes. 
+默认情况下，ThingsBoard使用嵌入式HSQLDB实例，这对于评估或开发目的非常方便。
   
-Alternatively, you can configure your platform to use either scalable Cassandra DB cluster or various SQL databases. 
-If you prefer to use an SQL database, we recommend PostgreSQL.
+另外，您可以配置平台以使用可伸缩的Cassandra数据库集群或各种SQL数据库。
+如果您更喜欢使用SQL数据库，建议使用PostgreSQL。
 
-##### [Optional] SQL Database: PostgreSQL
+##### [可选] SQL数据库：PostgreSQL
 
 {% include templates/install/optional-db.md %}
 
-Please use [this link](https://wiki.postgresql.org/wiki/Detailed_installation_guides) for the PostgreSQL installation instructions.
+请使用[此链接](https://wiki.postgresql.org/wiki/Detailed_installation_guides)获得PostgreSQL安装说明。
 
-Once PostgreSQL is installed you may want to create a new user or set the password for the main user.
+一旦安装了PostgreSQL，您可能想要创建一个新用户或设置主要用户的密码。
 
 {% include templates/install/create-tb-db.md %}
 
 
-##### [Optional] NoSQL Database: Cassandra
+##### [可选] NoSQL数据库：Cassandra
 
-Please refer to appropriate section where you find instructions on how to install cassandra:
+请参考适当的部分，在其中找到有关如何安装cassandra的说明：
 
- - [Cassandra installation on **Linux**](/docs/user-guide/install/linux/#cassandra)
- - [Cassandra installation on **Windows**](/docs/user-guide/install/windows/#cassandra)
+ - [Cassandra安装在**Linux**上](/docs/user-guide/install/linux/#cassandra)
+ - [Cassandra安状在**Windows**上](/docs/user-guide/install/windows/#cassandra)
 
-##### [Optional] Configure ThingsBoard to use external database
+##### [可选]配置ThingsBoard以使用外部数据库
  
 {% include templates/install/optional-db.md %} 
  
-Edit ThingsBoard configuration file: 
+编辑ThingsBoard配置文件：
 
 ```text
 /application/src/main/resources/thingsboard.yml
@@ -86,13 +86,13 @@ Edit ThingsBoard configuration file:
 
 {% include templates/disable-hsqldb.md %} 
 
-For **PostgreSQL**:
+对于**PostgreSQL**：
 
 {% include templates/enable-postgresql.md %} 
 
-For **Cassandra DB**:
+对于**Cassandra DB**：
 
-Locate and set database type configuration parameters to 'cassandra'.
+找到并将数据库类型配置参数设置为‘cassandra’。
  
 ```text
 database:
@@ -102,21 +102,21 @@ database:
     type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
 ```
 
-**NOTE:** If your Cassandra server is installed on the remote machine or it is bind to custom interface/port, you need to specify it in thingsboard.yml as well.
-Please, tefer to the [**configuration guide**](/docs/user-guide/install/config/) for the detailed description of **thingsboard.yml** file and what properties are used for cassandra connection configuration.
+**注意：** 如果您的Cassandra服务器已安装在远程计算机上，或者已绑定到自定义接口/端口，则还需要在Thingsboard.yml中进行指定。
+请转至[**配置指南**](/docs/user-guide/install/config/)以获取**thingsboard.yml**文件的详细说明以及用于cassandra连接配置的属性。
 
-After the thingsboard.yml file was updated, please rebuild the application module so that the updated thingsboard.yml gets populated to the target directory:
+Thingsboard.yml文件更新后，请重新编译应用程序模块，以便将更新后的Thingsboard.yml值生效：
 
 ```bash
 cd ${TB_WORK_DIR}/application
 mvn clean install -DskipTests
 ```
 
-##### Create Database schema and populate demo data
+##### 创建数据库结构并生成演示数据
 
-In order to create the database tables, run the following:
+为了创建数据库表请执行以下命令：
 
-On *Linux*:
+在 *Linux*:
 
 ```bash
 cd ${TB_WORK_DIR}/application/target/bin/install
@@ -124,97 +124,97 @@ chmod +x install_dev_db.sh
 ./install_dev_db.sh
 ```
 
-On *Windows*:
+在 *Windows*:
 
 ```bat
 cd %TB_WORK_DIR%\application\target\windows
 install_dev_db.bat
 ```
 
-#### Running development environment
+#### 运行开发环境
 
-##### Running UI container in hot redeploy mode.
+##### 在热部署模式下运行UI容器。
 
-By default, ThingsBoard UI is served at 8080 port. However, you may want to run UI in the hot redeploy mode.
+默认情况下ThingsBoard UI通过8080使用端口。但是您可能要在热重新部署模式下运行UI。
 
-**NOTE:** This step is optional. It is required only if you are going to do changes to UI.
+**注意：** 此步骤是可选的仅当您要更改UI时才需要。
  
-To start UI container in hot redeploy mode you will need to install **node.js** first. Once **node.js** is installed you can start container by executing next command:
+要以热部署模式启动UI容器，您需要先安装 **node.js**。安装**node.js**后，您可以通过执行下一个命令来启动容器：
 
 ```bash
 cd ${TB_WORK_DIR}/ui
 mvn clean install -P npm-start
 ```
 
-This will launch a special server that will listen on 3000 port. All REST API and websocket requests will be forwarded to 8080 port.
+这将启动一个特殊的服务器，该服务器将侦听3000端口。所有REST API和websocket请求都将转发到8080端口。
 
-##### Running server-side container
+##### 运行服务器端容器
 
-To start server-side container you can use couple options.
+要启动服务器端容器，您可以使用几个选项。
 
-As a first option, you can run the main method of **org.thingsboard.server.ThingsboardServerApplication** class that is located in *application* module from your *IDE*.
+首先，您可以运行*IDE*中*application*模块中的**org.thingsboard.server.ThingsboardServerApplication**类的main方法。
 
-As a second option, you can start the server from command line as a regular **Spring boot** application:
+其次是，您可以从命令行使用**Spring boot**启动应用程序服务器：
 
 ```bash
 cd ${TB_WORK_DIR}
 java -jar application/target/thingsboard-${VERSION}-boot.jar
 ```
 
-##### Dry run
+##### 运行
 
-Navigate to http://localhost:3000/ or http://localhost:8080/ and login into ThingsBoard using demo data credentials:
+导航到http://localhost:3000/或http://localhost:8080/ 并使用演示数据凭据登录ThingsBoard：
 
- - *login* **tenant@thingsboard.org**
- - *password* **tenant**
+ - *用户名* **tenant@thingsboard.org**
+ - *密码* **tenant**
 
-Make sure that you are able to login and everything has started correctly.
+确保您能够登录并且一切都已正确启动。
 
-#### Code changes
+#### 代码更改
 
-Now you are ready to start to do some changes to the codebase.
-Update server-side or UI code.
-Verify that changes that you have done meet your requirements and expectations from the user perspective.
+现在您准备开始对代码库进行一些更改。
+更新服务端或UI代码。
+从用户角度验证所做的更改是否满足您的要求和期望。
 
-##### Verify build
+##### 生成验证
 
-Before you commit your changes to the remote repository build it locally with tests run using *Maven*:
+在将更改提交到远程存储库之前，请使用*Maven*运行测试以在本地进行构建：
 
 ```bash
 mvn clean install
 ```
 
-Make sure that build is fine and all the tests are successful.
+确保构建正常并且所有测试均成功。
 
-##### Push changes to your fork
+##### 将更改推送到您的分支
 
-When you are done with code changes commit and push them to your forked repository with some meaningful comment:
+完成代码更改后，提交并使用一些有意义的注释将其推送到您的分支代码库中：
 
 ```bash
-git commit -m 'Some meaningful comment'
+git commit -m '有意义的说明'
 git push origin master
 ```
 
-##### Create pull request
+##### 创建请求请求
 
-Please create pull request into the **master** branch by default (the additional *branch* name will be provided during the initial stage of github issue discussion if needed).
+请默认将拉取请求创建到**master**分支中（如果需要，在github问题讨论的初始阶段将提供其他*branch*名称）。
 
-If there are some conflicts because new stuff has arrived into ThingsBoard master branch before your commit, please resolve those conflicts to continue.
+如果由于提交前新事物已进入ThingsBoard master分支而发生冲突，请解决这些冲突以继续。
 
-Sign up contribution license agreement (CLA) and verify that remote build has been successful. The CLA is signed atomatically using the github CLA bot.
+签署贡献许可协议（CLA），并验证远程构建是否成功。使用github CLA机器人对CLA进行了签名。
  
  ![image](/images/user-guide/pr_cla.png)
 
-Be patient, pull request may take several days to review.
+请耐心等待，拉取请求可能需要几天的时间进行审核。
 
 
 
-#### See also
+#### 了解更多
 
-- [Rule Node Development](/docs/user-guide/contribution/rule-node-development/) guide that describes how to create your own rule nodes.
+- [规则节点开发指南](/docs/user-guide/contribution/rule-node-development/) 介绍如何创建自己的规则节点。
 
-- [Widgets Development Guide](/docs/user-guide/contribution/widgets-development/) guide that describes how to create your own widgets.
+- [部件开发指南](/docs/user-guide/contribution/widgets-development/) 介绍如何创建自己的窗口小部件。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "Contribution" %}{% include templates/guides-banner.md %}

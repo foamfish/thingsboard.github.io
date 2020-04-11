@@ -2,154 +2,165 @@
 layout: docwithnav
 assignees:
 - ikulikov
-title: Widgets Development Guide
+title: 部件开发指南
 
 ---
 
 * TOC
 {:toc}
 
-## Introduction
+## 介绍
 
-**ThingsBoard widgets** are additional UI modules that easily integrate into any [IoT Dashboard](/docs/user-guide/ui/dashboards/).  They provide end-user functions such as data visualization, remote device control, alarms management and display of static custom html content.
-According to the provided features, each widget definition represents a specific [Widget Type](/docs/user-guide/ui/widget-library/#widget-types).
+**ThingsBoard小部件**属于UI模块可以与任何[IoT仪表板](/docs/user-guide/ui/dashboards/)集成并提供最终功能给用户，例如数据可视化，远程设备控制，警报管理和显示静态自定义html内容。
 
-## Creating new widget definition
+根据提供的功能每个部件定义代表特定的[部件类型](/docs/user-guide/ui/widget-library/#widget-types)。
 
-In order to create a new widget definition, navigate to "Widget Library" and open existing "Widgets Bundle" or create a new one.  In the "Widgets Bundle" view, click the big “+” button at the bottom-right part of the screen and then click the "Create new widget type" button.
+## 创建新的部件定义
+
+为了创建新的部件定义请导航“部件库”。
+
+然后打开现有的“部件捆绑”或创建一个新的。
+
+在“部件捆绑”视图中，单击屏幕右下角的大“ +”按钮，然后单击“创建新的窗口小部件类型”按钮。
 
 ![image](/images/user-guide/contribution/widgets/create-new-widget-type.png)
 
-"Select widget type" window should appear with select options corresponding to the [widget type](/docs/user-guide/ui/widget-library/#widget-types) you intend to develop.
+**选择窗口部件类型**会弹出窗口会，提示您选择要开发的相应[部件类型](/docs/user-guide/ui/widget-library/#widget-types)。
 
 ![image](/images/user-guide/contribution/widgets/select-widget-type.png)
 
-After that, the pre-populated "Widget Editor" page will open with starter widget template according to previously selected widget type.
+之后，将根据先前选择的窗口小部件类型打开“窗口部件编辑器”页面，该页面预填充了启动器窗口部件模板。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor.png)
 
-### Widget Editor overview
+### 部件编辑器概述
 
-Widget Editor view is a mini IDE designed to develop custom widget definitions.
-It consists of [top toolbar](#widget-editor-toolbar) and four main sections:
+它由[工具栏](#widget-editor-toolbar)和四个主要部分组成：
 
- - [Resources/HTML/CSS](#resourceshtmlcss-section)    
+ - [HTML和CSS资源](#resourceshtmlcss-section)    
  - [JavaScript](#javascript-section) 
- - [Settings schema](#settings-schema-section) 
- - [Widget preview](#widget-preview-section)
+ - [设置](#settings-schema-section) 
+ - [部件介绍](#widget-preview-section)
 
-#### Widget Editor Toolbar
+#### 部件工具栏编辑
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-toolbar.png)
 
-Widget Editor Toolbar consists of the following items:
+窗口部件编辑器工具栏包含以下各项：
 
- - **Widget Title** field - used to specify title of the widget definition
- - **Widget Type** selector -  used to specify [type](/docs/user-guide/ui/widget-library/#widget-types) of the widget definition
- - **Run** button - used to run widget code and view result in **Widget preview** section
- - **Undo** button - reverts all editor sections to latest saved state
- - **Save** button - saves widget definition
- - **Save as** button - allows to save a new copy of widget definition by specifying new widget type name and target **Widgets Bundle**
+ - **部件标题**字段 - 用于指定小部件定义的标题
+ - **部件类型**选择器 - 用于指定部件定义的[类型](/docs/user-guide/ui/widget-library/#widget-types)
+ - **运行**按钮 - 用于运行部件代码并在“部件预览”部分中查看结果
+ - **撤消** 按钮 - 将所有编辑器部分恢复为最新保存状态
+ - **保存**按钮 - 保存部件定义
+ - **另存为**按钮 - 通过指定新的部件类型名称和目标**部件捆绑**可以保存新的部件定义副本
  
-#### Resources/HTML/CSS section
+#### HTML和CSS资源部分
 
-This section consists of three tabs:
-
-
-The first **Resources** tab is used to specify external JavaScript/CSS resources used by the widget.
+本节包含三个选项卡。第一个**资源**选项卡用于指定窗口部件使用的外部JavaScript/CSS资源。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-resources.png)
 
-Second **HTML** tab contains widget html code *(Note: some widgets create html content dynamically, thus their initial html content can be empty).*
+第二个**HTML**选项卡包含部件html代码（注意：某些部件会动态创建html内容，而初始html内容可以为空）。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-html.png)
 
-Third **CSS** tab contains widget specific CSS style definitions. 
+第三个**CSS**选项卡包含特定于部件的CSS样式定义。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-css.png)
 
-#### JavaScript section
+#### JavaScript部分
 
-This section contains all widget related JavaScript code according to the [Widget API](#basic-widget-api).  
+本节包含根据[部件API](#basic-widget-api)的所有与窗口部件相关的JavaScript代码。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-javascript.png)
 
-#### Settings schema section
+#### 设置部分
 
-This section consists of two tabs:
+本节包含两个选项卡。
 
-The first tab, **Settings schema**, is used to specify the json schema of widget settings for UI form auto-generation using react-schema-form [builder](http://networknt.github.io/react-schema-form/). 
-This generated UI form is displayed in the **Advanced** tab of widget settings. 
-The Settings Object serialized by this schema is used to store specific widget settings and is accessible from widget JavaScript code.
+第一个**设置模式**标签用于指定部件设置的json模式，以便使用react-schema-form [捆绑](http://networknt.github.io/react-schema-form/)。
+
+在生成的UI表单上显示部件设置的**高级**选项卡。
+
+设置序列化对象存储部件然后从部件Javascript代码访问。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-settings-schema.png)
  
-The second tab, **Data key settings schema**, is used to specify json schema of data key settings for UI form auto-generation using react-schema-form [builder](http://networknt.github.io/react-schema-form/). 
-This generated UI form is displayed in **Advanced** tab of the **Data key configuration** dialog.
-The Settings Object serialized by this schema is used to store specific settings for each data key of the datasource defined in the widget. 
-These settings are accessible from widget JavaScript code.
+第二个**数据键设置**选项卡用于指定数据键为json模式，以便使用react-schema-form [捆绑](http://networknt.github.io/react-schema-form/)。
+
+在生成的UI表单上显示部件设置的**数据键配置**选项卡。
+
+设置序列化对象存储部件数据源的特定数据键。
+
+这些设置可从小部件JavaScript代码访问。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-datakey-settings-schema.png)
 
-#### Widget preview section
+#### 部件预览部分
 
-This section is used to preview and test widget definitions.
-It is presented as a mini dashboard containing one widget instantiated from the current widget definition.
-It has mostly all functionality provided by usual ThingsBoard dashboard, with some limitations.
-For example, "Function" can only be selected as datasource type in widget datasources section for debugging purposes.    
+本部分用于预览和测试窗口小部件定义。
+
+它以迷你仪表板的形式显示，其中包含一个从当前窗口小部件定义实例化的窗口小部件。
+
+它具有通常的ThingsBoard仪表板提供的几乎所有功能，但有一些限制。
+
+例如，出于调试目的，在窗口小部件数据源部分中只能选择“功能”作为数据源类型。
 
 ![image](/images/user-guide/contribution/widgets/widget-editor-preview.png)
 
-### Basic widget API
+### 基础小部件API
 
-All widget related code is located in the [JavaScript section](#javascript-section).
-The built-in variable **self** that is a reference to the widget instance is also available.
-Each widget function should be defined as a property of the **self** variable.
-**self** variable has property **ctx** - a reference to widget context that has all necessary API and data used by widget instance.
-Below is brief description of widget context properties:
+所有与部件相关的代码都位于[JavaScript部分](#javascript-section)。
+还提供了对部件实例的引用的内置变量**self**。
+每个部件函数都应定义为**self**变量的属性。
+**self**变量具有**ctx**属性-引用具有小部件实例使用的所有必要API和数据的小部件上下文。
+以下是窗口部件上下文属性的简要说明：
  
-| **Property**                     | **Type**           |  **Description**                                                |
+| **属性**                     | **类型**           |  **描述**                                                |
 |----------------------------------|--------------------|-----------------------------------------------------------------|
-| $container                       | jQuery Object      | Container element of the widget. Can be used to dynamically access or modify widget DOM using jQuery API. |
-| $scope                           | Object             | Angular scope object of the current widget element. Can be used to access/modify scope properties when widget is built using Angular approach. |
-| width                            | Number             | Current width of widget container in pixels.                     |
-| height                           | Number             | Current height of widget container in pixels.                    |
-| isEdit                           | Boolean            | Indicates whether the dashboard is in in the view or editing state.|
-| isMobile                         | Boolean            | Indicates whether the dashboard view is less then 960px width (default mobile breakpoint). |
-| widgetConfig                     | Object             | Common widget configuration containing properties such as **color** (text color), **backgroundColor** (widget background color), etc. |
-| settings                         | Object             | Widget settings containing widget specific properties according to the defined [settings json schema](#settings-schema-section) |
-| units                            | String             | Optional property defining units text of values displayed by widget. Useful for simple widgets like cards or gauges. |
-| decimals                         | Number             | Optional property defining how many positions should be used to display decimal part of the value number.  |
-| hideTitlePanel                   | Boolean            | Manages visibility of widget title panel. Useful for widget with custom title panels or different states. |
-| defaultSubscription              | Object             | See [Subscription object](#subscription-object) |
-| timewindowFunctions              | Object             | See [Timewindow functions](#timewindow-functions) |
-| controlApi                       | Object             | See [Control API](#control-api) | 
-| actionsApi                       | Object             | See [Actions API](#actions-api) |
-| stateController                  | Object             | See [State Controller](#state-controller) |
+| $container                       | jQuery Object      | 部件的容器元素。可用于使用jQuery API动态访问或修改部件DOM。 |
+| $scope                           | Object             | 当前部件元素的角度范围对象。使用Angular方法构建窗口小部件时，可用于访问/修改范围属性。 |
+| width                            | Number             | 部件容器的当前宽度（以像素为单位）。                    |
+| height                           | Number             | 部件容器的当前高度（以像素为单位）。                    |
+| isEdit                           | Boolean            | 指示仪表板是处于视图状态还是处于编辑状态。|
+| isMobile                         | Boolean            | 指示仪表板视图是否小于960px宽度（默认移动断点）。 |
+| widgetConfig                     | Object             | 常见的窗口小部件配置，其中包含诸如颜色（文本颜色），backgroundColor（小部件背景颜色）等属性。 |
+| settings                         | Object             | 根据定义的[json模式](#settings-schema-section)包含小部件特定属性的小部件设置 |
+| units                            | String             | 定义窗口小部件显示的值的单位文本的可选属性。对于简单的小部件（如卡片或仪表）很有用。 |
+| decimals                         | Number             | 可选属性，用于定义应使用多少个位置来显示数值的小数部分。  |
+| hideTitlePanel                   | Boolean            | 管理窗口小部件标题面板的可见性。对于具有自定义标题面板或不同状态的小部件很有用。 |
+| defaultSubscription              | Object             | 请参阅[对象订阅](#subscription-object) |
+| timewindowFunctions              | Object             | 请参阅[Timewindow功能](#timewindow-functions) |
+| controlApi                       | Object             | 请参阅[Control API](#control-api) | 
+| actionsApi                       | Object             | 请参阅[Actions API](#actions-api) |
+| stateController                  | Object             | 请参阅[状态Controller](#state-controller) |
 
-In order to implement a new widget, the following JavaScript functions should be defined *(Note: each function is optional and can be implemented according to  widget specific behaviour):*
+为了实现新的窗口部件，应定义以下JavaScript函数（注意：每个函数都是可选的，可以根据窗口部件的特定/行为来实现）：
    
-| **Function**                       | **Description**                                                                        |
+| **函数**                       | **描述**                                                                        |
 |------------------------------------|----------------------------------------------------------------------------------------|
-| ``` onInit() ```                   | The first function which is called when widget is ready for initialization. Should be used to prepare widget DOM, process widget settings and initial subscription information. |
-| ``` onDataUpdated() ```            | Called when the new data is available from the widget subscription. Latest data can be accessed from the [**defaultSubscription** object](#subscription-object) of widget context (**ctx**). |
-| ``` onResize() ```                 | Called when widget container is resized. Latest width and height can be obtained from widget context (**ctx**).             |
-| ``` onEditModeChanged() ```        | Called when dashboard editing mode is changed. Latest mode is handled by isEdit property of **ctx**.             |
-| ``` onMobileModeChanged() ```      | Called when dashboard view width crosses mobile breakpoint. Latest state is handled by isMobile property of **ctx**.                 |
-| ``` onDestroy() ```                | Called when widget element is destroyed. Should be used to cleanup all resources if necessary.            |
-| ``` getSettingsSchema() ```        | Optional function returning widget settings schema json as alternative to **Settings tab** of [Settings schema section](#settings-schema-section).             |
-| ``` getDataKeySettingsSchema() ``` | Optional function returning particular data key settings schema json as alternative to **Data key settings schema** tab of [Settings schema section](#settings-schema-section).             |
-| ``` typeParameters() ```           | Returns object describing widget datasource parameters. See [Type parameters object](#type-parameters-object). |            |
-| ``` actionSources() ```            | Returns object describing available widget action sources used to define user actions. See [Action sources object](#action-sources-object). |
+| ``` onInit() ```                   | 当widget准备好初始化时调用的第一个函数。应该用于准备小部件DOM，处理小部件设置和初始订阅信息。	 |
+| ``` onDataUpdated() ```            | 在部件订阅中有新数据可用时调用。可以从窗口部件上下文（**ctx**）的[**defaultSubscription** object](#subscription-object)访问最新数据。|
+| ``` onResize() ```                 | 调整窗口小部件容器的大小时调用。可以从窗口小部件上下文（**ctx**）获得最新的宽度和高度。             |
+| ``` onEditModeChanged() ```        | 更改仪表板编辑模式时调用。最新模式由**ctx**的isEdit属性处理。             |
+| ``` onMobileModeChanged() ```      | 当仪表板视图宽度超过移动断点时调用。最新状态由**ctx**的isMobile属性处理。                |
+| ``` onDestroy() ```                | 当部件元素被销毁时调用。如有必要，应使用它来清理所有资源。            |
+| ``` getSettingsSchema() ```        | 返回窗口小部件设置架构json的可选函数以替代[设置部分](#settings-schema-section)的**设置标签**。             |
+| ``` getDataKeySettingsSchema() ``` | 返回特定数据密钥设置方案json的可选函数，替代**设置部分**[Settings schema section](#settings-schema-section)的数据密钥设置方案标签。             |
+| ``` typeParameters() ```           | 检索描述窗口小部件数据源参数的对象。请参阅[类型参数对象](#type-parameters-object)类型参数对象。|            |
+| ``` actionSources() ```            | 调用对象，该对象描述用于定义用户操作的可用窗口小部件操作源。请参阅[操作源对象](#action-sources-object)。 |
 
 
-#### Subscription object
+#### 订阅对象
 
-The widget subscription object contains all subscription information, including current data, according to the [widget type](/docs/user-guide/ui/widget-library/#widget-types).
-Depending on widget type, subscription object provides different data structures.
-For [Latest values](/docs/user-guide/ui/widget-library/#latest-values) and [Time-series](/docs/user-guide/ui/widget-library/#time-series) widget types, it provides the following properties:
+窗口部件订阅对象包含所有订阅信息包括根据[部件类型](/docs/user-guide/ui/widget-library/#widget-types)的当前数据。
 
- - **datasources** - array of datasources used by this subscription, using the following structure:
+根据窗口部件类型，订阅对象提供不同的数据结构。
+
+对于[最新值](/docs/user-guide/ui/widget-library/#latest-values)和[时间序列](/docs/user-guide/ui/widget-library/#time-series)部件类型，它提供以下属性：
+
+ - **datasources** - 此订阅使用的数据源数组，具有以下结构:
 
 ```javascript
     datasources = [
@@ -176,7 +187,7 @@ For [Latest values](/docs/user-guide/ui/widget-library/#latest-values) and [Time
     ]
 ```
     
-  - **data** - array of latest data received in scope of this subscription, using the following structure:
+  - **data** - 在此订阅范围内接收到的最新数据的数组，其结构如下：
   
 ```javascript
     data = [
@@ -195,9 +206,9 @@ For [Latest values](/docs/user-guide/ui/widget-library/#latest-values) and [Time
     ]     
 ```
 
-For [Alarm widget](/docs/user-guide/ui/widget-library/#alarm-widget) type it provides the following properties:
+对于[Alarm小部件](/docs/user-guide/ui/widget-library/#alarm-widget)它提供以下属性：
  
- - **alarmSource** - information about entity for which alarms are fetched, using the following structure: 
+ - **alarmSource** - 有关为其获取警报的实体的信息，并具有以下结构: 
 
 ```javascript
     alarmSource = {
@@ -220,7 +231,7 @@ For [Alarm widget](/docs/user-guide/ui/widget-library/#alarm-widget) type it pro
     }
 ```
 
-  - **alarms** - array of alarms received in scope of this subscription, using the following structure:
+  - **alarms** - 在此订阅范围内收到的警报数组，其结构如下：
 
 ```javascript
     alarms = [
@@ -232,7 +243,7 @@ For [Alarm widget](/docs/user-guide/ui/widget-library/#alarm-widget) type it pro
             createdTime: 1498150092317, // Alarm created time (unix timestamp)
             startTs: 1498150092316, // Alarm started time (unix timestamp)
             endTs: 1498563899065, // Alarm end time (unix timestamp)
-            ackTs: 0, // Time of alarm acknowledgment (unix timestamp)
+            ackTs: 0, // Time of alarm aknowledgment (unix timestamp)
             clearTs: 0, // Time of alarm clear (unix timestamp)
             originator: { // Originator - id of entity produced this alarm 
                 entityType: "ASSET", 
@@ -251,54 +262,54 @@ For [Alarm widget](/docs/user-guide/ui/widget-library/#alarm-widget) type it pro
     ]               
 ```
 
-For [RPC](/docs/user-guide/ui/widget-library/#rpc-control-widget) or [Static](/docs/user-guide/ui/widget-library/#static) widget types, subscription object is optional and does not contain necessary information.    
+对于其他部件类型，例如[RPC](/docs/user-guide/ui/widget-library/#rpc-control-widget)或[Static](/docs/user-guide/ui/widget-library/#static)订阅对象是可选的，不包含必要的信息。
 
-#### Timewindow functions
+#### Timewindow函数
 
-Object with timewindow functions used to manage widget data time frame. Can by used by [Time-series](/docs/user-guide/ui/widget-library/#time-series) or [Alarm](/docs/user-guide/ui/widget-library/#alarm-widget) widgets.
+具有时间窗口功能的对象，用于管理窗口小部件数据时间范围。可以由[时间序列](/docs/user-guide/ui/widget-library/#time-series)或[警报](/docs/user-guide/ui/widget-library/#alarm-widget)部件。
 
-| **Function**                                        | **Description**                                                                        |
+| **函数**                                        | **描述**                                                                        |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------|
-| ``` onUpdateTimewindow(startTimeMs, endTimeMs) ```  | This function can be used to update current subscription time frame to historical one identified by **startTimeMs** and **endTimeMs** arguments. |
-| ``` onResetTimewindow() ```                         | Resets subscription time frame to default defined by widget timewindow component or dashboard timewindow depending on widget settings. |
+| ``` onUpdateTimewindow(startTimeMs, endTimeMs) ```  | 此功能可用于将当前订阅时间范围更新为由**startTimeMs**和**endTimeMs**参数标识的历史时间范围。 |
+| ``` onResetTimewindow() ```                         | 根据窗口部件设置将订阅时间范围重置为由窗口部件时间窗口组件或仪表板时间窗口定义的默认时间范围。 |
 
 
 #### Control API
 
-Object that provides API functions for [RPC (Control)](/docs/user-guide/ui/widget-library/#rpc-control-widget) widgets.
+提供[RPC (Control)](/docs/user-guide/ui/widget-library/#rpc-control-widget)部件的API函数的对象。
 
-| **Function**                                        | **Description**                                                                        |
+| **函数**                                        | **描述**                                                                        |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------|
-| ``` sendOneWayCommand(method, params, timeout) ```  | Sends one way (without response) RPC command to the device. Returns command execution promise. **method** - RPC method name, string, **params** - RPC method params, custom json object, **timeout** - maximum delay in milliseconds to wait until response/acknowledgement is received.  |
-| ``` sendTwoWayCommand(method, params, timeout) ```  | Sends two way (with response) RPC command to the device. Returns command execution promise with response body in success callback. |
+| ``` sendOneWayCommand(method, params, timeout) ```  | 向设备发送一种方法（无响应）RPC命令。返回命令执行承诺。**method** -RPC方法名称，字符串，**params** -RPC方法参数，自定义json对象，**timeout** -等待接收到响应/确认之前的最大延迟（以毫秒为单位）。 |
+| ``` sendTwoWayCommand(method, params, timeout) ```  | 设备发送两种方式（带有响应）的RPC命令。在成功回调中返回带有响应主体的命令执行承诺。 |
 
 
 #### Actions API
 
-Set of API functions to work with user defined actions.
+API函数集，可与用户定义的操作一起使用。
 
-| **Function**                                                          | **Description**                                                                        |
+| **函数**                                                          | **描述**                                                                        |
 |-----------------------------------------------------------------------|----------------------------------------------------------------------------------------|
-| ``` getActionDescriptors(actionSourceId) ```                          | Returns the list of action descriptors for provided **actionSourceId**                 |
-| ``` handleWidgetAction($event, descriptor, entityId, entityName) ```  | Handles action produced by particular action source. **$event** - event object associated with action, **descriptor** - action descriptor, **entityId** and **entityName** - current entity id and name provided by action source if available. |
+| ``` getActionDescriptors(actionSourceId) ```                          | 返回提供的**actionSourceId**的动作描述符的列表                 |
+| ``` handleWidgetAction($event, descriptor, entityId, entityName) ```  | 处理特定动作源产生的动作。**$event** -与Action相关的事件对象**descriptor**action描述符， **entityId**和**entityName** -当前实体ID和名称（如果可用）由动作源提供。 |
 
 
 #### State Controller
 
-Reference to Dashboard state controller, providing API to manage current dashboard state.
+引用仪表板状态控制器，提供用于管理当前仪表板状态的API。
 
-| **Function**                                        | **Description**                                                                        |
+| **函数**                                        | **描述**                                                                        |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------|
-| ``` openState(id, params, openRightLayout) ```      | Navigates to new dashboard state. **id** - id of the target dashboard state, **params** - object with state parameters to use by the new state, **openRightLayout** - optional boolean argument to force open right dashboard layout if present in mobile view mode. |
-| ``` updateState(id, params, openRightLayout) ```    | Updates current dashboard state. **id** - optional id of the target dashboard state to replace current state id, **params** - object with state parameters to update current state parameters, **openRightLayout** - optional boolean argument to force open right dashboard layout if present in mobile view mode. |
-| ``` getStateId() ```                                | Returns current dashboard state id. |
-| ``` getStateParams() ```                            | Returns current dashboard state parameters. |
-| ``` getStateParamsByStateId(id) ```                 | Returns state parameters for particular dashboard state identified by **id**. |
+| ``` openState(id, params, openRightLayout) ```      | 导航到新的仪表板状态。**id** -目标仪表盘状态的ID，**params** -与状态参数对象被新的状态下使用，**openRightLayout** -可选布尔参数强行打开右仪表盘布局如果存在于移动视图模式。 |
+| ``` updateState(id, params, openRightLayout) ```    | 更新当前仪表板状态。**id** -目标仪表盘状态的可选id替换当前的状态ID，**params** -与状态参数对象更新当前状态参数，**openRightLayout** -可选布尔参数强行打开右仪表盘布局如果存在于移动视图模式。 |
+| ``` getStateId() ```                                | 返回当前的仪表板状态ID。 |
+| ``` getStateParams() ```                            | 返回当前仪表板状态参数。 |
+| ``` getStateParamsByStateId(id) ```                 | 返回由**id**标识的特定仪表板状态的状态参数。 |
 
 
-#### Type parameters object
+#### 类型参数对象
 
-Object describing widget datasource parameters. It has the following properties:
+描述小部件数据源参数的对象。它具有以下属性:
 
 ```javascript
     return {
@@ -307,9 +318,9 @@ Object describing widget datasource parameters. It has the following properties:
     }
 ```
 
-#### Action sources object
+#### 对象操作来源
 
-Map describing available widget action sources to which user actions can be assigned. It has the following structure:
+映射描述了可以向其分配用户操作的可用窗口小部件操作源。它具有以下结构：
 
 ```javascript
    return {
@@ -320,20 +331,24 @@ Map describing available widget action sources to which user actions can be assi
     };   
 ```
 
-### Creating simple widgets 
+### 创建简单部件 
 
-The tutorials below show how to create minimal widgets of each type.
-In order to minimize the amount of code, the Angular framework will be used, on which ThingsBoard UI is actually based.
-By the way, you can always use pure JavaScript or jQuery API in your widget code.
+以下是一组简单的教程，介绍如何创建每种类型的最小部件。
 
-#### Latest Values widget
+使用Angular框架将减少ThingsBoard UI代码量。
 
-In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen and then click the “Create new widget type” button.
-Click the **Latest Values** button on the **Select widget type** popup.
-The **Widget Editor** will open, pre-populated with the content of the default **Latest Values** template widget.
+顺便说一句您始终可以在部件代码中使用纯JavaScript或jQuery API。
 
- - Clear content of the CSS tab of "Resources" section.
- - Put the following HTML code inside the HTML tab of "Resources" section:
+#### 最新值部件
+
+在**件捆绑包**视图中单击屏幕右下角的“+”大按钮，然后单击**创建部件类型**按钮。
+
+在**选择部件类型**弹出窗口中单击“新值”按钮。
+
+打开**部件编辑器**”，并预先填充默认的**新值**模板部件的内容。
+
+ - 清除“资源”部分CSS标签的内容。
+ - 将以下HTML代码放入“资源”部分的HTML标签中：
   
 ```html
   {% raw  %}<div flex layout="column" style="height: 100%;" layout-align="center stretch">
@@ -346,7 +361,7 @@ The **Widget Editor** will open, pre-populated with the content of the default *
   </div>{% endraw %}
 ```
 
- - Put the following JavaScript code inside the "JavaScript" section:
+ - 将以下JavaScript代码放入“JavaScript”部分中：
  
 ```javascript
     self.onInit = function() {
@@ -356,21 +371,24 @@ The **Widget Editor** will open, pre-populated with the content of the default *
     }
 ```
 
- - Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+ - 单击**部件编辑器工具栏**中的**运行**按钮，以便在**部件预览**部分中查看结果。
  
 ![image](/images/user-guide/contribution/widgets/latest-values-widget-sample.png) 
 
-In this example, the **data** property of [subscription](#subscription-object) is assigned to the **$scope** and becomes accessible within the HTML template.
-Inside the HTML, a special **ng-repeat** angular directive is used in order to iterate over available dataKeys & datapoints then render latest values with their corresponding timestamps. 
+在此示例中，[subscription](#subscription-object)的**data**属性被分配给 **$scope** 并且可以在HTML模板中访问。
 
-#### Time-Series widget
+在HTML内部，使用特殊的**ng-repeat**角度指令来迭代可用的dataKeys数据点并使用其时间戳呈现相应的最新值。
 
-In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen, then click the “Create new widget type” button.
-Click the **Time-Series** button on the **Select widget type** popup.
-The **Widget Editor** will open, pre-populated with default **Time-Series** template widget content.
+#### 时间序列部件
 
- - Clear content of the CSS tab of "Resources" section.
- - Put the following HTML code inside the HTML tab of "Resources" section:
+在**部件捆绑包**视图中，单击屏幕右下角的“+”大按钮，然后单击**创建部件类型**按钮。
+
+在**选择部件类型**弹出窗口中单击**时间系列**按钮。
+
+将打开**部件编辑器**其中预填充了默认的**时间系列**模板小部件的内容。
+
+ - 清除“资源”部分CSS标签的内容。
+ - 将以下HTML代码放入“资源”部分的HTML标签中：
 
 ```html
   {% raw  %}<div flex layout="column" style="height: 100%;">
@@ -396,7 +414,7 @@ The **Widget Editor** will open, pre-populated with default **Time-Series** temp
   </div>{% endraw %}
 ```
 
- - Put the following JavaScript code inside the "JavaScript" section:
+ - 将以下JavaScript代码放入“JavaScript”部分中：
  
 ```javascript
 self.onInit = function() {
@@ -426,25 +444,32 @@ self.onDataUpdated = function() {
 }
 ```
 
- - Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+ - 单击**部件编辑器工具栏**中的**运行**按钮以便在**部件预览**部分中查看结果。
 
 ![image](/images/user-guide/contribution/widgets/timeseries-widget-sample.png) 
 
-In this example, the [subscription](#subscription-object) **datasources** and **data** properties are assigned to **$scope** and become accessible within the HTML template.
-The **$scope.datasourceData** property is introduced to map datasource specific dataKeys data by datasource index for flexible access within the HTML template.
-Inside the HTML, a special **ng-repeat** angular directive is used in order to iterate over available datasources and render corresponding tabs.
-Inside each tab, the table is rendered using dataKeys obtained from **datasourceData** scope property accessed by datasource index.
-Each table renders columns by iterating over all **dataKeyData** objects and renders all available datapoints by iterating over **data** array of each **dataKeyData** to render timestamps and values.
-Note that in this code, **onDataUpdated** function is implemented with a call to angular **$digest** function necessary to perform new rendering cycle when new data is received.   
+在此示例中，[subscription](#subscription-object)的**datasources**和**data**属性被分配给**$scope**并且可以在HTML模板中访问。
 
-#### RPC (Control) widget
+引入了**datasourceData**范围属性，以通过数据源索引映射数据源特定的dataKeys数据以便在HTML模板中进行灵活访问。
 
-In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen and then click the “Create new widget type” button.
-Click the **Control Widget** button on the **Select widget type** popup.
-The **Widget Editor** will open, pre-populated with default **Control** template widget content.
+在HTML内部，使用特殊的**ng-repeat**角度指令来迭代可用的数据源并呈现相应的选项卡。
 
- - Clear content of the CSS tab of "Resources" section.
- - Put the following HTML code inside the HTML tab of "Resources" section:
+在每个选项卡内，使用从datasource索引访问的**datasourceData**范围属性获取的dataKeys数据呈现表。
+
+每个表都通过遍历所有**dataKeyData**对象来呈现列，并通过遍历每个**dataKeyData**的**data**数组以呈现时间戳和值来呈现所有可用的数据点。
+
+请注意此代码中的**onDataUpdated**函数是通过调用有角度的 **$digest** 函数实现的，该函数对于接收新数据时执行新的渲染周期是必需的。
+
+#### RPC(控制)部件
+
+在**部件捆绑包**视图中单击屏幕右下角的“+”大按钮然后单击“创建部件类型”按钮。
+
+在Z**选择部件类型**弹出窗口中单击**控制部件**按钮。
+
+将打开**部件编辑器**并预先填充默认的**控制**模板小部件的内容。
+
+ - 清除“资源”部分CSS标签的内容。
+ - 将以下HTML代码放入“资源”部分的HTML标签中：
 
 ```html
   {% raw  %}<form name="rpcForm" ng-submit="sendCommand()">
@@ -476,7 +501,7 @@ The **Widget Editor** will open, pre-populated with default **Control** template
   </form>{% endraw %}
 ```
 
- - Put the following JSON content inside the "Settings schema" tab of **Settings schema section**:
+ - 将以下JSON内容放入**设置架构**标签中：
  
 ```json
 {
@@ -504,7 +529,7 @@ The **Widget Editor** will open, pre-populated with default **Control** template
 } 
 ```
 
- - Put the following JavaScript code inside the "JavaScript" section:
+ - 将以下JavaScript代码放入“ JavaScript”部分中：
  
 ```javascript
 self.onInit = function() {
@@ -542,85 +567,88 @@ self.onInit = function() {
 }
 ```
 
- - Fill **Widget title** field with widget type name, for ex. "My first control widget".  
- - Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section. 
- - Click dashboard edit button on the preview section to change the size of the resulting widget. Then click dashboard apply button. The final widget should look like the image below.
+ - 用小部件类型名称填充**部件标题**字段，例如。 “我的第一个控件”。
+ - 单击**部件编辑器工具栏**中的**运行**按钮以便在**部件预览**部分中查看结果。
+ - 现在点击预览部分中的信息中心编辑按钮然后更改生成的小部件的大小然后单击仪表板应用按钮最终的小部件应如下图所示。
  
 ![image](/images/user-guide/contribution/widgets/control-widget-sample.png)
    
- - Click the **Save** button on the **Widget Editor Toolbar** to save widget type.
+ - 单击**部件编辑器工具栏**中的**保存**按钮以保存小部件类型。
    
-To test how this widget performs RPC commands, we will need to place it in a dashboard then bind it to a device working with RPC commands. To do this, perform the following steps:
+为了测试此窗口小部件如何执行RPC命令，我们需要将该窗口小部件放置在某些仪表板上并绑定到使用RPC命令的某些设备。为此，请执行以下步骤：
  
- - Login as Tenant administrator.
- - Navigate to **Devices** and create new device with some name, for ex. "My RPC Device".
- - Open device details and click "Copy Access Token" button to copy device access token to clipboard.
- - Download [mqtt-js-rpc-from-server.sh](/docs/reference/resources/mqtt-js-rpc-from-server.sh) and [mqtt-js-rpc-from-server.js](/docs/reference/resources/mqtt-js-rpc-from-server.js). Place these files in a folder.
- Edit **mqtt-js-rpc-from-server.sh** - replace **$ACCESS_TOKEN** with your device access token from the clipboard.
- - Run **mqtt-js-rpc-from-server.sh** script. You should see a "connected" message in the console.
- - Navigate to **Dashboards** and create a new dashboard with some name, for ex. "My first control dashboard". Open this dashboard.
- - Click dashboard "edit" button. In the dashboard edit mode, click the "Entity aliases" button located on the dashboard toolbar.
+ - 以租户管理员身份登录。
+ - 导航至**设备**，并使用某些名称创建新设备，例如。 “我的RPC设备”。
+ - 打开设备详细信息，然后单击“复制访问令牌”按钮，以将设备访问令牌复制到剪贴板。
+ - 下载[mqtt-js-rpc-from-server.sh](/docs/reference/resources/mqtt-js-rpc-from-server.sh)和[mqtt-js-rpc-from-server.js](/docs/reference/resources/mqtt-js-rpc-from-server.js)。将这些文件放在某个文件夹中。
+ - 编辑**mqtt-js-rpc-from-server.sh**-用剪贴板中的设备访问令牌替换 **$ACCESS_TOKEN**。
+ - 运行**mqtt-js-rpc-from-server.sh**脚本。如果一切正常，您应该在控制台中看到“已连接”消息。
+ - 导航至**仪表板**并创建一个具有某些名称的新仪表板，例如。 “我的第一个控制仪表板”。打开此仪表板。
+ - 点击信息中心的**修改**按钮。在仪表板编辑模式下，单击位于仪表板工具栏上的“实体别名”按钮。
 
 ![image](/images/user-guide/contribution/widgets/dashboard-toolbar-entity-aliases.png)
  
- - Inside **Entity aliases** popup click "Add alias". 
- - Fill "Alias name" field, for ex. "My RPC Device Alias".
- - Select "Entity list" in "Filter type" field.
- - Choose "Device" in "Type" field.
- - Select your device in "Entity list" field. In this example "My RPC Device".
+ - 在**实体别名**弹出窗口中，单击“添加别名”。
+ - 填写“别名”字段，例如。 “我的RPC设备别名”。
+ - 在“过滤器类型”字段中选择“实体列表”。
+ - 在“类型”字段中选择“设备”。
+ - 在“实体列表”字段中选择您的设备。在此示例中，“我的RPC设备”。
  
 ![image](/images/user-guide/contribution/widgets/add-rpc-device-alias.png)
 
- - Click "Add" and then "Save" in **Entity aliases**.
- - Click dashboard "+" button then click "Create new widget" button.   
+ - 在**实体别名**中单击“添加”，然后单击“保存”。
+ - 点击信息中心的“+”按钮，然后点击“创建部件”按钮。
 
 ![image](/images/user-guide/contribution/widgets/dashboard-create-new-widget-button.png)
 
- - Then select **Widget Bundle** where your RPC widget was saved. Select "Control widget" tab.
- - Click your widget. In this example, "My first control widget".
- - From **Add Widget** popup, select your device alias in **Target device** section. In this example "My RPC Device Alias".
- - Click **Add**. Your Control widget will appear in the dashboard. Click dashboard **Apply changes** button to save dashboard and leave editing mode.
- - Fill **RPC method** field with RPC method name. For ex. "TestMethod".
- - Fill **RPC params** field with RPC params. For ex. "{ param1: "value1" }".
- - Click **Send RPC command** button. You should see the following response in the widget.
+ - 然后选择**部件捆绑包** RPC小部件的保存位置。选择“控件小部件”选项卡。
+ - 点击小部件。在此示例中，“我的第一个控件”。
+ - 在**添加小部件**弹出窗口中，在**目标设备**部分中选择您的设备别名。在此示例中，“我的RPC设备别名”。
+ - 点击**添加**。您的控件小部件将出现在仪表板中。单击仪表板“应用更改”按钮以保存仪表板并退出编辑模式。
+ - 在**RPC方法**名称字段中填充RPC方法名称。对于前。 “测试方法”。
+ - 用**RPC参数**字段“{param1：'value1'}”。
+ - 点击**发送RPC命令**​​按钮。您应该在小部件中看到以下响应。
  
 ![image](/images/user-guide/contribution/widgets/control-widget-sample-response-one-way.png)  
   
-  The following output should be printed in the device console:
+  以下输出应在设备控制台中打印：
   
 ```bash   
   request.topic: v1/devices/me/rpc/request/0
   request.body: {"method":"TestMethod","params":"{ param1: \"value1\" }"}
 ```
 
-In order to test "Two way" RPC command mode, we need to change the corresponding widget settings property. To do this, perform the following steps:
+为了测试“Two way"” RPC命令模式，我们需要更改相应的窗口小部件设置属性。为此，请执行以下步骤：
 
- - Click dashboard "edit" button. In dashboard edit mode, click **Edit widget** button located in the header of Control widget.
- - In the widget details, view select "Advanced" tab and uncheck "Is One Way Command" checkbox.  
+ - 点击信息中心的**修改**按钮.在仪表板编辑模式下，单击“控制”小部件标题中的“编辑小部件”按钮。
+ - 在小部件详细信息视图中，选择“高级”标签，然后取消选中“Is One Way Command”复选框。
 
 ![image](/images/user-guide/contribution/widgets/control-widget-sample-settings.png)   
 
- - Click **Apply changes** button on the widget details header. Close details and click dashboard **Apply changes** button.
- - Fill widget fields with RPC method name and params like in previous steps. 
- Click **Send RPC command** button. You should see the following response in the widget.
+ - 点击部件详细信息标题中的**应用更改**按钮。关闭详细信息，然后点击信息中心**应用更改**按钮。
+ - 与前面的步骤一样，用RPC方法名称和参数填充部件字段。
+ 点击**发送RPC命令**​​按钮。您应该在小部件中看到以下响应。
  
 ![image](/images/user-guide/contribution/widgets/control-widget-sample-response-two-way.png)
   
-  - stop **mqtt-js-rpc-from-server.sh** script.
- Click **Send RPC command** button. You should see the following response in the widget.
+ - 停止**mqtt-js-rpc-from-server.sh**脚本。
+ 点击**发送RPC命令**​​按钮。您应该在小部件中看到以下响应。
   
 ![image](/images/user-guide/contribution/widgets/control-widget-sample-response-timeout.png)  
   
-In this example, **controlApi** is used to send RPC commands. Additionally, custom widget settings were introduced in order to configure RPC command mode and RPC request timeout.
-The response from the device is handled by **commandPromise**.  It has success and failed callbacks with corresponding response, or rejection objects containing information about request execution result.     
+在此示例中**controlApi**用于发送RPC命令。此外，引入了自定义窗口小部件设置以配置RPC命令模式和RPC请求超时。
 
-#### Alarm widget
+设备的响应由具有成功和失败回调的**commandPromise**进行处理，并带有包含有关请求执行结果信息的相应响应或拒绝对象。
 
-In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen and then click the “Create new widget type” button.
-Click the **Alarm Widget** button on the **Select widget type** popup.
-The **Widget Editor** will be opened, pre-populated with the content of the default **Alarm** template widget.
+#### 警报小部件
 
- - Put the following HTML code inside the HTML tab of "Resources" section:
+在**部件捆绑**视图中单击屏幕右下角的“+”按钮然后单击**创建部件类型**按钮。
+
+在**选择部件类型**弹出窗口中单击**警报部件**按钮。
+
+使用默认的**Alarm**模板小部件的内容预填充打开**部件编辑器**。
+
+ - 将以下HTML代码放入“资源”部分的HTML标签中：
 
 ```html
   {% raw  %}<div flex layout="column" style="height: 100%;">
@@ -641,9 +669,9 @@ The **Widget Editor** will be opened, pre-populated with the content of the defa
           </tbody>          
       </table>          
   </div>{% endraw %}
-```
+```**
 
- - Put the following JSON content inside the "Settings schema" tab of **Settings schema section**:
+ - 将以下JSON内容放入“设置”部分的**设置架构**标签中：
  
 ```json
 {
@@ -668,7 +696,7 @@ The **Widget Editor** will be opened, pre-populated with the content of the defa
 }
 ```
 
- - Put the following JavaScript code inside the "JavaScript" section:
+ - 将以下JavaScript代码放入“ JavaScript”部分中：
  
 ```javascript
 self.onInit = function() {
@@ -721,25 +749,34 @@ self.onDataUpdated = function() {
 }
 ```
 
- - Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+ - 单击“部件编辑器工具栏”中的“运行”按钮，以便在“部件预览”部分中查看结果。
 
 ![image](/images/user-guide/contribution/widgets/alarm-widget-sample.png)
 
-In this example, the **alarmSource** and **alarms** properties of [subscription](#subscription-object) are assigned to **$scope** and become accessible within HTML template.
-Inside the HTML, a special **ng-repeat** angular directive is used in order to iterate over available alarm **dataKeys** of **alarmSource** and render corresponding columns.
-The table rows are rendered by iterating over **alarms** array and corresponding cells rendered by iterating over **dataKeys**.
-The function **getAlarmValue** is fetching alarm value using special alarmFields constants obtained from **types** which is part of ThingsBoard UI and accessed via Angular **$injector**.
-The function **getAlarmCellStyle** is used to assign custom cell styles for each alarm cell. In this example, we introduced new settings property called **alarmSeverityColorFunction** that contains function body returning color depending on alarm severity.
-Inside the **getAlarmCellStyle** function there is corresponding invocation of **alarmSeverityColorFunction** with severity value in order to get color for alarm severity cell. 
-Note that in this code **onDataUpdated** function is implemented in order to update **alarms** property with latest alarms from subscription.   
+在此示例中[订阅](#subscription-object)的**alarmSource**和**alarms**属性被分配给**$scope**并且可以在HTML模板中访问。
 
-#### Static widget
+在HTML内部使用angular的**ng-repeat**指令进行遍历**alarmSource**可用警报的**dataKeys**并呈现相应的列。
 
-In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen and then click the “Create new widget type” button.
-Click the **Static Widget** button on the **Select widget type** popup.
-The **Widget Editor** will be opened pre-populated with the content of default **Static** template widget.
+在表中通过遍历**alarms**数组，显示对应的单元格**dataKeys**。
 
- - Put the following HTML code inside the HTML tab of "Resources" section:
+函数**getAlarmValue**是使用特殊的AlarmFields常量用来获取警报值该常量是从ThingsBoard UI的**types**中获取的并且可以通过Angular**$injector**进行访问。
+
+函数**getAlarmCellStyle**用于为每个报警单元分配自定义样式。
+在此示例中，我们引入了新的名为**alarmSeverityColorFunction**的设置属性该属性包含根据警报严重性返回颜色的函数主体。
+
+在**getAlarmCellStyle**函数内部有一个带有严重性值的**alarmSeverityColorFunction**相应的调用，以获取警报严重性单元格的颜色。
+
+请注意，在此代码中，实现了**onDataUpdated**函数，以便使用来自订阅的最新警报来更新**alarms**属性。
+
+#### Static部件
+
+在**部件捆绑**视图中单击屏幕右下角的“+”按钮然后单击**创建部件类型**按钮。
+
+在**选择部件类型**弹出窗口中单击**Static部件**按钮。
+
+打开**部件编辑器**并预先填充默认的***Static*模板小部件的内容。
+
+ - 将以下HTML代码放入“资源”部分的HTML标签中：
 
 ```html
   {% raw  %}<div flex layout="column" style="height: 100%;" layout-align="space-around stretch">
@@ -748,7 +785,7 @@ The **Widget Editor** will be opened pre-populated with the content of default *
   </div>{% endraw %}
 ```
 
- - Put the following JSON content inside the "Settings schema" tab of **Settings schema section**:
+ - 将以下JSON内容放入“设置”的**设置架构**标签中：
  
 ```json
 {
@@ -769,7 +806,7 @@ The **Widget Editor** will be opened pre-populated with the content of default *
 }
 ``` 
 
- - Put the following JavaScript code inside the "JavaScript" section:
+ - 将以下JavaScript代码放入“ JavaScript”部分中：
  
 ```javascript
 self.onInit = function() {
@@ -785,41 +822,47 @@ self.onInit = function() {
 }
 ```
 
- - Click the **Run** button on the **Widget Editor Toolbar** to see the resulting **Widget preview** section.
+ - 单击**部件编辑器工具栏**中的**运行**按钮，以便在**部件预览**部分中查看结果。
 
 ![image](/images/user-guide/contribution/widgets/static-widget-sample.png)
 
-This is just a static HTML widget.  There is no subscription data and no special widget API was used.
-Only custom **showAlert** function was implemented showing an alert with the content of **alertContent** property of widget settings.
-You can switch to dashboard edit mode in **Widget preview** section and change value of **alertContent** by changing widget settings in the "Advanced" tab of widget details.
-Then you can see that the new alert content is displayed. 
+This is just a static HTML widget so there is no subscription data or special widget API was used.
+这只是一个静态HTML小部件，因此没有订阅数据或使用了特殊的小部件API。
 
-## Integrating existing code to create widget definition 
+仅实现了自定义**showAlert**函数该函数显示具有小部件设置的**alertContent**属性内容的警报。
 
-Below are some examples demonstrating how external JavaScript libraries or existing code can be reused/integrated to create new widgets.
+您可以在**部件预览**部分切换到仪表盘编辑模式，并通过在小部件详细信息的“高级”选项卡中更改小部件设置来更改**alertContent**的值。
+
+然后您可以看到显示了新的警报内容。
+
+## 集成现有代码创建部件定义
+
+以下是一些示例，这些示例演示如何重用/集成外部JavaScript库或现有代码以创建新的小部件。
  
-### Using external JavaScript library
+### 使用外部JavaScript库
 
-In this example, **Latest Values** gauge widget will be created using external [gauge.js](http://bernii.github.io/gauge.js/) library.
+在此示例中，将使用外部[gauge.js](http://bernii.github.io/gauge.js/)库创建**Latest Values**仪表小部件。
 
-In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen, then click the “Create new widget type” button.
-Click the **Latest Values** button on the **Select widget type** popup.
-The **Widget Editor** will be opened, pre-populated with the content of default **Latest Values** template widget.
+在**部件捆绑**视图中单击屏幕右下角的“+”大按钮，然后单击**创建部件类型**按钮。
 
- - Open **Resources** tab and click "Add" then insert the following link:
+在**选择部件类型**弹出窗口中单击**Latest Values**按钮。
+
+将打开**部件编辑器**并预先填充默认的**Latest Values**模板小部件的内容。
+
+ - 打开**资源**标签，然后单击“添加”，然后插入以下链接：
 
 ```  
 http://bernii.github.io/gauge.js/dist/gauge.min.js  
 ```
 
- - Clear content of the CSS tab of "Resources" section.
- - Put the following HTML code inside the HTML tab of "Resources" section:
+ - 清除“资源”部分CSS标签的内容。
+ - 将以下HTML代码放入“资源”部分的HTML标签中：
  
 ```html
   {% raw  %}<canvas id="my-gauge"></canvas>{% endraw %}
 ```
 
- - Put the following JavaScript code inside the "JavaScript" section:
+ - 将以下JavaScript代码放入“ JavaScript”部分中：
  
 ```javascript
 var canvasElement;
@@ -847,21 +890,27 @@ self.onDataUpdated = function() {
 }
 ```
 
- - Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+ - 单击**部件编辑器工具栏**中的**运行**按钮以便在**部件预览**部分中查看结果。
 
 ![image](/images/user-guide/contribution/widgets/external-js-widget-sample.png)
 
-In this example, the external JS library API was used that becomes available after injecting the corresponding URL in **Resources** section.
-The value displayed was obtained from [subscription](#subscription-object) **data** property for the first dataKey. 
+在此示例中，使用了外部JS库的API，该API在**Resources**部分中注入相应的URL后才可用。
 
-### Using existing JavaScript code
+显示的值是从第一个dataKey的[subscription](#subscription-object) **data**属性获得的。
 
-Another approach of creating widgets is to use existing bundled JavaScript code.
-In this case, you can create own JavaScript class or Angular directive and bundle it into the ThingsBoard UI code.
-In order to make this code accessible within the widget, you need to register corresponding Angular module or inject JavaScript class to a global variable (for ex. window object).
-Some of the ThingsBoard widgets already use this approach. Take a look at the [widget.service.js](https://github.com/thingsboard/thingsboard/tree/master/ui/src/app/api/widget.service.js).
-Here you can find how some bundled classes or modules are registered for later use in ThingsBoard widgets.
-For example "Timeseries - Flot" widget (from "Charts" Widgets Bundle) uses [**TbFlot**](https://github.com/thingsboard/thingsboard/tree/master/ui/src/app/widget/lib/flot-widget.js) JavaScript class which is injected as window property inside **widget.service.js**:
+### 使用现有的JavaScript代码
+
+创建窗口部件的另一种方法是使用现有的捆绑JavaScript代码。
+
+在这种情况下，您可以创建自己的JavaScript类或Angular指令并将其捆绑到ThingsBoard UI代码中。
+
+为了使此代码可在窗口部件中访问，您需要注册相应的Angular模块或将JavaScript类注入到全局变量（例如，对于window对象）。
+
+一些ThingsBoard小部件已经使用这种方法。看看[widget.service.js](https://github.com/thingsboard/thingsboard/tree/master/ui/src/app/api/widget.service.js)。
+
+在这里，您可以找到如何注册一些捆绑的类或模块以供以后在ThingsBoard小部件中使用。
+
+例如**Timeseries-Flot**小部件（来自**Charts**部件捆绑包）使用[**TbFlot**](https://github.com/thingsboard/thingsboard/tree/master/ui/src/app/widget/lib/flot-widget.js)JavaScript类，将其作为窗口属性注入**widget.service.js**中：
 
 ```javascript
 ...
@@ -874,8 +923,9 @@ import TbFlot from '../widget/lib/flot-widget';
 
 ```
 
-Another example is "Timeseries table" widget (from "Cards" Widgets Bundle) that uses Angular directive [**tb-timeseries-table-widget**](https://github.com/thingsboard/thingsboard/tree/master/ui/src/app/widget/lib/timeseries-table-widget.js) which is registered as dependency of **'thingsboard.api.widget'** Angular module inside **widget.service.js**.
-Thereby this directive becomes available for use inside the widget template HTML. 
+另一个示例是使用“Angular”指令[**tb-timeseries-table-widget**](https://github.com/thingsboard/thingsboard/tree/master/ui/src/app/widget/lib/timeseries-table-widget.js)，该文件已注册为**thingsboard.api.widget**的Angular模块依赖 **widget.service.js**中的Angular模块的依赖项。
+
+因此，此指令可在小部件模板HTML中使用。
 
 ```javascript
 ...
@@ -890,15 +940,19 @@ export default angular.module('thingsboard.api.widget', ['oc.lazyLoad', thingsbo
 
 ```
 
-## Widget code debugging tips
+## 小部件代码调试技巧
 
-The most simple method of debugging is Web console output.
-Just place [**console.log(...)**](https://developer.mozilla.org/en-US/docs/Web/API/Console/log) function inside any part of widget JavaScript code.
-Then click **Run** button to restart widget code and observe debug information in the Web console.
+调试的最简单方法是Web控制台输出。
 
-Another and most effective method of debugging is to invoke browser debugger.
-Put [**debugger;**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) statement into the place of widget code you are interested in and then click **Run** button to restart widget code.
-Browser debugger (if enabled) will automatically pause code execution at the debugger statement and you will be able to analyze script execution using browser debugging tools.
+只需将[**console.log（...）**](https://developer.mozilla.org/en-US/docs/Web/API/Console/log) 函数放在小部件JavaScript代码的任何部分内即可。
+
+然后单击**运行**按钮以重新启动小部件代码，并在Web控制台中观察调试信息。
+
+另一种最有效的调试方法是调用浏览器调试器。
+
+将[**debugger;**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger)语句放入您感兴趣的小部件代码的位置，然后单击**运行**按钮重新启动小部件代码。
+
+浏览器调试器（如果启用）将自动在调试器语句处暂停代码执行，您将能够使用浏览器调试工具来分析脚本执行。
 
 ## Next steps
 
