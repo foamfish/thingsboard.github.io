@@ -2,134 +2,122 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Entities and relations
-description: IoT asset management using ThingsBoard entities and relations feature
+title: 实体和关系
+description: 通过ThingsBoard中实体和关系对IoT资产进行管理
 
 ---
 
 * TOC
 {:toc}
 
-## Entities Overview
+## 实体概述
 
-ThingsBoard provides the user interface and REST APIs to provision and manage multiple entity types and their relations in your IoT application.
-Supported entities are:
+ThingsBoard提供了用户界面和REST API，方便在IoT应用程序中配置和管理多种实体类型及其关系。支持的实体如下:
  
- - **Tenants** - you can treat tenant as a separate business-entity: individual or organization who owns or produce devices and assets;
- Tenant may have multiple tenant administrator users and millions of customers;
- - **Customers** - customer is also a separate business-entity: individual or organization who purchase or uses tenant devices and/or assets;
- Customer may have multiple users and millions of devices and/or assets;
- - **Users** - users are able to browse dashboards and manage entities;
- - **Devices** - basic IoT entities that may produce telemetry data and handle RPC commands. For example sensors, actuators, switches;
- - **Assets** - abstract IoT entities that may be related to other devices and assets. For example factory, field, vehicle;      
- - **Alarms** - events that identify issues with your assets, devices or other entities;
- - **Dashboards** - visualization of your IoT data and ability to control particular devices through user interface; 
- - **Rule Node** - processing units for incoming messages, entity lifecycle events, etc;
- - **Rule Chain** - logic unit of related Rule Nodes;
+ - **租户** - 您可以将租户视为独立的业务实体：拥有或生产设备和资产的个人或组织；租户可能有多个租户管理员用户和数百万个客户；
+ - **客户** - 客户也是一个独立的企业实体，购买或使用租户下的Device、Assets、Organization;客户可能有多个用户以及数百万个Device和Assets；
+ - **用户** - 用户能够浏览仪表板和管理实体；
+ - **设备** - 可以通过RPC命令处理Iot设备中的对象遥测数据。例如sensors（传感器）, actuators（执行器）, switches（开关）；
+ - **资产** - Device与Assets相关联的抽象Iot对象。例如factory（工厂）, field（字段）, vehicle（车辆）；
+ - **警报** - 提示Device和Assets以及Entity发生的事件；
+ - **面板** - 通过Dashboards查看数据以及控制指定设备； 
+ - **规则节点** - 通过消怎处理实体生命周期事件的单元；
+ - **规则链** - 规则节点的逻辑单元；
 
 
-Each entity supports:
+实体支持如下:
 
- - **Attributes** - static and semi-static key-value pairs associated with entities. For example serial number, model, firmware version;
- - **Telemetry data** - time-series data points available for storage, querying and visualization. For example temperature, humidity, battery level;
- - **Relations** - directed connections to other entities. For example contains, manages, owns, produces.
+ - **属性** - 与实体相关联的静态和半静态键值对。例如序列号，型号，固件版本；
+ - **遥测数据** - 可用于存储，查询和可视化的时间序列数据点。例如温度，湿度，电池电量;
+ - **关系** - 与其他实体的定向连接。例如包含，管理，拥有，生产.
  
-Additionally, devices and assets also have a type. This allows distinguising them and process data from them in a different way.
+此外，Device和Assets也具有一种类型。这允许区分它们并以不同方式处理与他们相关的数据。
    
-This guide provides the overview of the features listed above, some useful links to get more details and real-life examples of their usage.  
+本指南概述了上面列出的功能，一些有用的链接，以获取更多详细信息以及其用法的真实示例。 
 
-## Real-life application
+## 应用场景
 
-The easiest way to understand the concepts of ThingsBoard is to implement your first ThingsBoard application. 
-Let's assume we want to build an application that collects data from soil moisture and temperature sensors, 
-visualize this data on the dashboard, detect issues, raise alarms and control the irrigation.
+理解ThingsBoard概念的最简单方法是实现您的第一个ThingsBoard应用程序。假设我们要构建一个应用程序，该应用程序从土壤湿度和温度传感器收集数据，在仪表板上可视化该数据，检测问题，发出警报并控制灌溉。
+我们还假设我们想用数百个传感器支持多个领域。字段也可以分组到地理区域。
+我们认为应该遵循以下逻辑步骤来构建这样的应用程序：
 
-Let's also assume we want to support multiple fields with hundreds of sensors. Fields may be also grouped to the Geo regions.
- 
-We believe there should be following logical steps to build such an application:
+### 步骤1: 实体和关系
 
-### Step 1: Provision entities and relations
-
-We are going to setup following hierarchy of assets and devices:
+我们可以按图中的层次关系在Thingsboard Web UI中进行设置:
 
 
  ![image](/images/user-guide/entities-and-relations.svg)
  
  
-Please review the following screen cast to learn how to provision region and fields assets and their relations using ThingsBoard Web UI
+观看下方视频，可以了解如何使用ThingsBoard Web UI设置区域和字段资产及其关系
 
   
 <div id="video">
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/C-JoOfTBeT0" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/C-JoOfTBeT0" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 </div>
 
-Please review the following screen cast to learn how to provision devices and their relations with assets using ThingsBoard Web UI
+观看下方视频，可以了解如何使用ThingsBoard Web UI配置设备及其与资产的关系
 
 
 <div id="video">
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/BUFinxvzIo4" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/BUFinxvzIo4" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 </div>
 
-You can automate this actions using ThingsBoard REST API. You can provision new asset using POST request to the following URL
+您可以使用ThingsBoard REST API操作执行POST请求创建一个新资产。URL格式如下：
 
 ```shell 
 http(s)://host:port/api/asset
 ```
 
-For example:
+例如:
 
 {% capture tabspec %}create-asset
 A,create-asset.sh,shell,resources/create-asset.sh,/docs/user-guide/resources/create-asset.sh
 B,create-asset.json,json,resources/create-asset.json,/docs/user-guide/resources/create-asset.json{% endcapture %}  
 {% include tabs.html %}
 
-**Note:** in order to execute this request, you will need to substitute **$JWT_TOKEN** with a valid JWT token.
-This token should belong to a user with **TENANT_ADMIN** role. You can use following [guide](/docs/reference/rest-api/#rest-api-auth) to get the token.
+**注意:** 如果你要执行此请求, 你需要求将 **$JWT_TOKEN** 进行替换成相关的JWT令牌。
+此令牌属于**TENANT_ADMIN** 的角色用户. 你可以按照 [指南](/docs/reference/rest-api/#rest-api-auth) 获取令牌.
 
-Also, you can provision new relation using POST request to the following URL
+你可以使用POST请求设置一个新关系，URL格式如下：
 
 ```shell 
 http(s)://host:port/api/relation
 ```
 
-For example
+例如
 
 {% capture tabspec %}create-relation
 A,create-relation.sh,shell,resources/create-relation.sh,/docs/user-guide/resources/create-relation.sh
 B,create-relation.json,json,resources/create-relation.json,/docs/user-guide/resources/create-relation.json{% endcapture %}  
 {% include tabs.html %}
 
-**Note:** Don't forget to replace $FROM_ASSET_ID and $TO_ASSET_ID with valid asset ids. 
-**Note:** One can relate any entities. For example, assets to devices or assets to users.
-You can receive them as a result of previous REST API call or use Web UI.
+**注意:** 请将$FROM_ASSET_ID 和 $TO_ASSET_ID 替换成有效的参数值。
+**注意:** 可以进行任何有效的关联，例如：资产到设备或资产到用户。你可以通过REST API进行设置或者基于后台界面（Web UI）。
+
+### 步骤2: 分配资产属性
+   
+ThingsBoard提供了将属性分配给实体并对其进行管理的功能。点击以下链接了解详情
+<p><a href="/docs/user-guide/attributes" class="button">设备属性</a></p>
 
 
-### Step 2: Assign attributes to the assets
+### 步骤3: 上传设备遥测数据
 
-ThingsBoard provides the ability to assign attributes to entities and manage them.
-This topic is covered in separate guide.    
-<p><a href="/docs/user-guide/attributes" class="button">Working with device attributes</a></p>
+ThingsBoard提供了使用设备和其他实体的遥测数据的功能。点击以下链接了解详情  
+<p><a href="/docs/user-guide/telemetry" class="button">遥测数据</a></p>
 
+### 步骤4: 创建报警规则
 
-### Step 3: Upload telemetry data from devices
+ThingsBoard提供了使用规则引擎为设备和其他实体引发警报的功能。点击以下链接了解详情
+<p><a href="/docs/user-guide/alarms" class="button">警报</a></p>
 
-ThingsBoard provides the ability to work with telemetry data for devices and other entities.
-This topic is covered in separate guide.    
-<p><a href="/docs/user-guide/telemetry" class="button">Working with telemetry data</a></p>
+### 步骤5: 设计仪表板
 
-### Step 4: Creating Rules for Alarms
-
-ThingsBoard provides the ability to raise alarms using rule engine for devices and other entities.
-This topic is covered in the separate guide.    
-<p><a href="/docs/user-guide/alarms" class="button">Working with alarms</a></p>
-
-### Step 5: Design your dashboard
-
-Please [import](/docs/user-guide/ui/dashboards/#dashboard-import) the following [**dashboard**](/docs/user-guide/resources/region_fields_dashboard.json) that demonstrates Map, Alarm, Entity Table and Charts widgets.
+请[导入](/docs/user-guide/ui/dashboards/#dashboard-import)这个[**面板**](/docs/user-guide/resources/region_fields_dashboard.json)以便查Map、Alarm、Entity表格 和Charts部件.
 
 
  

@@ -2,47 +2,42 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Working with IoT device alarms
-description: IoT device alarm management using ThingsBoard alarms feature
-
+title: IoT设备警报
+description: 通过ThingsBoard中报警功能对IoT设备进行报警管理
 ---
 
 * TOC
 {:toc}
 
-ThingsBoard provides the ability to create and manage alarms related to your entities: devices, assets, customers, etc.
+Thingsboard能够创建和管理应用中实体（devices, assets, customers）相关的alarm功能。
 
-### Alarm Lifecycle
+### Alarm生命周期
 
-Alarms have a lifecycle. Each Alarm can be cleared and acknowledged. By default, an alarm is not in the active and unacknowledged state.
+alarm在应用程中是一个具有有生命周期功能，可以清除和确认应用中的每一个alarm。默认情况下alarm是处于活动和待确认状态。
 
-### Alarm Originator, Type, and Propagation
+### Alarm的创建，类型和传播
 
-Alarm Originator is an entity that is responsible for triggering an alarm. By default, an alarm is propagated to all related entities (parent relations only).
-An alarm is identified by start time, originator and type. There can't be two active alarms for a same type and originator.
+alarm发起者应负责触发警报的相关实体。默认情况下，警报会传播到所有相关实体（仅父级关系）。通过创建时间，创建者和类型来标识alarm。同一类型和不能有两个活动的alarm。
 
-### Alarm Severity
+### Alarm级别
 
-One of the following alarm severities is supported: CRITICAL, MAJOR, MINOR, WARNING, INDETERMINATE.
+alarm支持级别如下：危急（CRITICAL）, 重要（MAJOR）, 次要（MINOR）, 警告（WARNING,） 不确定（INDETERMINATE）
 
-### Alarm Updates
+### Alarm更新
 
-Alarm entity may be updated by external applications or ThingsBoard rules. Alarm keeps track of both clear and acknowledge time and latest change as an end time.
+alarm实体可以通过外部应用程序或ThingsBoard规则进行更新。警报会同时跟踪清除和确认时间以及最新更改作为结束时间。
 
-### Alarm REST API
+### Alarm REST AP
 
-ThingsBoard provides REST API to manage and query alarms. See demo environment [Alarm REST API](https://demo.thingsboard.io/swagger-ui.html#/alarm-controller) and general [REST API](/docs/reference/rest-api/) documentation for more details.
+ThingsBoard提供REST API来管理和查询alarm。 有关更多详细信息，请参见演示环境 [Alarm REST API](https://demo.thingsboard.io/swagger-ui.html#/alarm-controller)和常规[REST API](/docs/reference/rest-api/)文档。
 
-### Alarm Rules
-It is possible to create, update and clear alarm using ThingsBoard [rule engine](/docs/user-guide/rule-engine-2-0/re-getting-started/).
+### Alarm规则
+通过ThingsBoard[规则引擎](/docs/user-guide/rule-engine-2-0/re-getting-started/)可以创建，更新和清除警报。
 
-Please find more details about Alarm Rule Nodes:
+你可以通过以下链接了解更多Alarms相关信息:
 
-- [Create Alarm](/docs/user-guide/rule-engine-2-0/action-nodes/#create-alarm-node).
-- [Clear Alarm](/docs/user-guide/rule-engine-2-0/action-nodes/#clear-alarm-node).
-
-Also, in this step-by-step guide you can see how to create/update/clear Alarms in real-life scenarios:
-
-- [Work with Alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/).
+- [创建Alarms](/docs/user-guide/rule-engine-2-0/action-nodes/#create-alarm-node)。
+- [清除Alarms](/docs/user-guide/rule-engine-2-0/action-nodes/#clear-alarm-node)。
+- [使用Alarms](/docs/user-guide/rule-engine-2-0/tutorials/create-clear-alarms/)。
 
     

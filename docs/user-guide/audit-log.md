@@ -2,32 +2,30 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Audit Log
-description: IoT device management Audit Log
+title: 审计日志
+description: 管理IoT设备审计日志
 
 ---
 
-ThingsBoard provides the ability to track user actions in order to keep audit log. 
-It is possible to log user actions related to main entities: assets, devices, dashboard, rules, etc. 
+ThingsBoard提供了跟踪用户操作以保留审计日志的功能。可以记录与主要实体相关的用户操作：assets, devices, dashboard, rules等。 
 
-### User Interface
+### 用户界面
 
-Tenant Administrator is able to review audit logs that belong to corresponding tenant account. The administrator is able to setup date range and executes a full-text search for fetched entities.
+租户管理员能够查看属于相应租户帐户的审计日志。管理员能够设置日期范围，并对获取的实体执行全文搜索。
 
 ![image](/images/user-guide/ui/audit-log.png)
 
-The "details" button allows reviewing low-level details of the logged action.
+"详细"按钮可以查看记录的详细信息
 
 ![image](/images/user-guide/ui/audit-log-details.png)
 
 ### REST API
 
-It is possible to fetch audit logs via [REST API](https://demo.thingsboard.io/swagger-ui.html#/audit-log-controller). 
-There are several API calls that allow to fetch entities related to particular user, entity, customer or fetch all records using page links.  
+可以通过REST API获取审核日志。有几种API调用，它们允许获取与指定用户，实体，客户相关的实体，或使用页面链接获取所有记录。  
 
-### General configuration
+### 常规配置
 
-System administrator is able to configure audit log levels using [thingsboard.yml](/docs/user-guide/install/config/). You can find sample configuration below:
+系统管理员可以使用[thingsboard.yml](/docs/user-guide/install/config/).配置审核日志级别。您可以在下面找到示例配置:
 
 ```yaml
 # Audit log parameters
@@ -51,17 +49,13 @@ audit_log:
       "plugin": "${AUDIT_LOG_MASK_PLUGIN:RW}"
 ```
 
-This configuration sample disables the logging of any actions related to dashboards and logs read operations for users and rules. 
-For all other entities, ThingsBoard will log only write level operations.
+此配置示例禁用与仪表板相关的任何操作的日志记录，并为用户和规则进行日志读取操作。对于所有其他实体，ThingsBoard将仅记录写级别的操作。
 
-We recommend to modify "by_tenant_partitioning" parameter based on the number of devices and user actions that will be logged. 
-The more actions you plan to log, the more precise partitioning is required. 
-The approximate amount of records per partition should not exceed 500 000 records.
+我们建议根据要记录的设备数和用户操作来修改“ by_tenant_partitioning”参数。您计划记录的动作越多，所需的分区就越精确。每个分区的大约记录量不应超过500000条记录。
 
-### External log sink configuration
+### 外部日志接收配置
 
-System administrator is able to configure connection to external system. This connection will be used to push audit logs.
-The configuration parameters are well documented inline.
+系统管理员可以配置与外部系统的连接。此连接将用于推送审核日志。内联文档对配置参数进行了详细记录。
 
 ```yaml
   sink:
@@ -82,7 +76,7 @@ The configuration parameters are well documented inline.
     password: "${AUDIT_LOG_SINK_PASSWORD:}"      
 ```
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/guides-banner.md %}
   

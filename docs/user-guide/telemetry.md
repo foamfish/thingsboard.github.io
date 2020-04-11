@@ -2,72 +2,70 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Working with telemetry data
-description: IoT device time-series data collection using various IoT protocols and ThingsBoard telemetry feature
-
+title: 遥测数据
+description: 基于相关IoT协议和ThingsBoard中遥测功能对IoT设备时间序列数据进行收集
 ---
 
 * TOC
 {:toc}
 
-ThingsBoard provides a rich set of features related to telemetry data:
+ThingsBoard提供与遥测数据操作相关的API：
 
- - **collect** data from devices using MQTT, CoAP or HTTP protocols.
- - **store** timeseries data in Cassandra (efficient, scalable and fault-tolerant NoSQL database).
- - **query** latest timeseries data values or all data within the specified time interval.
- - **subscribe** to data updates using websockets (for visualization or real-time analytics).
- - **visualize** timeseries data using configurable and highly customizable widgets and dashboards.
- - **filter and analyze** data using flexible Rule Engine (/docs/user-guide/rule-engine/).
- - **generate alarms** based on collected data.
- - **forward** data to external systems using Rule Nodes (e.g. Kafka or RabbitMQ Rule Nodes).
+ - **采集** 使用MQTT, CoAP or HTTP协议采集设备数据。
+ - **存储** 在Cassandra（高效、可扩展、能容错的NoSQL数据库）中存储时序数据。
+ - **查询** 查询最新时序数据值，或查询特定时间段内的所有数据。
+ - **订阅** 使用websockets订阅数据更新(用于可视化或实时分析)。
+ - **可视化** 使用可配置和可配置的小部件以及仪表盘可视化时序数据。
+ - **过滤和分析** 使用灵活的规则引擎过滤和分析数据(/docs/user-guide/rule-engine/)。
+ - **事件警报** 根据采集的数据触发事件警报。
+ - **数据传输** 过规则引擎节点实现与外部数据交互（例如Kafka或RabbitMQ规则节点）。
 
-This guide provides an overview of the features listed above and some useful links to get more details.  
+本指南概述了上面列出的功能以及相关链接，可以获取更多信息。 
 
 ![image](/images/user-guide/telemetry.svg)
 
-## Device telemetry upload API
+## 设备遥测上传API
 
-ThingsBoard provides an API to upload timeseries key-value data.
-Flexibility and simplicity of key-value format allow easy and seamless integration with almost any IoT device on the market.
-Telemetry upload API is specific for each supported network protocol.
-You can review API and examples in corresponding reference page:
+ThingsBoard提供了一个用于上传时间序列键值对的数据的API。
+键值格式的灵活性和简单性允许与市场上几乎所有IoT设备轻松无缝地集成。
+遥测上传API基于特定的网络协议。您可以在相应的参考页面中查看API和示例：
 
- - [MQTT API reference](/docs/reference/mqtt-api/#telemetry-upload-api)
- - [CoAP API reference](/docs/reference/coap-api/#telemetry-upload-api)
- - [HTTP API reference](/docs/reference/http-api/#telemetry-upload-api)
+ - [MQTT API遥测介绍](/docs/reference/mqtt-api/#telemetry-upload-api)
+ - [CoAP API遥测介绍](/docs/reference/coap-api/#telemetry-upload-api)
+ - [HTTP API遥测介绍](/docs/reference/http-api/#telemetry-upload-api)
   
-## Telemetry Service
+## 遥测服务
 
-Telemetry Service is responsible for persisting timeseries data to internal data storage; 
-provides server-side API to query and subscribe for data updates. 
+遥测服务负责将时间序列数据持久保存至数据库中；提供服务器端API来查询和订阅数据更新服务。
 
-### Internal data storage
+### 数据存储
 
-ThingsBoard uses either Cassandra NoSQL database or SQL database to store all data.
+ThingsBoard使用Cassandra NoSQL数据库或SQL数据库来存储所有数据。
 
-A device that is sending data to the server will receive confirmation about data delivery as soon as data is stored in DB.
-Modern MQTT clients allow temporary local storage of undelivered data. 
-Thus, even if one of the ThingsBoard nodes goes down, the device will not lose the data and will be able to push it to other servers.
+向服务器发送数据的设备将在数据存储在DB中后立即收到有关数据传递的确认。
+
+MQTT客户端允许临时本地存储未交付的数据。
+
+因此，即使ThingsBoard节点之一发生故障，该设备也不会丢失数据，并且能够将其推送到其他服务器。
+
+服务器端应用程序还能够发布针对不同实体和实体类型有价值的遥测。
+
+虽然您可以直接查询数据库，但是ThingsBoard提供了一组RESTful和Websocket API，可简化调用过程并应用某些安全策略：
  
-Server side applications are also able to publish telemetry valued for different entities and entity types.
+ - Tenant管理员能够管理所拥有实体属性。
+ - Customer用户只能管理Tenant分配的实体属性。
   
-Although you can query the database directly, ThingsBoard provides set of RESTful and Websocket API that simplify this process and apply certain security policies:
- 
- - Tenant Administrator user is able to fetch data for all entities that belong to the corresponding tenant.
- - Customer user is able to fetch data only for entities that are assigned to the corresponding customer.
-  
-#### Data Query API
+#### 数据查询API
 
-Telemetry Service provides following REST API to fetch entity data:
+遥测服务提供以下REST API来获取实体数据:
 
 ![image](/images/user-guide/telemetry-service/rest-api.png)
 
-**NOTE:** The API listed above is available via Swagger UI, please review general [REST API](/docs/reference/rest-api/) documentation for more details.
-The API is backward compatible with TB v1.0+ and this is the main reason why API call URLs contain "plugin".
-
+**注意:** 上图中的API可通过Swagger UI使用，如获取更多详细信息请查看[REST API](/docs/reference/rest-api/) 。
+该API向后兼容TB v1.0 +，这是API调用URL包含“plugin”的主要原因。
 ##### Timeseries data keys API
 
-You can fetch list of all *data keys* for particular *entity type* and *entity id* using GET request to the following URL  
+您可以使用下面的GET请求地址获取指定entity类型和entity id的所有属性key列表  
  
 ```shell
 http(s)://host:port/api/plugins/telemetry/{entityType}/{entityId}/keys/timeseries
@@ -78,11 +76,11 @@ A,get-telemetry-keys.sh,shell,resources/get-telemetry-keys.sh,/docs/user-guide/r
 B,get-telemetry-keys-result.json,json,resources/get-telemetry-keys-result.json,/docs/user-guide/resources/get-telemetry-keys-result.json{% endcapture %}
 {% include tabs.html %}
 
-Supported entity types are: TENANT, CUSTOMER, USER, DASHBOARD, ASSET, DEVICE, ALARM, ENTITY_VIEW
+支持的实体类型为: TENANT, CUSTOMER, USER, DASHBOARD, ASSET, DEVICE, ALARM, ENTITY_VIEW
 
 ##### Timeseries data values API
 
-You can fetch list of latest values for particular *entity type* and *entity id* using GET request to the following URL  
+您可以使用下面的GET请求地址获取指定entity类型和entity id的所有属性value列表
  
 ```shell
 http(s)://host:port/api/plugins/telemetry/{entityType}/{entityId}/values/timeseries?keys=key1,key2,key3
@@ -93,91 +91,87 @@ A,get-latest-telemetry-values.sh,shell,resources/get-latest-telemetry-values.sh,
 B,get-latest-telemetry-values-result.json,json,resources/get-latest-telemetry-values-result.json,/docs/user-guide/resources/get-latest-telemetry-values-result.json{% endcapture %}
 {% include tabs.html %}
 
-Supported entity types are: TENANT, CUSTOMER, USER, DASHBOARD, ASSET, DEVICE, ALARM, ENTITY_VIEW
+支持的实体类型为: TENANT, CUSTOMER, USER, DASHBOARD, ASSET, DEVICE, ALARM, ENTITY_VIEW
 
-You can also fetch list of historical values for particular *entity type* and *entity id* using GET request to the following URL  
+您可以使用下面的GET请求地址获取指定entity类型和entity id的所有属性历史value列表 
  
 ```shell
 http(s)://host:port/api/plugins/telemetry/{entityType}/{entityId}/values/timeseries?keys=key1,key2,key3&startTs=1479735870785&endTs=1479735871858&interval=60000&limit=100&agg=AVG
 ```
 
-The supported parameters are described below:
+支持参数如下所述：
 
- - **keys** - comma separated list of telemetry keys to fetch.
- - **startTs** - unix timestamp that identifies start of the interval in milliseconds.
- - **endTs** - unix timestamp that identifies end of the interval in milliseconds.
- - **interval** - the aggregation interval, in milliseconds.
- - **agg** - the aggregation function. One of MIN, MAX, AVG, SUM, COUNT, NONE.
- - **limit** - the max amount of data points to return or intervals to process.
+ - **keys** - 以逗号分隔的要获取的遥测键列表。
+ - **startTs** - Unix时间戳，标识间隔的开始（以毫秒为单位）。
+ - **endTs** - -Unix时间戳，标识间隔的结束时间（以毫秒为单位）。
+ - **interval** - 聚合间隔，以毫秒为单位。
+ - **agg** - 聚合函数。MIN，MAX，AVG，SUM，COUNT，NONE之一。
+ - **limit** - 要返回的最大数据点数或要处理的间隔。
 
-ThingsBoard will use *startTs*, *endTs* and *interval* to identify aggregation partitions or sub-queries and execute asynchronous queries to DB that leverage built-in aggregation functions.
+hingsBoard将使用startTs，endTs和interval来标识聚合分区或子查询，并对利用内置聚合功能的数据库执行异步查询。
 
 {% capture tabspec %}get-telemetry-values
 A,get-telemetry-values.sh,shell,resources/get-telemetry-values.sh,/docs/user-guide/resources/get-telemetry-values.sh
 B,get-telemetry-values-result.json,json,resources/get-telemetry-values-result.json,/docs/user-guide/resources/get-telemetry-values-result.json{% endcapture %}
 {% include tabs.html %}
 
-Supported entity types are: TENANT, CUSTOMER, USER, DASHBOARD, ASSET, DEVICE, ALARM, ENTITY_VIEW
+支持的实体类型为: TENANT, CUSTOMER, USER, DASHBOARD, ASSET, DEVICE, ALARM, ENTITY_VIEW
 
 #### Websocket API
 
-Websockets are actively used by Thingsobard Web UI. Websocket API duplicates REST API functionality and provides the ability to subscribe to device data changes.
-You can open a websocket connection to a telemetry service using the following URL
+ThingsBoard Web UI使用Websocket API复制了REST API功能，并提供了订阅设备数据更改的功能。
+
+您可以使用以下URL打开与遥测服务的Websocket连接。
 
 ```shell
 ws(s)://host:port/api/ws/plugins/telemetry?token=$JWT_TOKEN
 ```
 
-Once opened, you can send 
+打开后，您可以发送
+[订阅命令](https://github.com/thingsboard/thingsboard/blob/master/application/src/main/java/org/thingsboard/server/service/telemetry/cmd/TelemetryPluginCmdsWrapper.java) 
+并接收
+[订阅更新](https://github.com/thingsboard/thingsboard/blob/master/application/src/main/java/org/thingsboard/server/service/telemetry/sub/SubscriptionUpdate.java):
 
-[subscription commands](https://github.com/thingsboard/thingsboard/blob/master/application/src/main/java/org/thingsboard/server/service/telemetry/cmd/TelemetryPluginCmdsWrapper.java) 
-and receive 
-[subscription updates](https://github.com/thingsboard/thingsboard/blob/master/application/src/main/java/org/thingsboard/server/service/telemetry/sub/SubscriptionUpdate.java):
-
-where 
-
- - **cmdId** - unique command id (within corresponding websocket connection)
- - **entityType** - unique entity type. Supported entity types are: TENANT, CUSTOMER, USER, DASHBOARD, ASSET, DEVICE, ALARM
- - **entityId** - unique entity identifier
- - **keys** - comma separated list of data keys
- - **timeWindow** - fetch interval for timeseries subscriptions, in milliseconds. Data will be fetch within following interval **[now()-timeWindow, now()]**
- - **startTs** - start time of fetch interval for historical data query, in milliseconds.
- - **endTs** - end time of fetch interval for historical data query, in milliseconds.
+ - **cmdId** - 命令唯一标识（在相应的Websocket连接中）
+ - **entityType** - 唯一实体类型标识. 支持实类型: TENANT, CUSTOMER, USER, DASHBOARD, ASSET, DEVICE, ALARM
+ - **entityId** - 唯一实体标识符
+ - **keys** - 逗号分隔的keys参数列表
+ - **timeWindow** - 订阅的时间间隔，以毫秒为单位. 数据将在以下时间间隔 **[now()-timeWindow, now()]**
+ - **startTs** - 获取历史数据查询的间隔的开始时间（以毫秒为单位）.
+ - **endTs** - 获取历史数据查询的间隔的结束时间（以毫秒为单位）.
  
-##### Example 
+##### 实例 
 
-Change values of the following variables : 
+更改以下变量的值: 
 
- - **token** - to the JWT token which you can get using the [following link](https://thingsboard.io/docs/reference/rest-api/#rest-api-auth).
+ - **token** - 指向JWT令牌，您可以使用[以下链接](https://thingsboard.io/docs/reference/rest-api/#rest-api-auth)获得该令牌.
 
- - **entityId** - to your device id.
+ - **entityId** - 您的设备ID.
  
- In case of live-demo server : 
+ 如果是现场演示服务器: 
  
- - replace **host:port** with **demo-thingsboard.io** and choose secure connection - **wss://**
+ - 用**demo-thingsboard.io**替换**host:port**并选择安全连接-**wss://**
  
- In case of local installation :
+ 如果是本地安装:
  
- - replace **host:port** with **127.0.0.1:8080** and choose **ws://**
+ - 用**127.0.0.1:8080**替换**host:port**并选择**ws://**
  
 {% capture tabspec %}web-socket
 A,web-socket.html,html,resources/web-socket.html,/docs/user-guide/resources/web-socket.html{% endcapture %}  
 {% include tabs.html %}
 
-## Data visualization
+## 数据可视化
 
-ThingsBoard provides the ability to configure and customize dashboards for data visualization.
-This topic is covered in a separate guide.    
-<p><a href="/docs/user-guide/visualization" class="button">Data Visualization guide</a></p>
+ThingsBoard提供了配置和自定义仪表板以进行数据可视化的功能。点击以下链接了解详情
+<p><a href="/docs/user-guide/visualization" class="button">数据可视化指南</a></p>
 
-## Rule engine
+## 规则引擎
 
-ThingsBoard provides the ability to configure data processing rules.
-Each rule consists of
+ThingsBoard提供了配置数据处理规则的功能。每个规则包括
 
- - filters - to filter incoming data feed, 
- - processor - to generate alarms or enrich incoming data with some server-side values
- - action - to apply a certain logic to filtered data.
-You can find more details in a separate guide.    
-<p><a href="/docs/user-guide/rule-engine" class="button">Rule Engine guide</a></p>
+ - filters - 过滤传入的数据供稿, 
+ - processor -生成警报或使用某些服务器端值丰富输入数据
+ - action - 对过滤的数据应用某种逻辑.
+点击以下链接了解详情    
+<p><a href="/docs/user-guide/rule-engine" class="button">规则引擎指南</a></p>
     

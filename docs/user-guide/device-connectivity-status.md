@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Device Connectivity Status
-description: IoT device status and connectivity checks
+title: 设备连接状态
+description: IoT设备状态和连接检查
 redirect_from: "/docs/user-guide/rule-engine-2-0/tutorials/device-online-offline/"
 
 ---
@@ -11,39 +11,33 @@ redirect_from: "/docs/user-guide/rule-engine-2-0/tutorials/device-online-offline
 * TOC
 {:toc}
 
-## Feature Overview
+## 功能概述
 
-ThingsBoard Device State service is responsible for monitoring of the device connectivity state and triggering device connectivity events 
-that are pushed to the [**Rule Engine**](/docs/user-guide/rule-engine-2-0/re-getting-started/). As a platform user, you are able to define how to react on this events. 
+ThingsBoard设备状态服务负责监视设备连接状态并触发推送到[**规则引擎的**](/docs/user-guide/rule-engine-2-0/re-getting-started/)设备连接事件。平台开发者可以对相关事件出相关处理。
 
-Supported events are:
+支持事件如下:
  
- - **Connect event** - triggered when device connects to ThingsBoard. Meaningful in case of session based transports like MQTT.
- Will be also triggered for HTTP transport, but in this case it will be triggered on each HTTP request;
- - **Disconnect event** - triggered when device disconnects from ThingsBoard. Meaningful in case of session based transports like MQTT. 
- Will be also triggered for HTTP transport, but in this case it will be triggered on each HTTP request;
- - **Activity event** - triggered when device pushes telemetry, attribute update or rpc command;
- - **Inactivity event** - triggered when device was inactive for a certain period of time. 
- Please note that this event may be triggered even without disconnect event from device. Typically means that there was no activity events triggered for a while;
+ - **Connect event** - 设备连接到ThingsBoard时触发。基于MQTT的会话传输和HTTP请求传输同时连接事件将在每一个HTTP请求上触发。
+ - **Disconnect event** - 设备与ThingsBoard断开连接时触发。基于MQTT的会话传输和HTTP请求传输同时连接事件将在每一个HTTP请求上触发。
+ - **Activity event** - 通过属性(attribute update)或者rpc命令推送遥测数据。
+ - **Inactivity event** - 当设备指定时间内不活动时触发。请注意，即使没有从设备断开连接事件，也可能触发此事件。通常表示一段时间没有触发任何活动事件。
+ - 设备状态服务负责维护以下[服务端属性](/docs/user-guide/attributes/#attribute-types)属性:
 
-Device State service is responsible for maintaining the following [server-side](/docs/user-guide/attributes/#attribute-types) attributes:
-
- - **active** - represents current device state, either true or false;
- - **lastConnectTime** - represents last time device connected to ThingsBoard, number of milliseconds since January 1, 1970, 00:00:00 GMT
- - **lastDisconnectTime** - represents last time device disconnected from ThingsBoard, number of milliseconds since January 1, 1970, 00:00:00 GMT
- - **lastActivityTime** - represents last time device pushed telemetry, attribute update or rpc command, number of milliseconds since January 1, 1970, 00:00:00 GMT
- - **inactivityAlarmTime** - represents last time inactivity event triggered, number of milliseconds since January 1, 1970, 00:00:00 GMT
+ - **active** - 表示当前设备状态为true或false;
+ - **lastConnectTime** - 表示设备最后一次连接到ThingsBoard的时间，自1970年1月1日格林尼治标准时间00:00:00以来的毫秒数
+ - **lastDisconnectTime** - 表示设备与ThingsBoard断开连接的最后时间，自1970年1月1日格林威治标准时间00:00:00以来的毫秒数
+ - **lastActivityTime** - 表示设备上次推送遥测，属性更新或rpc命令的时间，自1970年1月1日格林威治标准时间00:00:00以来的毫秒数
+ - **inactivityAlarmTime** - 表示上一次触发不活动事件的时间，自1970年1月1日格林尼治标准时间00:00:00以来的毫秒数
  
-## Configuration
+## 配置
 
-Device State service uses global configuration parameter for inactivity timeout. 
-This parameter is defined in **thingsboard.yml** (state.defaultInactivityTimeoutInSec) and by default it is set to 10 seconds.
-User can overwrite this parameter for individual device by setting "inactivityTimeout" server side attribute (value is set in milliseconds).
+设备状态服务将全局配置参数用于不活动超时，参数(state.defaultInactivityTimeoutInSec)在**thingsboard.yml**中定义默认为10秒。
 
-Device State service uses global configuration parameter to detect inactivity events.
-This parameter is defined in **thingsboard.yml** (state.defaultStateCheckIntervalInSec) and by default it is set to 10 seconds.
+用户可以通过设置服务器端属性"inactivityTimeout"来覆盖单个设备的此参数（值以毫秒为单位）。
 
-## Next steps
+设备状态服务使用全局配置参数来检测不活动事件,参数(state.defaultStateCheckIntervalInSec)在**thingsboard.yml**中定义默认为10秒。
+
+## 下一步
 
 {% assign currentGuide = "AdvancedFeatures" %}{% include templates/guides-banner.md %}
 
