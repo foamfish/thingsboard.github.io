@@ -5,10 +5,14 @@
   </td>
   <td>
       <br/>  
-      <p><b>IoT PaaS Demo</b></p>
+      <p><b>IoT PaaS演示</b></p>
       <br/>  
-      <p>We recommend to use ThingsBoard Professional Edition <a href="https://cloud.thingsboard.io/signup"><b>Live Demo</b></a> for the seamless experience and the newest features from the latest source code!</p>
-      <p>Save time on the installation and configuration with several pre-provisioned devices, dashboards available in the cloud and pre-integrated email server to create new customer accounts and users.</p>
+      <p>
+      我们建议使用ThingsBoard专业版<a href="https://cloud.thingsboard.io/signup"><b>在线演示</b></a>了解并体验最新功能！
+      </p>
+      <p>
+      使用云端默认提供的设备、仪表板和邮件服务可以节省你的安装和配置时间来创建新客户和用户。
+      </p>
   </td>
 </tr>
 </table>

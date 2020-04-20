@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: ThingsBoard installation options
-description: ThingsBoard installation instructions for various operation systems and cloud platforms
+title: ThingsBoard安装选项
+description: 适用于各种操作系统和云平台的ThingsBoard安装说明
 notitle: "true"
 ---
 
@@ -12,10 +12,10 @@ notitle: "true"
        <div class="install-options-hero">
           <div class="container">
             <div class="install-options-hero-content">
-                <h1>ThingsBoard installation options</h1>
+                <h1>ThingsBoard安装选项</h1>
                 <div class="install-options-description">
                     <p>
-                        ThingsBoard is designed to run and utilize on majority of hardware, from local Raspberry PI to powerful servers in the cloud
+ThingsBoard旨在更多的硬件上运行无论是普通电脑或树莓派还是服务器。
                     </p>
                 </div>
             </div>            
@@ -27,7 +27,7 @@ notitle: "true"
                             <div class="deployment-icon-div d-inline-block">
                                 <img src="/images/install/live-demo.png" alt="live demo icon" class="live-demo-icon d-inline">
                             </div>
-                            <h2 class="d-none d-md-inline-block">Live demo</h2>
+                            <h2 class="d-none d-md-inline-block">在线演示</h2>
                         </label>
                     </div>
                     <div class="deployment" data-toggle="#onPremise">
@@ -36,18 +36,18 @@ notitle: "true"
                             <div class="deployment-icon-div d-inline-block">
                                 <img src="/images/install/on-premise.png" alt="on premise icon" class="on-premise-icon d-inline">
                             </div>
-                            <h2 class="d-none d-md-inline-block">On premise</h2>
+                            <h2 class="d-none d-md-inline-block">前提条件</h2>
                         </label>
                     </div>
-                    <div class="deployment" data-toggle="#cloud">
+                    <!-- <div class="deployment" data-toggle="#cloud">
                         <input type="radio" class="magic-radio" name="deployment-radio-selector" id="DeploymentCloud" value="Deployment Cloud Details">
                         <label for="DeploymentCloud">
                             <div class="deployment-icon-div d-inline-block">
                                 <img src="/images/install/cloud.png" alt="cloud icon" class="cloud-icon d-inline">
                             </div>
-                            <h2 class="d-none d-md-inline-block">Cloud</h2>
+                            <h2 class="d-none d-md-inline-block">云</h2>
                         </label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="deployment-div">
                     <div class="container">

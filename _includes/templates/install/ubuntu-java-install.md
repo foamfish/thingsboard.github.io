@@ -1,24 +1,25 @@
-ThingsBoard service is running on Java 8. Follow this instructions to install OpenJDK 8:
+ThingsBoard服务运行在Java 8上。请按照以下说明安装OpenJDK 8。
 
 ```bash
 sudo apt update
 sudo apt install openjdk-8-jdk
 ```
 
-Please don't forget to configure your operating system to use OpenJDK 8 by default. 
-You can configure which version is the default using the following command:
+请不要忘记将操作系统配置为默认使用OpenJDK 8。
+
+您可以使用以下命令配置哪个版本是默认版本：
 
 ```bash
 sudo update-alternatives --config java
 ```
 
-You can check the installation using the following command:
+您可以使用以下命令检查安装：
 
 ```bash
 java -version
 ```
 
-Expected command output is:
+命令输出结果：
 
 ```text
 openjdk version "1.8.0_xxx"

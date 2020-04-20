@@ -1,10 +1,10 @@
-ThingsBoard logs are stored in the following directory:
+ThingsBoard日志存储在以下目录中：
  
 ```bash
 /var/log/thingsboard
 ```
 
-You can issue the following command in order to check if there are any errors on the backend side:
+执行如下命令检查后面是否有错误:
  
 ```bash
 cat /var/log/thingsboard/thingsboard.log | grep ERROR

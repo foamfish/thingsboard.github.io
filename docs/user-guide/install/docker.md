@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Installing ThingsBoard using Docker (Linux or Mac OS)
-description: Installing ThingsBoard IoT Platform using Docker (Linux or Mac OS)
+title: 在Docker(Linux或Mac OS)上安装ThingsBoard
+description: 在Docker(Linux或Mac OS)上安装ThingsBoard
 
 ---
 
@@ -12,81 +12,85 @@ description: Installing ThingsBoard IoT Platform using Docker (Linux or Mac OS)
 * TOC
 {:toc}
 
-This guide will help you to install and start ThingsBoard using Docker on Linux or Mac OS.
+本指南将帮助您在Linux或Mac OS上使用Docker安装和启动ThingsBoard。
 
 
-## Prerequisites
+## 先决条件
 
 - [Install Docker CE](https://docs.docker.com/engine/installation/)
 
-## Running
+## 运行
 
-Depending on the database used there are three type of ThingsBoard single instance docker images:
+根据所使用的数据库有三种类型的ThingsBoard单实例docker映像：
 
-* [thingsboard/tb-postgres](https://hub.docker.com/r/thingsboard/tb-postgres/) - single instance of ThingsBoard with PostgreSQL database.
+* [thingsboard/tb-postgres](https://hub.docker.com/r/thingsboard/tb-postgres/) - ThingsBoard与PostgreSQL数据库的单实例
     
-    Recommended option for small servers with at least 1GB of RAM and minimum load (few messages per second). 2-4GB is recommended.
-* [thingsboard/tb-cassandra](https://hub.docker.com/r/thingsboard/tb-cassandra/) - single instance of ThingsBoard with Cassandra database. 
+    对于具有至少1GB内存的小型服务器的推荐选项。建议使用2-4GB。
+* [thingsboard/tb-cassandra](https://hub.docker.com/r/thingsboard/tb-cassandra/) - 具有Cassandra数据库的ThingsBoard的单个实例。
     
-    The most performant and recommended option but requires at least 4GB of RAM. 8GB is recommended.  
-* [thingsboard/tb](https://hub.docker.com/r/thingsboard/tb/) - single instance of ThingsBoard with embedded HSQLDB database. 
+    最高性能和推荐的选项，但至少需要4GB的RAM。建议使用8GB。
+* [thingsboard/tb](https://hub.docker.com/r/thingsboard/tb/) - 具有嵌入式HSQLDB数据库的ThingsBoard的单个实例。
     
-    **Note:** Not recommended for any evaluation or production usage and is used only for development purposes and automatic tests. 
+    **注意：** 不建议用于任何评估或生产用途，仅用于开发目的和自动测试。
 
-In this instruction `thingsboard/tb-postgres` image will be used. You can choose any other images with different databases (see above).
-Execute the following command to run this docker directly:
+在此说明中，将使用`thingsboard/tb-postgres`镜像。您可以选择其他具有不同数据库的镜像（请参见上文）。
+
+执行以下命令以直接运行docker：
 
 ``` 
 $ docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v ~/.mytb-data:/data -v ~/.mytb-logs:/var/log/thingsboard --name mytb --restart always thingsboard/tb-postgres
 ```
 
-Where: 
+说明: 
     
-- `docker run`              - run this container
-- `-it`                     - attach a terminal session with current ThingsBoard process output
-- `-p 9090:9090`            - connect local port 9090 to exposed internal HTTP port 9090
-- `-p 1883:1883`            - connect local port 1883 to exposed internal MQTT port 1883    
-- `-p 5683:5683`            - connect local port 5683 to exposed internal COAP port 5683 
-- `-v ~/.mytb-data:/data`   - mounts the host's dir `~/.mytb-data` to ThingsBoard DataBase data directory
-- `-v ~/.mytb-logs:/var/log/thingsboard`   - mounts the host's dir `~/.mytb-logs` to ThingsBoard logs directory
-- `--name mytb`             - friendly local name of this machine
-- `--restart always`        - automatically start ThingsBoard in case of system reboot and restart in case of failure.
-- `thingsboard/tb-postgres`          - docker image, can be also `thingsboard/tb-cassandra` or `thingsboard/tb`
+- `docker run`              - 运行容器
+- `-it`                     - 将终端会话与当前ThingsBoard进程输出连接
+- `-p 9090:9090`            - 将本地端口9090映射至HTTP端口9090
+- `-p 1883:1883`            - 将本地端口1883映射至MQTT端口1883    
+- `-p 5683:5683`            - 将本地端口5683映射至COAP端口5683 
+- `-v ~/.mytb-data:/data`   - 挂载`~/.mytb-data`目录为ThingsBoard数据目录
+- `-v ~/.mytb-logs:/var/log/thingsboard`   - 挂载`~/.mytb-logs`目录为ThingsBoard日志目录
+- `--name mytb`             - 本地别名
+- `--restart always`        - 系统重启或出现故障后自动启动ThingsBoard
+- `thingsboard/tb-postgres`          - docker镜像`thingsboard/tb-cassandra`或`thingsboard/tb`
     
-After executing this command you can open `http://{your-host-ip}:9090` in you browser (for ex. `http://localhost:9090`). You should see ThingsBoard login page.
-Use the following default credentials:
+执行完命令后您可以`http://{your-host-ip}:9090`在浏览器中打开(例如`http://localhost:9090`)。您应该看到ThingsBoard登录页面。
 
-- **Systen Administrator**: sysadmin@thingsboard.org / sysadmin
-- **Tenant Administrator**: tenant@thingsboard.org / tenant
-- **Customer User**: customer@thingsboard.org / customer
-    
-You can always change passwords for each account in account profile page.
+使用以下默认凭据：
 
-## Detaching, stop and start commands
+- **系统管理员**: sysadmin@thingsboard.org / sysadmin
+- **租户管理员**: tenant@thingsboard.org / tenant
+- **客户**: customer@thingsboard.org / customer
 
-You can detach from session terminal with `Ctrl-p` `Ctrl-q` - the container will keep running in the background.
+您始终可以在帐户详情页面中更改每个帐户的密码。
 
-To reattach to the terminal (to see ThingsBoard logs) run:
+## 分离、停止和启动
+
+您可以使用`Ctrl-p` `Ctrl-q` - 与会话终端分离-容器将继续在后台运行.
+
+要重新连接到终端（查看ThingsBoard日志），请运行:
+
+分离容器：
 
 ```
 $ docker attach mytb
 ```
 
-To stop the container:
+停止容器：
 
 ```
 $ docker stop mytb
 ```
 
-To start the container:
+启动容器：
 
 ```
 $ docker start mytb
 ```
 
-## Upgrading
+## 升级
 
-In order to update to the latest image, execute the following commands:
+为了更新到最新的镜像，请执行以下命令：:
 
 ```
 $ docker pull thingsboard/tb-postgres
@@ -96,24 +100,23 @@ $ docker rm mytb
 $ docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v ~/.mytb-data:/data -v ~/.mytb-logs:/var/log/thingsboard --name mytb --restart always thingsboard/tb-postgres
 ```
 
-**NOTE**: if you use different database change image name in all commands from `thingsboard/tb-postgres` to `thingsboard/tb-cassandra` or `thingsboard/tb` correspondingly.
+**注意**: 如果您使用不同的数据库，则在所有命令中将映像名称从更改为`thingsboard/tb-postgres` 至 `thingsboard/tb-cassandra` 或 `thingsboard/tb` correspondingly.
  
-**NOTE**: replace host's directory `~/.mytb-data` with directory used during container creation. 
+**注意**: 将主机的目录替换为`~/.mytb-data`容器创建期间使用的目录. 
 
-## Troubleshooting
+## 故障排除
 
-### DNS issues
+### DNS问题
 
-**Note** If you observe errors related to DNS issues, for example
+**注意** 如果您发现与DNS问题相关的错误，例如
 
 ```bash
 127.0.1.1:53: cannot unmarshal DNS message
 ```
 
-You may configure your system to use Google public DNS servers. 
-See corresponding [Linux](https://developers.google.com/speed/public-dns/docs/using#linux) and [Mac OS](https://developers.google.com/speed/public-dns/docs/using#mac_os) instructions.
+您可以将系统配置为使用Google公共DNS服务器。请参阅相应的[Linux](https://developers.google.com/speed/public-dns/docs/using#linux)和[Mac OS](https://developers.google.com/speed/public-dns/docs/using#mac_os)说明。
 
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/guides-banner.md %}

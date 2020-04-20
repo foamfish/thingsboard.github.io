@@ -1,5 +1,8 @@
-**Configure HAProxy to enable HTTPS**
+**配置HAProxy以启用HTTPS**
+**配置HAProxy以启用HTTPS**
 
-You may want to configure HTTPS access using HAProxy. 
-This is possible in case you are hosting ThingsBoard in the cloud and have a valid DNS name assigned to your instance.
-Please follow this [guide](/docs/user-guide/install/pe/add-haproxy-rhel) to install HAProxy and generate valid SSL certificate using Let's Encrypt.
+您可能要使用HAProxy配置HTTPS访问。
+
+如果您在云端托管ThingsBoard并为您的实例分配了有效的DNS名称，则可以这样做。
+
+请按照此[指南](/docs/user-guide/install/pe/add-haproxy-rhel)安装HAProxy并使用“让我们加密”生成有效的SSL证书。

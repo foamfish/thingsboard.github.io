@@ -1,4 +1,4 @@
-Instructions listed below will help you to install Cassandra.
+下面列出的说明将帮助您安装Cassandra。
 
 ```bash
 # Add cassandra repository

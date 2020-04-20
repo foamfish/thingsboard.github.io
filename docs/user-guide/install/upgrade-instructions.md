@@ -2,22 +2,20 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Upgrade instructions
-description: ThingsBoard IoT platform upgrade instructions
+title: 升级说明
+description: ThingsBoard升级说明
 
 ---
 
-<h3>In order to update ThingsBoard PE please follow <a style="pointer-events: all;" href="/docs/user-guide/install/pe/upgrade-instructions/">these instructions</a></h3>
-
 <ul id="markdown-toc">
   <li>
-    <a href="#upgrading-to-103" id="markdown-toc-upgrading-to-103">Upgrading to 1.0.3</a>
+    <a href="#upgrading-to-103" id="markdown-toc-upgrading-to-103">升级到1.0.3</a>
   </li>
   <li>
-    <a href="#upgrading-to-110" id="markdown-toc-upgrading-to-110">Upgrading to 1.1.0</a>
+    <a href="#upgrading-to-110" id="markdown-toc-upgrading-to-110">升级到1.1.0</a>
   </li>
   <li>
-    <a href="#upgrading-to-120" id="markdown-toc-upgrading-to-120">Upgrading to 1.2.0</a>
+    <a href="#upgrading-to-120" id="markdown-toc-upgrading-to-120">升级到1.2.0</a>
     <ul>
         <li>
             <a href="#ubuntucentos" id="markdown-toc-ubuntucentos">Ubuntu/CentOS</a>        
@@ -28,7 +26,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>
   <li>
-    <a href="#upgrading-to-121" id="markdown-toc-upgrading-to-121">Upgrading to 1.2.1</a>
+    <a href="#upgrading-to-121" id="markdown-toc-upgrading-to-121">升级到1.2.1</a>
     <ul>
         <li>
             <a href="#ubuntucentos-1" id="markdown-toc-ubuntucentos-1">Ubuntu/CentOS</a>        
@@ -39,7 +37,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>
   <li>
-    <a href="#upgrading-to-122" id="markdown-toc-upgrading-to-122">Upgrading to 1.2.2</a>
+    <a href="#upgrading-to-122" id="markdown-toc-upgrading-to-122">升级到1.2.2</a>
     <ul>
         <li>
             <a href="#ubuntucentos-2" id="markdown-toc-ubuntucentos-2">Ubuntu/CentOS</a>        
@@ -50,7 +48,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>
   <li>
-    <a href="#upgrading-to-123" id="markdown-toc-upgrading-to-123">Upgrading to 1.2.3</a>
+    <a href="#upgrading-to-123" id="markdown-toc-upgrading-to-123">升级到1.2.3</a>
     <ul>
         <li>
             <a href="#ubuntucentos-3" id="markdown-toc-ubuntucentos-3">Ubuntu/CentOS</a>        
@@ -61,7 +59,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>
   <li>
-    <a href="#upgrading-to-130" id="markdown-toc-upgrading-to-130">Upgrading to 1.3.0</a>
+    <a href="#upgrading-to-130" id="markdown-toc-upgrading-to-130">升级到1.3.0</a>
     <ul>
         <li>
             <a href="#ubuntucentos-4" id="markdown-toc-ubuntucentos-4">Ubuntu/CentOS</a>        
@@ -72,7 +70,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-131" id="markdown-toc-upgrading-to-131">Upgrading to 1.3.1</a>
+    <a href="#upgrading-to-131" id="markdown-toc-upgrading-to-131">升级到1.3.1</a>
     <ul>
         <li>
             <a href="#ubuntucentos-5" id="markdown-toc-ubuntucentos-5">Ubuntu/CentOS</a>        
@@ -83,7 +81,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-140" id="markdown-toc-upgrading-to-140">Upgrading to 1.4.0</a>
+    <a href="#upgrading-to-140" id="markdown-toc-upgrading-to-140">升级到1.4.0</a>
     <ul>
         <li>
             <a href="#ubuntucentos-6" id="markdown-toc-ubuntucentos-6">Ubuntu/CentOS</a>        
@@ -94,7 +92,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-200" id="markdown-toc-upgrading-to-200">Upgrading to 2.0.0</a>
+    <a href="#upgrading-to-200" id="markdown-toc-upgrading-to-200">升级到2.0.0</a>
     <ul>
         <li>
             <a href="#ubuntucentos-7" id="markdown-toc-ubuntucentos-7">Ubuntu/CentOS</a>        
@@ -105,7 +103,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-201" id="markdown-toc-upgrading-to-201">Upgrading to 2.0.1</a>
+    <a href="#upgrading-to-201" id="markdown-toc-upgrading-to-201">升级到2.0.1</a>
     <ul>
         <li>
             <a href="#ubuntucentos-8" id="markdown-toc-ubuntucentos-8">Ubuntu/CentOS</a>        
@@ -116,7 +114,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-202" id="markdown-toc-upgrading-to-202">Upgrading to 2.0.2</a>
+    <a href="#upgrading-to-202" id="markdown-toc-upgrading-to-202">升级到2.0.2</a>
     <ul>
         <li>
             <a href="#ubuntucentos-9" id="markdown-toc-ubuntucentos-9">Ubuntu/CentOS</a>        
@@ -127,7 +125,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-203" id="markdown-toc-upgrading-to-203">Upgrading to 2.0.3</a>
+    <a href="#upgrading-to-203" id="markdown-toc-upgrading-to-203">升级到2.0.3</a>
     <ul>
         <li>
             <a href="#ubuntucentos-10" id="markdown-toc-ubuntucentos-10">Ubuntu/CentOS</a>        
@@ -138,7 +136,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-210" id="markdown-toc-upgrading-to-210">Upgrading to 2.1.0</a>
+    <a href="#upgrading-to-210" id="markdown-toc-upgrading-to-210">升级到2.1.0</a>
     <ul>
         <li>
             <a href="#ubuntucentos-11" id="markdown-toc-ubuntucentos-11">Ubuntu/CentOS</a>        
@@ -149,7 +147,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-220" id="markdown-toc-upgrading-to-220">Upgrading to 2.2.0</a>
+    <a href="#upgrading-to-220" id="markdown-toc-upgrading-to-220">升级到2.2.0</a>
     <ul>
         <li>
             <a href="#ubuntucentos-12" id="markdown-toc-ubuntucentos-12">Ubuntu/CentOS</a>        
@@ -160,7 +158,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-230" id="markdown-toc-upgrading-to-230">Upgrading to 2.3.0</a>
+    <a href="#upgrading-to-230" id="markdown-toc-upgrading-to-230">升级到2.3.0</a>
     <ul>
         <li>
             <a href="#ubuntucentos-13" id="markdown-toc-ubuntucentos-13">Ubuntu/CentOS</a>        
@@ -171,7 +169,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-231" id="markdown-toc-upgrading-to-231">Upgrading to 2.3.1</a>
+    <a href="#upgrading-to-231" id="markdown-toc-upgrading-to-231">升级到2.3.1</a>
     <ul>
         <li>
             <a href="#ubuntucentos-14" id="markdown-toc-ubuntucentos-14">Ubuntu/CentOS</a>        
@@ -182,7 +180,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-240" id="markdown-toc-upgrading-to-240">Upgrading to 2.4.0</a>
+    <a href="#upgrading-to-240" id="markdown-toc-upgrading-to-240">升级到2.4.0</a>
     <ul>
         <li>
             <a href="#ubuntucentos-15" id="markdown-toc-ubuntucentos-15">Ubuntu/CentOS</a>        
@@ -193,7 +191,7 @@ description: ThingsBoard IoT platform upgrade instructions
     </ul>
   </li>  
   <li>
-    <a href="#upgrading-to-241" id="markdown-toc-upgrading-to-241">Upgrading to 2.4.1</a>
+    <a href="#upgrading-to-241" id="markdown-toc-upgrading-to-241">升级到2.4.1</a>
     <ul>
         <li>
             <a href="#ubuntucentos-16" id="markdown-toc-ubuntucentos-16">Ubuntu/CentOS</a>        
@@ -203,52 +201,30 @@ description: ThingsBoard IoT platform upgrade instructions
         </li>
     </ul>
   </li>  
-  <li>
-    <a href="#upgrading-to-2421" id="markdown-toc-upgrading-to-2421">Upgrading to 2.4.2.1</a>
-    <ul>
-        <li>
-            <a href="#ubuntucentos-17" id="markdown-toc-ubuntucentos-17">Ubuntu/CentOS</a>        
-        </li>
-        <li>
-            <a href="#windows-17" id="markdown-toc-windows-17">Windows</a>        
-        </li>
-    </ul>
-  </li>  
-  <li>
-    <a href="#upgrading-to-243" id="markdown-toc-upgrading-to-243">Upgrading to 2.4.3</a>
-    <ul>
-        <li>
-            <a href="#ubuntucentos-18" id="markdown-toc-ubuntucentos-18">Ubuntu/CentOS</a>        
-        </li>
-        <li>
-            <a href="#windows-18" id="markdown-toc-windows-18">Windows</a>        
-        </li>
-    </ul>
-  </li>
 </ul>
 
-## Upgrading to 1.0.3
+## 升级到1.0.3
 
-These steps are applicable for 1.0, 1.0.1 and 1.0.2 ThingsBoard versions.
+这些步骤适用于1.0、1.0.1和1.0.2 ThingsBoard版本。
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-1-0-3
 thingsboard-download-1-0-3-ubuntu,Ubuntu,shell,resources/1.0.3/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/1.0.3/thingsboard-ubuntu-download.sh
 thingsboard-download-1-0-3-centos,CentOS,shell,resources/1.0.3/thingsboard-centos-download.sh,/docs/user-guide/install/resources/1.0.3/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-1-0-3
 thingsboard-installation-1-0-3-ubuntu,Ubuntu,shell,resources/1.0.3/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/1.0.3/thingsboard-ubuntu-installation.sh
 thingsboard-installation-1-0-3-centos,CentOS,shell,resources/1.0.3/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/1.0.3/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### Database upgrade
+#### 数据库升级
 
-This step is required only if you are upgrading from 1.0 or 1.0.1 versions.
-Please use following instruction to update your single node instance:
+仅当从1.0或1.0.1版本升级时，才需要执行此步骤。
+请按照以下说明更新您的单节点实例：
 
 ```bash
 # Download upgrade scripts
@@ -261,33 +237,33 @@ $ ./upgrade_1.0_1.0.2.sh
 
 ``` 
   
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
 ```
 
-## Upgrading to 1.1.0
+## 升级到1.1.0
 
-These steps are applicable for 1.0.3 ThingsBoard version.
+这些步骤适用于1.0.3 ThingsBoard版本。
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-1-1-0
 thingsboard-download-1-1-0-ubuntu,Ubuntu,shell,resources/1.1.0/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/1.1.0/thingsboard-ubuntu-download.sh
 thingsboard-download-1-1-0-centos,CentOS,shell,resources/1.1.0/thingsboard-centos-download.sh,/docs/user-guide/install/resources/1.1.0/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-1-1-0
 thingsboard-installation-1-1-0-ubuntu,Ubuntu,shell,resources/1.1.0/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/1.1.0/thingsboard-ubuntu-installation.sh
 thingsboard-installation-1-1-0-centos,CentOS,shell,resources/1.1.0/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/1.1.0/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### Database upgrade
+#### 数据库升级
 
-Please use the following instruction to update your single node instance:
+请按照以下说明更新您的单节点实例：
 
 ```bash
 # Download upgrade scripts
@@ -300,33 +276,33 @@ $ ./upgrade_1.0.3_1.1.0.sh
 
 ``` 
   
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
 ```
 
-## Upgrading to 1.2.0
+## 升级到1.2.0
 
-These steps are applicable for 1.1.0 ThingsBoard version.
+这些步骤适用于1.1.0 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-1-2-0
 thingsboard-download-1-2-0-ubuntu,Ubuntu,shell,resources/1.2.0/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/1.2.0/thingsboard-ubuntu-download.sh
 thingsboard-download-1-2-0-centos,CentOS,shell,resources/1.2.0/thingsboard-centos-download.sh,/docs/user-guide/install/resources/1.2.0/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-1-2-0
 thingsboard-installation-1-2-0-ubuntu,Ubuntu,shell,resources/1.2.0/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/1.2.0/thingsboard-ubuntu-installation.sh
 thingsboard-installation-1-2-0-centos,CentOS,shell,resources/1.2.0/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/1.2.0/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### Database upgrade
+#### 数据库升级
 
 ```bash
 # Download upgrade scripts
@@ -339,7 +315,7 @@ $ ./upgrade_1.1.0_1.2.0.sh
 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -347,67 +323,67 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-1.2.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.2/thingsboard-windows-1.2.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-1.2.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.2/thingsboard-windows-1.2.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
-* Uninstall the previous version of ThingsBoard service by running **uninstall.bat** located in ThingsBoard install dir.
+* 对ThingsBoard安装目录中的旧版配置进行备份
+* 通过运行ThingsBoard安装目录中的**uninstall.bat**来卸载ThingsBoard服务的先前版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意** 上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>uninstall.bat
 ```
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Run **install.bat** script to install the new version of ThingsBoard as a Windows service.
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 运行** install.bat **脚本将新版本的ThingsBoard安装为Windows服务。
 
 ```text
 C:\thingsboard>install.bat
 ```
 
-#### Database upgrade
+#### 数据库升级
  
-* Download upgrade scripts to some folder:
+* 将升级脚本下载到某些文件夹：
   * [upgrade_1.1.0_1.2.0.bat](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.0/upgrade_1.1.0_1.2.0.bat)
   * [system_widgets.cql](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.0/system_widgets.cql)
-* Execute **upgrade_1.1.0_1.2.0.bat** (**NOTE** This script should be executed using Administrative Role)
+* 执行**upgrade_1.1.0_1.2.0.bat **（**注意**此脚本应使用管理角色执行）
 
 ```text
 upgrade_1.1.0_1.2.0.bat
 ```
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 1.2.1
+## 升级到1.2.1
 
-These steps are applicable for 1.2.0 ThingsBoard version.
+这些步骤适用于1.2.0 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-1-2-1
 thingsboard-download-1-2-1-ubuntu,Ubuntu,shell,resources/1.2.1/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/1.2.1/thingsboard-ubuntu-download.sh
 thingsboard-download-1-2-1-centos,CentOS,shell,resources/1.2.1/thingsboard-centos-download.sh,/docs/user-guide/install/resources/1.2.1/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-1-2-1
 thingsboard-installation-1-2-1-ubuntu,Ubuntu,shell,resources/1.2.1/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/1.2.1/thingsboard-ubuntu-installation.sh
 thingsboard-installation-1-2-1-centos,CentOS,shell,resources/1.2.1/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/1.2.1/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### Database upgrade
+#### 数据库升级
 
 ```bash
 # Download upgrade scripts
@@ -421,7 +397,7 @@ $ ./upgrade_1.2.0_1.2.1.sh
 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -429,32 +405,32 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-1.2.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.2.1/thingsboard-windows-1.2.1.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-1.2.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.2.1/thingsboard-windows-1.2.1.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
-* Uninstall the previous version of ThingsBoard service by running **uninstall.bat** located in ThingsBoard install dir.
+* 对ThingsBoard安装目录中的旧版配置进行备份
+* 通过运行ThingsBoard安装目录中的**uninstall.bat**来卸载ThingsBoard服务的先前版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意** 上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>uninstall.bat
 ```
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Run **install.bat** script to install the new version of ThingsBoard as a Windows service.
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 运行** install.bat **脚本将新版本的ThingsBoard安装为Windows服务。
 
 ```text
 C:\thingsboard>install.bat
 ```
 
-#### Database upgrade
+#### 数据库升级
  
-* Download upgrade scripts to some folder:
+* 将升级脚本下载到某些文件夹：
   * [upgrade_1.2.0_1.2.1.bat](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.1/upgrade_1.2.0_1.2.1.bat)
   * [schema_update.cql](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.1/schema_update.cql)
   * [system_widgets.cql](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.1/system_widgets.cql)
@@ -464,33 +440,33 @@ C:\thingsboard>install.bat
 upgrade_1.2.0_1.2.1.bat
 ```
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 1.2.2
+## 升级到1.2.2
 
-These steps are applicable for 1.2.1 ThingsBoard version.
+这些步骤适用于1.2.1 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-1-2-2
 thingsboard-download-1-2-2-ubuntu,Ubuntu,shell,resources/1.2.2/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/1.2.2/thingsboard-ubuntu-download.sh
 thingsboard-download-1-2-2-centos,CentOS,shell,resources/1.2.2/thingsboard-centos-download.sh,/docs/user-guide/install/resources/1.2.2/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-1-2-2
 thingsboard-installation-1-2-2-ubuntu,Ubuntu,shell,resources/1.2.2/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/1.2.2/thingsboard-ubuntu-installation.sh
 thingsboard-installation-1-2-2-centos,CentOS,shell,resources/1.2.2/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/1.2.2/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### Database upgrade
+#### 数据库升级
 
 ```bash
 # Download upgrade scripts
@@ -503,7 +479,7 @@ $ ./upgrade_1.2.1_1.2.2.sh
 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -511,32 +487,32 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-1.2.2.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.2.2/thingsboard-windows-1.2.2.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-1.2.2.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.2.2/thingsboard-windows-1.2.2.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
-* Uninstall the previous version of ThingsBoard service by running **uninstall.bat** located in ThingsBoard install dir.
+* 对ThingsBoard安装目录中的旧版配置进行备份
+* 通过运行ThingsBoard安装目录中的**uninstall.bat**来卸载ThingsBoard服务的先前版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意** 上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>uninstall.bat
 ```
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Run **install.bat** script to install the new version of ThingsBoard as a Windows service.
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 运行** install.bat **脚本将新版本的ThingsBoard安装为Windows服务。
 
 ```text
 C:\thingsboard>install.bat
 ```
 
-#### Database upgrade
+#### 数据库升级
  
-* Download upgrade scripts to some folder:
+* 将升级脚本下载到某些文件夹：
   * [upgrade_1.2.1_1.2.2.bat](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.2/upgrade_1.2.1_1.2.2.bat)
   * [system_widgets.cql](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.2/system_widgets.cql)
 * Execute **upgrade_1.2.1_1.2.2.bat** (**NOTE** This script should be executed using Administrative Role)
@@ -545,33 +521,33 @@ C:\thingsboard>install.bat
 upgrade_1.2.1_1.2.2.bat
 ```
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 1.2.3
+## 升级到1.2.3
 
 These steps are applicable for 1.2.2 ThingsBoard version.
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-1-2-3
 thingsboard-download-1-2-3-ubuntu,Ubuntu,shell,resources/1.2.3/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/1.2.3/thingsboard-ubuntu-download.sh
 thingsboard-download-1-2-3-centos,CentOS,shell,resources/1.2.3/thingsboard-centos-download.sh,/docs/user-guide/install/resources/1.2.3/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-1-2-3
 thingsboard-installation-1-2-3-ubuntu,Ubuntu,shell,resources/1.2.3/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/1.2.3/thingsboard-ubuntu-installation.sh
 thingsboard-installation-1-2-3-centos,CentOS,shell,resources/1.2.3/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/1.2.3/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### Database upgrade
+#### 数据库升级
 
 ```bash
 # Download upgrade scripts
@@ -585,7 +561,7 @@ $ ./upgrade_1.2.2_1.2.3.sh
 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -593,69 +569,69 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-1.2.3.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.2.3/thingsboard-windows-1.2.3.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-1.2.3.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.2.3/thingsboard-windows-1.2.3.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
-* Uninstall the previous version of ThingsBoard service by running **uninstall.bat** located in ThingsBoard install dir.
+* 对ThingsBoard安装目录中的旧版配置进行备份
+* 通过运行ThingsBoard安装目录中的**uninstall.bat**来卸载ThingsBoard服务的先前版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>uninstall.bat
 ```
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Run **install.bat** script to install the new version of ThingsBoard as a Windows service.
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 运行**install.bat**脚本将新版本的ThingsBoard安装为Windows服务。
 
 ```text
 C:\thingsboard>install.bat
 ```
 
-#### Database upgrade
+#### 数据库升级
  
-* Download upgrade scripts to some folder:
+* 将升级脚本下载到某些文件夹：
   * [upgrade_1.2.2_1.2.3.bat](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.3/upgrade_1.2.2_1.2.3.bat)
   * [schema_update.cql](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.3/schema_update.cql)
   * [system_widgets.cql](https://raw.githubusercontent.com/thingsboard/thingsboard.github.io/master/docs/user-guide/install/resources/1.2.3/system_widgets.cql)
-* Execute **upgrade_1.2.2_1.2.3.bat** (**NOTE** This script should be executed using Administrative Role)
+* 执行**upgrade_1.2.2_1.2.3.bat**（**注意**此脚本应使用管理角色执行）
 
 ```text
 upgrade_1.2.2_1.2.3.bat
 ```
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 1.3.0
+## 升级到1.3.0
 
-These steps are applicable for 1.2.3 ThingsBoard version.
+这些步骤适用于1.2.3 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-1-3-0
 thingsboard-download-1-3-0-ubuntu,Ubuntu,shell,resources/1.3.0/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/1.3.0/thingsboard-ubuntu-download.sh
 thingsboard-download-1-3-0-centos,CentOS,shell,resources/1.3.0/thingsboard-centos-download.sh,/docs/user-guide/install/resources/1.3.0/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-1-3-0
 thingsboard-installation-1-3-0-ubuntu,Ubuntu,shell,resources/1.3.0/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/1.3.0/thingsboard-ubuntu-installation.sh
 thingsboard-installation-1-3-0-centos,CentOS,shell,resources/1.3.0/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/1.3.0/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set database.type parameter value (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将database.type参数值(在文件 **/etc/thingsboard/conf/thingsboard.yml** )中设置为“cassandra”而不是“sql”，以便升级cassandra数据库：
  
 ```
 database:
@@ -667,7 +643,7 @@ database:
 $ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=1.2.3 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -675,65 +651,65 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-1.3.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.3/thingsboard-windows-1.3.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-1.3.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.3/thingsboard-windows-1.3.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行，则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set database.type parameter value (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库：
   
   ```
   database:
       type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
   ```       
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>upgrade.bat --fromVersion=1.2.3
 ```
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 1.3.1
+## 升级到1.3.1
 
-These steps are applicable for 1.3.0 ThingsBoard version.
+这些步骤适用于1.3.0 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-1-3-1
 thingsboard-download-1-3-1-ubuntu,Ubuntu,shell,resources/1.3.1/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/1.3.1/thingsboard-ubuntu-download.sh
 thingsboard-download-1-3-1-centos,CentOS,shell,resources/1.3.1/thingsboard-centos-download.sh,/docs/user-guide/install/resources/1.3.1/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-1-3-1
 thingsboard-installation-1-3-1-ubuntu,Ubuntu,shell,resources/1.3.1/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/1.3.1/thingsboard-ubuntu-installation.sh
 thingsboard-installation-1-3-1-centos,CentOS,shell,resources/1.3.1/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/1.3.1/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer may ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set database.type parameter value (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序可能会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将database.type参数值（在文件**/etc/thingsboard/conf/thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库：
  
 ```
 database:
@@ -745,7 +721,7 @@ database:
 $ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=1.3.0 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -753,65 +729,66 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-1.3.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.3.1/thingsboard-windows-1.3.1.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-1.3.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.3.1/thingsboard-windows-1.3.1.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
- 
+* 如果正在运行则停止ThingsBoard服务。
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
+
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set database.type parameter value (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
       type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
   ```       
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>upgrade.bat --fromVersion=1.3.0
 ```
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 1.4.0
+## 升级到1.4.0
 
-These steps are applicable for 1.3.1 ThingsBoard version.
+这些步骤适用于1.3.1 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-1-4-0
 thingsboard-download-1-4-0-ubuntu,Ubuntu,shell,resources/1.4.0/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/1.4.0/thingsboard-ubuntu-download.sh
 thingsboard-download-1-4-0-centos,CentOS,shell,resources/1.4.0/thingsboard-centos-download.sh,/docs/user-guide/install/resources/1.4.0/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-1-4-0
 thingsboard-installation-1-4-0-ubuntu,Ubuntu,shell,resources/1.4.0/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/1.4.0/thingsboard-ubuntu-installation.sh
 thingsboard-installation-1-4-0-centos,CentOS,shell,resources/1.4.0/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/1.4.0/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set database.type parameter value (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将database.type参数值(在文件 **/etc/thingsboard/conf/thingsboard.yml** )中设置为“cassandra”而不是“sql”，以便升级cassandra数据库：
  
 ```
 database:
@@ -823,7 +800,7 @@ database:
 $ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=1.3.1 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -831,67 +808,67 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-1.4.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.4/thingsboard-windows-1.4.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-1.4.zip](https://github.com/thingsboard/thingsboard/releases/download/v1.4/thingsboard-windows-1.4.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行，则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set database.type parameter value (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
       type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
   ```       
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>upgrade.bat --fromVersion=1.3.1
 ```
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.0.0
+## 升级到2.0.0
 
-These steps are applicable for 1.4.0 ThingsBoard version.
+这些步骤适用于1.4.0 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
 {% include templates/upgrade-to-20-notice.md %}
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-0-0
 thingsboard-download-2-0-0-ubuntu,Ubuntu,shell,resources/2.0.0/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.0.0/thingsboard-ubuntu-download.sh
 thingsboard-download-2-0-0-centos,CentOS,shell,resources/2.0.0/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.0.0/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-0-0
 thingsboard-installation-2-0-0-ubuntu,Ubuntu,shell,resources/2.0.0/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.0.0/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-0-0-centos,CentOS,shell,resources/2.0.0/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.0.0/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set database.type parameter value (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将database.type参数值(在文件 **/etc/thingsboard/conf/thingsboard.yml** )中设置为“cassandra”而不是“sql”，以便升级cassandra数据库：
  
 ```
 database:
@@ -903,7 +880,7 @@ database:
 $ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=1.4.0 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -913,72 +890,72 @@ $ sudo service thingsboard start
 
 {% include templates/upgrade-to-20-notice.md %}
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.0.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.0/thingsboard-windows-2.0.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.0.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.0/thingsboard-windows-2.0.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set database.type parameter value (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
       type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
   ```       
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>upgrade.bat --fromVersion=1.4.0
 ```
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.0.1
+## 升级到2.0.1
 
-These steps are applicable for 2.0.0 ThingsBoard version.
+这些步骤适用于2.0.0 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-0-1
 thingsboard-download-2-0-1-ubuntu,Ubuntu,shell,resources/2.0.1/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.0.1/thingsboard-ubuntu-download.sh
 thingsboard-download-2-0-1-centos,CentOS,shell,resources/2.0.1/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.0.1/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-0-1
 thingsboard-installation-2-0-1-ubuntu,Ubuntu,shell,resources/2.0.1/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.0.1/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-0-1-centos,CentOS,shell,resources/2.0.1/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.0.1/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set database.type parameter value (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将database.type参数值(在文件 **/etc/thingsboard/conf/thingsboard.yml** )中设置为“cassandra”而不是“sql”，以便升级cassandra数据库：
  
 ```
 database:
     type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
 ```       
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -986,65 +963,65 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.0.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.0.1/thingsboard-windows-2.0.1.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.0.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.0.1/thingsboard-windows-2.0.1.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set database.type parameter value (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
       type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
   ```       
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.0.2
+## 升级到2.0.2
 
-These steps are applicable for 2.0.1 ThingsBoard version.
+这些步骤适用于2.0.1 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-0-2
 thingsboard-download-2-0-2-ubuntu,Ubuntu,shell,resources/2.0.2/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.0.2/thingsboard-ubuntu-download.sh
 thingsboard-download-2-0-2-centos,CentOS,shell,resources/2.0.2/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.0.2/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-0-2
 thingsboard-installation-2-0-2-ubuntu,Ubuntu,shell,resources/2.0.2/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.0.2/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-0-2-centos,CentOS,shell,resources/2.0.2/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.0.2/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set database.type parameter value (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将database.type参数值(在文件 **/etc/thingsboard/conf/thingsboard.yml** )中设置为“cassandra”而不是“sql”，以便升级cassandra数据库：
  
 ```
 database:
     type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
 ```       
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -1052,65 +1029,65 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.0.2.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.0.2/thingsboard-windows-2.0.2.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.0.2.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.0.2/thingsboard-windows-2.0.2.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set database.type parameter value (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
       type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
   ```       
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.0.3
+## 升级到2.0.3
 
-These steps are applicable for 2.0.2 ThingsBoard version.
+这些步骤适用于2.0.2 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-0-3
 thingsboard-download-2-0-3-ubuntu,Ubuntu,shell,resources/2.0.3/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.0.3/thingsboard-ubuntu-download.sh
 thingsboard-download-2-0-3-centos,CentOS,shell,resources/2.0.3/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.0.3/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-0-3
 thingsboard-installation-2-0-3-ubuntu,Ubuntu,shell,resources/2.0.3/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.0.3/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-0-3-centos,CentOS,shell,resources/2.0.3/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.0.3/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set database.type parameter value (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将database.type参数值(在文件 **/etc/thingsboard/conf/thingsboard.yml** )中设置为“cassandra”而不是“sql”，以便升级cassandra数据库：
  
 ```
 database:
     type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
 ```       
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -1118,65 +1095,65 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.0.3.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.0.3/thingsboard-windows-2.0.3.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.0.3.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.0.3/thingsboard-windows-2.0.3.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set database.type parameter value (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
       type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
   ```       
   
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.1.0
+## 升级到2.1.0
 
-These steps are applicable for 2.0.3 ThingsBoard version.
+这些步骤适用于2.0.3 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-1-0
 thingsboard-download-2-1-0-ubuntu,Ubuntu,shell,resources/2.1.0/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.1.0/thingsboard-ubuntu-download.sh
 thingsboard-download-2-1-0-centos,CentOS,shell,resources/2.1.0/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.1.0/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-1-0
 thingsboard-installation-2-1-0-ubuntu,Ubuntu,shell,resources/2.1.0/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.1.0/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-1-0-centos,CentOS,shell,resources/2.1.0/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.1.0/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set database.type parameter value (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将database.type参数值(在文件 **/etc/thingsboard/conf/thingsboard.yml** )中设置为“cassandra”而不是“sql”，以便升级cassandra数据库：
  
 ```
 database:
     type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
 ```       
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -1184,58 +1161,58 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.1/thingsboard-windows-2.1.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.1/thingsboard-windows-2.1.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set database.type parameter value (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
       type: "${DATABASE_TYPE:cassandra}" # cassandra OR sql
   ```       
 
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.2.0
+## 升级到2.2.0
 
-These steps are applicable for 2.1.0, 2.1.1, 2.1.2 and 2.1.3 ThingsBoard versions.
+这些步骤适用于2.1.0、2.1.1、2.1.2和2.1.3ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-2-0
 thingsboard-download-2-2-0-ubuntu,Ubuntu,shell,resources/2.2.0/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.2.0/thingsboard-ubuntu-download.sh
 thingsboard-download-2-2-0-centos,CentOS,shell,resources/2.2.0/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.2.0/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-2-0
 thingsboard-installation-2-2-0-ubuntu,Ubuntu,shell,resources/2.2.0/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.2.0/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-2-0-centos,CentOS,shell,resources/2.2.0/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.2.0/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将**database.entities.type**和**database.ts.type**参数值（在文件 **/etc/thingsboard/conf/thingsboard.yml** 中）设置为“cassandra”而不是“sql”来升级您的cassandra数据库：
  
 ```
     database:
@@ -1250,7 +1227,7 @@ Please make sure that you set **database.entities.type** and **database.ts.type*
 $ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=2.0.0 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -1258,24 +1235,24 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.2.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.2/thingsboard-windows-2.2.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.2.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.2/thingsboard-windows-2.2.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
@@ -1285,42 +1262,42 @@ net stop thingsboard
       type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
   ```       
 
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>upgrade.bat --fromVersion=2.0.0
 ```
 
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.3.0
+## 升级到2.3.0
 
-These steps are applicable for 2.2.0 ThingsBoard version.
+这些步骤适用于2.2.0 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-3-0
 thingsboard-download-2-3-0-ubuntu,Ubuntu,shell,resources/2.3.0/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.3.0/thingsboard-ubuntu-download.sh
 thingsboard-download-2-3-0-centos,CentOS,shell,resources/2.3.0/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.3.0/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-3-0
 thingsboard-installation-2-3-0-ubuntu,Ubuntu,shell,resources/2.3.0/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.3.0/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-3-0-centos,CentOS,shell,resources/2.3.0/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.3.0/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将**database.entities.type**和**database.ts.type**参数值（在文件 **/etc/thingsboard/conf/thingsboard.yml** 中）设置为“cassandra”而不是“sql”来升级您的cassandra数据库：
  
 ```
     database:
@@ -1335,7 +1312,7 @@ Please make sure that you set **database.entities.type** and **database.ts.type*
 $ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=2.2.0 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -1343,24 +1320,24 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.3.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.3/thingsboard-windows-2.3.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.3.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.3/thingsboard-windows-2.3.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
@@ -1370,42 +1347,43 @@ net stop thingsboard
       type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
   ```       
 
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>upgrade.bat --fromVersion=2.2.0
 ```
 
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.3.1
+## 升级到2.3.1
 
-These steps are applicable for 2.3.0 ThingsBoard version.
+这些步骤适用于2.3.0 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-3-1
 thingsboard-download-2-3-1-ubuntu,Ubuntu,shell,resources/2.3.1/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.3.1/thingsboard-ubuntu-download.sh
 thingsboard-download-2-3-1-centos,CentOS,shell,resources/2.3.1/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.3.1/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-3-1
 thingsboard-installation-2-3-1-ubuntu,Ubuntu,shell,resources/2.3.1/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.3.1/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-3-1-centos,CentOS,shell,resources/2.3.1/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.3.1/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将**database.entities.type**和**database.ts.type**参数值（在文件 **/etc/thingsboard/conf/thingsboard.yml** 中）设置为“cassandra”而不是“sql”来升级您的cassandra数据库：
+
  
 ```
     database:
@@ -1420,7 +1398,7 @@ Please make sure that you set **database.entities.type** and **database.ts.type*
 $ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=2.3.0 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -1428,24 +1406,24 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.3.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.3.1/thingsboard-windows-2.3.1.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.3.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.3.1/thingsboard-windows-2.3.1.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
@@ -1455,43 +1433,43 @@ net stop thingsboard
       type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
   ```       
 
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>upgrade.bat --fromVersion=2.3.0
 ```
 
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
 
-## Upgrading to 2.4.0
+## 升级到2.4.0
 
-These steps are applicable for 2.3.1 ThingsBoard version.
+这些步骤适用于2.3.1 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-4-0
 thingsboard-download-2-4-0-ubuntu,Ubuntu,shell,resources/2.4.0/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.4.0/thingsboard-ubuntu-download.sh
 thingsboard-download-2-4-0-centos,CentOS,shell,resources/2.4.0/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.4.0/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-4-0
 thingsboard-installation-2-4-0-ubuntu,Ubuntu,shell,resources/2.4.0/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.4.0/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-4-0-centos,CentOS,shell,resources/2.4.0/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.4.0/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将**database.entities.type**和**database.ts.type**参数值（在文件 **/etc/thingsboard/conf/thingsboard.yml** 中）设置为“cassandra”而不是“sql”来升级您的cassandra数据库：
  
 ```
     database:
@@ -1506,7 +1484,7 @@ Please make sure that you set **database.entities.type** and **database.ts.type*
 $ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=2.3.1 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -1514,24 +1492,24 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.4.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.4/thingsboard-windows-2.4.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.4.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.4/thingsboard-windows-2.4.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
@@ -1541,42 +1519,42 @@ net stop thingsboard
       type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
   ```       
 
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>upgrade.bat --fromVersion=2.3.1
 ```
 
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.4.1
+## 升级到2.4.1
 
-These steps are applicable for 2.4.0 ThingsBoard version.
+这些步骤适用于2.4.0 ThingsBoard版本。
 
 ### Ubuntu/CentOS
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
 {% capture tabspec %}thingsboard-download-2-4-1
 thingsboard-download-2-4-1-ubuntu,Ubuntu,shell,resources/2.4.1/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.4.1/thingsboard-ubuntu-download.sh
 thingsboard-download-2-4-1-centos,CentOS,shell,resources/2.4.1/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.4.1/thingsboard-centos-download.sh{% endcapture %}  
 {% include tabs.html %}
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
 {% capture tabspec %}thingsboard-installation-2-4-1
 thingsboard-installation-2-4-1-ubuntu,Ubuntu,shell,resources/2.4.1/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.4.1/thingsboard-ubuntu-installation.sh
 thingsboard-installation-2-4-1-centos,CentOS,shell,resources/2.4.1/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.4.1/thingsboard-centos-installation.sh{% endcapture %}  
 {% include tabs.html %}
 
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+**注意：**软件包安装程序会要求您合并您的Thingsboard配置。最好使用**合并选项**以确保您之前的所有参数都不会被覆盖。
+请确保将**database.entities.type**和**database.ts.type**参数值（在文件 **/etc/thingsboard/conf/thingsboard.yml** 中）设置为“cassandra”而不是“sql”来升级您的cassandra数据库：
  
 ```
     database:
@@ -1591,7 +1569,7 @@ Please make sure that you set **database.entities.type** and **database.ts.type*
 $ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=2.4.0 
 ```
 
-#### Start the service
+#### 启动服务
 
 ```bash
 $ sudo service thingsboard start
@@ -1599,24 +1577,24 @@ $ sudo service thingsboard start
 
 ### Windows
 
-#### ThingsBoard package download
+#### ThingsBoard软件包下载
 
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.4.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.4.1/thingsboard-windows-2.4.1.zip).
+下载适用于Windows的ThingsBoard安装包: [thingsboard-windows-2.4.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.4.1/thingsboard-windows-2.4.1.zip).
 
-#### ThingsBoard service upgrade
+#### ThingsBoard服务升级
 
-* Stop ThingsBoard service if it is running.
+* 如果正在运行则停止ThingsBoard服务。
  
 ```text
 net stop thingsboard
 ```
 
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
+* 对ThingsBoard安装目录中的旧版配置进行备份
 
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
+* 删除ThingsBoard安装目录。
+* 将安装档案解压缩到ThingsBoard安装目录。
+* 将旧的ThingsBoard配置文件（来自第一步中的备份）与新的进行比较。
+* 请确保将database.type参数值（在文件**\<ThingsBoard install dir\>\conf\thingsboard.yml**中）设置为“cassandra”而不是“sql”，以便升级cassandra数据库
   
   ```
   database:
@@ -1626,190 +1604,20 @@ net stop thingsboard
       type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
   ```       
 
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
+* 运行**upgrade.bat**脚本将ThingsBoard升级到新版本。
 
-**NOTE** Scripts listed above should be executed using Administrator Role.
+**注意**上面列出的脚本应使用管理员角色执行。
 
 ```text
 C:\thingsboard>upgrade.bat --fromVersion=2.4.0
 ```
 
-#### Start the service
+#### 启动服务
 
 ```text
 net start thingsboard
 ```
 
-## Upgrading to 2.4.2.1
-
-These steps are applicable for 2.4.1 and 2.4.2 ThingsBoard versions.
-
-### Ubuntu/CentOS
-
-#### ThingsBoard package download
-
-{% capture tabspec %}thingsboard-download-2-4-2
-thingsboard-download-2-4-2-ubuntu,Ubuntu,shell,resources/2.4.2.1/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.4.2.1/thingsboard-ubuntu-download.sh
-thingsboard-download-2-4-2-centos,CentOS,shell,resources/2.4.2.1/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.4.2.1/thingsboard-centos-download.sh{% endcapture %}  
-{% include tabs.html %}
-
-#### ThingsBoard service upgrade
-
-{% capture tabspec %}thingsboard-installation-2-4-2
-thingsboard-installation-2-4-2-ubuntu,Ubuntu,shell,resources/2.4.2.1/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.4.2.1/thingsboard-ubuntu-installation.sh
-thingsboard-installation-2-4-2-centos,CentOS,shell,resources/2.4.2.1/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.4.2.1/thingsboard-centos-installation.sh{% endcapture %}  
-{% include tabs.html %}
-
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
- 
-```
-    database:
-      entities:
-        type: "${DATABASE_ENTITIES_TYPE:cassandra}" # cassandra OR sql
-      ts:
-        type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
-```
-
-```bash
-# Execute upgrade script
-$ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=2.4.1 
-```
-
-#### Start the service
-
-```bash
-$ sudo service thingsboard start
-```
-
-### Windows
-
-#### ThingsBoard package download
-
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.4.2.1.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.4.2.1/thingsboard-windows-2.4.2.1.zip).
-
-#### ThingsBoard service upgrade
-
-* Stop ThingsBoard service if it is running.
- 
-```text
-net stop thingsboard
-```
-
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
-
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
-  
-  ```
-  database:
-    entities:
-      type: "${DATABASE_ENTITIES_TYPE:cassandra}" # cassandra OR sql
-    ts:
-      type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
-  ```       
-
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
-
-**NOTE** Scripts listed above should be executed using Administrator Role.
-
-```text
-C:\thingsboard>upgrade.bat --fromVersion=2.4.1
-```
-
-#### Start the service
-
-```text
-net start thingsboard
-```
-
-## Upgrading to 2.4.3
-
-These steps are applicable for 2.4.2 and 2.4.2.1 ThingsBoard versions.
-
-### Ubuntu/CentOS
-
-#### ThingsBoard package download
-
-{% capture tabspec %}thingsboard-download-2-4-3
-thingsboard-download-2-4-3-ubuntu,Ubuntu,shell,resources/2.4.3/thingsboard-ubuntu-download.sh,/docs/user-guide/install/resources/2.4.3/thingsboard-ubuntu-download.sh
-thingsboard-download-2-4-3-centos,CentOS,shell,resources/2.4.3/thingsboard-centos-download.sh,/docs/user-guide/install/resources/2.4.3/thingsboard-centos-download.sh{% endcapture %}  
-{% include tabs.html %}
-
-#### ThingsBoard service upgrade
-
-{% capture tabspec %}thingsboard-installation-2-4-3
-thingsboard-installation-2-4-3-ubuntu,Ubuntu,shell,resources/2.4.3/thingsboard-ubuntu-installation.sh,/docs/user-guide/install/resources/2.4.3/thingsboard-ubuntu-installation.sh
-thingsboard-installation-2-4-3-centos,CentOS,shell,resources/2.4.3/thingsboard-centos-installation.sh,/docs/user-guide/install/resources/2.4.3/thingsboard-centos-installation.sh{% endcapture %}  
-{% include tabs.html %}
-
-**NOTE:** Package installer will ask you to merge your thingsboard configuration. It is preferred to use **merge option** to make sure that all your previous parameters will not be overwritten.  
-Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **/etc/thingsboard/conf/thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
- 
-```
-    database:
-      entities:
-        type: "${DATABASE_ENTITIES_TYPE:cassandra}" # cassandra OR sql
-      ts:
-        type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
-```
-
-```bash
-# Execute upgrade script
-$ sudo /usr/share/thingsboard/bin/install/upgrade.sh --fromVersion=2.4.2
-```
-
-#### Start the service
-
-```bash
-$ sudo service thingsboard start
-```
-
-### Windows
-
-#### ThingsBoard package download
-
-Download ThingsBoard installation archive for Windows: [thingsboard-windows-2.4.3.zip](https://github.com/thingsboard/thingsboard/releases/download/v2.4.3/thingsboard-windows-2.4.3.zip).
-
-#### ThingsBoard service upgrade
-
-* Stop ThingsBoard service if it is running.
- 
-```text
-net stop thingsboard
-```
-
-* Make a backup of previous ThingsBoard configuration located in \<ThingsBoard install dir\>\conf (for ex. C:\thingsboard\conf).
-
-* Remove ThingsBoard install dir.
-* Unzip installation archive to ThingsBoard install dir.
-* Compare your old ThingsBoard configuration files (from the backup you made in the first step) with new ones.
-* Please make sure that you set **database.entities.type** and **database.ts.type** parameters values (in the file **\<ThingsBoard install dir\>\conf\thingsboard.yml**) to "cassandra" instead of "sql" in order to upgrade your cassandra database:
-  
-  ```
-  database:
-    entities:
-      type: "${DATABASE_ENTITIES_TYPE:cassandra}" # cassandra OR sql
-    ts:
-      type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
-  ```       
-
-* Run **upgrade.bat** script to upgrade ThingsBoard to the new version.
-
-**NOTE** Scripts listed above should be executed using Administrator Role.
-
-```text
-C:\thingsboard>upgrade.bat --fromVersion=2.4.2
-```
-
-#### Start the service
-
-```text
-net start thingsboard
-```
-
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/guides-banner.md %}

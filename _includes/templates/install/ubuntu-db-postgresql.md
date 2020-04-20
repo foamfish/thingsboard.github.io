@@ -1,25 +1,26 @@
 {% capture postgresql-info %}
-ThingsBoard team recommends to use PostgreSQL for development and production environments with reasonable load (< 5000 msg/sec).
-Many cloud vendors support managed PostgreSQL servers which is a cost-effective solution for most of ThingsBoard instances.
+将PostgreSQL用于开发和生产环境ThingsBoard团队建议load(< 5000 msg/sec)。
+
+许多云服务商都支持托管的PostgreSQL服务器这对于ThingsBoard实例而言都是一种经济高效的解决方案。
 {% endcapture %}
 {% include templates/info-banner.md content=postgresql-info %}
 
-##### PostgreSQL Installation
+##### PostgreSQL安装
 
 {% include templates/install/postgres-install-ubuntu.md %}
 
 {% include templates/install/create-tb-db.md %}
 
-##### ThingsBoard Configuration
+##### ThingsBoard配置
 
-Edit ThingsBoard configuration file 
+编辑ThingsBoard配置文件
 
 ```bash 
 sudo nano /etc/thingsboard/conf/thingsboard.conf
 ``` 
 {: .copy-code}
 
-Add the following lines to the configuration file. Don't forget **to replace** "PUT_YOUR_POSTGRESQL_PASSWORD_HERE" with your **real postgres user password**:
+将“PUT_YOUR_POSTGRESQL_PASSWORD_HERE”替换postgres用户真实密码
 
 ```bash
 # DB Configuration 

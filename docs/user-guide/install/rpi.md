@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Installing ThingsBoard on Raspberry Pi 3 Model B
-description: Installing ThingsBoard IoT Platform on Raspberry Pi 3 Model B
+title: 在树莓派3代B上安装ThingsBoard
+description: 在树莓派3代B上安装ThingsBoard
 
 ---
 
@@ -12,43 +12,43 @@ description: Installing ThingsBoard IoT Platform on Raspberry Pi 3 Model B
 * TOC
 {:toc}
 
-This guide describes how to install ThingsBoard on a Raspberry Pi 3 running Raspbian Buster.
+本指南介绍了如何在运行树莓派3代B上安装ThingsBoard。
 
-### Third-party components installation
+### 第三方组件安装
 
-### Step 1. Install Java 8 (OpenJDK) 
+### 步骤1.安装Java 8(OpenJDK) 
 
 {% include templates/install/ubuntu-java-install.md %}
 
-### Step 2. ThingsBoard service installation
+### 步骤2.ThingsBoard服务安装
 
-Download installation package.
+下载安装包
 
 ```bash
-wget https://github.com/thingsboard/thingsboard/releases/download/v2.4.3/thingsboard-2.4.3.deb
+wget https://github.com/thingsboard/thingsboard/releases/download/v2.4.1/thingsboard-2.4.1.deb
 ```
 {: .copy-code}
 
-Install ThingsBoard as a service
+安装ThingsBoard服务
 
 ```bash
-sudo dpkg -i thingsboard-2.4.3.deb
+sudo dpkg -i thingsboard-2.4.1.deb
 ```
 {: .copy-code}
 
-### Step 3. Configure ThingsBoard database
+### 步骤3.配置ThingsBoard数据库
 
 {% include templates/install/ubuntu-db-postgresql.md %}
 
-### Step 4. Memory update for slow machines (1GB of RAM) 
+### 步骤4.低性能电脑内存修改(1GB RAM)
 
 {% include templates/install/memory-on-slow-machines.md %} 
 
-### Step 5. Run installation script
+### 步骤5.运行安装脚本
 {% include templates/run-install.md %} 
 
 
-### Step 6. Start ThingsBoard service
+### 步骤6.启动ThingsBoard服务
 
 {% include templates/start-service.md %}
 
@@ -56,10 +56,10 @@ sudo dpkg -i thingsboard-2.4.3.deb
 Please allow up to 240 seconds for the Web UI to start. This is applicable only for slow machines with 1-2 CPUs or 1-2 GB RAM.{% endcapture %}
 {% include templates/info-banner.md content=90-sec-ui %}
 
-### Troubleshooting
+### 故障排除
 
 {% include templates/install/troubleshooting.md %}
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/guides-banner.md %}

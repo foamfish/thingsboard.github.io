@@ -1,27 +1,31 @@
 {% capture postgresql-info %}
-ThingsBoard team recommends to use PostgreSQL for development and production environments with reasonable load (< 5000 msg/sec).
-Many cloud vendors support managed PostgreSQL servers which is a cost-effective solution for most of ThingsBoard instances.
+将PostgreSQL用于开发和生产环境ThingsBoard团队建议load(< 5000 msg/sec)。
+
+许多云服务商都支持托管的PostgreSQL服务器这对于ThingsBoard实例而言都是一种经济高效的解决方案。
 {% endcapture %}
 {% include templates/info-banner.md content=postgresql-info %}
 
-##### PostgreSQL Installation
+##### PostgreSQL安装
 
-Download the installation file (PostgreSQL 9.6+ or newer releases) [here](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows) and follow the installation instructions.
+下载安装文件(PostgreSQL 9.6+或更高版本[此处](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)并按照安装说明进行操作。
 
-During PostgreSQL installation, you will be prompted for superuser (postgres) password.
-Don't forget this password. It will be used later. For simplicity, we will substitute it with "postgres".
+在PostgreSQL安装时系统将提示您输入超级用户(postgres)密码。
 
-##### Create ThingsBoard Database
+请一定牢记此密码，为了方便记忆我们将密码替换为postgres。
 
-Once installed, launch the "pgAdmin" software and login as superuser (postgres). 
-Open your server and create database "thingsboard" with owner "postgres".
+##### 创建ThingsBoard数据库
 
-##### ThingsBoard Configuration
+安装成功后启动“pgAdmin”并使用超级用户(postgres)身份登录。
 
-In case you have specified the PostgreSQL superuser password as "postgres", you can skip this step. 
+打开服务器并用“postgres”用户创建数据库“thingsboard”。
 
-Open the Notepad or other editor as administrator user (right click on the app icon and select "Run as administrator").  
-Open the following file for editing (select "All Files" instead of "Text Documents" in file choosing dialog, the encoding is UTF-8):
+##### ThingsBoard配置
+
+如果您已将PostgreSQL超级用户密码指定为"postgres"，则可以跳过此步骤。
+
+以管理员用户身份打开记事本或其他编辑器（右键单击应用程序图标，然后选择“以管理员身份运行”）。
+
+打开以下文件进行编辑（在文件选择对话框中选择“所有文件”而不是“文本文档”，编码为UTF-8）：
 
 ```text 
 C:\Program Files (x86)\thingsboard\conf\thingsboard.yml
@@ -29,7 +33,7 @@ C:\Program Files (x86)\thingsboard\conf\thingsboard.yml
 {: .copy-code}
 
 
-and locate "# SQL DAO Configuration" block. Don't forget to replace "postgres" with your real postgres user password:
+找到"SQL DAO Configuration"代码块将postgres用户密码替换"postgres"：
 
 ```yml
 # SQL DAO Configuration

@@ -1,4 +1,4 @@
-Instructions listed below will help you to install PostgreSQL.
+下面列出的说明将帮助您安装PostgreSQL。
 
 ```bash
 # Update your system

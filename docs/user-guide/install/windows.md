@@ -2,8 +2,8 @@
 layout: docwithnav
 assignees:
 - ikulikov
-title: Installing ThingsBoard on Windows
-description: Installing ThingsBoard on Windows
+title: 在Windows上安装ThingsBoard
+description: 在Windows上安装ThingsBoard
 
 ---
 
@@ -12,51 +12,58 @@ description: Installing ThingsBoard on Windows
 * TOC
 {:toc}
 
-### Prerequisites
+### 先决条件
 
-This guide describes how to install ThingsBoard on a Windows machine.
-Instructions below are provided for Windows 10/8.1/8/7 32-bit/64-bit. 
-Hardware requirements depend on chosen database and amount of devices connected to the system. 
-To run ThingsBoard and PostgreSQL on a single machine you will need at least 2Gb of RAM.
-To run ThingsBoard and Cassandra on a single machine you will need at least 8Gb of RAM.
+本指南介绍了如何在Windows计算机上安装ThingsBoard。
 
-### Step 1. Install Java 8 (OpenJDK) 
+以下说明适用于Windows10/8.1/8/7 32位/64位。
+
+硬件要求取决于选择的数据库和连接到系统的设备数量。
+
+一台PC机运行ThingsBoard和PostgreSQL要求最低内存配置2Gb。
+
+一台PC机运行ThingsBoard和Cassandra要求最低内存配置8Gb。
+
+### 步骤1.安装Java 8(OpenJDK)
 
 {% include templates/install/windows-java-install.md %}
 
-### Step 2. ThingsBoard service installation
+### 步骤2.ThingsBoard服务安装
 
-Download and extract the package.
+下载并解压缩软件包。
 
 ```bash
-https://github.com/thingsboard/thingsboard/releases/download/v2.4.3/thingsboard-windows-2.4.3.zip
+https://github.com/thingsboard/thingsboard/releases/download/v2.4.1/thingsboard-windows-2.4.1.zip
 ```
 {: .copy-code}
 
-**Note:** We assume you have extracted ThingsBoard package to default location: *C:\Program Files (x86)\thingsboard*  
+**注意：** 我们假设您已将ThingsBoard软件包解压缩到默认位置:*C:\Program Files (x86)\thingsboard*
 
-### Step 3. Configure ThingsBoard database
+### 步骤3.配置ThingsBoard数据库
 
 {% include templates/install/install-db.md %}
 
 {% capture contenttogglespec %}
-PostgreSQL <small>(recommended for < 5K msg/sec)</small>%,%postgresql%,%templates/install/windows-db-postgresql.md%br%
-Hybrid <br/>PostgreSQL+Cassandra<br/><small>(recommended for > 5K msg/sec)</small>%,%hybrid%,%templates/install/windows-db-hybrid.md{% endcapture %}
+PostgreSQL <small>(建议 < 5K msg/sec)</small>%,%postgresql%,%templates/install/windows-db-postgresql.md%br%
+Hybrid <br/>PostgreSQL+Cassandra<br/><small>(建议 > 5K msg/sec)</small>%,%hybrid%,%templates/install/windows-db-hybrid.md{% endcapture %}
 
 {% include content-toggle.html content-toggle-id="ubuntuThingsboardDatabase" toggle-spec=contenttogglespec %} 
 
-### Step 4. [Optional] Memory update for slow machines (1GB of RAM) 
+### 步骤4. [可选]低性能电脑内存修改(1GB RAM)
 
 {% include templates/install/windows-memory-on-slow-machines.md %} 
 
-### Step 5. Run installation script
+### 步骤5.运行安装脚本
 
-Launch windows shell (Command Prompt) as Administrator. Change directory to your ThingsBoard installation directory.
+以管理员身份启动Windows Shell（命令提示符）。将目录更改为ThingsBoard安装目录。
 
-Execute **install.bat** script to install ThingsBoard as a Windows service (or run **"install.bat --loadDemo"** to install and add demo data).
-This means it will be automatically started on system startup. 
-Similar, **uninstall.bat** will remove ThingsBoard from Windows services.
-The output should be similar to this one:
+执行**install.bat**脚本以将ThingsBoard作为Windows服务安装（或运行**“install.bat--loadDemo”**以安装和添加演示数据）。
+
+这意味着它将在系统启动时自动启动。
+
+执行**uninstall.bat**将从Windows服务中删除ThingsBoard。
+
+输出执行结果：
   
   ```text
 C:\Program Files (x86)\thingsboard>install.bat --loadDemo
@@ -68,7 +75,7 @@ Installing thingsboard ...
 ThingsBoard installed successfully!
 ```
 
-### Step 6. Start ThingsBoard service
+### 步骤6.启动ThingsBoard服务
 
 {% include templates/windows-start-service.md %}
 
@@ -77,58 +84,58 @@ Please allow up to 90 seconds for the Web UI to start. This is applicable only f
 {% include templates/info-banner.md content=90-sec-ui %}
 
 
-### Troubleshooting
+### 故障排除
 
-The log files are located in **logs** folder ("C:\Program Files (x86)\thingsboard\logs" in our case).
+日志文件位于**logs**文件夹中（在本例中为"C:\Program Files (x86)\thingsboard\logs"）。
 
-The **thingsboard.log** file should contain following line:
+**thingsboard.log**文件应包含以下行：
 
 ```text
 YYYY-MM-DD HH:mm:ss,sss [main] INFO  o.t.s.ThingsboardServerApplication - Started ThingsboardServerApplication in x.xxx seconds (JVM running for x.xxx)
 
 ```
 
-In case of any unclear errors, use general [troubleshooting guide](/docs/user-guide/troubleshooting/#getting-help) or [contact us](/docs/contact-us/).
+如果有任何不清楚的错误，请使用常规的[故障排除指南](/docs/user-guide/troubleshooting/#getting-help)或[联系我们](/docs/contact-us/)。
 
-### Windows firewall settings
+### Windows防火墙设置
 
-In order to have external access to ThingsBoard Web UI and device connectivity (HTTP, MQTT, CoAP)
-you need to create a new inbound rule with Windows Firewall with Advanced Security.
+允许外部访问ThingsBoard Web UI和设备连接(HTTP, MQTT, CoAP)
+您需要使用具有高级安全性的Windows防火墙创建新的入站规则。
  
-- Open "Windows Firewall" from "Control Panel":
+- 从“控制面板”中打开“Windows防火墙”：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-1.png)
 
-- Click "Advanced settings" on the left panel:
+- 点击左侧面板上的“高级设置”：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-2.png)
 
-- Select "Inbound Rules" on the left panel, then click "New Rule..." on the right "Actions" panel:
+- 在左侧面板上选择“入站规则”，然后在右侧“操作”面板上单击“新建规则...”：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-3.png)
 
-- Now new "New Inbound Rule Wizard" window will open. On the first step "Rule Type" select "Port" option: 
+- 现在将打开新的“新建入站规则向导”窗口。在第一步“规则类型”中选择“端口”选项：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-4.png)
 
-- On the "Protocol and Ports" step select "TCP" protocol and enter port list **8080, 1883, 5683** in the "Specific local ports" field:
+- 在“协议和端口”步骤中选择“TCP”协议然后在“特定本地端口”字段中输入端口列表**8080、1883、5683**：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-5.png)
 
-- On the "Action" step leave "Allow the connection" option selected:
+- 在“操作”步骤中，选择“允许连接”选项：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-6.png)
 
-- On the "Profile" step select Windows network profiles when to apply this rule:
+- 在“配置文件”步骤中，选择何时应用此规则的Windows网络配置文件：
 
 ![image](/images/user-guide/install/windows/windows7-firewall-7.png)
 
-- Finally, give the name to this rule (for ex. "ThingsBoard Service Networking") and click "Finish".
+- 最后，为该规则命名（例如“ ThingsBoard服务网络”）然后单击“完成”。
 
 ![image](/images/user-guide/install/windows/windows7-firewall-8.png)
 
 
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/guides-banner.md %}

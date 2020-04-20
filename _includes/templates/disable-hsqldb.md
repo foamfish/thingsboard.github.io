@@ -1,4 +1,4 @@
-Comment '# HSQLDB DAO Configuration' block.
+注释‘# HSQLDB DAO配置’代码片断。
  
 ```text
 # HSQLDB DAO Configuration

@@ -1,9 +1,9 @@
-Instructions listed below will help you to install Cassandra.
+下面列出的说明将帮助您安装Cassandra。
 
 ```bash
 # Add cassandra repository
 echo 'deb http://www.apache.org/dist/cassandra/debian 311x main' | sudo tee --append /etc/apt/sources.list.d/cassandra.list > /dev/null
-curl -L https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
+curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
 sudo apt-get update
 ## Cassandra installation
 sudo apt-get install cassandra

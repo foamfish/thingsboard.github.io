@@ -2,57 +2,61 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Cluster setup
-description: ThingsBoard IoT platform cluster setup guide
+title: 集群安装
+description: ThingsBoard集群设置指南
 
 ---
 
 * TOC
 {:toc}
 
-This guide will help you to setup ThingsBoard in cluster mode. There are two options available. 
+本指南将帮助您以集群模式设置ThingsBoard。有两个选项。
 
-## Cluster setup using microservices architecture (recommended)
+## 使用微服务架构进行集群设置（推荐）
 
-Starting ThingsBoard v2.2, it is possible to install ThingsBoard cluster using new microservices architecture and docker containers. 
-See [**microservices**](/docs/reference/msa/) architecture page and [**deployment**](https://github.com/thingsboard/thingsboard/blob/master/docker/README.md) 
-tips for more details how to launch the ThingsBoard cluster in a "dockerized" environment. This option is recommended for advanced users only.
+从ThingsBoard v2.2开始，可以使用新的微服务架构和Docker容器安装ThingsBoard集群。
+deployment
+部署
+请参阅[**微服务**](/docs/reference/msa/)体系结构页面和[**部署**](https://github.com/thingsboard/thingsboard/blob/master/docker/README.md)有关更多详细信息的技巧，如何在“ dockerized”环境中启动ThingsBoard集群。仅建议高级用户使用此选项。
 
-## Cluster setup using monolithic architecture (before v2.2)
+## 使用单体架构的集群设置（v2.2+）
   
-Installing cluster of monolithic ThingsBoard applications where each one contains all necessary transport and core components in a single VM is no longer recommended option.
-However, you may still want to use this option in case you would like to minimize amount of third-party used. See instructions below.   
+不建议在单个VM中安装每个都包含所有必需的传输和核心组件的整体ThingsBoard应用程序集群。
 
-### Assumptions
+但是，如果您想最大程度地减少使用的第三方数量，您可能仍要使用此选项。请参阅下面的说明。
 
-ThingsBoard requires Zookeeper for cluster coordination, Cassandra as a NoSQL database and Redis for cluster cache.
-You can host Cassandra and Redis on the same nodes where you install ThingsBoard or on separate nodes.
+### 假设
 
-We assume following topology
+ThingsBoard需要Zookeeper进行群集协调，Cassandra需要NoSQL数据库，Redis需要群集缓存。
+
+您可以将Cassandra和Redis托管在安装ThingsBoard的相同节点上，也可以托管在单独的节点上。
+
+我们假设以下拓扑
  
 ![image](/images/user-guide/cluster-topology.svg)
  
-In this case, both Zookeeper and Cassandra nodes are deployed in cluster mode. 
-We use two nodes clusters only for demonstration purposes. 
-This is not recommended for production.
+在这种情况下，Zookeeper和Cassandra节点均以集群模式部署。
 
-Let's assume following hostnames:
+我们仅将两个节点群集用于演示目的。
 
- - **tb1**, **tb2** and **tb3** - ThingsBoard hosts
- - **zk1** and **zk2** - Zookeeper hosts
- - **c1** and **c2** - Cassandra hosts 
- - **r1** and/or **r2** (for redis cluster)
+不建议将其用于生产。
+
+让我们假设以下主机名：
+
+ - **tb1**, **tb2**和**tb3** - ThingsBoard主机
+ - **zk1**和**zk2** - Zookeeper主机
+ - **c1**和**c2** - Cassandra主机 
+ - **r1**和**r2** (redis集群)
  
-We will use default ports for Cassandra (9042), Zookeeper(2181) and Redis(6379).
+我们将为Cassandra（9042），Zookeeper（2181）和Redis（6379）使用默认端口。
 
-### Installation
+### 安装
 
-You can install ThingsBoard services using single node [installation guide](/docs/user-guide/install/linux/)
-Please note that you don't need to execute "Provision database schema and initial data" step only once per cluster.
+您可以使用单节点安装ThingsBoard服务[安装指南](/docs/user-guide/install/linux/)请注意，您不必为每个集群执行一次“规定数据库模式和初始数据”步骤。
 
-### Configuration
+### 配置
 
-You will need to change following Zookeeper and Cassandra parameters in [thingsboard.yml](/docs/user-guide/install/config/#thingsboardyml)
+您需要在[thingsboard.yml](/docs/user-guide/install/config/#thingsboardyml)中更改以下Zookeeper和Cassandra参数
 
 ```bash
 zk:
@@ -77,28 +81,27 @@ redis:
 
 ```
 
-Also, you need to specify **rpc.bind_host** to match your current host for each thingsboard server. For example, **tb1** configuration:
+另外，您需要指定**rpc.bind_host**，以与每个Thingsboard服务器的当前主机匹配。例如，**tb1**配置：
 
 ```bash
 rpc:
   bind_host: "${RPC_HOST:tb1}"
 ```
 
-### Networking
+### 网络
 
-Following ports need to be accessible within cluster for corresponding servers:
+需要在群集内为相应服务器访问以下端口：
  
- - Zookeeper - **2181** port (used for coordination and can be modified using **zk.url** property).
- - Cassandra - **9042** port (used for coordination and can be modified using **cassandra.url** property).
- - ThingsBoard - **9001** port (used for RPC and can be modified using **rpc.bind_port** property).
- - Redis     - **6379** port (used for redis connection and can be modified using **redis.port** property)
+ - Zookeeper - **2181** 端口(可以使用**zk.url**属性进行修改)。
+ - Cassandra - **9042** 端口(可以使用**cassandra.url**属性进行修改)。
+ - ThingsBoard - **9001** 端口(可以使用**rpc.bind_port**属性进行修改)。
+ - Redis     - **6379** 端口(可以使用**redis.port**属性进行修改)。
 
-Following ThingsBoard server ports need to be accessible outside cluster for device connectivity:
- 
- - HTTP - **8080** port (can be modified using **server.port** property).
- - MQTT - **1883** port (can be modified using **mqtt.bind_port** property).
- - CoAP - **5683** port (can be modified using **coap.bind_port** property).
+需要在集群外部访问以下ThingsBoard服务器端口以实现设备连接：
+ - HTTP - **8080** 端口 (可以使用**server.port**属性进行修改)。
+ - MQTT - **1883** 端口 (可以使用**mqtt.bind_port**属性进行修改)。
+ - CoAP - **5683** 端口 (可以使用**coap.bind_port**属性进行修改)。
 
-## Next steps
+## 下一步
 
 {% assign currentGuide = "InstallationGuides" %}{% include templates/guides-banner.md %}
