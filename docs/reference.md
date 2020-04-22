@@ -1,7 +1,7 @@
 ---
 layout: docwithnav
-title: ThingsBoard architecture overview
-description: ThingsBoard architecture
+title: ThingsBoard体系结构概述
+description: ThingsBoard架构
 
 ---
 
@@ -9,69 +9,68 @@ description: ThingsBoard architecture
 {:toc}
 
 
-ThingsBoard is designed to be:
+ThingsBoard设计为：
 
-* **scalable**: horizontally scalable platform, build using leading open-source technologies.
-* **fault-tolerant**: no single-point-of-failure, every node in the cluster is identical.
-* **robust and efficient**: single server node can handle tens or even hundreds thousands of devices depending on use-case. 
-ThingsBoard cluster can handle millions of devices.
-* **customizable**: adding new functionality is easy with customizable widgets and rule engine nodes.
-* **durable**: never lose your data.
+* **可扩展**：可水平扩展的平台，使用领先的开源技术构建。
+* **容错**：没有单点故障，集群中的每个节点都是相同的。
+* **健壮高效**：单个服务器节点可以根据使用情况处理成千上万的设备。
+ThingsBoard集群可以处理数百万个设备。
+* **可自定义**：使用可自定义的小部件和规则引擎节点可以轻松添加新功能。
+* **持久**：永远不会丢失您的数据。
 
 ## 10 000 foot view
 
 TODO: put a simple, very high-level diagram here.
 
-## On-premise vs cloud deployments
+## 本地部署与云部署
 
-ThingsBoard supports both on-premise and cloud deployments. 
-With more then 2000 ThingsBoard servers running all over the world, ThingsBoard is running in production on AWS, Azure, GCE and private data centers.
-It is possible to launch ThingsBoard in the private network with no internet access at all.
+ThingsBoard支持本地部署和云部署。
+在全球运行着超过2000台ThingsBoard服务器之后，ThingsBoard在AWS，Azure，GCE和私有数据中心的生产环境中运行。
+可以在完全没有互联网访问的专用网络中启动ThingsBoard。
 
-## Standalone vs cluster mode
+## 独立vs集群模式
 
-Platform is designed to be horizontally scalable and supports automatic discovery of new ThingsBoard servers (nodes). 
-All ThingsBoard nodes inside cluster are identical and are sharing the load. 
-Since all nodes are identical there is no "master" or "coordinator" processes and there is no single point of failure. 
-The load balancer of your choice may forward request from devices, applications and users to all ThingsBoard nodes.
+该平台设计为可水平扩展，并支持自动发现新的ThingsBoard服务器（节点）。
+集群中的所有ThingsBoard节点都是相同的，并且正在分担负载。
+由于所有节点都相同，因此没有“主”或“协调器”过程，也没有单点故障。
+您选择的负载均衡器可能会将来自设备，应用程序和用户的请求转发到所有ThingsBoard节点。
 
-## Monolithic vs microservices architecture
+## 整体与微服务架构
 
-Starting ThingsBoard v2.2, platform was refactored to support microservices architecture, but also to be able to run the platform as a monolithic application in a standalone mode.
-Supporting both options requires some additional programming efforts, however, is critical due to back-ward compatibility with variety of existing installations.
+从ThingsBoard v2.2开始，对平台进行了重构，以支持微服务体系结构，而且还能够以独立模式将其作为整体应用程序运行。
+支持这两个选项都需要一些额外的编程工作，但是，由于与各种现有安装的向后兼容性，这一点至关重要。
 
-ThingsBoard was always designed to run as a distributed application, but was also originally designed as a monolith application. 
-This means that there were single java process running the app on each server node. 
-Those processes were communicating using [gRPC](https://grpc.io/) and service discovery was done using [Zookeeper](https://zookeeper.apache.org/). 
-This model works well for many installations and require minimum support efforts, knowledge and hardware resources to do the setup. 
+ThingsBoard始终被设计为可作为分布式应用程序运行，但最初也被设计为整体应用程序。
+这意味着在每个服务器节点上只有一个Java进程在运行该应用程序。
+这些进程正在使用[gRPC](https://grpc.io/)进行通信，并且服务发现是通过[Zookeeper](https://zookeeper.apache.org/)完成的。
+该模型适用于许多安装，并且只需最少的支持工作，知识和硬件资源即可进行设置。
 
-However, there are also some challenges that are solved with microservices architecture and applicable for more complex deployments and usage scenarios. 
-For example, running a multi-tenant deployments where one need more granular isolation to protect from:
+但是，微服务架构还解决了一些挑战，这些挑战适用于更复杂的部署和使用场景。
+例如，运行一个多租户部署，其中需要更精细的隔离以防止：
 
-* unpredictable rule chain misconfiguration;
-* unpredictable load spikes;
-* single devices opening 1000s of concurrent connections due to firmware bugs;
-* and many other cases.
+* 不可预测的规则链配置错误；
+* 不可预测的负载峰值；
+* 由于固件错误，单个设备打开了数千个并发连接；
+* 和许多其他情况。
  
-Please follow the links listed below to learn more and choose the right architecture and deployment option:
+请点击下面列出的链接以了解更多信息，然后选择合适的架构和部署选项：
 
-* [**monolithic**](/docs/reference/monolithic): Learn more about deployment, configuring and running ThingsBoard platform in a monolythic mode.  
-* [**microservices**](/docs/reference/msa): Learn more about deployment, configuring and running ThingsBoard platform in a microservices mode.
+* [**monolithic**](/docs/reference/monolithic)：了解有关以单模式部署，配置和运行ThingsBoard平台的更多信息。
+* [**microservices**](/docs/reference/msa)：了解有关在微服务模式下部署，配置和运行ThingsBoard平台的更多信息。
 
-## SQL vs NoSQL vs Hybrid database approach
+## SQL vs NoSQL vs Hybrid数据库方法
 
-ThingsBard uses database to store 
-[entities](/docs/user-guide/entities-and-relations/) (devices, assets, customers, dashboards, etc) and 
-[telemetry](/docs/user-guide/telemetry/) data (attributes, timeseries sensor readings, statistics, events). 
-Platform supports three database options at the moment:
+ThingsBard使用数据库进行存储
+[实体](/docs/user-guide/entities-and-relations/)设备，资产，客户，仪表板等）和[遥测](/docs/user-guide/telemetry/)数据（属性，时间序列传感器读数，统计信息，事件）。
+平台目前支持三个数据库选项：
 
-* **SQL** - Stores all entities and telemetry in SQL database. ThingsBoard authors recommend to use PostgreSQL and this is the main SQL database that ThingsBoard supports. 
-It is possible to use HSQLDB for local development purposes. **We do not recommend to use HSQLDB** for anything except running tests and launching dev instance that has minimum possible load.
-* **NoSQL** - Stores all entities and telemetry in NoSQL database. ThingsBoard authors recommend to use Cassandra and this is the only NoSQL database that ThingsBoard supports at the moment.
-However, due to a lot of interest to deployments with managed databases, we plan to introduce support on AWS DynamoDB in v2.3. 
-* **Hybrid** - Stores all entities in SQL database and all telemetry in NoSQL database. 
+* **SQL**-将所有实体和遥测存储在SQL数据库中。 ThingsBoard作者建议使用PostgreSQL，这是ThingsBoard支持的主要SQL数据库。
+可以将HSQLDB用于本地开发目的。 **除运行测试和启动具有最小可能负载的开发实例外，我们不建议将HSQLDB用于任何其他用途。
+* **NoSQL**-将所有实体和遥测存储在NoSQL数据库中。 ThingsBoard作者建议使用Cassandra，这是ThingsBoard目前支持的唯一NoSQL数据库。
+但是，由于对托管数据库的部署非常感兴趣，我们计划在v2.3中引入对AWS DynamoDB的支持。
+* **Hybrid**-将所有实体存储在SQL数据库中，并将所有遥测存储在NoSQL数据库中。
 
-It is possible to configure this options using **thingsboard.yml** file. See database [configuration](/docs/user-guide/install/config/) page for more details.
+可以使用**thingsboard.yml**文件配置此选项。有关更多详细信息，请参见数据库[配置](/docs/user-guide/install/config/)页面。
 
 ```yaml
 database:
@@ -82,7 +81,7 @@ database:
     type: "${DATABASE_TS_TYPE:sql}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
 ```
 
-## Programming languages and third-party
+## 编程语言和第三方
 
-ThingsBoard back-end is written in Java, but we also have some micro-services based on Node.js. ThingsBoard front-end is a SPA based on Angular JS framework. 
-See [monolithic](/docs/reference/monolithic) and [microservices](/docs/reference/monolithic) pages for more details about third-party components used.  
+ThingsBoard后端是用Java编写的，但是我们也有一些基于Node.js的微服务。 ThingsBoard前端是基于Angular JS框架的SPA。
+有关使用的第三方组件的更多详细信息，请参见[monolithic](/docs/reference/monolithic)和[microservices](/docs/reference/monolithic)页面。
