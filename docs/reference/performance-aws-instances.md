@@ -1,52 +1,51 @@
 ---
 layout: docwithnav
-title: ThingsBoard Performance on different AWS instances
-description: ThingsBoard Performance on different AWS instances results
+title: 不同AWS实例上的ThingsBoard性能
+description: 不同AWS实例上的ThingsBoard性能
 
 ---
 
 * TOC
 {:toc}
 
-One of the key features of ThingsBoard open-source IoT Platform is data collection and this is a crucial feature that must work reliably under a heavy long-running messages upload.
+ThingsBoard开源IoT平台的关键功能之一是数据收集，这是一项至关重要的功能，必须在大量长时间运行的消息上传中可靠地工作。
 
-In this article, we are going to execute long-running data collection tests of ThingsBoard on different AWS instances.
-We are going to check how many messages per second each instance can handle and will provide the CPU and memory load stats.
+在本文中，我们将在不同的AWS实例上执行ThingsBoard的长期数据收集测试。
+我们将检查每个实例每秒可以处理多少消息，并将提供CPU和内存负载统计信息。
 
-Considering test results and your project requirements you will be able to identify what type of the instance is the most suitable for your project.
+考虑到测试结果和您的项目要求，您将能够确定哪种类型的实例最适合您的项目。
 
-## Data flow and test tools
+## 数据流和测试工具
 
-IoT devices connect to ThingsBoard server via MQTT or HTTP Device API and send sample test data (*single telemetry of long type*) to the platform. 
-ThingsBoard server processes MQTT or HTTP messages and stores them to Cassandra/PostgreSQL asynchronously. 
+物联网设备通过MQTT或HTTP设备API连接到ThingsBoard服务器，并将示例测试数据（*长型单遥测*）发送到平台。
+ThingsBoard服务器处理MQTT或HTTP消息，并将它们异步存储到Cassandra / PostgreSQL。
 
-As a test tool we have used updated version of [Performance Test Project](https://github.com/thingsboard/performance-tests) that is able to send messages over MQTT/HTTP Device API in an asynchronous way quite efficiently. 
+作为测试工具，我们使用了[Performance Test Project](https://github.com/thingsboard/performance-tests)的更新版本，该版本能够以非常高效的异步方式通过MQTT/HTTP Device API发送消息。
 
-Considering microservice architecture of the ThingsBoard platform and to measure performance in an accurate way, we have created an additional Rule Chain Node that is able to calculate a number of messages that this Node has been received per 1 second (this is a configurable parameter that could be changed) and stores this value as telemetry on a tenant level.
+考虑到ThingsBoard平台的微服务架构并以准确的方式衡量性能，我们创建了一个附加的规则链节点，该规则链节点能够计算每1秒已收到该节点的消息数量（这是一个可配置的参数，更改）并将此值存储为租户级别上的遥测。
 
-This additional Rule Chain Node is located after the ‘Save telemetry’ Node of the Root Chain and calculates how many messages ThingsBoard instance processed during the performance testing. This data is stored on a tenant level as telemetry with predefined key prefix. 
+该附加的规则链节点位于根链的“保存遥测”节点之后，并计算性能测试期间ThingsBoard实例处理了多少消息。此数据以预定义键前缀的遥测方式存储在租户级别。
 
 ![image](/images/reference/performance-aws-instances/modified-rule-chain.png)
 
-Performance Test Tool, after test completion, take this telemetry value from the platform and provides result in the console of the test:
+测试完成后，性能测试工具将从平台获取此遥测值，并在测试控制台中提供结果：
 
 ```bash
 12:20:03.772 [main] INFO  o.t.t.s.stats.StatisticsCollector - ============ Node [692dc903cf52] AVG is 500.0 per 1 second ============
 12:20:03.772 [main] INFO  o.t.t.s.stats.StatisticsCollector - ============ Total AVG is 500.0 per 1 second ============
 ```
 
-This telemetry value could be shown as well as general telemetry on the ThingsBoard Dashboard. 
+可以在ThingsBoard仪表板上显示此遥测值以及常规遥测。
 
-**NOTE:** If you have multiple ThingsBoard nodes in the cluster, additional Rule Chain Node will save statistics under different telemetry keys on tenant level, but Performance Test Tool in the result will aggregate these values into a single result.
+**注意：**如果集群中有多个ThingsBoard节点，则附加的规则链节点将在租户级别的不同遥测键下保存统计信息，但是结果中的Performance Test Tool将这些值聚合为一个结果。
 
-## How to repeat the tests
+## 如何重复测试
 
-Please use documentation of the [Performance Test Project](https://github.com/thingsboard/performance-tests/) for more details.
+有关更多详细信息，请使用[Performance Test Project](https://github.com/thingsboard/performance-tests/) 的文档。
 
-## Performance by AWS Instance Type
+## 按AWS实例类型的性能
 
-
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages| Maximum number of messages |
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟|消息上限|
 | --- | --- | --- | --- | --- | --- | --- |
 | [t2.micro](#t2micro) | 1 vCPUs for a 2h 24m burst, 1GB | PostgreSQL | MQTT | 500 | 1000 ms | **~450/sec** | 
 | [t2.medium](#t2medium)  | 2 vCPUs for a 4h 48m burst, 4GB | PostgreSQL | MQTT | 900 | 1000 ms | **~780/sec** |
@@ -58,13 +57,13 @@ Please use documentation of the [Performance Test Project](https://github.com/th
 
 ## t2.micro
 
-**Performance Results**
+**性能结果**
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages | Maximum number of messages |
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟|消息上限|
 | --- | --- | --- | --- | --- | --- | --- |
 | t2.micro | 1 vCPUs for a 2h 24m burst, 1GB | PostgreSQL | MQTT | 500 | 1000 ms | **~450/sec** |
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目](https://github.com/thingsboard/performance-tests/#running)):
 
 ```bash
 ...
@@ -77,15 +76,15 @@ PUBLISH_PAUSE=1000
 ...
 ```
 
-### Test Run #1
+### 测试运行#1
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Count of test run hours | 
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）测试运行小时数|
 | --- | --- | --- | --- | --- | --- | --- |
 | t2.micro | 1 vCPUs for a 2h 24m burst, 1GB | PostgreSQL | MQTT | 50 | 1000 ms | 10 | 
 
-**Test Configuration**
+**测试配置**
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目](https://github.com/thingsboard/performance-tests/#running)):
 
 ```bash
 ...
@@ -100,7 +99,7 @@ PUBLISH_PAUSE=1000
 
 **CPU/Memory Load**
 
-| Property | Avg | Min | Max |
+| 属性 | 平均 | 最小 | 最大 |
 | --- | --- | --- | --- |
 | CPU Utilization (%) | 18 | 8.9 | 55 |
 | Memory Utilization (%) | 96 | 81 | 97.36 |
@@ -122,15 +121,15 @@ TB dashboard
 
 ![image](/images/reference/performance-aws-instances/t2-micro/postgresql-50msgs-tb.png)
 
-### Test Run #2
+### 测试运行#2
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Count of test run hours |
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）测试运行小时数|
 | --- | --- | --- | --- | --- | --- | --- |
 | t2.micro | 1 vCPUs for a 2h 24m burst, 1GB | PostgreSQL | MQTT | 100 | 1000 ms | 10 | 
 
-**Test Configuration**
+**测试配置**
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目](https://github.com/thingsboard/performance-tests/#running)):
 
 ```bash
 ...
@@ -145,7 +144,7 @@ PUBLISH_PAUSE=1000
 
 **CPU/Memory Load**
 
-| Property | Avg | Min | Max |
+| 属性 | 平均 | 最小 | 最大 |
 | --- | --- | --- | --- |
 | CPU Utilization (%) | 32 | 8.1 | 100 |
 | Memory Utilization (%) | 97 | 81.3 | 98.37 | 
@@ -169,13 +168,13 @@ TB dashboard
 
 ## t2.medium
 
-**Performance Results**
+**性能结果**
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Maximum number of messages per second |
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟|消息上限|
 | --- | --- | --- | --- | --- | --- | --- |
 | t2.medium | 2 vCPUs for a 4h 48m burst, 4GB | PostgreSQL | MQTT | 900 | 1000 ms | **~780/sec** |
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目](https://github.com/thingsboard/performance-tests/#running)):
 
 ```bash
 ...
@@ -188,15 +187,15 @@ PUBLISH_PAUSE=1000
 ...
 ```
 
-### Test Run #1
+### 测试运行 #1
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Count of test run hours | 
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）测试运行小时数|
 | --- | --- | --- | --- | --- | --- | --- |
 | t2.medium | 2 vCPUs for a 4h 48m burst, 4GB | PostgreSQL | MQTT | 150 | 1000 ms | 10 | 
 
-**Test Configuration**
+**测试配置**
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目](https://github.com/thingsboard/performance-tests/#running)):
 
 ```bash
 ...
@@ -211,7 +210,7 @@ PUBLISH_PAUSE=1000
 
 **CPU/Memory Load**
 
-| Property | Avg | Min | Max |
+| 属性 | 平均 | 最小 | 最大 |
 | --- | --- | --- | --- |
 | CPU Utilization (%) | 19 | 1.5 | 25 |
 | Memory Utilization (%) | 25 | 3.54 | 28.3 |
@@ -233,15 +232,15 @@ TB dashboard
 
 ![image](/images/reference/performance-aws-instances/t2-medium/postgresql-150msgs-tb.png)
 
-### Test Run #2
+### 测试运行 #2
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Count of test run hours | 
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）测试运行小时数|
 | --- | --- | --- | --- | --- | --- | --- |
 | t2.medium | 2 vCPUs for a 4h 48m burst, 4GB | PostgreSQL | MQTT | 200 | 1000 ms | 10 | 
 
-**Test Configuration**
+**测试配置**
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目](https://github.com/thingsboard/performance-tests/#running)):
 
 ```bash
 ...
@@ -256,23 +255,23 @@ PUBLISH_PAUSE=1000
 
 **CPU/Memory Load**
 
-Result shows that **t2.medium** AWS Instance Type is not able to handle more than 200 requests per second, because of the [AWS CPU Credit Balance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-credits-baseline-concepts.html).
+结果显示，由于[AWS CPU Credit Balance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-credits-baseline-concepts.html),**t2.medium** AWS实例类型每秒不能处理200个以上的请求。
 
-Here is the Credit Balance chart line for the **t2.medium** during publishing 200 messages per second.
+这是每秒发布200条消息期间**t2.medium**的“贷方余额”图表线。
 
-The line goes down and after some period instance will be dramatically decreased by CPU (20% of total).
+该行下降，经过一段时间后，CPU将大大减少实例（占总数的20％）。
 
 ![image](/images/reference/performance-aws-instances/t2-medium/postgresql-200msgs-failing-cpu-credit.png)
 
-### Test Run #3
+### 测试运行 #3
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Count of test run hours | 
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）测试运行小时数|
 | --- | --- | --- | --- | --- | --- | --- |
 | t2.medium | 2 vCPUs for a 4h 48m burst, 4GB | PostgreSQL | MQTT | 300 | 1000 ms | 10 | 
 
-**Test Configuration**
+**测试配置**
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目](https://github.com/thingsboard/performance-tests/#running)):
 
 ```bash
 ...
@@ -287,19 +286,19 @@ PUBLISH_PAUSE=1000
 
 **CPU/Memory Load**
 
-The same results as previous run, but CPU Credit Balance chart line goes down more faster.
+结果与上次运行相同，但CPU信用余额图表线下降得更快。
 
 ![image](/images/reference/performance-aws-instances/t2-medium/postgresql-300msgs-failed-cpu-credit.png)
 
 ## c5.large
 
-**Performance Results**
+**性能结果**
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Maximum number of messages per second |
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）每秒最大消息数|
 | --- | --- | --- | --- | --- | --- | --- |
 | c5.large | 2 vCPUs , 4GB | PostgreSQL | MQTT | 1100 | 1000 ms | **~1020/sec** |
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目](https://github.com/thingsboard/performance-tests/#running))：
 
 ```bash
 ...
@@ -312,15 +311,15 @@ PUBLISH_PAUSE=1000
 ...
 ```
 
-### Test Run #1
+### 测试运行 #1
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Count of test run hours | 
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）测试运行小时数|
 | --- | --- | --- | --- | --- | --- | --- |
 | c5.large | 2 vCPUs, 4GB | PostgreSQL | MQTT |  500 | 1000 ms | 10 |
 
-**Test Configuration**
+**测试配置**
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目]（https://github.com/thingsboard/performance-tests/#running))：
 
 
 ```bash
@@ -336,15 +335,15 @@ PUBLISH_PAUSE=1000
 
 **CPU/Memory Load**
 
-**c5.large** AWS instance does not have CPU burst that why CPU Credit Balance is not applicable to verify in this case.
+**c5.large** AWS实例没有CPU爆裂，这就是为什么在这种情况下CPU信用余额不适用于验证的原因。
 
-But to be able to support 500 requests per seconds correct volume must be provisioned - with enough [IOPS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-io-characteristics.html) limits.
+但是为了能够支持每秒500个请求，必须设置正确的卷-具有足够的[IOPS][IOPS](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-io-characteristics.html)限制。
 
-For the PostgreSQL database, 500 requests per seconds are equal to ~500 IOPS.
+对于PostgreSQL数据库，每秒500个请求等于〜500 IOPS。
 
-So AWS volume for this test must be provisioned with at least 600 IOPS.
+因此，必须为该测试的AWS卷配备至少600 IOPS。
 
-| Property | Avg | Min | Max |
+| 属性 | 平均 | 最小 | 最大 |
 | --- | --- | --- | --- |
 | CPU Utilization (%) | 48 | 3 | 57.4 |
 | Memory Utilization (%) | 34 | 32.79 | 37.76 |
@@ -372,15 +371,15 @@ AWS write IOPS for the volume
 
 ![image](/images/reference/performance-aws-instances/c5-large/postgresql-500msgs-iops-1.png)
 
-### Test Run #2
+### 测试运行 #2
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Count of test run hours | 
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）测试运行小时数|
 | --- | --- | --- | --- | --- | --- | --- |
 | c5.large | 2 vCPUs, 4GB | PostgreSQL | MQTT |  700 | 1000 ms | 10 |
 
-**Test Configuration**
+**测试配置**
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目]（https://github.com/thingsboard/performance-tests/#running))：
 
 ```bash
 ...
@@ -395,7 +394,7 @@ PUBLISH_PAUSE=1000
  
 **CPU/Memory Load**
  
-| Property | Avg | Min | Max |
+| 属性 | 平均 | 最小 | 最大 |
 | --- | --- | --- | --- |
 | CPU Utilization (%) | 70 | 66.8 | 76.1 |
 | Memory Utilization (%) | 33 | 33.39 | 33.85 |
@@ -425,13 +424,13 @@ AWS write IOPS for the volume
 
 ## m5.xlarge
 
-**Performance Results**
+**性能结果**
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Maximum number of messages per second |
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）每秒最大消息数|
 | --- | --- | --- | --- | --- | --- | --- |
 | m5.xlarge | 4 vCPUs, 16GB, 150GB SSD mounted | Cassandra | MQTT | 3500 | 1000 ms | **~3500/sec** |
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目]（https://github.com/thingsboard/performance-tests/#running))：
 
 ```bash
 ...
@@ -444,11 +443,11 @@ PUBLISH_PAUSE=1000
 ...
 ```
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Maximum number of messages per second |
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）每秒最大消息数|
 | --- | --- | --- | --- | --- | --- | --- |
 | m5.xlarge |  4 vCPUs, 16GB, 150GB SSD mounted | Cassandra | HTTP | 2000 | 1000 ms | **~950/sec** |
 
-Test run configuration:
+试运行配置：
 
 ```bash
 ...
@@ -461,15 +460,15 @@ PUBLISH_PAUSE=1000
 ...
 ```
 
-### Test Run #1
+### 测试运行 #1
 
-| Instance Type | Instance details | Database Type | Device API | Number of devices | Delay between messages in millis | Count of test run hours | 
+|实例类型|实例详细信息|数据库类型|设备API |设备数量|消息延迟（以毫秒为单位）测试运行小时数|
 | --- | --- | --- | --- | --- | --- | --- |
 | m5.xlarge | 4 vCPUs, 16GB | Cassandra | MQTT | 2100 | 1000 ms | 10 |
 
-**Test Configuration**
+**测试配置**
 
-Test run configuration (see [Performance Test Project](https://github.com/thingsboard/performance-tests/#running) for more details):
+测试运行配置(有关更多详细信息，请参见[性能测试项目]（https://github.com/thingsboard/performance-tests/#running))：
 
 ```bash
 ...
@@ -484,7 +483,7 @@ PUBLISH_PAUSE=1000
 
 **CPU/memory load**
 
-| Property | Avg | Min | Max |
+| 属性 | 平均 | 最小 | 最大 |
 | --- | --- | --- | --- |
 | CPU Utilization (%) | 36 | 8.3 | 61.2 |
 | Memory Utilization (%) | 40 | 39.83 | 40.14 |
