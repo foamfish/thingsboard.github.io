@@ -26,12 +26,12 @@
       keywords: device management attributes
       video: false
       pe: false
-    - path: /docs/reference/pe-demo-getting-started/
-      title: ThingsBoard PE Cloud 入门
-      subtitle: 使用演示智能计量应用程序了解不同的ThingsBoard PE功能。
-      keywords: professional edition
-      video: true
-      pe: true
+    # - path: /docs/reference/pe-demo-getting-started/
+    #   title: ThingsBoard PE Cloud 入门
+    #   subtitle: 使用演示智能计量应用程序了解不同的ThingsBoard PE功能。
+    #   keywords: professional edition
+    #   video: true
+    #   pe: true
 - title: 安装指南
   subtitle: 了解如何在其它的操作系统上安装ThingsBoard
   id: InstallationGuides
@@ -124,67 +124,67 @@
       keywords:
       pe: false
       video: false
-    - path: /docs/user-guide/integrations/http/
-      title: 使用ThingsBoard HTTP集成将具有自定义payload的设备连接起来
-      subtitle: 将现有协议和payload格式转换为ThingsBoard消息格式。
-      keywords: http connect
-      pe: true
-      video: true
-    - path: /docs/user-guide/integrations/mqtt/
-      title: 使用ThingsBoard MQTT集成将具有自定义负载的设备连接起来。
-      subtitle: 连接到外部代理并使用MQTT数据流。
-      keywords: mqtt connect
-      pe: true
-      video: true
-    - path: /docs/user-guide/integrations/sigfox/
-      title: 使用TB PE集成连接SigFox设备
-      subtitle: 了解如何将消息从Sigfox后端路由到ThingsBoard并解码二进制设备payload。
-      keywords: sigfox connect
-      pe: true
-      video: true
-    - path: /docs/user-guide/integrations/ttn/
-      title: 使用TheThingsNetwork连接LoRaWAN设备
-      subtitle: 了解如何将消息从TheThingsNetwork后端路由到ThingsBoard，反之亦然。.
-      keywords: ttn connect
-      pe: true
-      video: false
-    - path: /docs/user-guide/integrations/opc-ua/
-      title: 将OPC-UA服务器连接到ThingsBoard
-      subtitle: 了解如何将OPC-UA设备连接到ThingsBoard。
-      keywords: opcua connect
-      pe: true
-      video: true
-    - path: /docs/user-guide/integrations/thingpark/
-      title: 使用Actility ThingPark连接LoRaWAN设备
-      subtitle: 了解如何将消息从ThingPark路由到ThingsBoard，反之亦然。
-      keywords:
-      pe: true
-      video: false
-    - path: /docs/user-guide/integrations/aws-iot/
-      title: 通过AWS IoT连接设备
-      subtitle: 了解如何使用ThingsBoard连接到AWS IoT代理，转换传入消息并生成下行链路。
-      keywords:
-      pe: true
-      video: true
-    - path: /docs/user-guide/integrations/ibm-watson-iot/
-      title: 通过IBM Watson IoT连接设备
-      subtitle: 了解如何使用ThingsBoard连接到IBM Watson IoT代理，转换传入消息并生成下行链路。
-      keywords:
-      pe: true
-      video: true
-    - path: /docs/user-guide/integrations/azure-event-hub/
-      title: 通过Azure Event Hub连接设备
-      subtitle: 了解如何使用ThingsBoard连接到Azure Event Hub，转换传入消息并生成下行链路。
-      keywords:
-      pe: true
-      video: true
-    - path: /docs/user-guide/integrations/tcp/
-      title: 设备使用TCP协议
-      subtitle: 如何使用ThingsBoard连接到ThingsBoard TCP服务器，转换传入消息并生成下行链路。
-      keywords: Connect TCP devices
-      pe: true
-      video: true
-    - path: /docs/user-guide/integrations/tcp/
+    # - path: /docs/user-guide/integrations/http/
+    #   title: 使用ThingsBoard HTTP集成将具有自定义payload的设备连接起来
+    #   subtitle: 将现有协议和payload格式转换为ThingsBoard消息格式。
+    #   keywords: http connect
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/integrations/mqtt/
+    #   title: 使用ThingsBoard MQTT集成将具有自定义负载的设备连接起来。
+    #   subtitle: 连接到外部代理并使用MQTT数据流。
+    #   keywords: mqtt connect
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/integrations/sigfox/
+    #   title: 使用TB PE集成连接SigFox设备
+    #   subtitle: 了解如何将消息从Sigfox后端路由到ThingsBoard并解码二进制设备payload。
+    #   keywords: sigfox connect
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/integrations/ttn/
+    #   title: 使用TheThingsNetwork连接LoRaWAN设备
+    #   subtitle: 了解如何将消息从TheThingsNetwork后端路由到ThingsBoard，反之亦然。.
+    #   keywords: ttn connect
+    #   pe: true
+    #   video: false
+    # - path: /docs/user-guide/integrations/opc-ua/
+    #   title: 将OPC-UA服务器连接到ThingsBoard
+    #   subtitle: 了解如何将OPC-UA设备连接到ThingsBoard。
+    #   keywords: opcua connect
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/integrations/thingpark/
+    #   title: 使用Actility ThingPark连接LoRaWAN设备
+    #   subtitle: 了解如何将消息从ThingPark路由到ThingsBoard，反之亦然。
+    #   keywords:
+    #   pe: true
+    #   video: false
+    # - path: /docs/user-guide/integrations/aws-iot/
+    #   title: 通过AWS IoT连接设备
+    #   subtitle: 了解如何使用ThingsBoard连接到AWS IoT代理，转换传入消息并生成下行链路。
+    #   keywords:
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/integrations/ibm-watson-iot/
+    #   title: 通过IBM Watson IoT连接设备
+    #   subtitle: 了解如何使用ThingsBoard连接到IBM Watson IoT代理，转换传入消息并生成下行链路。
+    #   keywords:
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/integrations/azure-event-hub/
+    #   title: 通过Azure Event Hub连接设备
+    #   subtitle: 了解如何使用ThingsBoard连接到Azure Event Hub，转换传入消息并生成下行链路。
+    #   keywords:
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/integrations/tcp/
+    #   title: 设备使用TCP协议
+    #   subtitle: 如何使用ThingsBoard连接到ThingsBoard TCP服务器，转换传入消息并生成下行链路。
+    #   keywords: Connect TCP devices
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/integrations/tcp/
       title: 设备使用UDP协议
       subtitle: 如何使用ThingsBoard连接到ThingsBoard UDP服务器，转换传入消息并生成下行链路。
       keywords: Connect UDP devices
@@ -293,30 +293,30 @@
       subtitle: "了解如何使用REST API获取指定位置的天气数据。"
       keys: rest api
       pe: false
-    - path: /docs/user-guide/rule-engine-2-0/tutorials/add-devices-to-group/
-      title: 添加和删​​除设备以动态分组
-      subtitle: "解如何基于来自设备的传入数据动态地从设备组添加和删除设备。"
-      keys: device group dynamic relation
-      pe: true
-    - path: /docs/user-guide/integrations/send-data-external-mqtt-brokers/
+    # - path: /docs/user-guide/rule-engine-2-0/tutorials/add-devices-to-group/
+    #   title: 添加和删​​除设备以动态分组
+    #   subtitle: "解如何基于来自设备的传入数据动态地从设备组添加和删除设备。"
+    #   keys: device group dynamic relation
+    #   pe: true
+    # - path: /docs/user-guide/integrations/send-data-external-mqtt-brokers/
       title: 将数据发送到外部MQTT代理
       subtitle: "连接到外部代理并发送MQTT数据流。"
       keys: mqtt connect
       pe: true
-- title: IoT数据分析
-  subtitle: "了解如何使用规则引擎执行基本分析任务。"
-  id: DataAnalytics
-  section:
-    - path: /docs/user-guide/rule-engine-2-0/tutorials/aggregate-incoming-data-stream/
-      title: 汇总传入数据流
-      subtitle: 根据建筑物内多个水表的读数计算建筑物的总用水量。
-      keywords: aggregation water meter analytics rule engine
-      pe: true
-    - path: /docs/user-guide/rule-engine-2-0/tutorials/aggregate-latest-data/
-      title: 定期汇总最新遥测值
-      subtitle: 根据多个温度传感器的读数计算仓库中的平均温度。
-      keywords: average temperature analytics rule engine
-      pe: true
+# - title: IoT数据分析
+#   subtitle: "了解如何使用规则引擎执行基本分析任务。"
+#   id: DataAnalytics
+#   section:
+#     - path: /docs/user-guide/rule-engine-2-0/tutorials/aggregate-incoming-data-stream/
+#       title: 汇总传入数据流
+#       subtitle: 根据建筑物内多个水表的读数计算建筑物的总用水量。
+#       keywords: aggregation water meter analytics rule engine
+#       pe: true
+#     - path: /docs/user-guide/rule-engine-2-0/tutorials/aggregate-latest-data/
+#       title: 定期汇总最新遥测值
+#       subtitle: 根据多个温度传感器的读数计算仓库中的平均温度。
+#       keywords: average temperature analytics rule engine
+#       pe: true
 #- title: Pushing data to external systems
 #  subtitle: lorem ipsum dolor
 #  section:
@@ -382,12 +382,12 @@
       subtitle: "包含接线图，草图和仪表板设置指南。"
       pe: false
       video: false
-    - path: /docs/user-guide/integrations/sodaq/
-      title: 了解如何将您的SODAQ Universal Tracker连接到ThingsBoard
-      subtitle: "了解如何通过T-Mobile – IoT CDP集成将SODAQ Universal Tracker连接到ThingsBoard。"
-      keywords: NB IoT, NB-IoT, T-Mobile, SODAQ, 5G
-      pe: true
-      video: false
+    # - path: /docs/user-guide/integrations/sodaq/
+    #   title: 了解如何将您的SODAQ Universal Tracker连接到ThingsBoard
+    #   subtitle: "了解如何通过T-Mobile – IoT CDP集成将SODAQ Universal Tracker连接到ThingsBoard。"
+    #   keywords: NB IoT, NB-IoT, T-Mobile, SODAQ, 5G
+    #   pe: true
+    #   video: false
     - path: /docs/user-guide/integrations/sodaq-udp
       title: 了解如何将您的SODAQ Universal Tracker连接到ThingsBoard
       subtitle: "了解如何通过UDP集成将SODAQ Universal Tracker连接到ThingsBoard。"
@@ -423,26 +423,26 @@
       subtitle: "了解如何通过限制单个时间单位（分钟，小时等）中来自单个主机的请求数来控制API使用情况。"
       pe: false
       video: false
-    - path: /docs/user-guide/white-labeling/
-      title: White标签
-      subtitle: "了解如何在2分钟内以零编码的方式配置公司或产品徽标和配色方案。"
-      pe: true
-      video: true
-    - path: /docs/user-guide/groups/
-      title: 设备和资产组
-      subtitle: "了解如何使用实体组和执行批量操作。"
-      pe: true
-      video: true
-    - path: /docs/user-guide/scheduler/
-      title: Scheduler
-      subtitle: "了解如何配置各种类的事件和触发操作。"
-      pe: true
-      video: true
-    - path: /docs/user-guide/reporting/
-      title: 报告
-      subtitle: "了解如何根据现有仪表板计划和生成报告。"
-      pe: true
-      video: true
+    # - path: /docs/user-guide/white-labeling/
+    #   title: White标签
+    #   subtitle: "了解如何在2分钟内以零编码的方式配置公司或产品徽标和配色方案。"
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/groups/
+    #   title: 设备和资产组
+    #   subtitle: "了解如何使用实体组和执行批量操作。"
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/scheduler/
+    #   title: Scheduler
+    #   subtitle: "了解如何配置各种类的事件和触发操作。"
+    #   pe: true
+    #   video: true
+    # - path: /docs/user-guide/reporting/
+    #   title: 报告
+    #   subtitle: "了解如何根据现有仪表板计划和生成报告。"
+    #   pe: true
+    #   video: true
 - title: 贡献和开发
   subtitle: "了解如何为Thingsboard做出贡献，自定义和开发自定义小部件和规则节点。"
   id: Contribution
