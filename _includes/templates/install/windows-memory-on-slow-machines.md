@@ -8,7 +8,7 @@ C:\Program Files (x86)\thingsboard\thingsboard.xml
 {: .copy-code}
 
 
-找到"SQL DAO Configuration"代码块将postgres用户密码替换"postgres"：
+在配置文件中找到以下几行。
 
 ```xml
     <startargument>-Xms512m</startargument>
