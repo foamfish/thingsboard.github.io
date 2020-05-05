@@ -11,7 +11,7 @@ description: 基于相关IoT协议和ThingsBoard中遥测功能对IoT设备时�
 
 ThingsBoard提供与遥测数据操作相关的API：
 
- - **采集** 使用MQTT, CoAP or HTTP协议采集设备数据。
+ - **采集** 使用MQTT, CoAP或者HTTP协议采集设备数据。
  - **存储** 在Cassandra（高效、可扩展、能容错的NoSQL数据库）中存储时序数据。
  - **查询** 查询最新时序数据值，或查询特定时间段内的所有数据。
  - **订阅** 使用websockets订阅数据更新(用于可视化或实时分析)。
