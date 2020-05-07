@@ -8,13 +8,13 @@
       keywords: mqtt http coap visualization helloworld
       video: true
       pe: false
-    - path: /docs/iot-video-tutorials/#working-with-users-devices-and-dashboards
-      title: IoT仪表板
+    - path: /docs/iot-video-tutorials/#用户设备和仪表板
+      title: 用户设备和仪表板
       subtitle: 了解如何在设备、客户和仪表板进行基本操作
       keywords: devices customers dashboards
       video: true
       pe: false
-    - path: /docs/iot-video-tutorials/#device-data-management-using-thingsboard
+    - path: /docs/iot-video-tutorials/#管理设备数据
       title: 管理设备数据
       subtitle: 了解如何对设备属性执行基本操作以实现实际的设备管理用例。
       keywords: device management attributes
@@ -185,46 +185,46 @@
     #   pe: true
     #   video: true
     # - path: /docs/user-guide/integrations/tcp/
-      title: 设备使用UDP协议
-      subtitle: 如何使用ThingsBoard连接到ThingsBoard UDP服务器，转换传入消息并生成下行链路。
-      keywords: Connect UDP devices
-      pe: true
-      video: true
+      # title: 设备使用UDP协议
+      # subtitle: 如何使用ThingsBoard连接到ThingsBoard UDP服务器，转换传入消息并生成下行链路。
+      # keywords: Connect UDP devices
+      # pe: true
+      # video: true
 - title: 数据可视化
   subtitle: 这些指南包含有关如何配置复杂的ThingsBoard仪表板的说明
   id: DataVisualization
   section:
-    - path: /docs/iot-video-tutorials/#dashboard-development-guide-part-1-of-3-visualizing-assets-data-using-maps-and-tables
+    - path: /docs/iot-video-tutorials/#仪表板开发指南第1部分共3部分使用地图和表格可视化资产数据
       title: 使用地图和表格可视化资产数据
       subtitle: "了解如何：创建资产和设备并定义它们之间的关系；添加服务器属性并创建一个新的仪表板；使用“实体表”和“地图”小部件可视化资产属性中的数据。"
       keywords:
       pe: false
       video: true
-    - path: /docs/iot-video-tutorials/#dashboard-development-guide-part-2-of-3-dashboard-states-aliases-and-widget-actions
-      title: 仪表板状态，别名和小部件操作
+    - path: /docs/iot-video-tutorials/#仪表板开发指南第2部分共3部分仪表板状态别名和小部件操作
+      title: 仪表板状态别名和小部件操作
       subtitle: "了解如何：添加和配置新的仪表板状态；创建各种别名；使用图像映射小部件可视化属性数据；在不同的小部件中创建动作，以便在状态之间导航；使用模拟和数字仪表以及“时间序列”小部件可视化遥测数据。"
       keywords:
       pe: false
       video: true
-    - path: /docs/iot-video-tutorials/#dashboard-development-guide-part-3-of-3-remote-device-control-and-alarm-management
+    - path: /docs/iot-video-tutorials/#仪表板开发指南第3部分共3部分远程设备控制和警报管理
       title: 远程设备控制和警报管理
       subtitle: "了解如何：添加和使用旋钮控件小部件；创建警报规则；使用“警报”小部件处理警报；公开仪表板。"
       keywords:
       pe: false
       video: true
-    - path: /docs/iot-video-tutorials/#widget-configuration-guide-part-1-of-3-basic-settings
+    - path: /docs/iot-video-tutorials/#窗口部件配置指南第1部分共3部分基本设置
       title: 基本小部件设置
       subtitle: "了解如何：更改小部件标题，背景，颜色，字体，阴影等。"
       keywords:
       pe: false
       video: true
-    - path: /docs/iot-video-tutorials/#widget-configuration-guide-part-2-of-3-latest-values-map-widget
+    - path: /docs/iot-video-tutorials/#小部件配置指南第2部分共3部分最新值映射小部件
       title: 最新值地图小部件
       subtitle: "了解如何基于纬度和经度创建地图小部件以及如何自定义地图小部件的布局和属性。"
       keywords:
       pe: false
       video: true
-    - path: /docs/iot-video-tutorials/#widget-configuration-guide-part-3-of-3-time-series-map-widget
+    - path: /docs/iot-video-tutorials/#小部件配置指南第3部分共3部分时间序列图小部件
       title: 时间序列图小部件
       subtitle: "了解如何在“时间序列图”窗口小部件上显示具有最新遥测数据的设备以及如何修改窗口小部件属性。"
       keywords:
