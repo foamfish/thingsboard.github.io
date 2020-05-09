@@ -17,7 +17,7 @@ description: 规则引擎入门
 
 
 ## 典型实例 
-ThingsBoard Rule Engine是一个高度可定制的框架，用于复杂事件的处理。以下是一些可以通过ThingsBoard规则链配置的常见用例：
+ThingsBoard规则引擎是一个高度可定制的框架，用于复杂事件的处理。以下是一些可以通过ThingsBoard规则链配置的常见用例：
 
 - 在保存到数据库之前，对接收的遥测数据或属性进行验证和修改。
 - 将遥测或属性从设备复制到相关资产，以便可以汇总遥测。例如，可以将多个设备中的数据汇总到相关资产中。
@@ -34,7 +34,7 @@ ThingsBoard Rule Engine是一个高度可定制的框架，用于复杂事件的
 
 你可以使用ThingsBoard平台将DHT22温度传感器采集的-40°C至+ 80°C温度值进行收集。
 
-在此教程中我们将配置ThingsBoard Rule Engine来存储-40至80°C范围内的所有温度，并将所有数据记录到系统日志中。
+在此教程中我们将配置ThingsBoard规则引擎来存储-40至80°C范围内的所有温度，并将所有数据记录到系统日志中。
 
 #### 添加温度并验节点
 进入Thingsboard UI中**Rule Chains**转到**Root Rule Chain**.
@@ -102,7 +102,7 @@ curl -v -X POST -d '{"temperature":24}' http://localhost:8080/api/v1/$ACCESS_TOK
 
 ## 相关文档:
 
-你可以通过以下链接了解Thingsboard Rule Engine的更多信息：
+你可以通过以下链接了解Thingsboard规则引擎的更多信息：
 
 - [规则引擎概述](/docs/user-guide/rule-engine-2-0/overview/)
 - [规则引擎架构](/docs/user-guide/rule-engine-2-0/architecture/)

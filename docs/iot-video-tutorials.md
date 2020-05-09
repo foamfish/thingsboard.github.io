@@ -22,7 +22,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 <br>
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/dIKXFxpfB_Q" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/1.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -38,7 +38,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/L_geyNzS7tM" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/2.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -55,7 +55,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/JCW_hShAp7I" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/3.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -71,7 +71,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/KMsODExqeIw" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/4.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -86,7 +86,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 <br>
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/S8JNPYsdT_M" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/5.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 相关链接：<a href="https://blog.thingsboard.io/2016/12/temperature-upload-over-mqtt-using_21.html">教程文档
@@ -100,7 +100,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 <br>
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/NGU_MJd7fk8" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/6.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 相关链接：<a href="https://blog.thingsboard.io/2017/01/esp8266-gpio-control-over-mqtt-using.html">教程文档
@@ -114,7 +114,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 <br>
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/-26bxb90tt0" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/7.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 相关链接：<a href="https://blog.thingsboard.io/2017/01/temperature-upload-over-mqtt-using.html">教程文档
@@ -125,7 +125,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 <br>
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/SRnYjoS3M0Y" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/8.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 相关链接：<br>
@@ -146,7 +146,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/5qZRSBYTDN4" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/9.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -165,7 +165,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/Wau2icogLrw" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/10.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -183,7 +183,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/6DOyA3i5NGc" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/11.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -201,7 +201,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/XkGO_9j0iyo" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/12.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -219,7 +219,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/kFAZD2F2aso" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/13.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -235,7 +235,7 @@ ThingsBoard [Youtube频道](https://www.youtube.com/channel/UCDb9fsV-YR4JmnipAMG
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/ro3UFB_7SzE" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/14.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -253,7 +253,7 @@ ThingsBoard专业版Web界面使您能够在2分钟内配置公司或产品徽�
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/4dkbVASJ1JU" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/15.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -270,7 +270,7 @@ ThingsBoard专业版允许您配置多个自定义设备和资产组。每个实
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/RNdaEqrGhn8" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/16.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 <br>
@@ -287,7 +287,7 @@ ThingsBoard专业版允许您配置多个自定义设备和资产组。每个实
   
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/TzQ21MP8tNs" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/17.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -305,7 +305,7 @@ AWS IoT集成允许将数据从AWS IoT后端流式传输到ThingsBoard专业版�
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/udkuOUrNzWk" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/18.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -329,7 +329,7 @@ AWS IoT集成允许将数据从AWS IoT后端流式传输到ThingsBoard专业版�
  
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/CojStpYCTGI" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/19.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -345,7 +345,7 @@ Sigfox集成允许将数据从Sigfox后端流传输到ThingsBoard专业版，并
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/T769XqaqeFU" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/20.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -365,7 +365,7 @@ ThingsBoard专业版HTTP集成允许将现有协议和有效负载格式转换�
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/LTl9mS4uXyg" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/21.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -380,7 +380,7 @@ IBM Watson IoT集成允许将数据从IBM Watson IoT流传输到专业版，并�
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/eqSObPW2P1g" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/22.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -395,7 +395,7 @@ Azure事件中心集成允许将数据从Azure事件中心流式传输到ThingsB
 
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/Pl1_oXCnP-8" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/23.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 
@@ -416,7 +416,7 @@ ThingsBoard专业版MQTT集成允许将现有协议和有效负载格式转换�
  
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://www.youtube.com/embed/OPkE5FXGPrs" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/iot-video-tutorials/24.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div><br>
 

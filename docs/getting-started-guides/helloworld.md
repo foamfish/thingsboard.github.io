@@ -32,7 +32,7 @@ description: 开始使用ThingsBoard平台
   
 <div id="video">  
     <div id="video_wrapper">
-        <iframe src="https://thingsboard.oss-cn-chengdu.aliyuncs.com/Getting%20started%20with%20ThingsBoard%20v2.0%2B.mp4" frameborder="0" allowfullscreen></iframe>
+        <iframe src="http://124.161.226.23:8081/Content/tb/helloworld/5.mp4" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
@@ -154,7 +154,7 @@ F,cURL (HTTP),shell,resources/curl.sh,/docs/getting-started-guides/resources/cur
  
  <div id="video">  
      <div id="video_wrapper">
-         <iframe src="https://thingsboard.oss-cn-chengdu.aliyuncs.com/ThingsBoard%20CE%20education_%20Lesson%201.Tenancy.mp4" frameborder="0" allowfullscreen></iframe>
+         <iframe src="http://124.161.226.23:8081/Content/tb/helloworld/6.mp4" frameborder="0" allowfullscreen></iframe>
      </div>
  </div>
  <p></p>
@@ -166,4 +166,4 @@ F,cURL (HTTP),shell,resources/curl.sh,/docs/getting-started-guides/resources/cur
 ## 意见
 
 
-不要犹豫，在 **[github](https://github.com/thingsboard/thingsboard)** 上加注ThingsBoard 来帮助我们传播这个词。如果您对此样本有任何疑问，请将其发布在 **[论坛](https://groups.google.com/forum/#!forum/thingsboard)**。
+通过在 **[github](https://github.com/thingsboard/thingsboard)** 上关注ThingsBoard来帮助我们推广它。如果您对此样本有任何疑问，请将其发布在 **[论坛](https://groups.google.com/forum/#!forum/thingsboard)**。

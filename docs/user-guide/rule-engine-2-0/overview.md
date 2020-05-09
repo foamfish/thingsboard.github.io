@@ -8,7 +8,7 @@ description: 规则引擎概述
 * TOC
 {:toc}
 
-ThingsBoard Rule Engine是用于复杂事件处理的高度可定制和可配置的系统。使用规则引擎，您可以过滤，丰富和转换由IoT设备和相关资产发出的传入消息。您还可以触发各种操作，例如，通知或与外部系统的通信。
+ThingsBoard规则引擎是用于复杂事件处理的高度可定制和可配置的系统。使用规则引擎，您可以过滤，丰富和转换由IoT设备和相关资产发出的传入消息。您还可以触发各种操作，例如，通知或与外部系统的通信。
   
 ## 关键概念
 
@@ -26,7 +26,7 @@ ThingsBoard Rule Engine是用于复杂事件处理的高度可定制和可配置
   * 消息ID（Message ID）：基于时间的通用唯一标识符;
   * 消息发起者（Originator of the message）：Device，Asset或其他[Entity](/docs/user-guide/entities-and-relations/)标识符;
   * 消息类型（Type of the message）：遥测或不活动的事件等;
-  * 消息负载（Payload of the message）：带有实际消息有效负载的JSON正文;
+  * 消息负载（Payload of the message）：带有实际消息有效payload的JSON正文;
   * 元数据（Metadata）键值对的列表以及与消息有关的其他数据. 
 
 ##### 预定义的消息类型
@@ -220,7 +220,7 @@ ThingsBoard Rule Engine是用于复杂事件处理的高度可定制和可配置
 
 当规则节点生成传出消息时，它总是指定用于将消息路由到下一个节点的关系类型。
 
-典型的规则节点关系是“成功”和“失败”。表示逻辑运算的规则节点可以使用“ True”或“ False”。
+典型的规则节点关系是**Success**和**Failure**。表示逻辑运算的规则节点可以使用**True**或**False**。
 
 一些特定的规则节点可能使用完全不同的关系类型，例如：“Post Telemetry”，“Attributes Updated”，“Entity Created”等。
 
