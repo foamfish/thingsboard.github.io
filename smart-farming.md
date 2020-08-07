@@ -26,9 +26,13 @@ ThingsBoard平台提供了现成的组件和API，可大大缩短产品上市时
 
 实时演示服务器上托管的以下交互式仪表板代表了智能农业IoT数据可视化，该可视化可能已嵌入到IoT农业项目或未来的农场解决方案中。请参阅下面的仪表板说明。
 
-<iframe class="demoDashboardFrame" src="https://demo.thingsboard.io/dashboards/198c2b60-0edc-11e7-942c-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0&source=docs" frameborder="0" width="100%"></iframe>
+<iframe class="demoDashboardFrame" src="https://demo.thingsboard.io/dashboard/198c2b60-0edc-11e7-942c-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0&source=docs" frameborder="0" width="100%"></iframe>
 <div class="center" style="margin-bottom: 20px;">
+<<<<<<< HEAD
     <a target="_blank" style="padding: 0 40px;" href="https://demo.thingsboard.io/dashboards/1f9828d0-058e-11e7-87f7-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0&source=realtimeIotDashboards" class="button">在线实例</a>
+=======
+    <a target="_blank" style="padding: 0 40px;" href="https://demo.thingsboard.io/dashboard/1f9828d0-058e-11e7-87f7-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0&source=realtimeIotDashboards" class="button">Live demo</a>
+>>>>>>> master
 </div>
 
 随附的仪表板演示了使用ThingsBoard MQTT API收集的来自IoT传感器的实时数据。数据存储在我们的演示服务器上的Cassandra DB中。

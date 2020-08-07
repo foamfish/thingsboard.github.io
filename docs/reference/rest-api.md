@@ -43,7 +43,17 @@ ThingsBoard使用JWT进行请求身份验证。
 
 {% capture tabspec %}token
 A,get-token.sh,shell,resources/get-token.sh,/docs/reference/resources/get-token.sh
-B,resonse.json,json,resources/get-token-response.json,/docs/reference/resources/get-token-response.json{% endcapture %}
+B,response.json,json,resources/get-token-response.json,/docs/reference/resources/get-token-response.json{% endcapture %}
 {% include tabs.html %}
 
+<<<<<<< HEAD
  - 现在你应该将“X-Authorization”设置为“Bearer $YOUR_JWT_TOKEN”
+=======
+ - Now, you should set  'X-Authorization' to "Bearer $YOUR_JWT_TOKEN"
+ 
+ 
+## Java REST API Client
+
+ThingsBoard team provides client library written in Java to simplify consumption of the REST API.
+Please see Java REST API Client [documentation page](/docs/reference/rest-client/) for more details.
+>>>>>>> master

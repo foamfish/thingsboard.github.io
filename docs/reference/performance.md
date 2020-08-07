@@ -17,9 +17,16 @@ ThingsBoard开源物联网平台的关键功能之一就是数据收集，这是
 
 ThingsBoard的性能利用了三个主要项目：
 
+<<<<<<< HEAD
  - [Netty](http://netty.io/) 用于IoT设备的高性能MQTT server/broker。
  - [Akka](http://akka.io/) 用于高性能actor系统，以协调数百万个设备之间的消息。
  - [Cassandra](http://cassandra.apache.org/) 用于可扩展的高性能NoSQL DB，用于存储来自设备的时间序列数据。
+=======
+ - [Netty](http://netty.io/) for high-performance MQTT server/broker for IoT devices.
+ - [Cassandra](http://cassandra.apache.org/) for scalable high-performance NoSQL DB to store timeseries data from devices.
+ - Actor System for high-performance coordination of messages between millions of devices.
+ - Kafka (or RabbitMQ, AWS SQS, Azure Event Hub, Google PubSub) - as a scalable message queue 
+>>>>>>> master
  
 我们还使用 [Zookeeper](https://zookeeper.apache.org/) 进行协调，并在集群模式下使用 [gRPC](http://www.grpc.io/) 有关更多详细信息，请参见[平台架构](/docs/reference/)。
 

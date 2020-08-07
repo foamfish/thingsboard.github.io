@@ -12,7 +12,11 @@ description: ThingsBoard网关的安装结构和配置
 
 ## 目录结构
 
+<<<<<<< HEAD
 请在下面查看默认目录结构。
+=======
+Please see default directory structure below for daemon installation.  
+>>>>>>> master
 
 ```text
 /etc/thingsboard-gateway/config                   - Configuration folder.

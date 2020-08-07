@@ -40,7 +40,7 @@ B,CentOS,shell,resources/maven-centos-installation.sh,/docs/user-guide/install/r
 ```bash
 git clone git@github.com:thingsboard/thingsboard.git
 # checkout latest release branch
-git checkout release-2.4
+git checkout release-3.0
 ```
 
 #### 生成
@@ -64,4 +64,3 @@ mvn clean install -Ddockerfile.skip=false
 ```bash
 application/target
 ```
- 

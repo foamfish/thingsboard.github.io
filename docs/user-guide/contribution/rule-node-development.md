@@ -335,17 +335,26 @@ sudo service thingsboard restart
   
 ### UI configuration
 
+<<<<<<< HEAD
 ThingsBoard规则节点UI在官方[github仓库](https://github.com/thingsboard/rule-node-examples-ui)中配置了另一个项目。请参阅以下[连接](https://github.com/thingsboard/thingsboard-rule-config-ui#thingsboard-rule-config-ui)查看相关说明。
+=======
+The ThingsBoard rule nodes UI is configured with another project in the official [github repo](https://github.com/thingsboard/rule-node-examples-ui-ngx). Please, refer to the following [link](https://github.com/thingsboard/rule-node-examples-ui-ngx#rule-node-examples-ui-ngx) to see build instructions.
+>>>>>>> master
 
 #### 在热部署模式下运行Rule Node UI容器
 
 要以热重新部署方式运行Rule Node UI容器：
 
+<<<<<<< HEAD
  - 您需要先在**server.js**文件中将常量**ruleNodeUiforwardPort**从8080更改为5000，应在此处：
+=======
+ - first you need to change constant **ruleNodeUiforwardPort** from **8080** to **5000** in file **proxy.conf.js** that should be here:
+>>>>>>> master
     
 ```
-cd ${TB_WORK_DIR}/ui/server.js
+cd ${TB_WORK_DIR}/ui-ngx/proxy.conf.js
 ```
+<<<<<<< HEAD
      
  - 其次您需要在热部署模式下运行UI容器。请参考以下链接以了解如何执行此操作：[以热重新部署模式运行UI容器](/docs/user-guide/contribution/how-to-contribute/#running-ui-container-in-hot-redeploy-mode)。
  
@@ -356,13 +365,23 @@ cd ${TB_RULE_NODE_UI_WORK_DIR}/ui/server.js
 ```
    
   - 最后一步是从本地目录**TB_RULE_NODE_UI_WORK_DIR**执行如下命令:
+=======
+    
+ - second, you need to run UI container in hot redeploy mode. Please, refer to the following link to see how to do this: [Running UI container in hot redeploy mode](/docs/user-guide/contribution/how-to-contribute/#running-ui-container-in-hot-redeploy-mode).   
+    
+ - last step is to execute the following command from your local directory **TB_RULE_NODE_UI_WORK_DIR**:
+>>>>>>> master
     
     ```
     npm start
     ```
 
+<<<<<<< HEAD
 这会将规则节点UI请求转发到在**3000**端口上侦听的服务器。
 
 ## 下一步
+=======
+## Next steps
+>>>>>>> master
  
  {% assign currentGuide = "Contribution" %}{% include templates/guides-banner.md %}

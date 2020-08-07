@@ -224,8 +224,8 @@ mqtt转换器的类型：
 2. custom -- 自定义转换器（您可以自己编写，它将用于转换来自代理的传入数据。）
 
 {% capture mqttconvertertypespec %}
-json<small>Recommended if json will be received in response<</small>%,%json%,%templates/iot-gateway/mqtt-converter-json-config.md%br%
-custom<small>Recommended if bytes or anything else will be received in response<</small>%,%custom%,%templates/iot-gateway/mqtt-converter-custom-config.md{% endcapture %}
+json<small>Recommended if json will be received in response</small>%,%json%,%templates/iot-gateway/mqtt-converter-json-config.md%br%
+custom<small>Recommended if bytes or anything else will be received in response</small>%,%custom%,%templates/iot-gateway/mqtt-converter-custom-config.md{% endcapture %}
 
 {% include content-toggle.html content-toggle-id="MqttConverterTypeConfig" toggle-spec=mqttconvertertypespec %}
 

@@ -29,6 +29,7 @@ ThingsBoard服务器节点充当支持常规请求和观察请求的CoAP服务�
 * **4.01 未授权** - **$ACCESS_TOKEN**无效。
 * **4.04 未找到** - 找不到资源。
 
+<<<<<<< HEAD
 ## Key-value格式
 
 ThingsBoard支持JSON中的key-value内容。键始终是一个字符串，而值可以是字符串，布尔值，双精度或长整数。也可以使用自定义二进制格式或某些序列化框架。有关更多详细信息，请参见[自定义协议](#protocol-customization)协议。
@@ -37,6 +38,9 @@ ThingsBoard支持JSON中的key-value内容。键始终是一个字符串，而�
 ```json
 {"stringKey":"value1", "booleanKey":true, "doubleKey":42.0, "longKey":73}
 ```
+=======
+{% include templates/api/key-value-format.md %}
+>>>>>>> master
 
 ## 遥测上传API
 

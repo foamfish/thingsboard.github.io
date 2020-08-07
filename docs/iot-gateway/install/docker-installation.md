@@ -19,12 +19,13 @@ title: Linux Docker下安装ThingsBoard网关
 **执行以下命令以直接运行此docker：**
 
 ```
-docker run -it -v ~/.tb-gateway/logs:/var/log/thingsboard-gateway -v ~/.tb-gateway/extensions:/var/lib/thingsboard_gateway/extensions -v ~/.tb-gateway/config:/etc/thingsboard-gateway/config --name tb-gateway --restart always thingsboard/tb-gateway
+docker run -it -v ~/.tb-gateway/logs:/thingsboard_gateway/logs -v ~/.tb-gateway/extensions:/thingsboard_gateway/extensions -v ~/.tb-gateway/config:/thingsboard_gateway/config --name tb-gateway --restart always thingsboard/tb-gateway
 ```
 {: .copy-code}
 
 说明: 
     
+<<<<<<< HEAD
 - `docker run`              - 运行容器
 - `-it`                     - 将终端会话与网关进程输出连接
 - `-v ~/.tb-gateway/config:/etc/thingsboard-gateway/config`   - 挂载主机目录`~/.tb-gateway/config`至网关配置目录
@@ -33,6 +34,16 @@ docker run -it -v ~/.tb-gateway/logs:/var/log/thingsboard-gateway -v ~/.tb-gatew
 - `--name tb-gateway`             - 网关在本机的别名
 - `--restart always`        - 系统重启或出现故障后自动启动ThingsBoard。
 - `thingsboard/tb-gateway`          - docker镜像
+=======
+- `docker run`              - run this container
+- `-it`                     - attach a terminal session with current Gateway process output
+- `-v ~/.tb-gateway/config:/thingsboard_gateway/config`   - mounts the host's dir `~/.tb-gateway/config` to Gateway config  directory
+- `-v ~/.tb-gateway/extensions:/thingsboard_gateway/extensions`   - mounts the host's dir `~/.tb-gateway/extensions` to Gateway extensions  directory
+- `-v ~/.tb-gateway/logs:/thingsboard_gateway/logs`   - mounts the host's dir `~/.tb-gateway/logs` to Gateway logs  directory
+- `--name tb-gateway`             - friendly local name of this machine
+- `--restart always`        - automatically start ThingsBoard in case of system reboot and restart in case of failure.
+- `thingsboard/tb-gateway`          - docker image
+>>>>>>> master
 
 ## 分离、停止和启动
 

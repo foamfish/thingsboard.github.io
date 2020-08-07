@@ -13,5 +13,14 @@ toc:
   path: /docs/reference/http-api/
 - title: REST API
   path: /docs/reference/rest-api/
+<<<<<<< HEAD
 - title: MQTT网关API参考
   path: /docs/reference/gateway-mqtt-api/
+=======
+- title: MQTT Gateway API Reference
+  path: /docs/reference/gateway-mqtt-api/
+- title: Java REST Client
+  path: /docs/reference/rest-client/
+- title: Python REST Client
+  path: /docs/reference/python-rest-client/
+>>>>>>> master

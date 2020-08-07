@@ -25,14 +25,22 @@ description: 在树莓派3代B上安装ThingsBoard
 下载安装包
 
 ```bash
+<<<<<<< HEAD
 wget https://github.com/thingsboard/thingsboard/releases/download/v2.4.1/thingsboard-2.4.1.deb
+=======
+wget https://github.com/thingsboard/thingsboard/releases/download/v3.0.1/thingsboard-3.0.1.deb
+>>>>>>> master
 ```
 {: .copy-code}
 
 安装ThingsBoard服务
 
 ```bash
+<<<<<<< HEAD
 sudo dpkg -i thingsboard-2.4.1.deb
+=======
+sudo dpkg -i thingsboard-3.0.1.deb
+>>>>>>> master
 ```
 {: .copy-code}
 
@@ -40,6 +48,7 @@ sudo dpkg -i thingsboard-2.4.1.deb
 
 {% include templates/install/ubuntu-db-postgresql.md %}
 
+<<<<<<< HEAD
 ### 步骤4.低性能电脑内存修改(1GB RAM)
 
 {% include templates/install/memory-on-slow-machines.md %} 
@@ -49,6 +58,29 @@ sudo dpkg -i thingsboard-2.4.1.deb
 
 
 ### 步骤6.启动ThingsBoard服务
+=======
+### Step 4. Choose ThingsBoard queue service
+
+{% include templates/install/rpi-install-queue.md %}
+
+{% capture contenttogglespecqueue %}
+In Memory <small>(built-in and default)</small>%,%inmemory%,%templates/install/queue-in-memory.md%br%
+AWS SQS <small>(managed service from AWS)</small>%,%aws-sqs%,%templates/install/ubuntu-queue-aws-sqs.md%br%
+Google Pub/Sub <small>(managed service from Google)</small>%,%pubsub%,%templates/install/ubuntu-queue-pub-sub.md%br%
+Azure Service Bus <small>(managed service from Azure)</small>%,%service-bus%,%templates/install/ubuntu-queue-service-bus.md{% endcapture %}
+
+{% include content-toggle.html content-toggle-id="ubuntuThingsboardQueue" toggle-spec=contenttogglespecqueue %} 
+
+### Step 5. Memory update for slow machines (1GB of RAM) 
+
+{% include templates/install/memory-on-slow-machines.md %} 
+
+### Step 6. Run installation script
+{% include templates/run-install.md %} 
+
+
+### Step 7. Start ThingsBoard service
+>>>>>>> master
 
 {% include templates/start-service.md %}
 

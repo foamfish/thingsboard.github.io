@@ -13,7 +13,11 @@
 
 请一定牢记此密码，为了方便记忆我们将密码替换为postgres。
 
+<<<<<<< HEAD
 ##### 创建ThingsBoard数据库
+=======
+Download the installation file (PostgreSQL 11.7 or newer releases) [here](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows) and follow the installation instructions.
+>>>>>>> master
 
 安装成功后启动“pgAdmin”并使用超级用户(postgres)身份登录。
 
@@ -43,6 +47,7 @@ spring:
       repositories:
         enabled: "true"
   jpa:
+    open-in-view: "false"
     hibernate:
       ddl-auto: "none"
     database-platform: "${SPRING_JPA_DATABASE_PLATFORM:org.hibernate.dialect.PostgreSQLDialect}"
@@ -51,5 +56,16 @@ spring:
     url: "${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/thingsboard}"
     username: "${SPRING_DATASOURCE_USERNAME:postgres}"
     password: "${SPRING_DATASOURCE_PASSWORD:YOUR_POSTGRES_PASSWORD_HERE}"
+    hikari:
+      maximumPoolSize: "${SPRING_DATASOURCE_MAXIMUM_POOL_SIZE:5}"
 ``` 
 {: .copy-code}
+
+locate "SQL_POSTGRES_TS_KV_PARTITIONING" parameter in order to override the default value for timestamp key-value storage partitioning size:
+
+```yml
+    sql:
+      postgres:
+        # Specify partitioning size for timestamp key-value storage. Example: DAYS, MONTHS, YEARS, INDEFINITE.
+        ts_key_value_partitioning: "${SQL_POSTGRES_TS_KV_PARTITIONING:MONTHS}"
+```

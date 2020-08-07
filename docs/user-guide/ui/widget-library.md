@@ -167,14 +167,23 @@ description: ThingsBoard仪表板部件库
 #### Widgets Bundle导出
 
 
+<<<<<<< HEAD
 您可以将部件导出为JSON格式，然后将其导入相同或另一个ThingsBoard实例。
 
 为了导出部件包，您应该导航到**Widgets Library**页面，然后单击位于特定部件包卡上的导出按钮。
+=======
+In order to export widgets bundle, you should navigate to the **Widgets Library** page and click on the export button located on the particular widgets bundle row.
+ 
+>>>>>>> master
 ![image](/images/user-guide/ui/export-widgets-bundle.png)
 
 #### Widgets Bundle导入
 
+<<<<<<< HEAD
 将需要导入窗口部件类型，您应该导航到“窗口小部件库”页面，然后打开窗口小部件包，然后单击屏幕右下方的大“ +”按钮，然后单击导入按钮。
+=======
+Similar, to import the widgets bundle you should navigate to the **Widgets Library** page and click on the "+" button in the top-right corner of the **Widgets Bundles** table and then choose "Import widgets bundle" option. 
+>>>>>>> master
 
 ![image](/images/user-guide/ui/import-widgets-bundle.png)
 

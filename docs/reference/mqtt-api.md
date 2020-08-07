@@ -28,6 +28,7 @@ ThingsBoard服务器节点充当支持QoS级别0（最多一次）和QoS级别1�
 我们将在本文中使用令牌凭据对进行设备访问，这些凭证稍后将称为  **$ACCESS_TOKEN** 。应用程序需要发送用户名包含  **$ACCESS_TOKEN** 的MQTT CONNECT消息。
 连接期间可能的返回码及其原因：
 
+<<<<<<< HEAD
 * **0x00 连接成功** - 成功连接
 * **0x04 连接失败** - 用户名或密码错误。
 * **0x05 连接未授权** - -用户名包含无效的 **$ACCESS_TOKEN**。
@@ -41,6 +42,9 @@ ThingsBoard支持JSON以key-value的格式。键始终是一个字符串，而�
 ```json
 {"stringKey":"value1", "booleanKey":true, "doubleKey":42.0, "longKey":73}
 ```
+=======
+{% include templates/api/key-value-format.md %}
+>>>>>>> master
 
 ## 遥测上传API
 

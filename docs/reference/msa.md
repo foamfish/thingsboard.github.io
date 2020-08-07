@@ -84,10 +84,17 @@ ThingsBoard节点是用Java编写的核心服务，负责处理：
  
 **注意**：已将ThingsBoard v2.5的规则引擎移动到单独的微服务中。有关更多详细信息请参见[路线图](/docs/reference/roadmap)。
  
+<<<<<<< HEAD
 ThingsBoard节点使用Akka actor系统来实现租户，设备，规则链和规则节点actor。
 平台节点可以加入每个节点都相等的集群。服务发现是通过Zookeeper完成的。
 ThingsBoard节点使用基于实体ID的一致哈希算法在彼此之间路由消息。
 因此用于同一实体的消息在同一ThingsBoard节点上进行处理。平台使用[gRPC]（https://grpc.io/）在ThingsBoard节点之间发送消息。
+=======
+ThingsBoard node uses Actor System to implement tenant, device, rule chains and rule node actors. 
+Platform nodes can join the cluster, where each node is equal. Service discovery is done via Zookeeper. 
+ThingsBoard nodes route messages between each other using consistent hashing algorithm based on entity id. 
+So, messages for the same entity are processed on the same ThingsBoard node. Platform uses [gRPC](https://grpc.io/) to send messages between ThingsBoard nodes.
+>>>>>>> master
 
 **注意**：ThingsBoard作者考虑在将来的版本中从gRPC迁移到Kafka，以便在ThingsBoard节点之间交换消息。
 主要思想是牺牲性能/等待时间的小损失，以支持由卡夫卡用户群提供的持久可靠的消息传递和自动负载平衡。
@@ -112,9 +119,15 @@ ThingsBoard使用Zookeeper来处理从单个实体（设备，资产，承租人
 
 ### HAProxy（或其他LoadBalancer）
 
+<<<<<<< HEAD
 我们建议使用HAProxy进行负载平衡。
 您可以找到参考 [haproxy.cfg](https://github.com/thingsboard/thingsboard/blob/release-2.4/docker/haproxy/config/haproxy.cfg) 
 与以下架构图相对应的配置：
+=======
+We recommend to use HAProxy for load balancing. 
+You can find the reference [haproxy.cfg](https://github.com/thingsboard/thingsboard/blob/release-2.5/docker/haproxy/config/haproxy.cfg) 
+configuration that corresponds to the architecture diagram below: 
+>>>>>>> master
 
 {% highlight conf %}
 #HA Proxy Config
@@ -241,7 +254,15 @@ backend tb-api-backend
 
 ## Deployment
 
+<<<<<<< HEAD
 您可以找到参考[docker-compose.yml](https://github.com/thingsboard/thingsboard/blob/release-2.4/docker/docker-compose.yml) 和相应的 [documentation](https://github.com/thingsboard/thingsboard/blob/master/docker/README.md) 它将帮助您在集群模式下（尽管在单个主机上）运行ThingsBoard容器。
+=======
+You can find the reference [docker-compose.yml](https://github.com/thingsboard/thingsboard/blob/release-2.5/docker/docker-compose.yml)
+and corresponding [documentation](https://github.com/thingsboard/thingsboard/blob/master/docker/README.md) that will help you to run ThingsBoard containers in a cluster mode 
+(although on a single host machine)
+
+TODO: 2.5  
+>>>>>>> master
 
 {% highlight yaml %}
 version: '2.2'

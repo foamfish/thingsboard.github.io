@@ -139,6 +139,33 @@ Kafka节点向Kafka代理发送消息。消息可具有任何消息类型。将�
 
 **Outbound message** 此节点的出站消息将在消息元数据中包含响应**offset**, **partition** and **topic**属性。原始消息payload、类型和发送方不会被更改。
 
+**Note** - if you want to use [Confluent cloud](https://confluent.cloud) as a kafka broker you should add next properties:
+
+<table>
+    <tr>
+        <th>Key</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>ssl.endpoint.identification.algorithm</td>
+        <td>https</td>
+    </tr>
+    <tr>
+        <td>sasl.mechanism</td>
+        <td>PLAIN</td>
+    </tr>
+    <tr>
+        <td>sasl.jaas.config</td>
+        <td>org.apache.kafka.common.security.plain.PlainLoginModule required username="CLUSTER_API_KEY" password="CLUSTER_API_SECRET";</td>
+    </tr>
+    <tr>
+        <td>security.protocol</td>
+        <td>SASL_SSL</td>
+    </tr>
+</table>
+- **CLUSTER_API_KEY** - your access key from Cluster settings.
+- **CLUSTER_API_SECRET** - your access secret from Cluster settings.
+
 <br/>
 
 # MQTT Node
@@ -185,6 +212,57 @@ Kafka节点向Kafka代理发送消息。消息可具有任何消息类型。将�
 **Published body** - 节点将向MQTT主题发送完整的消息有效负载。如果需要，可以将规则链配置为使用转换节点链，以将正确的有效负载发送到MQTT代理.
 
 在成功发布消息的情况下，原始消息将通过**Success**链传递到下一个节点，否则将使用**Failure**链。
+
+<br/>
+
+# Azure IoT Hub Node
+
+<table  style="width:12%">
+   <thead>
+     <tr>
+	 <td style="text-align: center"><strong><em>Since TB Version 2.5.3</em></strong></td>
+     </tr>
+   </thead>
+</table> 
+
+![image](/images/user-guide/rule-engine-2-0/nodes/external-iot-hub.png)
+
+Configuration:
+
+![image](/images/user-guide/rule-engine-2-0/nodes/external-iot-hub-config.png)
+
+- **Topic** - for more information about IoT Hub topic use [link](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-mqtt-support#sending-device-to-cloud-messages).
+- **Hostname** - Azure IoT Hub Hostname.
+- **Device ID** - Your Device ID from Azure IoT Hub.
+- **Credentials** - Azure IoT Hub connection credentials. Can be either *Shared Access Signature* or *PEM*.
+
+Different Authentication credentials are supported for Azure IoT Hub:
+
+- Shared Access Signature - SAS Key is used for Authentication
+- PEM - PEM certificates are used for Authentication
+
+If **Shared Access Signature** credentials type is selected, the following configuration should be provided:
+- SAS Key - it is key from your device in [Azure IoT Hub](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-authenticate-downstream-device#symmetric-key-authentication)
+- CA certificate file, by default used Baltimore certificate. More about certificates [here](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-mqtt-support#tlsssl-configuration)
+
+If **PEM** credentials type is selected, the following configuration should be provided:
+
+- CA certificate file, by default used Baltimore certificate. More about certificates [here](https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-mqtt-support#tlsssl-configuration)
+- Certificate file
+- Private key file
+- Private key password
+
+[X.509 CA-signed authentication](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-authenticate-downstream-device#x509-ca-signed-authentication)
+
+[CACertificates instruction](https://github.com/Azure/azure-iot-sdk-c/tree/master/tools/CACertificates)
+
+<br/>
+
+**Published body** - Node will send full Message payload to the Azure IoT Hub device.
+If required, Rule Chain can be configured to use chain of Transformation Nodes for sending correct Payload to the Azure IoT Hub.
+
+In case of successful message publishing, original Message will be passed to the next nodes via **Success** chain, 
+otherwise **Failure** chain is used.
 
 <br/>
 

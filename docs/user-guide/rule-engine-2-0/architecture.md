@@ -16,8 +16,14 @@ ThingsBoard规则引擎基于两个主要组件：参与者模型和消息队列
  
 ### Actor模型
 
+<<<<<<< HEAD
 只要服务器端API调用，Actor模型就可以实现高性能和并发处理来自设备传输层的消息。
 ThingsBoard使用Akka作为actor系统实现。与规则引擎相关的主要参与者有两个：Rule Chain Actor和Rule Node Actor。
+=======
+Actor model enables high performance and concurrent processing of messages from device transport layer as long as server-side API calls. 
+ThingsBoard uses own Actor System implementation that is sharpened for our use case. 
+There are two main actors related to the rule engine: Rule Chain Actor and Rule Node Actor.
+>>>>>>> master
 
 #### 规则链Actor
 

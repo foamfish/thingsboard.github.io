@@ -19,19 +19,28 @@ description: ThingsBoard令牌认证。
 
 下面的示例演示如何连接到使用自签名证书的ThingsBoard MQTT服务器。您将需要具有PEM格式的服务器证书的公钥。有关服务器端配置的更多详细信息，请[参见](/docs/user-guide/mqtt-over-ssl/#self-signed-certificate-generation)以下说明。
 
+<<<<<<< HEAD
 下载Python客户端示例[**one-way-ssl-mqtt-client.py**](https://raw.githubusercontent.com/thingsboard/thingsboard/master/tools/src/main/python/one-way-ssl-mqtt-client.py)。指定访问令牌和服务器证书公钥的路径
+=======
+Download Python client example [**one-way-ssl-mqtt-client.py**](/docs/user-guide/resources/mqtt-over-ssl/one-way-ssl-mqtt-client.py).
+Specify your access token and path to the public key of the server certificate.
+>>>>>>> master
 
 ```python
 # Some code omitted
 
 client.tls_set(ca_certs="mqttserver.pub.pem", certfile=None, keyfile=None, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1, ciphers=None);
 
-client.username_pw_set("TEST_TOKEN")
+client.username_pw_set("accessToken")
 
 # Some code omitted
 ```
 
+<<<<<<< HEAD
 **注意** 脚本使用 **8883** mqtt端口和需要paho mqtt库你可以使用以下命令进行安装：**pip install paho-mqtt**
+=======
+**Note** Script uses **8883** mqtt port and requires paho mqtt library that you can install using the following command: **pip3 install paho-mqtt**
+>>>>>>> master
  
 运行脚本:
 

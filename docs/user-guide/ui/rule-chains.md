@@ -12,7 +12,12 @@ description: ThingsBoard 规则链管理
 
 ## 规则链页面
 
+<<<<<<< HEAD
 规则链管理UI页面显示配置的租户规则链表。每个规则链都有一个单独的卡。您可以执行以下操作：
+=======
+Rule Chains Administration UI page displays a table of configured tenant rule chains.
+You are able to do following operations:
+>>>>>>> master
 
  - 导入或创建新规则链
  - 将规则链导出到JSON
@@ -29,13 +34,21 @@ description: ThingsBoard 规则链管理
 
 您可以将规则链导出为JSON格式，并将其导入到相同或其他ThingsBoard实例。
 
+<<<<<<< HEAD
 为了导出规则链，您应该导航到**规则链**页面，然后单击位于特定规则链卡上的导出按钮。
+=======
+In order to export rule chain, you should navigate to the **Rule Chains** page and click on the export button located on the particular rule chain row.
+>>>>>>> master
  
 ![image](/images/user-guide/ui/export-rule-chain.png)
 
 #### 规则导入
 
+<<<<<<< HEAD
 要导入规则链你应该导航到**规则链**页面，然后单击屏幕右下角的大“+”按钮然后单击导入按钮。
+=======
+Similar, to import the rule chain you should navigate to the **Rule Chains** page and click on the "+" button located in the top-right corner of the **Rule chains** table and then choose "Import rule chain" option. 
+>>>>>>> master
 
 ![image](/images/user-guide/ui/rule-import.png)
 

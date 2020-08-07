@@ -42,18 +42,35 @@ Windows用户应将Docker托管卷用于ThingsBoard数据库。
 打开"Docker Quickstart Terminal"。执行以下命令以创建Docker卷：
 
 ``` 
-$ docker volume create mytb-data
-$ docker volume create mytb-logs
+docker volume create mytb-data
+docker volume create mytb-logs
 ```
 
+<<<<<<< HEAD
 执行以下命令以直接运行docker：
                                    
 ``` 
 $ docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v mytb-data:/data -v ~/mytb-logs:/var/log/thingsboard --name mytb --restart always thingsboard/tb-postgres
 ```
+=======
+## Choose ThingsBoard queue service
+
+{% include templates/install/install-queue.md %}
+
+{% capture contenttogglespecqueue %}
+In Memory <small>(built-in and default)</small>%,%inmemory%,%templates/install/windows-docker-queue-in-memory.md%br%
+Kafka <small>(recommended for on-prem, production installations)</small>%,%kafka%,%templates/install/windows-docker-queue-kafka.md%br%
+AWS SQS <small>(managed service from AWS)</small>%,%aws-sqs%,%templates/install/windows-docker-queue-aws-sqs.md%br%
+Google Pub/Sub <small>(managed service from Google)</small>%,%pubsub%,%templates/install/windows-docker-queue-pub-sub.md%br%
+Azure Service Bus <small>(managed service from Azure)</small>%,%service-bus%,%templates/install/windows-docker-queue-service-bus.md%br%
+RabbitMQ <small>(for small on-prem installations)</small>%,%rabbitmq%,%templates/install/windows-docker-queue-rabbitmq.md{% endcapture %}
+
+{% include content-toggle.html content-toggle-id="ubuntuThingsboardQueue" toggle-spec=contenttogglespecqueue %} 
+>>>>>>> master
 
 说明: 
     
+<<<<<<< HEAD
 - `docker run`              - 运行容器
 - `-it`                     - 将终端会话与当前ThingsBoard进程输出连接
 - `-p 9090:9090`            - 将本地端口9090映射至HTTP端口9090
@@ -66,12 +83,41 @@ $ docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v mytb-data:/data -
 - `thingsboard/tb-postgres`          - docker镜象`thingsboard/tb-cassandra`或`thingsboard/tb`
 
 从Windows计算机上的外部IP主机访问资源，请执行以下命令：
+=======
+- `8080:9090`            - connect local port 8080 to exposed internal HTTP port 9090
+- `1883:1883`            - connect local port 1883 to exposed internal MQTT port 1883    
+- `5683:5683`            - connect local port 5683 to exposed internal COAP port 5683 
+- `~/.mytb-data:/data`   - mounts the host's dir `~/.mytb-data` to ThingsBoard DataBase data directory
+- `~/.mytb-logs:/var/log/thingsboard`   - mounts the host's dir `~/.mytb-logs` to ThingsBoard logs directory
+- `mytb`             - friendly local name of this machine
+- `restart: always`        - automatically start ThingsBoard in case of system reboot and restart in case of failure.
+- `image: thingsboard/tb-postgres`          - docker image, can be also `thingsboard/tb-cassandra` or `thingsboard/tb`
+
+Execute the following command to up this docker compose directly:
+
+**NOTE**: For running docker compose commands you have to be in a directory with docker-compose.yml file. 
+
+```
+docker-compose pull
+docker-compose up
+```
+{: .copy-code}
+
+In order to get access to necessary resources from external IP/Host on Windows machine, please execute the following commands:
+>>>>>>> master
 
 ``` 
-$ VBoxManage controlvm "default" natpf1 "tcp-port9090,tcp,,9090,,9090"  
-$ VBoxManage controlvm "default" natpf1 "tcp-port1883,tcp,,1883,,1883"
-$ VBoxManage controlvm "default" natpf1 "tcp-port5683,tcp,,5683,,5683"
+VBoxManage controlvm "default" natpf1 "tcp-port8080,tcp,,8080,,9090"  
+VBoxManage controlvm "default" natpf1 "tcp-port1883,tcp,,1883,,1883"
+VBoxManage controlvm "default" natpf1 "tcp-port5683,tcp,,5683,,5683"
 ```
+<<<<<<< HEAD
+=======
+{: .copy-code}
+    
+After executing this command you can open `http://{your-host-ip}:9090` in you browser (for ex. `http://localhost:8080`). You should see ThingsBoard login page.
+Use the following default credentials:
+>>>>>>> master
 
 执行完命令后您可以`http://{your-host-ip}:9090`在浏览器中打开(例如`http://localhost:9090`)。您应该看到ThingsBoard登录页面。
 
@@ -89,23 +135,31 @@ $ VBoxManage controlvm "default" natpf1 "tcp-port5683,tcp,,5683,,5683"
 
 要重新连接到终端（查看ThingsBoard日志），请运行:
 
+<<<<<<< HEAD
 分离容器：
+=======
+In case of any issues you can examine service logs for errors.
+For example to see ThingsBoard node logs execute the following command:
+>>>>>>> master
 
 ```
-$ docker attach mytb
+docker-compose logs -f mytbpe
 ```
+{: .copy-code}
 
 停止容器：
 
 ```
-$ docker stop mytb
+docker-compose stop
 ```
+{: .copy-code}
 
 启动容器：
 
 ```
-$ docker start mytb
+docker-compose start
 ```
+{: .copy-code}
 
 ## 升级
 
@@ -113,10 +167,10 @@ $ docker start mytb
 
 ```
 $ docker pull thingsboard/tb-postgres
-$ docker stop mytb
+$ docker-compose stop
 $ docker run -it -v mytb-data:/data --rm thingsboard/tb-postgres upgrade-tb.sh
 $ docker rm mytb
-$ docker run -it -p 9090:9090 -p 1883:1883 -p 5683:5683/udp -v ~/mytb-data:/data -v ~/mytb-logs:/var/log/thingsboard --name mytb --restart always thingsboard/tb-postgres
+$ docker-compose up
 ```
 
 **注意**: 如果您使用不同的数据库，则在所有命令中将映像名称从更改为`thingsboard/tb-postgres` 至 `thingsboard/tb-cassandra` 或 `thingsboard/tb` correspondingly.

@@ -61,6 +61,21 @@ description: ThingsBoard文档-了解平台使用并让您的IoT项目在ThingsB
 
 <p>ThingsBoard <b><a href="/docs/iot-gateway/">网关</a></b>相关文档</p>
 
+<<<<<<< HEAD
 <h2>视频教程</h2>
 
 <p>关于ThingsBoard在<b><a href="https://www.bilibili.com/video/BV1nt41137rx?from=search&seid=1773731488104463388">bilibili</a></b> 的相关视频， 讲解了平台各种功能。</p>
+=======
+<h2>Trendz Analytics Features</h2>
+
+<ul>    
+    <li><b><a href="/docs/trendz/prediction">Forecast timeseries</a></b> - predict system behaviour and forecast utilisation</li>
+    <li><b><a href="/docs/trendz/calculated-fields">Calculated fields</a></b> - define, monitor and compare custom KPIs</li>
+    <li><b><a href="/docs/trendz/states">States</a></b> - track how much time equipment spent in different states</li>
+    <li><b><a href="/docs/trendz/data-filtering">Filtering</a></b> - clear and filter data by any field</li>
+    <li><b><a href="/docs/trendz/visualizations-overview">Advanced visualisations</a></b> - create heatmaps, scatter plots and compare utilities</li>
+    <li><b><a href="/docs/trendz/data-grouping-aggregation">Grouping and aggregation</a></b> - aggregate data on different levels in few minutes</li>
+</ul>
+
+<p>Comprehensive documentation about ThingsBoard <b><a href="/docs/trendz/">Trendz Analytics</a></b>.</p>
+>>>>>>> master

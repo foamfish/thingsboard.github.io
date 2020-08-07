@@ -23,9 +23,13 @@ ThingsBoard平台提供了现成的组件和API，可大大减少产品上市时
 
 实时演示服务器上托管的以下交互式仪表板代表了可能嵌入在IoT车队跟踪项目中的车辆路线和状态指示器可视化。请参阅下面的仪表板说明。
 
-<iframe class="demoDashboardFrame" src="https://demo.thingsboard.io/dashboards/83cbe060-0edc-11e7-942c-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0&source=docs" frameborder="0" width="100%"></iframe>
+<iframe class="demoDashboardFrame" src="https://demo.thingsboard.io/dashboard/83cbe060-0edc-11e7-942c-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0&source=docs" frameborder="0" width="100%"></iframe>
 <div class="center" style="margin-bottom: 20px;">
+<<<<<<< HEAD
     <a target="_blank" style="padding: 0 40px;" href="https://demo.thingsboard.io/dashboards/3d0bf910-ee09-11e6-b619-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0&source=realtimeIotDashboards" class="button">在线实例</a>
+=======
+    <a target="_blank" style="padding: 0 40px;" href="https://demo.thingsboard.io/dashboard/3d0bf910-ee09-11e6-b619-bb0136cc33d0?publicId=963ab470-34c9-11e7-a7ce-bb0136cc33d0&source=realtimeIotDashboards" class="button">Live demo</a>
+>>>>>>> master
 </div>
 
 随附的仪表板演示了使用ThingsBoard MQTT API收集的来自车辆传感器的实时数据。数据存储在我们的演示服务器上的Cassandra DB中。

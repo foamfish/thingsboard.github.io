@@ -29,14 +29,22 @@ description: 在Ubuntu Server上安装ThingsBoard CE
 下载安装包。
 
 ```bash
+<<<<<<< HEAD
 wget https://github.com/thingsboard/thingsboard/releases/download/v2.4.1/thingsboard-2.4.1.deb
+=======
+wget https://github.com/thingsboard/thingsboard/releases/download/v3.0.1/thingsboard-3.0.1.deb
+>>>>>>> master
 ```
 {: .copy-code}
 
 安装ThingsBoard服务
 
 ```bash
+<<<<<<< HEAD
 sudo dpkg -i thingsboard-2.4.1.deb
+=======
+sudo dpkg -i thingsboard-3.0.1.deb
+>>>>>>> master
 ```
 {: .copy-code}
 
@@ -45,6 +53,7 @@ sudo dpkg -i thingsboard-2.4.1.deb
 {% include templates/install/install-db.md %}
 
 {% capture contenttogglespec %}
+<<<<<<< HEAD
 PostgreSQL <small>(建议 < 5K msg/sec)</small>%,%postgresql%,%templates/install/ubuntu-db-postgresql.md%br%
 Hybrid <br/>PostgreSQL+Cassandra<br/><small>(建议 > 5K msg/sec)</small>%,%hybrid%,%templates/install/ubuntu-db-hybrid.md{% endcapture %}
 
@@ -60,6 +69,38 @@ Hybrid <br/>PostgreSQL+Cassandra<br/><small>(建议 > 5K msg/sec)</small>%,%hybr
 
 
 ### 步骤6.启动ThingsBoard服务
+=======
+PostgreSQL <small>(recommended for < 5K msg/sec)</small>%,%postgresql%,%templates/install/ubuntu-db-postgresql.md%br%
+Hybrid <br/>PostgreSQL+Cassandra<br/><small>(recommended for > 5K msg/sec)</small>%,%hybrid%,%templates/install/ubuntu-db-hybrid.md%br%
+Hybrid <br/>PostgreSQL+TimescaleDB<br/><small>(for TimescaleDB professionals)</small>%,%timescale%,%templates/install/ubuntu-db-hybrid-timescale.md{% endcapture %}
+
+{% include content-toggle.html content-toggle-id="ubuntuThingsboardDatabase" toggle-spec=contenttogglespec %} 
+
+### Step 4. Choose ThingsBoard queue service
+
+{% include templates/install/install-queue.md %}
+
+{% capture contenttogglespecqueue %}
+In Memory <small>(built-in and default)</small>%,%inmemory%,%templates/install/queue-in-memory.md%br%
+Kafka <small>(recommended for on-prem, production installations)</small> %,%kafka%,%templates/install/ubuntu-queue-kafka.md%br%
+Kafka in docker container <small>(recommended for on-prem, production installations)</small> %,%kafka-in-docker%,%templates/install/ubuntu-queue-kafka-in-docker.md%br%
+AWS SQS <small>(managed service from AWS)</small> %,%aws-sqs%,%templates/install/ubuntu-queue-aws-sqs.md%br%
+Google Pub/Sub <small>(managed service from Google)</small>%,%pubsub%,%templates/install/ubuntu-queue-pub-sub.md%br%
+Azure Service Bus <small>(managed service from Azure)</small>%,%service-bus%,%templates/install/ubuntu-queue-service-bus.md%br%
+RabbitMQ <small>(for small on-prem installations)</small>%,%rabbitmq%,%templates/install/ubuntu-queue-rabbitmq.md{% endcapture %}
+
+{% include content-toggle.html content-toggle-id="ubuntuThingsboardQueue" toggle-spec=contenttogglespecqueue %} 
+
+### Step 5. [Optional] Memory update for slow machines (1GB of RAM) 
+
+{% include templates/install/memory-on-slow-machines.md %} 
+
+### Step 6. Run installation script
+{% include templates/run-install.md %} 
+
+
+### Step 7. Start ThingsBoard service
+>>>>>>> master
 
 {% include templates/start-service.md %}
 

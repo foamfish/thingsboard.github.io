@@ -5,8 +5,10 @@
 编辑pg_hba.conf文件：
 
 ```bash
-sudo nano /var/lib/pgsql/9.6/data/pg_hba.conf
+sudo nano /var/lib/pgsql/12/data/pg_hba.conf
+
 ```
+{: .copy-code}
 
 找到以下几行：
 
@@ -24,13 +26,24 @@ host    all             all             127.0.0.1/32            md5
 最后，您应该重新启动PostgreSQL服务以初始化新配置：
 
 ```bash
-sudo systemctl restart postgresql-9.6.service
+sudo systemctl restart postgresql-12.service
+
 ```
+{: .copy-code}
 
 连接到数据库并创建Thingsboard：
 
 ```bash
 psql -U postgres -d postgres -h 127.0.0.1 -W
+
+```
+{: .copy-code}
+
+Execute create database statement
+
+```bash
 CREATE DATABASE thingsboard;
 \q
+
 ```
+{: .copy-code}

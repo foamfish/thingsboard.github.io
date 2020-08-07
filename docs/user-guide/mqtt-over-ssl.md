@@ -90,28 +90,80 @@ sudo chown thingsboard:thingsboard /etc/thingsboard/conf/mqttserver.jks
 
 ### 服务器配置
 
+<<<<<<< HEAD
 找到您的 **thingsboard.yml** 文件，并取消注释"＃取消注释以下行以为MQTT启用ssl之后的行"：
+=======
+Locate your **thingsboard.conf** file and set the MQTT_SSL_ENABLED value equals  true.
 
-```bash
-# MQTT server parameters
-mqtt:
-  bind_address: "${MQTT_BIND_ADDRESS:0.0.0.0}"
-  bind_port: "${MQTT_BIND_PORT:8883}"
-  adaptor: "${MQTT_ADAPTOR_NAME:JsonMqttAdaptor}"
-  timeout: "${MQTT_TIMEOUT:10000}"
-# Uncomment the following lines to enable ssl for MQTT
-  ssl:
-    key_store: mqttserver.jks
-    key_store_password: server_ks_password
-    key_password: server_key_password
-    key_store_type: JKS
+You can add the next row for to the **thingsboard.conf**, so that the MQTT over SSL will be enabled.  
+```bash 
+...
+export MQTT_SSL_ENABLED=true
+>>>>>>> master
+
 ```
 
+<<<<<<< HEAD
 您可能还希望将 **mqtt.bind_port** 更改为8883，基于SSL认证的MQTT推荐使用。
+=======
+You may also want to change **mqtt.bind_port** to 8883 which is recommended for MQTT over SSL servers.
+
+The MQTT bind port can be changed with the next row within the **thingsboard.conf** being added:
+
+```bash
+...
+export MQTT_BIND_PORT=8883
+
+```
+
+The **key_store** Property must point to the **.jks** file location. **key_store_password** and **key_password** must be the same as were used in keystore generation.
+>>>>>>> master
 
 此 **key_store** 属性必须指向.jks文件位置。**key_store_password**和**key_password**必须与生成密钥库时使用的相同。
 
+<<<<<<< HEAD
 **注意:** ThingsBoard也支持 **.p12** 密钥库。如果是这种情况，请将**key_store_type**e值设置为 **'PKCS12'**
+=======
+After these values are set, launch or restart your ThingsBoard server.
+
+### Example of configuration 
+The next combination of the **keygen.properties** example was used to generate a proper .jks and .pem in a case of the ThingsBoard uses the next default **thingsboard.conf** with the enchantments being specified below.   
+This example is based on the default ThingsBoard installation of the **2.5 version**. 
+
+
+**thingsboard.conf:**
+```bash
+...
+export MQTT_SSL_ENABLED=true
+export MQTT_BIND_PORT=8883
+...
+``` 
+
+
+**keygen.properties:** 
+```bash
+DOMAIN_SUFFIX=localhost
+ORGANIZATIONAL_UNIT=Thingsboard
+ORGANIZATION=Thingsboard
+CITY=SF
+STATE_OR_PROVINCE=CA
+TWO_LETTER_COUNTRY_CODE=US
+
+SERVER_KEYSTORE_PASSWORD=server_ks_password
+SERVER_KEY_PASSWORD=server_key_password
+
+SERVER_KEY_ALIAS="serveralias"
+SERVER_FILE_PREFIX="mqttserver"
+SERVER_KEYSTORE_DIR="/etc/thingsboard/conf"
+
+CLIENT_KEYSTORE_PASSWORD=password
+CLIENT_KEY_PASSWORD=password
+
+CLIENT_KEY_ALIAS="clientalias"
+CLIENT_FILE_PREFIX="mqttclient"
+```
+
+>>>>>>> master
 
 设置这些值之后，启动或重新启动Thingsboard服务器。
 

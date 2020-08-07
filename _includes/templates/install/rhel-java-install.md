@@ -3,6 +3,7 @@ ThingsBoard服务正在Java 8上运行。请按照以下说明安装OpenJDK 8：
 ```bash
 sudo yum install java-1.8.0-openjdk
 ```
+{: .copy-code}
 
 请不要忘记将操作系统配置为默认使用OpenJDK 8。
 
@@ -11,12 +12,14 @@ sudo yum install java-1.8.0-openjdk
 ```bash
 sudo update-alternatives --config java
 ```
+{: .copy-code}
 
 您可以使用以下命令检查安装：
 
 ```bash
 java -version
 ```
+{: .copy-code}
 
 命令输出结果：
 

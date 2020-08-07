@@ -62,9 +62,13 @@ ThingsBoard IoT平台提供了可用于生产的服务器基础架构，以连�
 
 实时演示服务器上托管的以下交互式仪表板代表了可能嵌入在IoT项目或解决方案中的智能计量IoT数据可视化。请参阅下面的仪表板说明。
 
-<iframe class="demoDashboardFrame" src="https://demo.ThingsBoard.io/dashboards/3a1026e0-83f6-11e7-b56d-c7f326cba909?publicId=322a2330-7c36-11e7-835d-c7f326cba909" frameborder="0" width="100%"></iframe>
+<iframe class="demoDashboardFrame" src="https://demo.ThingsBoard.io/dashboard/3a1026e0-83f6-11e7-b56d-c7f326cba909?publicId=322a2330-7c36-11e7-835d-c7f326cba909" frameborder="0" width="100%"></iframe>
 <div class="center" style="margin-bottom: 20px;">
+<<<<<<< HEAD
     <a target="_blank" style="padding: 0 40px;" href="https://demo.ThingsBoard.io/dashboards/3a1026e0-83f6-11e7-b56d-c7f326cba909?publicId=322a2330-7c36-11e7-835d-c7f326cba909" class="button">在线实例</a>
+=======
+    <a target="_blank" style="padding: 0 40px;" href="https://demo.ThingsBoard.io/dashboard/3a1026e0-83f6-11e7-b56d-c7f326cba909?publicId=322a2330-7c36-11e7-835d-c7f326cba909" class="button">Live demo</a>
+>>>>>>> master
 </div>
 
 随附的仪表板演示了使用[ThingsBoard MQTT API](/docs/reference/mqtt-api/)收集的来自智能电表的实时数据。数据存储在我们的演示服务器上的Cassandra DB中。

@@ -25,7 +25,13 @@ ThingsBoard可用于:
  
 了解更多功能请参见[**ThingsBoard功能列表**](/docs/#community-edition-features) 。
 
+<<<<<<< HEAD
 #### 架构
+=======
+<object width="80%" data="/images/reference/thingsboard-architecture.svg"></object>
+
+#### Architecture
+>>>>>>> master
 
 ThingsBoard设计为:
 

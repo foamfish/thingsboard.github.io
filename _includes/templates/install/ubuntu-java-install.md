@@ -4,6 +4,7 @@ ThingsBoard服务运行在Java 8上。请按照以下说明安装OpenJDK 8。
 sudo apt update
 sudo apt install openjdk-8-jdk
 ```
+{: .copy-code}
 
 请不要忘记将操作系统配置为默认使用OpenJDK 8。
 
@@ -12,12 +13,14 @@ sudo apt install openjdk-8-jdk
 ```bash
 sudo update-alternatives --config java
 ```
+{: .copy-code}
 
 您可以使用以下命令检查安装：
 
 ```bash
 java -version
 ```
+{: .copy-code}
 
 命令输出结果：
 

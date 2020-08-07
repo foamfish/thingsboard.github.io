@@ -47,14 +47,23 @@ mvn clean install -DskipTests
 接下来，将该项目作为**Maven**项目导入到您最喜欢的*IDE*中。  
 请参阅[**IDEA**](https://www.jetbrains.com/help/idea/2016.3/importing-project-from-maven-model.html)和[**Eclipse**](http://javapapers.com/java/import-maven-project-into-eclipse/)。
 
+<<<<<<< HEAD
 **注意：** 如果您使用的是Eclipse，则在将maven项目导入到IDE之后，建议您在**ui**项目上禁用Maven项目构建器。这将极大地提高Eclipse性能，因为它将避免Eclipse Maven构建生成node_modules目录（这是不必要的，只会导致Eclipse挂起）。为此，右键单击**ui**项目，转到**Properties-> Builders**，然后取消选中**Maven Project Builder**”复选框，然后单击**确定**。
+=======
+**NOTE:** If you are using Eclipse, after the maven project is imported to the IDE, We recommend you to disable Maven Project builder on **ui-ngx** project. This will improve the Eclipse performance *a lot*, because it will avoid Eclipse Maven builder from digging in node_modules directory (which is unnecessary and only causes Eclipse to hang). To do this, right-click on **ui-ngx** project, go to **Properties -> Builders**, and then uncheck the **Maven Project Builder** checkbox and then click **Ok**.
+>>>>>>> master
 
 #### 数据库
 
 默认情况下，ThingsBoard使用嵌入式HSQLDB实例，这对于评估或开发目的非常方便。
   
+<<<<<<< HEAD
 另外，您可以配置平台以使用可伸缩的Cassandra数据库集群或各种SQL数据库。
 如果您更喜欢使用SQL数据库，建议使用PostgreSQL。
+=======
+Alternatively, you can configure your platform to use either hybrid mode - PostgreSQL for entities data and scalable Cassandra DB cluster for timeseries data or PostgreSQL for both. 
+If you prefer to use an SQL database, we recommend PostgreSQL.
+>>>>>>> master
 
 ##### [可选] SQL数据库：PostgreSQL
 
@@ -67,7 +76,11 @@ mvn clean install -DskipTests
 {% include templates/install/create-tb-db.md %}
 
 
+<<<<<<< HEAD
 ##### [可选] NoSQL数据库：Cassandra
+=======
+##### [Optional] NoSQL Database for timeseries data: Cassandra
+>>>>>>> master
 
 请参考适当的部分，在其中找到有关如何安装cassandra的说明：
 
@@ -96,8 +109,6 @@ mvn clean install -DskipTests
  
 ```text
 database:
-  entities:
-    type: "${DATABASE_ENTITIES_TYPE:cassandra}" # cassandra OR sql
   ts:
     type: "${DATABASE_TS_TYPE:cassandra}" # cassandra OR sql (for hybrid mode, only this value should be cassandra)
 ```
@@ -137,16 +148,24 @@ install_dev_db.bat
 
 默认情况下ThingsBoard UI通过8080使用端口。但是您可能要在热重新部署模式下运行UI。
 
+<<<<<<< HEAD
 **注意：** 此步骤是可选的仅当您要更改UI时才需要。
  
 要以热部署模式启动UI容器，您需要先安装 **node.js**。安装**node.js**后，您可以通过执行下一个命令来启动容器：
+=======
+**NOTE:** This step is optional. It is required only if you are going to do changes to UI.
+>>>>>>> master
 
 ```bash
-cd ${TB_WORK_DIR}/ui
+cd ${TB_WORK_DIR}/ui-ngx
 mvn clean install -P npm-start
 ```
 
+<<<<<<< HEAD
 这将启动一个特殊的服务器，该服务器将侦听3000端口。所有REST API和websocket请求都将转发到8080端口。
+=======
+This will launch a special server that will listen on 4200 port. All REST API and websocket requests will be forwarded to 8080 port.
+>>>>>>> master
 
 ##### 运行服务器端容器
 
@@ -163,7 +182,11 @@ java -jar application/target/thingsboard-${VERSION}-boot.jar
 
 ##### 运行
 
+<<<<<<< HEAD
 导航到http://localhost:3000/或http://localhost:8080/ 并使用演示数据凭据登录ThingsBoard：
+=======
+Navigate to http://localhost:4200/ or http://localhost:8080/ and login into ThingsBoard using demo data credentials:
+>>>>>>> master
 
  - *用户名* **tenant@thingsboard.org**
  - *密码* **tenant**

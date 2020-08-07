@@ -28,6 +28,7 @@ toc:
     path: /docs/user-guide/rpc/
   - title: 数据可视化
     path: /docs/user-guide/visualization/
+<<<<<<< HEAD
   # - title: Advanced RBAC for IoT
   #   path: /docs/user-guide/rbac/
   #   pe: true
@@ -65,6 +66,48 @@ toc:
   #   path: /docs/user-guide/file-storage/
   #   pe: true
   - title: 审计日志
+=======
+  - title: OAuth 2 Support
+    path: /docs/user-guide/oauth-2-support/
+    new: true
+  - title: Advanced RBAC for IoT
+    path: /docs/user-guide/rbac/
+    pe: true
+  - title: White-labeling
+    path: /docs/user-guide/white-labeling/
+    pe: true
+  - title: Self-registration
+    path: /docs/user-guide/self-registration/
+    pe: true
+  - title: Custom Translations
+    path: /docs/user-guide/custom-translation/
+    pe: true
+  - title: Custom Menu
+    path: /docs/user-guide/custom-menu/
+    pe: true
+  - title: Platform Integrations
+    path: /docs/user-guide/integrations/#overview
+    pe: true
+  - title: Entity Groups
+    path: /docs/user-guide/groups/
+    pe: true
+  - title: Scheduler
+    path: /docs/user-guide/scheduler/
+    pe: true
+  - title: Reporting
+    path: /docs/user-guide/reporting/
+    pe: true
+  - title: CSV/XLS data export
+    path: /docs/user-guide/csv-xls-data-export/
+    pe: true
+  - title: Bulk Provisioning
+    new: true
+    path: /docs/user-guide/bulk-provisioning/
+  - title: File Storage
+    path: /docs/user-guide/file-storage/
+    pe: true
+  - title: Audit Log
+>>>>>>> master
     path: /docs/user-guide/audit-log/
   - title: API限制
     path: /docs/user-guide/api-limits/
@@ -143,6 +186,7 @@ toc:
     section:
       - title: 入门
         path: /docs/trendz/
+<<<<<<< HEAD
       - title: 将Trendz连接到Thingsboard
         path: /docs/trendz/connect-thingsboard/
       - title: 可视化
@@ -150,13 +194,70 @@ toc:
       - title: 清除, 过滤, 分组和聚合
         path: /docs/trendz/view-builder/
       - title: 共享和嵌入可视化
+=======
+      - title: Installation guide
+        section:
+          - title: Installation options
+            path: /docs/trendz/install/installation-options
+          - title: Installing Trendz on Ubuntu Server
+            path: /docs/trendz/install/ubuntu/
+          - title: Installing Trendz on CentOS/RHEL
+            path: /docs/trendz/install/rhel/
+          - title: Installing Trendz on Windows
+            path: /docs/trendz/install/windows/
+          - title: Installing Trendz using Docker (Windows)
+            path: /docs/trendz/install/docker-windows/
+          - title: Installing Trendz using Docker (Linux or Mac OS)
+            path: /docs/trendz/install/docker/
+          - title: Upgrade instructions
+            path: /docs/trendz/install/trndz-upgrade-instructions/
+      - title: Connect Trendz to Thingsboard
+        path: /docs/trendz/connect-thingsboard/
+      - title: Data Visualization
+        section:
+          - title: Overview
+            path: /docs/trendz/visualizations-overview/
+          - title: Tables
+            path: /docs/trendz/visualizations-tables/
+          - title: Line Chart
+            path: /docs/trendz/visualizations-line/
+          - title: Bar & Histogram
+            path: /docs/trendz/visualizations-bar/
+          - title: Pie Chart
+            path: /docs/trendz/visualizations-pie/
+          - title: Scatter Plot
+            path: /docs/trendz/visualizations-scatter/
+          - title: Heat Map
+            path: /docs/trendz/visualizations-heatmap/
+          - title: Cards
+            path: /docs/trendz/visualizations-card/
+          - title: View Settings
+            path: /docs/trendz/view-settings/
+      - title: Grouping and Aggregation
+        path: /docs/trendz/data-grouping-aggregation/
+      - title: Filtering
+        path: /docs/trendz/data-filtering/
+      - title: Calculated Fields
+        path: /docs/trendz/calculated-fields/
+      - title: States
+        path: /docs/trendz/states/
+      - title: Prediction
+        path: /docs/trendz/prediction/
+      - title: Share and embed Visualizations
+>>>>>>> master
         path: /docs/trendz/embed-visuals/
   - title: Kafka
     new: true
     path: /docs/samples/analytics/kafka-streams/
 - title: 安全
   section:
+<<<<<<< HEAD
   - title: MQTT证书认证
+=======
+  - title: OAuth 2 Support
+    path: /docs/user-guide/oauth-2-support/
+  - title: MQTT over SSL
+>>>>>>> master
     path: /docs/user-guide/mqtt-over-ssl/
   - title: 设备身份认证
     path: /docs/user-guide/device-credentials/
@@ -232,11 +333,34 @@ toc:
         path: /docs/iot-gateway/config/request/
       - title: CAN
         path: /docs/iot-gateway/config/can/
+<<<<<<< HEAD
   - title: 自定义指南
+=======
+      - title: BACnet Connector
+        path: /docs/iot-gateway/config/bacnet/
+      - title: ODBC Connector
+        path: /docs/iot-gateway/config/odbc/
+      - title: REST Connector
+        path: /docs/iot-gateway/config/rest/
+      - title: SNMP Connector
+        path: /docs/iot-gateway/config/snmp/
+  - title: Customization guide
+>>>>>>> master
     path: /docs/iot-gateway/custom/
   - title: 网关功能
     path: /docs/iot-gateway/features/
+<<<<<<< HEAD
   - title: 网关路线图
+=======
+    section:
+      - title: Remote logging
+        path: /docs/iot-gateway/guides/how-to-enable-remote-logging/
+      - title: Service RPC methods
+        path: /docs/iot-gateway/guides/how-to-use-gateway-rpc-methods/
+      - title: Remote shell
+        path: /docs/iot-gateway/guides/how-to-enable-remote-shell/
+  - title: IoT Gateway Roadmap
+>>>>>>> master
     path: /docs/iot-gateway/roadmap/
 - title: 故障排除
   path: /docs/user-guide/troubleshooting/
@@ -246,9 +370,17 @@ toc:
       path: /docs/user-guide/contribution/how-to-contribute/
     - title: 规则节点开发
       path: /docs/user-guide/contribution/rule-node-development/
+<<<<<<< HEAD
     - title: 部件开发
       path: /docs/user-guide/contribution/widgets-development/
 - title: 发行说明
+=======
+    - title: Widgets development (ThingsBoard v3.x)
+      path: /docs/user-guide/contribution/widgets-development/
+    - title: Widgets development (ThingsBoard v2.x)
+      path: /docs/user-guide/contribution/widgets-development-before-3.0/
+- title: Release Notes
+>>>>>>> master
   path: /docs/reference/releases/
 - title: 路线图
   path: /docs/reference/roadmap/

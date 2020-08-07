@@ -58,10 +58,17 @@ ThingsBoard规则引擎负责使用用户定义的逻辑和流程来处理传入
  * WebSocket [subscriptions](/docs/user-guide/telemetry/#websocket-api) 有关实体遥测和属性更改的信息；
  * 监视设备 [连接状态](/docs/user-guide/device-connectivity-status/)（活动/不活动）。
  
+<<<<<<< HEAD
 ThingsBoard节点使用Akka actor系统来实现租户，设备，规则链和规则节点actor。
 平台节点可以加入每个节点都相等的集群。服务发现是通过Zookeeper完成的。
 ThingsBoard节点使用基于实体ID的一致哈希算法在彼此之间路由消息。
 因此，用于同一实体的消息在同一ThingsBoard节点上进行处理。平台使用[gRPC](https://grpc.io/) 在ThingsBoard节点之间发送消息。
+=======
+ThingsBoard node uses Actor System to implement tenant, device, rule chains and rule node actors. 
+Platform nodes can join the cluster, where each node is equal. Service discovery is done via Zookeeper. 
+ThingsBoard nodes route messages between each other using consistent hashing algorithm based on entity id. 
+So, messages for the same entity are processed on the same ThingsBoard node. Platform uses [gRPC](https://grpc.io/) to send messages between ThingsBoard nodes.
+>>>>>>> master
 
 **注意**：ThingsBoard作者考虑在将来的版本中从gRPC迁移到Kafka，以便在ThingsBoard节点之间交换消息。
 主要思想是牺牲性能/等待时间的小损失，以支持由卡夫卡用户群提供的持久可靠的消息传递和自动负载平衡。

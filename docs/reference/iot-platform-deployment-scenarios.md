@@ -98,11 +98,19 @@ HAProxy负载平衡器也安装在同一服务器上，并充当反向代理和�
 
 **性能**：
 
+<<<<<<< HEAD
 解决方案的整体性能取决于实例硬件，而在很大程度上取决于数据库的性能。
 我们建议在独立服务器部署方案中将PostgreSQL用于实体和遥测数据。
 一个普通的虚拟环境每秒可以处理约5,000个遥测数据点。
 请参阅[关键基础结构特征](/docs/reference/iot-platform-deployment-scenarios/#key-infrastructure-characteristics)
 和[性能测试](/docs/reference/performance-aws-instances/)在不同的AWS实例上。此信息对于正确决定您的解决方案的基础结构很有用。
+=======
+Overall performance of the solution depends on the instance hardware and heavily rely on the performance of the database.
+We suggest to use PostgreSQL for both entities and telemetry data in Standalone server deployment scenario.
+An average virtual environment can handle ~ 5,000 telemetry data points per second.
+See [key infrastructure characteristics](/docs/reference/iot-platform-deployment-scenarios/#key-infrastructure-characteristics)
+and [performance tests](/docs/reference/performance-aws-instances/) on different AWS instances. This information is useful for making right decision regarding the infrastructure for your solution. 
+>>>>>>> master
 
 **拥有总成本（TCO）示例**：
 
@@ -249,5 +257,10 @@ ThingsBoard **支持生产环境的托管服务**：每台设备每月0.01美元
 
 TCO：每月约27,508美元或每台设备每月0.0275美元。
 
+<<<<<<< HEAD
 **如果您想在集群设置中重现这种情况，请遵循以下指南：**
 [智能跟踪器用例性能测试](https://github.com/ashvayka/tb-pe-k8s-perf-tests/tree/scenario/1-million-smart-trackers)
+=======
+**If you would like to reproduce this case on your cluster setup, please follow this guide:**
+[Smart Trackers use case performance test](https://github.com/ashvayka/tb-pe-k8s-perf-tests/tree/scenario/1-million-smart-trackers)
+>>>>>>> master

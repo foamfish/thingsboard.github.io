@@ -42,13 +42,21 @@ description: ThingsBoard IoT 面板
 
 你可以将仪表板导出为JSON格式，然后将其导入相同或另一个ThingsBoard实例。
 
+<<<<<<< HEAD
 为了导出仪表盘，您应该导航到**Dashboards**页面，然后单击位于特定仪表盘卡上的导出按钮。
+=======
+In order to export dashboard, you should navigate to the **Dashboards** page and click on the export button located on the particular dashboard row.
+>>>>>>> master
  
 ![image](/images/user-guide/ui/export-dashboard.png)
 
 #### 仪表板导入
 
+<<<<<<< HEAD
 同样，要导入仪表板，您应该导航至**Dashboards**页面，然后单击屏幕右下角的大“ +”按钮，然后单击导入按钮。
+=======
+Similar, to import the dashboard you should navigate to the **Dashboards** page and click on the "+" button located in the top-right corner of the **Dashboards** table and then choose "Import dashboard" option. 
+>>>>>>> master
 
 ![image](/images/user-guide/ui/import-dashboard.png)
 

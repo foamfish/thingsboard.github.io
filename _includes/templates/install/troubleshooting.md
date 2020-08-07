@@ -3,6 +3,7 @@ ThingsBoard日志存储在以下目录中：
 ```bash
 /var/log/thingsboard
 ```
+{: .copy-code}
 
 执行如下命令检查后面是否有错误:
  

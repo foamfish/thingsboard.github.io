@@ -111,14 +111,23 @@ title: 部件开发指南
 
 ### 基础小部件API
 
+<<<<<<< HEAD
 所有与部件相关的代码都位于[JavaScript部分](#javascript-section)。
 还提供了对部件实例的引用的内置变量**self**。
 每个部件函数都应定义为**self**变量的属性。
 **self**变量具有**ctx**属性-引用具有小部件实例使用的所有必要API和数据的小部件上下文。
 以下是窗口部件上下文属性的简要说明：
+=======
+All widget related code is located in the [JavaScript section](#javascript-section).
+The built-in variable **self** that is a reference to the widget instance is also available.
+Each widget function should be defined as a property of the **self** variable.
+**self** variable has property **ctx** of type [WidgetContext](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/models/widget-component.models.ts#L83) - a reference to widget context that has all necessary API and data used by widget instance.
+Below is brief description of widget context properties:
+>>>>>>> master
  
 | **属性**                     | **类型**           |  **描述**                                                |
 |----------------------------------|--------------------|-----------------------------------------------------------------|
+<<<<<<< HEAD
 | $container                       | jQuery Object      | 部件的容器元素。可用于使用jQuery API动态访问或修改部件DOM。 |
 | $scope                           | Object             | 当前部件元素的角度范围对象。使用Angular方法构建窗口小部件时，可用于访问/修改范围属性。 |
 | width                            | Number             | 部件容器的当前宽度（以像素为单位）。                    |
@@ -137,9 +146,36 @@ title: 部件开发指南
 | stateController                  | Object             | 请参阅[状态Controller](#state-controller) |
 
 为了实现新的窗口部件，应定义以下JavaScript函数（注意：每个函数都是可选的，可以根据窗口部件的特定/行为来实现）：
+=======
+| $container                       | jQuery Object      | Container element of the widget. Can be used to dynamically access or modify widget DOM using jQuery API. |
+| $scope                           | [IDynamicWidgetComponent](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/models/widget-component.models.ts#L274")             | Reference to the current widget component. Can be used to access/modify component properties when widget is built using Angular approach. |
+| width                            | Number             | Current width of widget container in pixels.                     |
+| height                           | Number             | Current height of widget container in pixels.                    |
+| isEdit                           | Boolean            | Indicates whether the dashboard is in in the view or editing state.|
+| isMobile                         | Boolean            | Indicates whether the dashboard view is less then 960px width (default mobile breakpoint). |
+| widgetConfig                     | [WidgetConfig](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L341)             | Common widget configuration containing properties such as **color** (text color), **backgroundColor** (widget background color), etc. |
+| settings                         | Object             | Widget settings containing widget specific properties according to the defined [settings json schema](#settings-schema-section) |
+| datasources                      | Array<[Datasource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L250)>  | Array of resolved widget datasources. See [Subscription object](#subscription-object). |
+| data                             | Array<[DatasourceData](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L275)>  | Array of latest datasources data. See [Subscription object](#subscription-object). |
+| timeWindow                       | [WidgetTimewindow](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/time/time.models.ts#L104)   | Current widget timewindow (applicable for timeseries widgets). Holds information about current timewindow bounds. **minTime** - minimum time in UTC milliseconds, **maxTime** - maximum time in UTC milliseconds, **interval** - current aggregation interval in milliseconds.|
+| units                            | String             | Optional property defining units text of values displayed by widget. Useful for simple widgets like cards or gauges. |
+| decimals                         | Number             | Optional property defining how many positions should be used to display decimal part of the value number.  |
+| hideTitlePanel                   | Boolean            | Manages visibility of widget title panel. Useful for widget with custom title panels or different states. **updateWidgetParams()** function must be called after this property change. |
+| widgetTitle                      | String             | If set, will override configured widget title text. **updateWidgetParams()** function must be called after this property change. |
+| detectChanges()                  | Function           | Trigger change detection for current widget. Must be invoked when widget HTML template bindings should be updated due to widget data changes. |
+| updateWidgetParams()             | Function           | Updates widget with runtime set properties such as **widgetTitle**, **hideTitlePanel**, etc. Must be invoked in order these properties changes take effect. |
+| defaultSubscription              | [IWidgetSubscription](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L220")             | Default widget subscription object contains all subscription information, including current data, according to the widget type. See [Subscription object](#subscription-object). |
+| timewindowFunctions              | [TimewindowFunctions](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L45)             | Object with timewindow functions used to manage widget data time frame. Can by used by Time-series or Alarm widgets. See [Timewindow functions](#timewindow-functions). |
+| controlApi                       | [RpcApi](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L58)             | Object that provides API functions for RPC (Control) widgets. See [Control API](#control-api). | 
+| actionsApi                       | [WidgetActionsApi](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L67)             | Set of API functions to work with user defined actions. See [Actions API](#actions-api). |
+| stateController                  | [IStateController](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L121)             | Reference to Dashboard state controller, providing API to manage current dashboard state. See [State Controller](#state-controller). |
+
+In order to implement a new widget, the following JavaScript functions should be defined *(Note: each function is optional and can be implemented according to  widget specific behaviour):*
+>>>>>>> master
    
 | **函数**                       | **描述**                                                                        |
 |------------------------------------|----------------------------------------------------------------------------------------|
+<<<<<<< HEAD
 | ``` onInit() ```                   | 当widget准备好初始化时调用的第一个函数。应该用于准备小部件DOM，处理小部件设置和初始订阅信息。	 |
 | ``` onDataUpdated() ```            | 在部件订阅中有新数据可用时调用。可以从窗口部件上下文（**ctx**）的[**defaultSubscription** object](#subscription-object)访问最新数据。|
 | ``` onResize() ```                 | 调整窗口小部件容器的大小时调用。可以从窗口小部件上下文（**ctx**）获得最新的宽度和高度。             |
@@ -153,14 +189,34 @@ title: 部件开发指南
 
 
 #### 订阅对象
+=======
+| ``` onInit() ```                   | The first function which is called when widget is ready for initialization. Should be used to prepare widget DOM, process widget settings and initial subscription information. |
+| ``` onDataUpdated() ```            | Called when the new data is available from the widget subscription. Latest data can be accessed from the [**defaultSubscription** object](#subscription-object) of widget context (**ctx**). |
+| ``` onResize() ```                 | Called when widget container is resized. Latest width and height can be obtained from widget context (**ctx**).             |
+| ``` onEditModeChanged() ```        | Called when dashboard editing mode is changed. Latest mode is handled by isEdit property of **ctx**.             |
+| ``` onMobileModeChanged() ```      | Called when dashboard view width crosses mobile breakpoint. Latest state is handled by isMobile property of **ctx**.                 |
+| ``` onDestroy() ```                | Called when widget element is destroyed. Should be used to cleanup all resources if necessary.            |
+| ``` getSettingsSchema() ```        | Optional function returning widget settings schema json as alternative to **Settings tab** of [Settings schema section](#settings-schema-section).             |
+| ``` getDataKeySettingsSchema() ``` | Optional function returning particular data key settings schema json as alternative to **Data key settings schema** tab of [Settings schema section](#settings-schema-section).             |
+| ``` typeParameters() ```           | Returns [WidgetTypeParameters](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L146) object describing widget datasource parameters. See [Type parameters object](#type-parameters-object). |            |
+| ``` actionSources() ```            | Returns map describing available widget action sources ([WidgetActionSource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L118)) used to define user actions. See [Action sources object](#action-sources-object). |
+>>>>>>> master
 
 窗口部件订阅对象包含所有订阅信息包括根据[部件类型](/docs/user-guide/ui/widget-library/#widget-types)的当前数据。
 
 根据窗口部件类型，订阅对象提供不同的数据结构。
 
+<<<<<<< HEAD
 对于[最新值](/docs/user-guide/ui/widget-library/#latest-values)和[时间序列](/docs/user-guide/ui/widget-library/#time-series)部件类型，它提供以下属性：
 
  - **datasources** - 此订阅使用的数据源数组，具有以下结构:
+=======
+The widget subscription object is instance of [IWidgetSubscription](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L220") and contains all subscription information, including current data, according to the [widget type](/docs/user-guide/ui/widget-library/#widget-types).
+Depending on widget type, subscription object provides different data structures.
+For [Latest values](/docs/user-guide/ui/widget-library/#latest-values) and [Time-series](/docs/user-guide/ui/widget-library/#time-series) widget types, it provides the following properties:
+
+ - **datasources** - array of datasources (Array<[Datasource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L250)>) used by this subscription, using the following structure:
+>>>>>>> master
 
 ```javascript
     datasources = [
@@ -171,7 +227,7 @@ title: 部件开发指南
            entityName: 'entityName', // name of the Entity used as datasource
            entityType: 'DEVICE', // datasource Entity type (for ex. "DEVICE", "ASSET", "TENANT", etc.)
            entityId: '943b8cd0-576a-11e7-824c-0b1cb331ec92', // entity identificator presented as string uuid. 
-           dataKeys: [ // array of keys (attributes or timeseries) of the entity used to fetch data 
+           dataKeys: [ //  array of keys (Array<DataKey>) (attributes or timeseries) of the entity used to fetch data 
                { // dataKey
                     name: 'name', // the name of the particular entity attribute/timeseries 
                     type: 'timeseries', // type of the dataKey. Can be "timeseries", "attribute" or "function" 
@@ -187,7 +243,11 @@ title: 部件开发指南
     ]
 ```
     
+<<<<<<< HEAD
   - **data** - 在此订阅范围内接收到的最新数据的数组，其结构如下：
+=======
+  - **data** - array of latest data (Array<[DatasourceData](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L275)>) received in scope of this subscription, using the following structure:
+>>>>>>> master
   
 ```javascript
     data = [
@@ -208,7 +268,11 @@ title: 部件开发指南
 
 对于[Alarm小部件](/docs/user-guide/ui/widget-library/#alarm-widget)它提供以下属性：
  
+<<<<<<< HEAD
  - **alarmSource** - 有关为其获取警报的实体的信息，并具有以下结构: 
+=======
+ - **alarmSource** - ([Datasource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L250)) information about entity for which alarms are fetched, using the following structure: 
+>>>>>>> master
 
 ```javascript
     alarmSource = {
@@ -231,7 +295,11 @@ title: 部件开发指南
     }
 ```
 
+<<<<<<< HEAD
   - **alarms** - 在此订阅范围内收到的警报数组，其结构如下：
+=======
+  - **alarms** - array of alarms (Array<[Alarm](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/alarm.models.ts#L88)>) received in scope of this subscription, using the following structure:
+>>>>>>> master
 
 ```javascript
     alarms = [
@@ -266,7 +334,11 @@ title: 部件开发指南
 
 #### Timewindow函数
 
+<<<<<<< HEAD
 具有时间窗口功能的对象，用于管理窗口小部件数据时间范围。可以由[时间序列](/docs/user-guide/ui/widget-library/#time-series)或[警报](/docs/user-guide/ui/widget-library/#alarm-widget)部件。
+=======
+Object with timewindow functions ([TimewindowFunctions](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L45)) used to manage widget data time frame. Can by used by [Time-series](/docs/user-guide/ui/widget-library/#time-series) or [Alarm](/docs/user-guide/ui/widget-library/#alarm-widget) widgets.
+>>>>>>> master
 
 | **函数**                                        | **描述**                                                                        |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------|
@@ -276,7 +348,11 @@ title: 部件开发指南
 
 #### Control API
 
+<<<<<<< HEAD
 提供[RPC (Control)](/docs/user-guide/ui/widget-library/#rpc-control-widget)部件的API函数的对象。
+=======
+Object that provides API functions ([RpcApi](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L58)) for [RPC (Control)](/docs/user-guide/ui/widget-library/#rpc-control-widget) widgets.
+>>>>>>> master
 
 | **函数**                                        | **描述**                                                                        |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------|
@@ -286,7 +362,11 @@ title: 部件开发指南
 
 #### Actions API
 
+<<<<<<< HEAD
 API函数集，可与用户定义的操作一起使用。
+=======
+Set of API functions ([WidgetActionsApi](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L67)) to work with user defined actions.
+>>>>>>> master
 
 | **函数**                                                          | **描述**                                                                        |
 |-----------------------------------------------------------------------|----------------------------------------------------------------------------------------|
@@ -296,7 +376,11 @@ API函数集，可与用户定义的操作一起使用。
 
 #### State Controller
 
+<<<<<<< HEAD
 引用仪表板状态控制器，提供用于管理当前仪表板状态的API。
+=======
+Reference to Dashboard state controller ([IStateController](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/core/api/widget-api.models.ts#L121)), providing API to manage current dashboard state.
+>>>>>>> master
 
 | **函数**                                        | **描述**                                                                        |
 |-----------------------------------------------------|----------------------------------------------------------------------------------------|
@@ -309,18 +393,27 @@ API函数集，可与用户定义的操作一起使用。
 
 #### 类型参数对象
 
+<<<<<<< HEAD
 描述小部件数据源参数的对象。它具有以下属性:
+=======
+Object [WidgetTypeParameters](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L146) describing widget datasource parameters. It has the following properties:
+>>>>>>> master
 
 ```javascript
     return {
         maxDatasources: -1, // Maximum allowed datasources for this widget, -1 - unlimited
-        maxDataKeys: -1 //Maximum allowed data keys for this widget, -1 - unlimited
+        maxDataKeys: -1, //Maximum allowed data keys for this widget, -1 - unlimited
+        dataKeysOptional: false //Whether this widget can be configured with datasources without data keys
     }
 ```
 
 #### 对象操作来源
 
+<<<<<<< HEAD
 映射描述了可以向其分配用户操作的可用窗口小部件操作源。它具有以下结构：
+=======
+Map describing available widget action sources ([WidgetActionSource](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/shared/models/widget.models.ts#L118)) to which user actions can be assigned. It has the following structure:
+>>>>>>> master
 
 ```javascript
    return {
@@ -351,13 +444,13 @@ API函数集，可与用户定义的操作一起使用。
  - 将以下HTML代码放入“资源”部分的HTML标签中：
   
 ```html
-  {% raw  %}<div flex layout="column" style="height: 100%;" layout-align="center stretch">
-      <div>My first latest values widget.</div>
-      <div flex layout="row" ng-repeat="dataKeyData in data" layout-align="space-around center">
-          <div>{{dataKeyData.dataKey.label}}:</div>
-          <div>{{dataKeyData.data[0][0] | date : 'yyyy-MM-dd HH:mm:ss'}}</div>
-          <div>{{dataKeyData.data[0][1]}}</div>
-      </div>
+  {% raw  %}<div fxFlex fxLayout="column" style="height: 100%;" fxLayoutAlign="center stretch">
+    <div>My first latest values widget.</div>
+    <div fxFlex fxLayout="row" *ngFor="let dataKeyData of data" fxLayoutAlign="space-around center">
+        <div>{{dataKeyData.dataKey.label}}:</div>
+        <div>{{(dataKeyData.data[0] && dataKeyData.data[0][0]) | date : 'yyyy-MM-dd HH:mm:ss' }}</div>
+        <div>{{dataKeyData.data[0] && dataKeyData.data[0][1]}}</div>
+    </div>
   </div>{% endraw %}
 ```
 
@@ -365,9 +458,11 @@ API函数集，可与用户定义的操作一起使用。
  
 ```javascript
     self.onInit = function() {
+       self.ctx.$scope.data = self.ctx.defaultSubscription.data;
+    }
         
-        self.ctx.$scope.data = self.ctx.defaultSubscription.data;
-    
+    self.onDataUpdated = function() {
+        self.ctx.detectChanges();
     }
 ```
 
@@ -375,6 +470,7 @@ API函数集，可与用户定义的操作一起使用。
  
 ![image](/images/user-guide/contribution/widgets/latest-values-widget-sample.png) 
 
+<<<<<<< HEAD
 在此示例中，[subscription](#subscription-object)的**data**属性被分配给 **$scope** 并且可以在HTML模板中访问。
 
 在HTML内部，使用特殊的**ng-repeat**角度指令来迭代可用的dataKeys数据点并使用其时间戳呈现相应的最新值。
@@ -382,42 +478,56 @@ API函数集，可与用户定义的操作一起使用。
 #### 时间序列部件
 
 在**部件捆绑包**视图中，单击屏幕右下角的“+”大按钮，然后单击**创建部件类型**按钮。
+=======
+In this example, the **data** property of [subscription](#subscription-object) is assigned to the **$scope** and becomes accessible within the HTML template.
+Inside the HTML, a special [***ngFor**](https://angular.io/api/common/NgForOf) structural angular directive is used in order to iterate over available dataKeys & datapoints then render latest values with their corresponding timestamps. 
+>>>>>>> master
 
 在**选择部件类型**弹出窗口中单击**时间系列**按钮。
 
 将打开**部件编辑器**其中预填充了默认的**时间系列**模板小部件的内容。
 
+<<<<<<< HEAD
  - 清除“资源”部分CSS标签的内容。
  - 将以下HTML代码放入“资源”部分的HTML标签中：
+=======
+ - Replace content of the CSS tab in "Resources" section with the following one:
+
+```css
+.my-data-table th {
+    text-align: left;
+}
+``` 
+ 
+ - Put the following HTML code inside the HTML tab of "Resources" section:
+>>>>>>> master
 
 ```html
-  {% raw  %}<div flex layout="column" style="height: 100%;">
-      <div>My first Time-Series widget.</div>
-      <md-tabs md-border-bottom>
-          <md-tab ng-repeat="datasource in datasources track by $index" label="{{datasource.name}}">
-              <table style="width: 100%;">
-                  <thead>
-                      <tr>
-                          <th>Timestamp</th>
-                          <th ng-repeat="dataKeyData in datasourceData[$index]">{{dataKeyData.dataKey.label}}</th>
-                      <tr>          
-                  </thead>
-                  <tbody>
-                      <tr ng-repeat="data in datasourceData[$index][0].data track by $index">
-                          <td>{{data[0] | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
-                          <td ng-repeat="dataKeyData in datasourceData[$parent.$index]">{{dataKeyData.data[$parent.$index][1]}}</td>
-                      </tr>      
-                  </tbody>          
-              </table>          
-          </md-tab>       
-      </md-tabs>      
-  </div>{% endraw %}
+  {% raw  %}<mat-tab-group style="height: 100%;">
+      <mat-tab *ngFor="let datasource of datasources; let $dsIndex = index" label="{{datasource.name}}">
+          <table class="my-data-table" style="width: 100%;">
+              <thead>
+                  <tr>
+                      <th>Timestamp</th>
+                      <th *ngFor="let dataKeyData of datasourceData[$dsIndex]">{{dataKeyData.dataKey.label}}</th>
+                  <tr>          
+              </thead>
+              <tbody>
+                  <tr *ngFor="let data of datasourceData[$dsIndex][0].data; let $dataIndex = index">
+                      <td>{{data[0] | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+                      <td *ngFor="let dataKeyData of datasourceData[$dsIndex]">{{dataKeyData.data[$dataIndex] && dataKeyData.data[$dataIndex][1]}}</td>
+                  </tr>      
+              </tbody>          
+          </table>          
+      </mat-tab>       
+  </mat-tab-group>{% endraw %}
 ```
 
  - 将以下JavaScript代码放入“JavaScript”部分中：
  
 ```javascript
 self.onInit = function() {
+    self.ctx.widgetTitle = 'My first Time-Series widget';
     self.ctx.$scope.datasources = self.ctx.defaultSubscription.datasources;
     self.ctx.$scope.data = self.ctx.defaultSubscription.data;
     
@@ -436,11 +546,12 @@ self.onInit = function() {
         } 
         self.ctx.$scope.datasourceData[currentDatasourceIndex].push(dataKeyData);
     }
+    self.ctx.updateWidgetParams();
 
 }
 
 self.onDataUpdated = function() {
-    self.ctx.$scope.$digest();
+    self.ctx.detectChanges();
 }
 ```
 
@@ -448,6 +559,7 @@ self.onDataUpdated = function() {
 
 ![image](/images/user-guide/contribution/widgets/timeseries-widget-sample.png) 
 
+<<<<<<< HEAD
 在此示例中，[subscription](#subscription-object)的**datasources**和**data**属性被分配给**$scope**并且可以在HTML模板中访问。
 
 引入了**datasourceData**范围属性，以通过数据源索引映射数据源特定的dataKeys数据以便在HTML模板中进行灵活访问。
@@ -463,6 +575,14 @@ self.onDataUpdated = function() {
 #### RPC(控制)部件
 
 在**部件捆绑包**视图中单击屏幕右下角的“+”大按钮然后单击“创建部件类型”按钮。
+=======
+In this example, the [subscription](#subscription-object) **datasources** and **data** properties are assigned to **$scope** and become accessible within the HTML template.
+The **$scope.datasourceData** property is introduced to map datasource specific dataKeys data by datasource index for flexible access within the HTML template.
+Inside the HTML, a special [***ngFor**](https://angular.io/api/common/NgForOf) structural angular directive is used in order to iterate over available datasources and render corresponding tabs.
+Inside each tab, the table is rendered using dataKeys obtained from **datasourceData** scope property accessed by datasource index.
+Each table renders columns by iterating over all **dataKeyData** objects and renders all available datapoints by iterating over **data** array of each **dataKeyData** to render timestamps and values.
+Note that in this code, **onDataUpdated** function is implemented with a call to **detectChanges** function necessary to perform new change detection cycle when new data is received.   
+>>>>>>> master
 
 在Z**选择部件类型**弹出窗口中单击**控制部件**按钮。
 
@@ -472,33 +592,32 @@ self.onDataUpdated = function() {
  - 将以下HTML代码放入“资源”部分的HTML标签中：
 
 ```html
-  {% raw  %}<form name="rpcForm" ng-submit="sendCommand()">
-    <md-content class="md-padding" layout="column">
-        <md-input-container>
-          <label>RPC method</label>  
-          <input required name="rpcMethod" ng-model="rpcMethod"/>
-          <div ng-messages="rpcForm.rpcMethod.$error">
-            <div ng-message="required">RPC method name is required.</div>
-          </div>
-        </md-input-container>    
-        <md-input-container>
-          <label>RPC params</label>  
-          <input required name="rpcParams" ng-model="rpcParams"/>
-          <div ng-messages="rpcForm.rpcParams.$error">
-            <div ng-message="required">RPC params is required.</div>
-          </div>
-        </md-input-container>    
-        <md-button ng-disabled="rpcForm.$invalid || !rpcForm.$dirty" type="submit"
-                   class="md-raised md-primary">
-            Send RPC command
-        </md-button>
+    {% raw  %}<form #rpcForm="ngForm" (submit)="sendCommand()">
+      <div class="mat-content mat-padding" fxLayout="column">
+        <mat-form-field class="mat-block">
+          <mat-label>RPC method</mat-label>
+          <input matInput required name="rpcMethod" #rpcMethodField="ngModel" [(ngModel)]="rpcMethod"/>
+          <mat-error *ngIf="rpcMethodField.hasError('required')">
+            RPC method name is required.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="mat-block">
+          <mat-label>RPC params</mat-label>
+          <input matInput required name="rpcParams" #rpcParamsField="ngModel" [(ngModel)]="rpcParams"/>
+          <mat-error *ngIf="rpcParamsField.hasError('required')">
+            RPC params is required.
+          </mat-error>
+        </mat-form-field>
+        <button [disabled]="rpcForm.invalid || !rpcForm.dirty" mat-raised-button color="primary" type="submit" >
+          Send RPC command
+        </button>
         <div>
-           <label>RPC command response</label>
-           <div style="width: 100%; height: 100px; border: solid 2px gray" ng-bind-html="rpcCommandResponse">
-           </div>       
+          <label>RPC command response</label>
+          <div style="width: 100%; height: 100px; border: solid 2px gray" [innerHTML]="rpcCommandResponse">
+          </div>
         </div>
-    </md-content>
-  </form>{% endraw %}
+      </div>
+    </form>{% endraw %}
 ```
 
  - 将以下JSON内容放入**设置架构**标签中：
@@ -539,26 +658,28 @@ self.onInit = function() {
         var rpcParams = self.ctx.$scope.rpcParams;
         var timeout = self.ctx.settings.requestTimeout;
         var oneWayElseTwoWay = self.ctx.settings.oneWayElseTwoWay ? true : false;
-        
-        var commandPromise;
+
+        var commandObservable;
         if (oneWayElseTwoWay) {
-            commandPromise = self.ctx.controlApi.sendOneWayCommand(rpcMethod, rpcParams, timeout);
+            commandObservable = self.ctx.controlApi.sendOneWayCommand(rpcMethod, rpcParams, timeout);
         } else {
-            commandPromise = self.ctx.controlApi.sendTwoWayCommand(rpcMethod, rpcParams, timeout);
+            commandObservable = self.ctx.controlApi.sendTwoWayCommand(rpcMethod, rpcParams, timeout);
         }
-        commandPromise.then(
-            function success(response) {
+        commandObservable.subscribe(
+            function (response) {
                 if (oneWayElseTwoWay) {
-                    self.ctx.$scope.rpcCommandResponse = "Command was successfully received by device.<br/> No response body because of one way command mode.";
+                    self.ctx.$scope.rpcCommandResponse = "Command was successfully received by device.<br> No response body because of one way command mode.";
                 } else {
-                    self.ctx.$scope.rpcCommandResponse = "Response from device:<br/>";                    
-                    self.ctx.$scope.rpcCommandResponse += angular.toJson(response);
+                    self.ctx.$scope.rpcCommandResponse = "Response from device:<br>";                    
+                    self.ctx.$scope.rpcCommandResponse += JSON.stringify(response, undefined, 2);
                 }
+                self.ctx.detectChanges();
             },
-            function fail(rejection) {
-                self.ctx.$scope.rpcCommandResponse = "Failed to send command to the device:<br/>"
-                self.ctx.$scope.rpcCommandResponse += "Status: " + rejection.status + "<br/>";
+            function (rejection) {
+                self.ctx.$scope.rpcCommandResponse = "Failed to send command to the device:<br>"
+                self.ctx.$scope.rpcCommandResponse += "Status: " + rejection.status + "<br>";
                 self.ctx.$scope.rpcCommandResponse += "Status text: '" + rejection.statusText + "'";
+                self.ctx.detectChanges();
             }
             
         );
@@ -636,12 +757,18 @@ self.onInit = function() {
   
 ![image](/images/user-guide/contribution/widgets/control-widget-sample-response-timeout.png)  
   
+<<<<<<< HEAD
 在此示例中**controlApi**用于发送RPC命令。此外，引入了自定义窗口小部件设置以配置RPC命令模式和RPC请求超时。
+=======
+In this example, **controlApi** is used to send RPC commands. Additionally, custom widget settings were introduced in order to configure RPC command mode and RPC request timeout.
+The response from the device is handled by **commandObservable**.  It has success and failed callbacks with corresponding response, or rejection objects containing information about request execution result.     
+>>>>>>> master
 
 设备的响应由具有成功和失败回调的**commandPromise**进行处理，并带有包含有关请求执行结果信息的相应响应或拒绝对象。
 
 #### 警报小部件
 
+<<<<<<< HEAD
 在**部件捆绑**视图中单击屏幕右下角的“+”按钮然后单击**创建部件类型**按钮。
 
 在**选择部件类型**弹出窗口中单击**警报部件**按钮。
@@ -649,20 +776,31 @@ self.onInit = function() {
 使用默认的**Alarm**模板小部件的内容预填充打开**部件编辑器**。
 
  - 将以下HTML代码放入“资源”部分的HTML标签中：
+=======
+- Replace content of the CSS tab in "Resources" section with the following one:
+
+```css
+.my-alarm-table th {
+    text-align: left;
+}
+``` 
+
+ - Put the following HTML code inside the HTML tab of "Resources" section:
+>>>>>>> master
 
 ```html
-  {% raw  %}<div flex layout="column" style="height: 100%;">
+  {% raw  %}<div fxFlex fxLayout="column" style="height: 100%;">
       <div>My first Alarm widget.</div>
-      <table style="width: 100%;">
+      <table class="my-alarm-table" style="width: 100%;">
           <thead>
               <tr>
-                  <th ng-repeat="dataKey in alarmSource.dataKeys">{{dataKey.label}}</th> 
+                  <th *ngFor="let dataKey of alarmSource?.dataKeys">{{dataKey.label}}</th> 
               <tr>          
           </thead>
           <tbody>
-              <tr ng-repeat="alarm in alarms">
-                  <td ng-repeat="dataKey in alarmSource.dataKeys" 
-                      ng-style="getAlarmCellStyle(alarm, dataKey)">
+              <tr *ngFor="let alarm of alarms">
+                  <td *ngFor="let dataKey of alarmSource?.dataKeys" 
+                      [ngStyle]="getAlarmCellStyle(alarm, dataKey)">
                       {{getAlarmValue(alarm, dataKey)}}
                   </td>
               </tr>      
@@ -702,11 +840,8 @@ self.onInit = function() {
 self.onInit = function() {
     self.ctx.$scope.alarmSource = self.ctx.defaultSubscription.alarmSource;
     
-    var alarmFields = self.ctx.$scope.$injector.get('types').alarmFields;
-    var $filter = self.ctx.$scope.$injector.get('$filter');
-    
     var alarmSeverityColorFunctionBody = self.ctx.settings.alarmSeverityColorFunction;
-    if (angular.isUndefined(alarmSeverityColorFunctionBody) || !alarmSeverityColorFunctionBody.length) {
+    if (typeof alarmSeverityColorFunctionBody === 'undefined' || !alarmSeverityColorFunctionBody.length) {
         alarmSeverityColorFunctionBody = "if(severity == 'CRITICAL') {return 'red';} else if (severity == 'MAJOR') {return 'orange';} else return 'green';";
     }
     
@@ -718,34 +853,34 @@ self.onInit = function() {
     }
 
     self.ctx.$scope.getAlarmValue = function(alarm, dataKey) {
-        var alarmField = alarmFields[dataKey.name];
-        if (alarmField) {
-            var value = alarm[alarmField.value];
-            if (alarmField.time) {
-                return $filter('date')(value, 'yyyy-MM-dd HH:mm:ss');
-            } else {
-                return value;
-            }
+        var alarmKey = dataKey.name;
+        if (alarmKey === 'originator') {
+            alarmKey = 'originatorName';
+        }
+        var value = alarm[alarmKey];
+        if (alarmKey === 'createdTime') {
+            return self.ctx.date.transform(value, 'yyyy-MM-dd HH:mm:ss');
         } else {
-            return alarm[dataKey.name];
+            return value;
         }
     }
     
     self.ctx.$scope.getAlarmCellStyle = function(alarm, dataKey) {
-        var alarmField = alarmFields[dataKey.name];
-        if (alarmField && alarmField == alarmFields.severity && alarmSeverityColorFunction) {
-            var severity = alarm[alarmField.value];
+        var alarmKey = dataKey.name;
+        if (alarmKey === 'severity' && alarmSeverityColorFunction) {
+            var severity = alarm[alarmKey];
             var color = alarmSeverityColorFunction(severity);
             return {
                 color: color  
             };
-        }
+        } 
         return {};
     }
 }
 
 self.onDataUpdated = function() {
     self.ctx.$scope.alarms = self.ctx.defaultSubscription.alarms;
+    self.ctx.detectChanges();
 }
 ```
 
@@ -753,6 +888,7 @@ self.onDataUpdated = function() {
 
 ![image](/images/user-guide/contribution/widgets/alarm-widget-sample.png)
 
+<<<<<<< HEAD
 在此示例中[订阅](#subscription-object)的**alarmSource**和**alarms**属性被分配给**$scope**并且可以在HTML模板中访问。
 
 在HTML内部使用angular的**ng-repeat**指令进行遍历**alarmSource**可用警报的**dataKeys**并呈现相应的列。
@@ -760,6 +896,15 @@ self.onDataUpdated = function() {
 在表中通过遍历**alarms**数组，显示对应的单元格**dataKeys**。
 
 函数**getAlarmValue**是使用特殊的AlarmFields常量用来获取警报值该常量是从ThingsBoard UI的**types**中获取的并且可以通过Angular**$injector**进行访问。
+=======
+In this example, the **alarmSource** and **alarms** properties of [subscription](#subscription-object) are assigned to **$scope** and become accessible within HTML template.
+Inside the HTML, a special [***ngFor**](https://angular.io/api/common/NgForOf) structural angular directive is used in order to iterate over available alarm **dataKeys** of **alarmSource** and render corresponding columns.
+The table rows are rendered by iterating over **alarms** array and corresponding cells rendered by iterating over **dataKeys**.
+The function **getAlarmValue** is fetching alarm value and formatting **createdTime** alarm property using a [DatePipe](https://angular.io/api/common/DatePipe) angular pipe accessible via **date** property of **ctx**.
+The function **getAlarmCellStyle** is used to assign custom cell styles for each alarm cell. In this example, we introduced new settings property called **alarmSeverityColorFunction** that contains function body returning color depending on alarm severity.
+Inside the **getAlarmCellStyle** function there is corresponding invocation of **alarmSeverityColorFunction** with severity value in order to get color for alarm severity cell. 
+Note that in this code **onDataUpdated** function is implemented in order to update **alarms** property with latest alarms from subscription and invoke change detection using **detectChanges()** function.   
+>>>>>>> master
 
 函数**getAlarmCellStyle**用于为每个报警单元分配自定义样式。
 在此示例中，我们引入了新的名为**alarmSeverityColorFunction**的设置属性该属性包含根据警报严重性返回颜色的函数主体。
@@ -779,9 +924,9 @@ self.onDataUpdated = function() {
  - 将以下HTML代码放入“资源”部分的HTML标签中：
 
 ```html
-  {% raw  %}<div flex layout="column" style="height: 100%;" layout-align="space-around stretch">
-      <h3 style="text-align: center;">My first static widget.</h3>
-      <md-button class="md-primary md-raised" ng-click="showAlert()">Click me</md-button>
+  {% raw  %}<div fxFlex fxLayout="column" style="height: 100%;" fxLayoutAlign="space-around stretch">
+    <h3 style="text-align: center;">My first static widget.</h3>
+    <button mat-raised-button color="primary" (click)="showAlert()">Click me</button>
   </div>{% endraw %}
 ```
 
@@ -843,7 +988,13 @@ This is just a static HTML widget so there is no subscription data or special wi
 
 在此示例中，将使用外部[gauge.js](http://bernii.github.io/gauge.js/)库创建**Latest Values**仪表小部件。
 
+<<<<<<< HEAD
 在**部件捆绑**视图中单击屏幕右下角的“+”大按钮，然后单击**创建部件类型**按钮。
+=======
+#### Latest Values Example
+
+In this example, **Latest Values** gauge widget will be created using external [gauge.js](http://bernii.github.io/gauge.js/) library.
+>>>>>>> master
 
 在**选择部件类型**弹出窗口中单击**Latest Values**按钮。
 
@@ -852,7 +1003,7 @@ This is just a static HTML widget so there is no subscription data or special wi
  - 打开**资源**标签，然后单击“添加”，然后插入以下链接：
 
 ```  
-http://bernii.github.io/gauge.js/dist/gauge.min.js  
+https://bernii.github.io/gauge.js/dist/gauge.min.js  
 ```
 
  - 清除“资源”部分CSS标签的内容。
@@ -904,6 +1055,7 @@ self.onDataUpdated = function() {
 
 在这种情况下，您可以创建自己的JavaScript类或Angular指令并将其捆绑到ThingsBoard UI代码中。
 
+<<<<<<< HEAD
 为了使此代码可在窗口部件中访问，您需要注册相应的Angular模块或将JavaScript类注入到全局变量（例如，对于window对象）。
 
 一些ThingsBoard小部件已经使用这种方法。看看[widget.service.js](https://github.com/thingsboard/thingsboard/tree/master/ui/src/app/api/widget.service.js)。
@@ -911,33 +1063,162 @@ self.onDataUpdated = function() {
 在这里，您可以找到如何注册一些捆绑的类或模块以供以后在ThingsBoard小部件中使用。
 
 例如**Timeseries-Flot**小部件（来自**Charts**部件捆绑包）使用[**TbFlot**](https://github.com/thingsboard/thingsboard/tree/master/ui/src/app/widget/lib/flot-widget.js)JavaScript类，将其作为窗口属性注入**widget.service.js**中：
+=======
+#### Time-Series Example
 
+In this example, **Time-Series** line chart widget will be created using external [Chart.js](https://www.chartjs.org/) library.
+
+In the **Widgets Bundle** view, click the big “+” button at the bottom-right part of the screen, then click the “Create new widget type” button.
+Click the **Time-Series** button on the **Select widget type** popup.
+The **Widget Editor** will be opened, pre-populated with the content of default **Time-Series** template widget.
+
+ - Open **Resources** tab and click "Add" then insert the following link:
+
+```  
+https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js
+```
+
+ - Clear content of the CSS tab of "Resources" section.
+ - Put the following HTML code inside the HTML tab of "Resources" section:
+ 
+```html
+  {% raw  %}<canvas id="myChart"></canvas>{% endraw %}
+```
+>>>>>>> master
+
+ - Put the following JavaScript code inside the "JavaScript" section:
+ 
 ```javascript
+var myChart;
+
+self.onInit = function() {
+    
+    var chartData = {
+        datasets: []
+    };
+
+    for (var i=0; i < self.ctx.data.length; i++) {
+        var dataKey = self.ctx.data[i].dataKey;
+        var dataset = {
+            label: dataKey.label,
+            data: [],
+            borderColor: dataKey.color,
+            fill: false
+        };
+        chartData.datasets.push(dataset);
+    }
+    
+    var options = {
+        maintainAspectRatio: false,
+        legend: {
+            display: false
+        },
+        scales: {
+        xAxes: [{
+            type: 'time',
+            ticks: {
+                maxRotation: 0,
+                autoSkipPadding: 30
+            }
+        }]
+    }
+    };
+    
+    var canvasElement = $('#myChart', self.ctx.$container)[0];
+    var canvasCtx = canvasElement.getContext('2d');
+    myChart = new Chart(canvasCtx, {
+        type: 'line',
+        data: chartData,
+        options: options
+    });
+    self.onResize();
+}
+
+self.onResize = function() {
+    myChart.resize();
+}
+
+self.onDataUpdated = function() {
+    for (var i = 0; i < self.ctx.data.length; i++) {
+        var datasourceData = self.ctx.data[i];
+        var dataSet = datasourceData.data;
+        myChart.data.datasets[i].data.length = 0;
+        var data = myChart.data.datasets[i].data;
+        for (var d = 0; d < dataSet.length; d++) {
+            var tsValuePair = dataSet[d];
+            var ts = tsValuePair[0];
+            var value = tsValuePair[1];
+            data.push({t: ts, y: value});
+        }
+    }
+    myChart.options.scales.xAxes[0].ticks.min = self.ctx.timeWindow.minTime;
+    myChart.options.scales.xAxes[0].ticks.max = self.ctx.timeWindow.maxTime;
+    myChart.update();
+}
+```
+
+ - Click the **Run** button on the **Widget Editor Toolbar** in order to see the result in **Widget preview** section.
+
+![image](/images/user-guide/contribution/widgets/external-js-timeseries-widget-sample.png)
+
+In this example, the external JS library API was used that becomes available after injecting the corresponding URL in **Resources** section.
+Initially chart datasets prepared using configured dataKeys from **data** property of **ctx**.
+In the **onDataUpdated** function datasources data converted to Chart.js line chart format and pushed to chart datasets.
+Please note that xAxis (time axis) is limited to current timewindow bounds obtained from **timeWindow** property of **ctx**.  
+
+### Using existing JavaScript code
+
+Another approach of creating widgets is to use existing bundled JavaScript code.
+In this case, you can create own TypeScript class or Angular component and bundle it into the ThingsBoard UI code.
+In order to make this code accessible within the widget, you need to register corresponding Angular module or inject TypeScript class to a global variable (for ex. window object).
+Some of the ThingsBoard widgets already use this approach. Take a look at the [polyfills.ts](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/polyfills.ts#L106)
+or [widget-components.module.ts](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/components/widget/widget-components.module.ts#L44).
+Here you can find how some bundled classes or components are registered for later use in ThingsBoard widgets.
+For example "Timeseries - Flot" widget (from "Charts" Widgets Bundle) uses [**TbFlot**](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/components/widget/lib/flot-widget.ts#L63) TypeScript class which is injected as window property inside **polyfills.ts**:
+
+```typescript
 ...
 
-import TbFlot from '../widget/lib/flot-widget';
+import { TbFlot } from '@home/components/widget/lib/flot-widget';
 ...
 
-    $window.TbFlot = TbFlot;
+    (window as any).TbFlot = TbFlot;
 ...
 
 ```
 
+<<<<<<< HEAD
 另一个示例是使用“Angular”指令[**tb-timeseries-table-widget**](https://github.com/thingsboard/thingsboard/tree/master/ui/src/app/widget/lib/timeseries-table-widget.js)，该文件已注册为**thingsboard.api.widget**的Angular模块依赖 **widget.service.js**中的Angular模块的依赖项。
 
 因此，此指令可在小部件模板HTML中使用。
+=======
+Another example is "Timeseries table" widget (from "Cards" Widgets Bundle) that uses Angular component [**tb-timeseries-table-widget**](https://github.com/thingsboard/thingsboard/blob/13e6b10b7ab830e64d31b99614a9d95a1a25928a/ui-ngx/src/app/modules/home/components/widget/lib/timeseries-table-widget.component.ts#L99) which is registered as dependency of **WidgetComponentsModule** Angular module inside **widget-components.module.ts**.
+Thereby this component becomes available for use inside the widget template HTML. 
+>>>>>>> master
 
-```javascript
+```typescript
 ...
 
-import thingsboardTimeseriesTableWidget from '../widget/lib/timeseries-table-widget';
+import { TimeseriesTableWidgetComponent } from '@home/components/widget/lib/timeseries-table-widget.component';
 
 ...
 
-export default angular.module('thingsboard.api.widget', ['oc.lazyLoad', thingsboardLedLight, thingsboardTimeseriesTableWidget,
-
+@NgModule({
+  declarations:
+    [
 ...
-
+      TimeseriesTableWidgetComponent,
+...
+    ],
+...
+  exports: [
+...
+      TimeseriesTableWidgetComponent,
+...
+  ],
+...    
+})
+export class WidgetComponentsModule { }
 ```
 
 ## 小部件代码调试技巧
