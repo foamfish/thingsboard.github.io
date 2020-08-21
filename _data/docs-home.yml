@@ -118,6 +118,8 @@ toc:
     path: /docs/user-guide/integrations/thingpark/
   - title: TheThingsNetwork
     path: /docs/user-guide/integrations/ttn/
+  - title: TheThingsIndustries
+    path: /docs/user-guide/integrations/tti/
   - title: AWS IoT
     path: /docs/user-guide/integrations/aws-iot/
   - title: AWS Kinesis
@@ -126,6 +128,8 @@ toc:
     path: /docs/user-guide/integrations/ibm-watson-iot/
   - title: Azure Event Hub
     path: /docs/user-guide/integrations/azure-event-hub/
+  - title: Azure IoT Hub
+    path: /docs/user-guide/integrations/azure-iot-hub/
   - title: TCP
     path: /docs/user-guide/integrations/tcp/
   - title: UDP
@@ -196,6 +200,8 @@ toc:
         path: /docs/trendz/prediction/
       - title: Share and embed Visualizations
         path: /docs/trendz/embed-visuals/
+      - title: Trendz Release Notes
+        path: /docs/trendz/releases/
   - title: Kafka Streams
     new: true
     path: /docs/samples/analytics/kafka-streams/

@@ -8,6 +8,78 @@ description: ThingsBoard architecture
 * TOC
 {:toc}
 
+## v3.1 (August 12, 2020)
+
+### ThingsBoard CE
+
+Minor release with the following improvements and bug fixes.
+
+**Main features:**
+
+ * Filters over entity fields, attributes and latest telemetry; 
+ * Alarm widget improvements;
+ * Performance improvements to insets in PostgreSQL;
+ * Ability to store the latest values in SQL instead of NoSQL;
+
+**Additional features:**
+
+ * UI: 
+   * External angular modules for widget development;
+   * Support of the files with .txt extensions in bulk import of entities;
+   * Flot: add ability to use attributes in datakeys labels;
+   * Maps cluster mode optimizations;
+   * Add ability to edit polygons on image map;
+   * New alias entity types: Current User and Current User Owner (Tenant or Customer);
+ * Rule Engine: 
+   * Improved logging of failed and timeout messages;
+   * Azure iot hub rule node;
+   * Open rule chain from rule node link;
+   * Clear alarm node now accepts alarm id as an originator;
+   * Log time to acknowledge message;
+   * Display sorted metadata keys in rule nodes;
+ * REST API: Ability to move device to another tenant;
+ * Enable default credential provider chain for aws sqs;
+ * Added logging of MQTT payload errors;
+ * Added support of Confluent cloud;
+
+**Bug fixes:**
+
+ * UI: 
+   * Fixed show polygon on image map widget;
+   * Fix page link without pagination. Minor fixes;
+   * Fix boolean input widgets;
+   * Fix web camera input widget;
+
+### ThingsBoard PE
+
+Everything from [TB CE v3.1](https://github.com/thingsboard/thingsboard/releases/tag/v3.1) with the following improvements.
+
+Main features:
+
+* Performance improvements for majority of REST API calls;
+* Azure IoT Hub integration;
+* The Things Industries integration;
+
+## v2.5.3 (August 12, 2020)
+
+### ThingsBoard CE
+
+**Improvements:**
+
+ * Performance improvements to inserts in PostgreSQL;
+ * Prometheus Metrics;
+ * Created Azure IoT hub rule node;
+ * REST API: Ability to move device to another tenant;
+ * Added proxy configs to rest api call rule node (#2943);
+
+**Bug fixes:**
+
+ * refactored DataValidator email pattern
+
+### ThingsBoard PE
+
+Everything from [TB CE v2.5.3](https://github.com/thingsboard/thingsboard/releases/tag/v2.5.3).
+
 ## v3.0.1 (June 9, 2020)
 
 ### ThingsBoard CE

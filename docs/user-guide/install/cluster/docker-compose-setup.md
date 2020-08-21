@@ -22,12 +22,12 @@ Before starting please make sure [Docker CE](https://docs.docker.com/install/) a
 Make sure your have [logged in](https://docs.docker.com/engine/reference/commandline/login/) to docker hub using command line.
 
 ```bash
-docker pull thingsboard/tb-node:3.0.1
-docker pull thingsboard/tb-web-ui:3.0.1
-docker pull thingsboard/tb-js-executor:3.0.1
-docker pull thingsboard/tb-http-transport:3.0.1
-docker pull thingsboard/tb-mqtt-transport:3.0.1
-docker pull thingsboard/tb-coap-transport:3.0.1
+docker pull thingsboard/tb-node:3.1.0
+docker pull thingsboard/tb-web-ui:3.1.0
+docker pull thingsboard/tb-js-executor:3.1.0
+docker pull thingsboard/tb-http-transport:3.1.0
+docker pull thingsboard/tb-mqtt-transport:3.1.0
+docker pull thingsboard/tb-coap-transport:3.1.0
 ```
 
 ## Step 2. Review the architecture page
@@ -61,7 +61,8 @@ Kafka <small>(recommended for on-prem, production installations)</small>%,%kafka
 AWS SQS <small>(managed service from AWS)</small>%,%aws-sqs%,%templates/install/cluster-queue-aws-sqs.md%br%
 Google Pub/Sub <small>(managed service from Google)</small>%,%pubsub%,%templates/install/cluster-queue-pub-sub.md%br%
 Azure Service Bus <small>(managed service from Azure)</small>%,%service-bus%,%templates/install/cluster-queue-service-bus.md%br%
-RabbitMQ <small>(for small on-prem installations)</small>%,%rabbitmq%,%templates/install/cluster-queue-rabbitmq.md{% endcapture %}
+RabbitMQ <small>(for small on-prem installations)</small>%,%rabbitmq%,%templates/install/cluster-queue-rabbitmq.md%br%
+Confluent Cloud <small>(Event Streaming Platform based on Kafka)</small>%,%confluent-cloud%,%templates/install/cluster-queue-confluent-cloud.md{% endcapture %}
 
 {% include content-toggle.html content-toggle-id="ubuntuThingsboardQueue" toggle-spec=contenttogglespecqueue %} 
 
